@@ -1,0 +1,1 @@
+import {CatalogPage} from "@/components/catalog";export default function Page(){return <CatalogPage title="Công cụ làm việc cùng AI" eyebrow="CÔNG CỤ VIỆT, WORKFLOW THẬT" intro="Ứng dụng desktop riêng tư và web app gọn nhẹ, được xây từ chính những vướng mắc của người mới." filter={p=>p.kind==="desktop"||p.kind==="webapp"}/>}

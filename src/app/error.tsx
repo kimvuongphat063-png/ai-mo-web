@@ -1,0 +1,1 @@
+"use client";export default function Error({reset}:{error:Error&{digest?:string};reset:()=>void}){return <main className="page-main container"><div className="empty"><h1>Something went wrong</h1><p>The page could not be loaded.</p><button className="btn btn-coral" onClick={reset}>Try again</button></div></main>}

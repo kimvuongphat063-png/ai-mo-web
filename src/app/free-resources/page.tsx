@@ -1,0 +1,1 @@
+import {CatalogPage} from "@/components/catalog";export default function Page(){return <CatalogPage title="Bắt đầu mà chưa cần mua" eyebrow="TÀI NGUYÊN MIỄN PHÍ" intro="Prompt, checklist và hướng dẫn nền tảng để tuần đầu làm quen AI có kết quả thật." filter={p=>p.kind==="resource"}/>}

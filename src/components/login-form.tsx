@@ -1,0 +1,8 @@
+"use client";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+export function LoginForm() {
+  const router = useRouter(); const search = useSearchParams(); const [error,setError]=useState(""); const [busy,setBusy]=useState(false);
+  async function submit(event: React.FormEvent<HTMLFormElement>) { event.preventDefault(); setBusy(true); setError(""); const data=new FormData(event.currentTarget); const response=await fetch("/api/auth/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({email:data.get("email"),password:data.get("password")})}); const result=await response.json(); setBusy(false); if(!response.ok){setError(result.error);return} const requested=search.get("next"); const safe=requested?.startsWith("/")&&!requested.startsWith("//")?requested:null; router.push(safe||(result.user.role==="admin"?"/admin":"/account/learning")); router.refresh(); }
+  return <form className="auth-card" onSubmit={submit}><span className="kicker">AI MỞ · ĐĂNG NHẬP</span><h1>Chào mừng bạn trở lại</h1><p>Dùng một trong hai tài khoản demo theo đúng vai trò.</p><label>Email<input name="email" required type="email" autoComplete="username"/></label><label>Mật khẩu<input name="password" required type="password" autoComplete="current-password"/></label>{error&&<p className="form-error" role="alert">{error}</p>}<button disabled={busy} className="btn btn-coral wide">{busy?"Đang xác thực…":"Đăng nhập"}</button><div className="credentials"><b>Học viên:</b> hocvien@aimo.vn / Hocvien@2026!<br/><b>Admin:</b> admin@aimo.vn / Admin@2026!</div></form>;
+}

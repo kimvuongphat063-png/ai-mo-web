@@ -1,0 +1,1 @@
+import Link from "next/link";export default function NotFound(){return <main className="page-main container"><div className="empty"><span className="kicker">404 ERROR</span><h1>That page wandered off.</h1><p>The resource may have moved or no longer exists.</p><Link className="btn btn-coral" href="/products">Explore products</Link></div></main>}

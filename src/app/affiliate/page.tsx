@@ -1,0 +1,1 @@
+import {CatalogPage} from "@/components/catalog";export default function Page(){return <CatalogPage title="Chọn lọc thay vì quảng cáo" eyebrow="ĐỀ XUẤT MINH BẠCH" intro="Sản phẩm bên thứ ba chúng tôi đã dùng, chỉ rõ điểm mạnh, giới hạn và công khai cách nhận hoa hồng." filter={p=>p.ownership==="affiliate"}/>}

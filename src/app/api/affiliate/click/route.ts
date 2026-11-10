@@ -1,0 +1,2 @@
+import {NextRequest,NextResponse} from "next/server";import {findCmsProduct} from "@/lib/cms";
+export async function GET(request:NextRequest){const slug=request.nextUrl.searchParams.get("slug")||"";const product=await findCmsProduct(slug);if(!product||product.kind!=="affiliate")return NextResponse.redirect(new URL("/affiliate",request.url));console.info(JSON.stringify({event:"affiliate_click",slug,at:new Date().toISOString(),referrer:request.headers.get("referer")||null}));return NextResponse.redirect(product.affiliateUrl,302)}

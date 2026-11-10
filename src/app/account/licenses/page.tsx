@@ -1,0 +1,1 @@
+import {DashboardShell} from "@/components/dashboard";export default function Page(){return <DashboardShell title="Giấy phép"><table className="table"><thead><tr><th>Sản phẩm</th><th>Loại</th><th>Thiết bị</th><th>Trạng thái</th></tr></thead><tbody><tr><td>PromptDesk</td><td>Cá nhân</td><td>1 / 1</td><td>Đang hoạt động</td></tr></tbody></table></DashboardShell>}

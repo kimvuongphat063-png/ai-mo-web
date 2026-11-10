@@ -1,0 +1,977 @@
+@import "tailwindcss";
+
+@theme {
+  /* ============================================================
+     STUDIO WORKSPACE PALETTE (/app only)
+     Neutral canvas + one technical accent. See docs/UI-REDESIGN-PLAN.md
+     ============================================================ */
+  --color-bg: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F4F4F5;
+  --color-border: #E4E4E7;
+  --color-border-2: #D4D4D8;
+  --color-text: #18181B;
+  --color-text-2: #52525B;
+  --color-muted: #A1A1AA;
+
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-subtle: #EFF6FF;
+
+  --color-success: #16A34A;
+  --color-success-subtle: #F0FDF4;
+  --color-warning: #D97706;
+  --color-warning-subtle: #FFFBEB;
+  --color-error: #DC2626;
+  --color-error-subtle: #FEF2F2;
+
+  /* Legacy warm/terracotta palette — public marketing pages only.
+     BANNED inside /app. */
+  --color-warm-50: #FBF9F5;
+  --color-warm-100: #F7F4EF;
+  --color-warm-200: #F2E3D6;
+  --color-warm-300: #E7E1D7;
+  --color-warm-500: #C4B5A0;
+  --color-warm-700: #8B7355;
+  --color-warm-900: #5C635D;
+  
+  --color-terracotta-50: #FBF5F3;
+  --color-terracotta-100: #F8E8E3;
+  --color-terracotta-200: #F2D4CB;
+  --color-terracotta-300: #E9B8A6;
+  --color-terracotta-400: #DE927A;
+  --color-terracotta-500: #C4612F;
+  --color-terracotta-600: #A94E22;
+  --color-terracotta-700: #8B3F1C;
+  --color-terracotta-800: #6F3317;
+  --color-terracotta-900: #5A2A13;
+  
+  --color-ink: #1F2421;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+:root {
+  /* TECH LED PALETTE — Minimalism + Neon Accents */
+  --ink: #0A0A0A;
+  --paper: #FFFFFF;
+  --line: #E5E5E5;
+  --line-2: #F5F5F5;
+  --muted: #737373;
+  --accent: #000000;
+
+  /* LED/Neon accents */
+  --electric-blue: #00D4FF;
+  --electric-cyan: #00FFF5;
+  --electric-purple: #B366FF;
+  --electric-pink: #FF3D9A;
+  --glow-blue: rgba(0, 212, 255, 0.5);
+  --glow-cyan: rgba(0, 255, 245, 0.5);
+  --glow-purple: rgba(179, 102, 255, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+  font: inherit;
+}
+
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* ============================================================
+   MINIMALISM PUBLIC SITE STYLES
+   Pure editorial: hairline borders, generous whitespace, monochrome.
+   ============================================================ */
+
+.site-header {
+  height: 56px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 50;
+}
+
+.nav-wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin: 0 auto;
+}
+
+.nav a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.nav a:hover {
+  color: var(--ink);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.text-link {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.text-link:hover {
+  color: var(--ink);
+}
+
+.cart-link {
+  position: relative;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.cart-link:hover {
+  color: var(--ink);
+}
+
+.cart-link span {
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  background: var(--ink);
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.menu-button {
+  display: none;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 760px;
+  display: grid;
+  grid-template-columns: 110px 1.05fr 0.95fr;
+  gap: 30px;
+  align-items: center;
+  position: relative;
+  padding-block: 72px;
+  font-family: var(--font-sans), sans-serif;
+}
+
+.hero-index {
+  align-self: start;
+  margin-top: 25px;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.pill, .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.pill {
+  border: 1px solid var(--ink);
+  border-radius: 99px;
+  padding: 8px 12px;
+}
+
+.pill svg {
+  width: 14px;
+}
+
+/* Buttons — minimalism */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  height: 40px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: white;
+}
+
+.btn-coral,
+.btn.btn-coral {
+  background: var(--ink);
+  color: white;
+}
+
+.btn-coral:hover {
+  opacity: 0.9;
+}
+
+.btn.wide {
+  width: 100%;
+}
+
+/* Footer — minimalism */
+.footer {
+  margin-top: 80px;
+  border-top: 1px solid var(--line-2);
+}
+
+.footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.footer-content a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-content a:hover {
+  color: var(--ink);
+}
+
+.hero h1 {
+  font-size: clamp(40px, 6vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  margin: 0 0 24px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.link-minimal {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.link-minimal:hover {
+  text-decoration-thickness: 2px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 0 0 32px;
+}
+
+.course-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.course-num {
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.course-tag {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.course-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* CMS/auth styles */
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -5rem;
+  z-index: 1000;
+  background: #fff;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--ink);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.nav-logout {
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+.cms-toolbar {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+}
+
+.cms-toolbar input {
+  min-width: 18rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d8d3ca;
+  border-radius: 0.6rem;
+}
+
+.cms-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(23, 23, 19, 0.72);
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.cms-modal > div {
+  background: #fffaf2;
+  width: min(860px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.33);
+}
+
+.cms-modal textarea {
+  width: 100%;
+  min-height: 50vh;
+  padding: 1rem;
+  font: 13px/1.5 monospace;
+  border: 1px solid #cbc4b8;
+  border-radius: 0.5rem;
+}
+
+.cms-crud td button {
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+
+.cms-crud td small {
+  color: #777;
+}
+
+.cms-hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 120px 24px 80px;
+}
+
+.cms-hero h1 {
+  font-size: clamp(40px, 6vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  margin: 0 0 24px;
+}
+
+.cms-hero p {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+/* Legacy decorative hero orbit (page.tsx slot) — now minimal */
+.hero-orbit {
+  display: none;
+}
+
+.stats-strip {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.stats-strip div {
+  display: grid;
+  text-align: center;
+}
+
+.stats-strip div:last-child {
+  border: 0;
+}
+
+.stats-strip b {
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats-strip span {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cms-course-grid {
+  max-width: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.cms-course {
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.cms-course:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.cms-course h2, .cms-course h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cms-course p {
+  line-height: 1.6;
+  font-weight: 300;
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 560px;
+}
+
+.catalog-main, .course-detail {
+  padding-block: 5rem;
+}
+
+.catalog-main > h1, .course-detail > h1 {
+  font-size: clamp(36px, 6vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.course-price {
+  display: block;
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.curriculum {
+  max-width: 900px;
+  margin-top: 4rem;
+}
+
+/* ============================================================
+   TECH LED EFFECTS — neon glow, animated borders, grid backdrop
+   Layered on top of the Minimalism base: the layout stays editorial,
+   the surface gets a high-tech sheen.
+   ============================================================ */
+
+@keyframes led-border-spin {
+  to { transform: rotate(1turn); }
+}
+
+@keyframes led-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+
+@keyframes led-scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(400%); }
+}
+
+@keyframes led-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.6; }
+}
+
+@keyframes led-marquee {
+  from { background-position: 0% 50%; }
+  to   { background-position: 200% 50%; }
+}
+
+@keyframes led-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --- Ambient grid backdrop behind the whole page ------------------ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(10, 10, 10, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 0%, transparent 75%);
+}
+
+/* --- Header: LED underline that breathes ------------------------- */
+.site-header {
+  position: relative;
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--electric-blue) 20%,
+    var(--electric-cyan) 40%,
+    var(--electric-purple) 60%,
+    var(--electric-blue) 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: led-marquee 6s linear infinite;
+  opacity: 0.75;
+}
+
+/* --- Hero headline: gradient ink with a soft neon bloom ---------- */
+.cms-hero h1,
+.hero h1 {
+  background: linear-gradient(
+    100deg,
+    var(--ink) 0%,
+    var(--ink) 45%,
+    #1B4A5A 62%,
+    var(--electric-blue) 88%,
+    var(--electric-cyan) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-wrap: balance;
+}
+
+/* --- Buttons: LED edge + travelling glow on hover ---------------- */
+.btn {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--ink);
+  transition: background 0.2s, color 0.2s, box-shadow 0.25s, border-color 0.2s;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.55) 45%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.btn:hover::after {
+  transform: translateX(120%);
+}
+
+.btn-coral,
+.btn.btn-coral {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+  box-shadow:
+    0 0 0 0 var(--glow-blue),
+    0 0 24px -4px var(--glow-blue);
+}
+
+.btn-coral:hover,
+.btn.btn-coral:hover {
+  opacity: 1;
+  border-color: var(--electric-blue);
+  box-shadow:
+    0 0 0 1px var(--electric-blue),
+    0 0 20px -2px var(--glow-blue),
+    0 0 44px -6px var(--glow-cyan);
+}
+
+/* Outline buttons light their edge up rather than flooding */
+.btn:not(.btn-coral):hover {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--electric-blue);
+  box-shadow: 0 0 18px -4px var(--glow-blue);
+}
+
+/* --- Course rows: LED rail on hover ----------------------------- */
+.cms-course {
+  position: relative;
+  transition: opacity 0.15s ease, transform 0.2s ease, padding-left 0.2s ease;
+}
+
+.cms-course::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    to bottom,
+    var(--electric-cyan),
+    var(--electric-purple)
+  );
+  box-shadow: 0 0 12px var(--glow-cyan);
+  transition: height 0.25s ease;
+}
+
+.cms-course:hover {
+  opacity: 1;
+  padding-left: 20px;
+}
+
+.cms-course:hover::before {
+  height: 60%;
+}
+
+.cms-course:hover h3,
+.cms-course:hover h2 {
+  color: #0B3A47;
+}
+
+/* --- Stats: numbers read as lit instrument panel ---------------- */
+.stats-strip b {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(180deg, var(--ink) 30%, #2A6E85 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.stats-strip div {
+  position: relative;
+  padding-block: 4px;
+}
+
+.stats-strip div::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 28px;
+  height: 1px;
+  transform: translateX(-50%);
+  background: var(--electric-blue);
+  box-shadow: 0 0 10px var(--glow-blue);
+  opacity: 0.7;
+}
+
+/* --- Cards / panels that opt in via .led-panel ------------------ */
+.led-panel {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.led-panel::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    130deg,
+    var(--electric-blue),
+    var(--electric-cyan) 30%,
+    transparent 55%,
+    var(--electric-purple) 85%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.led-panel:hover::before {
+  opacity: 1;
+}
+
+/* Scanning light across a panel */
+.led-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.led-scan::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 25%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 212, 255, 0.14),
+    transparent
+  );
+  animation: led-scan 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* --- Badges / pills: lit chip ------------------------------------ */
+.pill {
+  position: relative;
+  border-color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.25s;
+}
+
+.pill:hover {
+  border-color: var(--electric-blue);
+  box-shadow: 0 0 16px -4px var(--glow-blue);
+}
+
+/* --- Cart badge: glowing counter --------------------------------- */
+.cart-link span {
+  background: var(--ink);
+  box-shadow: 0 0 10px -1px var(--glow-cyan);
+}
+
+.cart-link:hover {
+  color: var(--ink);
+  filter: drop-shadow(0 0 8px var(--glow-blue));
+}
+
+/* --- Section titles: hairline LED tick --------------------------- */
+.section-title {
+  position: relative;
+  padding-left: 20px;
+}
+
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--electric-cyan), var(--electric-purple));
+  box-shadow: 0 0 10px var(--glow-cyan);
+}
+
+/* --- Link underline: neon on hover ------------------------------- */
+.link-minimal {
+  position: relative;
+  text-decoration-color: var(--line);
+  transition: text-decoration-color 0.2s, color 0.2s;
+}
+
+.link-minimal:hover {
+  text-decoration-color: var(--electric-blue);
+  color: #0B3A47;
+}
+
+/* --- Nav links: lit hairline under the active item --------------- */
+.nav a {
+  position: relative;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -6px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--electric-cyan), var(--electric-blue));
+  box-shadow: 0 0 8px var(--glow-cyan);
+  transition: right 0.25s ease;
+}
+
+.nav a:hover::after {
+  right: 0;
+}
+
+/* --- Logo: subtle flicker like a display ------------------------- */
+.logo {
+  transition: text-shadow 0.3s;
+}
+
+.logo:hover {
+  text-shadow: 0 0 14px var(--glow-blue);
+}
+
+/* --- Footer: lit top edge ---------------------------------------- */
+.footer {
+  border-top-color: var(--line);
+  position: relative;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--electric-purple) 35%,
+    var(--electric-cyan) 65%,
+    transparent
+  );
+  opacity: 0.5;
+}
+
+/* --- Motion-safe entrance for hero content ---------------------- */
+.cms-hero > *,
+.hero-actions {
+  animation: led-rise 0.7s ease both;
+}
+
+.cms-hero > *:nth-child(2) { animation-delay: 0.08s; }
+.cms-hero > *:nth-child(3) { animation-delay: 0.16s; }

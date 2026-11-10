@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI MỞ — Minimalism Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0A0A0A;
+      --paper: #FFFFFF;
+      --line: #E5E5E5;
+      --line-2: #F5F5F5;
+      --muted: #737373;
+      --accent: #000000;
+      --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Minimalism: Only 1 weight jump (400 -> 700), nothing in between */
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    /* Header: Ultra-minimal, no backdrop blur, just border */
+    .header {
+      height: 56px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .nav a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+    }
+
+    .nav a.active {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .header-actions a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    .header-actions a:hover {
+      color: var(--ink);
+    }
+
+    .btn-minimal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      height: 36px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .btn-minimal:hover {
+      opacity: 0.9;
+    }
+
+    /* Hero: Massive negative space, no decoration. One narrow column. */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 56px);
+      margin-bottom: 24px;
+      line-height: 0.95;
+    }
+
+    .hero p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 40px;
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .link-minimal {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer;
+    }
+
+    .link-minimal:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    /* Stats: Hairline, no background */
+    .stats {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .stat-num {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Courses: List, not grid — editorial */
+    .courses {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .courses h2 {
+      font-size: 28px;
+      margin-bottom: 32px;
+    }
+
+    .course {
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.15s;
+    }
+
+    .course:hover {
+      opacity: 0.6;
+    }
+
+    .course:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .course-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .course-num {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .course-tag {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .course-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .course-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    .course-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 8px;
+    }
+
+    /* Footer: Minimal, just line + text */
+    .footer {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      border-top: 1px solid var(--line-2);
+      margin-top: 80px;
+    }
+
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer a:hover {
+      color: var(--ink);
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 60px 24px 40px;
+      }
+      .hero h1 { font-size: 36px; }
+      .stats {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+      .nav { display: none; }
+      .header-actions { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">AI MỞ</div>
+      <nav class="nav">
+        <a href="#" class="active">Khóa học</a>
+        <a href="#">Lộ trình</a>
+        <a href="#">Công cụ</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#">Đăng nhập</a>
+        <a href="#" class="btn-minimal">Bắt đầu</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Đừng chỉ hỏi AI.<br>Hãy làm được việc.</h1>
+    <p>Lộ trình, công cụ và tài nguyên tiếng Việt giúp bạn biến AI thành năng lực thật — bắt đầu từ số 0. Không lý thuyết suông.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-minimal">Chọn lộ trình →</a>
+      <a href="#" class="link-minimal">Xem demo</a>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div><div class="stat-num">2.400+</div><div class="stat-label">học viên</div></div>
+    <div><div class="stat-num">21 ngày</div><div class="stat-label">workflow đầu tiên</div></div>
+    <div><div class="stat-num">4,9/5</div><div class="stat-label">đánh giá</div></div>
+  </section>
+
+  <section class="courses">
+    <h2>Khóa học</h2>
+    <a href="#" class="course">
+      <div class="course-head">
+        <span class="course-num">01</span>
+        <span class="course-tag">Cơ bản</span>
+      </div>
+      <div class="course-title">Prompt Engineering 101</div>
+      <div class="course-desc">Viết prompt hiệu quả cho ChatGPT, Claude, Gemini. Từ zero-shot đến chain-of-thought.</div>
+      <div class="course-meta"><span>8 tuần</span><span>432 học viên</span></div>
+    </a>
+    <a href="#" class="course">
+      <div class="course-head">
+        <span class="course-num">02</span>
+        <span class="course-tag">Nâng cao</span>
+      </div>
+      <div class="course-title">Python cho AI Agent</div>
+      <div class="course-desc">Xây dựng agent tự động hóa workflow: scrape data, phân tích, tạo báo cáo.</div>
+      <div class="course-meta"><span>12 tuần</span><span>287 học viên</span></div>
+    </a>
+    <a href="#" class="course">
+      <div class="course-head">
+        <span class="course-num">03</span>
+        <span class="course-tag">Thực chiến</span>
+      </div>
+      <div class="course-title">AI Content Studio</div>
+      <div class="course-desc">Workflow hoàn chỉnh từ ý tưởng → kịch bản → hình ảnh → video, tự động hóa 80%.</div>
+      <div class="course-meta"><span>6 tuần</span><span>195 học viên</span></div>
+    </a>
+  </section>
+
+  <footer class="footer">
+    <span>© 2026 AI MỞ. Thiết kế tại Việt Nam.</span>
+    <a href="#">Điều khoản · Quyền riêng tư</a>
+  </footer>
+
+</body>
+</html>

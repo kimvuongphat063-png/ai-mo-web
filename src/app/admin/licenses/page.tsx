@@ -1,0 +1,1 @@
+import {DashboardShell} from "@/components/dashboard";export default function Page(){return <DashboardShell admin title="Quản lý giấy phép"><div className="dash-grid"><div className="dash-card"><b>886</b><p>License đang hoạt động</p></div><div className="dash-card"><b>12</b><p>Yêu cầu reset thiết bị</p></div></div></DashboardShell>}

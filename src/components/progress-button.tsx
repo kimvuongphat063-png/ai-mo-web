@@ -1,0 +1,3 @@
+"use client";
+import { useState } from "react";
+export function ProgressButton({courseSlug,lessonSlug,initial}:{courseSlug:string;lessonSlug:string;initial:boolean}){const [done,setDone]=useState(initial);const [busy,setBusy]=useState(false);async function toggle(){setBusy(true);const next=!done;const r=await fetch("/api/progress",{method:"PUT",headers:{"content-type":"application/json"},body:JSON.stringify({courseSlug,lessonSlug,completed:next})});if(r.ok)setDone(next);setBusy(false)}return <button className={`btn ${done?"btn-ink":"btn-coral"}`} disabled={busy} onClick={toggle}>{busy?"Đang lưu…":done?"✓ Đã hoàn thành — hoàn tác":"Đánh dấu hoàn thành"}</button>}

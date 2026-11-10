@@ -1,0 +1,1 @@
+import {CatalogPage} from "@/components/catalog";export default function Page(){return <CatalogPage title="Bộ giải pháp theo mục tiêu" eyebrow="MUA GỌN, DÙNG LÂU" intro="Khóa học, công cụ và template được đóng gói có chủ đích — không nhồi những thứ bạn không cần." filter={p=>p.kind==="bundle"}/>}

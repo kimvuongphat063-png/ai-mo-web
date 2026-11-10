@@ -1,0 +1,1 @@
+import Link from "next/link";export default function Page(){return <main className="success-card container"><span className="eyebrow">ĐƠN HÀNG ĐÃ TẠO</span><h1>Chào mừng bạn đến AI MỞ.</h1><p>Sản phẩm demo đã được thêm vào thư viện tài khoản.</p><Link href="/account/library" className="btn btn-coral">Mở thư viện</Link></main>}

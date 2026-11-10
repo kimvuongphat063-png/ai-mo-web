@@ -1,0 +1,1 @@
+import {DashboardShell} from "@/components/dashboard";export default function Page(){return <DashboardShell admin title="Bản phát hành phần mềm"><table className="table"><thead><tr><th>Sản phẩm</th><th>Phiên bản</th><th>Nền tảng</th><th>Ngày</th></tr></thead><tbody><tr><td>PromptDesk</td><td>2.4.0</td><td>Win / macOS</td><td>22/07/2026</td></tr></tbody></table></DashboardShell>}

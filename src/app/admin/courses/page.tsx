@@ -1,0 +1,1 @@
+import {DashboardShell} from "@/components/dashboard";import {CmsEditor} from "@/components/cms-editor";import {readCms} from "@/lib/cms";export default async function Page(){return <DashboardShell admin title="Biên tập chương trình học"><CmsEditor initial={await readCms()}/></DashboardShell>}
