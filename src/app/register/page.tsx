@@ -1,1 +1,21 @@
-import Link from "next/link";export default function Page(){return <main className="auth-page"><form className="auth-card" action="/account/library"><span className="kicker">JOIN THE MARKET</span><h1>Create your account</h1><label>Full name<input required/></label><label>Email<input required type="email"/></label><label>Password<input required type="password" minLength={6}/></label><label className="check"><input required type="checkbox"/> I agree to the Terms and Privacy Policy.</label><button className="btn btn-coral wide">Create account</button><p>Already registered? <Link href="/login">Sign in</Link></p></form></main>}
+import { Suspense } from "react";
+import Link from "next/link";
+import { RegisterForm } from "@/components/register-form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Đăng ký tài khoản — AI MỞ",
+  description: "Tạo tài khoản miễn phí để tải trọn bộ ứng dụng HTML offline, tài liệu và công cụ AI thực chiến.",
+};
+
+export default function RegisterPage() {
+  return (
+    <main id="main-content" className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6">
+      <div className="w-full max-w-md">
+        <Suspense fallback={<div className="text-center text-sm text-neutral-500 py-12">Đang tải biểu mẫu...</div>}>
+          <RegisterForm />
+        </Suspense>
+      </div>
+    </main>
+  );
+}

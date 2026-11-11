@@ -2,6 +2,7 @@ import "server-only";
 import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { createHash, randomBytes } from "node:crypto";
+import { hashPassword } from "@/lib/auth-password";
 
 // ─── Prisma client singleton ────────────────────────────────────────────────
 
@@ -46,6 +47,54 @@ export async function findUserByEmail(email: string): Promise<AuthUser | null> {
   });
   if (!user || user.deletedAt) return null;
   if (user.status !== "active") return null;
+  return {
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    isAdmin: user.isAdmin,
+    passwordHash: user.passwordHash,
+    passwordVersion: user.passwordVersion,
+    status: user.status,
+  };
+}
+
+/** Create a new learner user for registration. */
+export async function createUser(data: {
+  email: string;
+  password: string;
+  name?: string | null;
+}): Promise<AuthUser> {
+  const normalized = data.email.toLowerCase().trim();
+  const hashedPassword = await hashPassword(data.password);
+  const db = getPrisma();
+
+  const existing = await db.user.findUnique({
+    where: { email: normalized },
+  });
+  if (existing) {
+    throw new Error("Email đã được đăng ký tài khoản");
+  }
+
+  const user = await db.user.create({
+    data: {
+      email: normalized,
+      passwordHash: hashedPassword,
+      name: data.name?.trim() || normalized.split("@")[0],
+      status: "active",
+      isAdmin: false,
+      passwordVersion: 0,
+    },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      isAdmin: true,
+      passwordHash: true,
+      passwordVersion: true,
+      status: true,
+    },
+  });
+
   return {
     id: user.id,
     email: user.email,
