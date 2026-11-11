@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authorizeApi } from "@/lib/auth";
 import { authorizeMutation } from "@/lib/auth-csrf";
+import { checkRateLimit } from "@/lib/rate-limit-v2";
 import { listProducts, createProduct } from "@/lib/studio";
 import { productProfileFormSchema } from "@/lib/validation/studio";
 
@@ -20,6 +21,15 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const auth = await authorizeMutation(req);
   if (auth.error) return auth.error;
+
+  const rl = await checkRateLimit("studioMutation", auth.session.userId);
+  if (!rl.allowed) {
+    const retryAfterSec = Math.ceil((rl.resetMs - Date.now()) / 1000);
+    return NextResponse.json(
+      { error: "Thao tác quá nhanh. Vui lòng thử lại sau.", code: "rate_limited" },
+      { status: 429, headers: { "Retry-After": String(Math.max(retryAfterSec, 1)) } },
+    );
+  }
 
   try {
     const body = await req.json();

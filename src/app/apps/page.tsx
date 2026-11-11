@@ -1,22 +1,16 @@
 import Link from "next/link";
-import { Laptop, ArrowRight, ShieldCheck, Download, Play, CheckCircle2, Search } from "lucide-react";
+import { Laptop, ArrowRight, ShieldCheck, Download, CheckCircle2 } from "lucide-react";
 import { HTML_APPS } from "@/lib/apps-data";
+import { AppsClientView } from "@/components/apps-client-view";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "14+ App HTML Miễn Phí & Dùng Thử",
-  description: "Bộ sưu tập ứng dụng web HTML độc lập, chạy offline, bảo mật tuyệt đối, không cần cài đặt phức tạp cho kinh doanh, quản lý và học tập.",
+  description:
+    "Bộ sưu tập ứng dụng web HTML độc lập, chạy offline, bảo mật tuyệt đối, không cần cài đặt phức tạp cho kinh doanh, quản lý và học tập.",
 };
 
 export default function AppsPage() {
-  const categories = [
-    { key: "all", label: "Tất cả công cụ" },
-    { key: "kinh-doanh", label: "Kinh doanh & Bán lẻ" },
-    { key: "quan-ly", label: "Quản lý & Tài chính" },
-    { key: "ky-nang", label: "Kỹ năng & Năng suất" },
-    { key: "hoc-tap", label: "Học tập & Giáo dục" },
-  ];
-
   return (
     <main id="main-content" className="container py-12 space-y-12">
       {/* Header */}
@@ -48,76 +42,8 @@ export default function AppsPage() {
         </div>
       </section>
 
-      {/* Grid of Apps */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
-          <h2 className="text-lg font-bold text-neutral-900">
-            Danh sách ứng dụng ({HTML_APPS.length})
-          </h2>
-          <span className="text-xs text-neutral-500">Miễn phí · Mở là dùng</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {HTML_APPS.map((app) => (
-            <div
-              key={app.slug}
-              className="group bg-white rounded-2xl border border-neutral-200/90 p-6 flex flex-col justify-between hover:shadow-md hover:border-neutral-300 transition-all"
-            >
-              <div className="space-y-4">
-                <div className="flex items-start justify-between gap-3">
-                  <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-700 uppercase tracking-wide">
-                    {app.categoryLabel}
-                  </span>
-                  {app.badge && (
-                    <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
-                        app.badge === "Thử nghiệm"
-                          ? "bg-amber-100 text-amber-800 border border-amber-200"
-                          : "bg-blue-100 text-blue-800 border border-blue-200"
-                      }`}
-                    >
-                      {app.badge}
-                    </span>
-                  )}
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold text-neutral-900 group-hover:text-blue-600 transition-colors">
-                    <Link href={`/apps/${app.slug}`}>{app.title}</Link>
-                  </h3>
-                  <p className="text-xs text-neutral-600 mt-2 line-clamp-3 leading-relaxed">
-                    {app.summary}
-                  </p>
-                </div>
-
-                <div className="space-y-1.5 pt-2 border-t border-neutral-100">
-                  <span className="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">
-                    Đặc điểm nổi bật:
-                  </span>
-                  <ul className="text-xs text-neutral-600 space-y-1">
-                    {app.highlights.slice(0, 3).map((h, idx) => (
-                      <li key={idx} className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span className="truncate">{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="pt-6 mt-4 border-t border-neutral-100 flex items-center justify-between gap-3">
-                <Link
-                  href={`/apps/${app.slug}`}
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-semibold rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 transition-colors"
-                >
-                  <Play className="w-3.5 h-3.5" />
-                  <span>Dùng thử & Hướng dẫn</span>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Grid of Apps with Live Search & Filter */}
+      <AppsClientView apps={HTML_APPS} />
 
       {/* Banner CTA to Video Prompt Studio */}
       <section className="rounded-3xl bg-gradient-to-br from-neutral-900 to-neutral-800 text-white p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
