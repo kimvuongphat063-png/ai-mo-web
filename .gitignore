@@ -52,5 +52,9 @@ next-env.d.ts
 /PHAN-TICH-DU-AN.md
 /FIX-TYPESCRIPT-ERRORS.md
 
+# user uploads
+/public/uploads/*
+!/public/uploads/.gitkeep
+
 .vercel
 .env*
