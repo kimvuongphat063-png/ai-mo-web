@@ -412,7 +412,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
               }}
               className="px-4 py-2 rounded-xl bg-[#155EEF] text-white text-xs font-bold hover:bg-blue-700 transition-colors cursor-pointer"
             >
-              Xem tất cả 17 công cụ
+              Xem tất cả 19 công cụ
             </button>
           </div>
         )}

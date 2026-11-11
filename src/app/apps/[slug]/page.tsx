@@ -265,7 +265,7 @@ export default async function AppDetailPage({
             Các ứng dụng hữu ích khác
           </h2>
           <Link href="/apps" className="text-xs font-bold text-[#155EEF] hover:underline">
-            Xem tất cả 17 công cụ →
+            Xem tất cả 19 công cụ →
           </Link>
         </div>
 
