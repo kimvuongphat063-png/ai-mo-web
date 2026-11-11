@@ -2,51 +2,49 @@
 
 @theme {
   /* ============================================================
-     STUDIO WORKSPACE PALETTE (/app only)
-     Neutral canvas + one technical accent. See docs/UI-REDESIGN-PLAN.md
+     UNIFIED MODERN AI/TECH PALETTE (AI MỞ DESIGN SYSTEM)
      ============================================================ */
-  --color-bg: #FAFAFA;
+  --color-bg: #FAFBFD;
   --color-surface: #FFFFFF;
-  --color-surface-2: #F4F4F5;
-  --color-border: #E4E4E7;
-  --color-border-2: #D4D4D8;
-  --color-text: #18181B;
-  --color-text-2: #52525B;
-  --color-muted: #A1A1AA;
+  --color-surface-2: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-2: #CBD5E1;
+  --color-text: #0F172A;
+  --color-text-2: #475569;
+  --color-muted: #64748B;
 
-  --color-accent: #2563EB;
-  --color-accent-hover: #1D4ED8;
-  --color-accent-subtle: #EFF6FF;
+  --color-accent: #155EEF;
+  --color-accent-hover: #124BBF;
+  --color-accent-subtle: #EAF2FF;
 
   --color-success: #16A34A;
-  --color-success-subtle: #F0FDF4;
+  --color-success-subtle: #DCFCE7;
   --color-warning: #D97706;
-  --color-warning-subtle: #FFFBEB;
+  --color-warning-subtle: #FEF3C7;
   --color-error: #DC2626;
-  --color-error-subtle: #FEF2F2;
+  --color-error-subtle: #FEE2E2;
 
-  /* Legacy warm/terracotta palette — public marketing pages only.
-     BANNED inside /app. */
-  --color-warm-50: #FBF9F5;
-  --color-warm-100: #F7F4EF;
-  --color-warm-200: #F2E3D6;
-  --color-warm-300: #E7E1D7;
-  --color-warm-500: #C4B5A0;
-  --color-warm-700: #8B7355;
-  --color-warm-900: #5C635D;
+  /* Legacy remapping to Clean Slate & Tech Blue (Khai tử Terracotta) */
+  --color-warm-50: #F8FAFC;
+  --color-warm-100: #F1F5F9;
+  --color-warm-200: #E2E8F0;
+  --color-warm-300: #CBD5E1;
+  --color-warm-500: #64748B;
+  --color-warm-700: #334155;
+  --color-warm-900: #0F172A;
   
-  --color-terracotta-50: #FBF5F3;
-  --color-terracotta-100: #F8E8E3;
-  --color-terracotta-200: #F2D4CB;
-  --color-terracotta-300: #E9B8A6;
-  --color-terracotta-400: #DE927A;
-  --color-terracotta-500: #C4612F;
-  --color-terracotta-600: #A94E22;
-  --color-terracotta-700: #8B3F1C;
-  --color-terracotta-800: #6F3317;
-  --color-terracotta-900: #5A2A13;
+  --color-terracotta-50: #EFF6FF;
+  --color-terracotta-100: #DBEAFE;
+  --color-terracotta-200: #BFDBFE;
+  --color-terracotta-300: #93C5FD;
+  --color-terracotta-400: #60A5FA;
+  --color-terracotta-500: #155EEF;
+  --color-terracotta-600: #124BBF;
+  --color-terracotta-700: #0F3F99;
+  --color-terracotta-800: #0B2D6D;
+  --color-terracotta-900: #081E48;
   
-  --color-ink: #1F2421;
+  --color-ink: #0F172A;
 }
 
 html, body {
@@ -85,10 +83,43 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Inter, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 15px;
   line-height: 1.6;
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* AI Modern Utilities */
+.ai-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.ai-glow-sm {
+  box-shadow: 0 0 15px rgba(21, 94, 239, 0.15);
+}
+
+.ai-glow {
+  box-shadow: 0 0 25px rgba(21, 94, 239, 0.25);
+}
+
+.ai-glow-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ai-glow-hover:hover {
+  box-shadow: 0 8px 30px rgba(21, 94, 239, 0.22);
+  transform: translateY(-2px);
+}
+
+.ai-gradient-badge {
+  background: linear-gradient(135deg, rgba(21, 94, 239, 0.12) 0%, rgba(0, 163, 255, 0.12) 100%);
+  border: 1px solid rgba(21, 94, 239, 0.2);
 }
 
 a {
