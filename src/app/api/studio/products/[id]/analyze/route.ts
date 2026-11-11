@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authorizeMutation } from "@/lib/auth-csrf";
+import { checkRateLimit } from "@/lib/rate-limit-v2";
 import { getProduct, updateProduct, getBrandProfile } from "@/lib/studio";
 import {
   aiErrorBody,
@@ -18,6 +19,16 @@ export async function POST(req: NextRequest, { params }: Params) {
   const auth = await authorizeMutation(req);
   if (auth.error) return auth.error;
   const userId = auth.session.userId;
+
+  // Rate limit: 30 AI generations per day per user.
+  const rl = await checkRateLimit("aiGenerate", userId);
+  if (!rl.allowed) {
+    const retryAfterSec = Math.ceil((rl.resetMs - Date.now()) / 1000);
+    return NextResponse.json(
+      { error: "Đã đạt giới hạn phân tích hôm nay.", code: "quota" },
+      { status: 429, headers: { "Retry-After": String(Math.max(retryAfterSec, 1)) } },
+    );
+  }
 
   const { id } = await params;
   // Ownership: getProduct filters by userId, so a foreign id yields 404.

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authorizeApi } from "@/lib/auth";
 import { authorizeMutation } from "@/lib/auth-csrf";
+import { checkRateLimit } from "@/lib/rate-limit-v2";
 import { listScripts, createScript, getProduct, getBrandProfile, updateProduct } from "@/lib/studio";
 import { scriptWizardFormSchema } from "@/lib/validation/studio";
 import {
@@ -33,6 +34,16 @@ export async function POST(req: NextRequest) {
   if (auth.error) return auth.error;
 
   const userId = auth.session.userId;
+
+  // Rate limit: 30 AI generations per day per user.
+  const rl = await checkRateLimit("aiGenerate", userId);
+  if (!rl.allowed) {
+    const retryAfterSec = Math.ceil((rl.resetMs - Date.now()) / 1000);
+    return NextResponse.json(
+      { error: "Đã đạt giới hạn tạo kịch bản hôm nay.", code: "quota" },
+      { status: 429, headers: { "Retry-After": String(Math.max(retryAfterSec, 1)) } },
+    );
+  }
 
   let validated: ReturnType<typeof scriptWizardFormSchema.parse>;
   try {

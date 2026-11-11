@@ -49,6 +49,20 @@ export const POLICIES = {
     windowMs: 24 * 60 * 60 * 1000,
     prefix: "rl:ai",
   },
+  /** Studio mutations: 20 requests per hour per userId */
+  studioMutation: {
+    limit: 20,
+    window: "1 h",
+    windowMs: 60 * 60 * 1000,
+    prefix: "rl:studio",
+  },
+  /** PromptKichBan regenerate: 15 requests per hour per IP */
+  promptkichbanRegenerate: {
+    limit: 15,
+    window: "1 h",
+    windowMs: 60 * 60 * 1000,
+    prefix: "rl:pkb-regen",
+  },
 } as const;
 
 export type PolicyName = keyof typeof POLICIES;

@@ -27,6 +27,8 @@
     "test": "tsx tests/unit.ts",
     "test:server": "node --conditions=react-server --import tsx tests/server/usage-adapter.ts && node --conditions=react-server --import tsx tests/server/rate-limit.ts",
     "test:smoke": "playwright test",
+    "env:validate": "tsx scripts/validate-env.ts",
+    "predeploy": "npm run env:validate && npm run typecheck && npm run build",
     "studio:readiness": "tsx scripts/test-studio-migration.ts && tsx tests/migration-regression.ts && tsx tests/delete-cascade-regression.ts",
     "studio:delete-check": "tsx tests/delete-cascade-regression.ts",
     "studio:migrate": "tsx scripts/migrate-studio-to-pg.ts",
