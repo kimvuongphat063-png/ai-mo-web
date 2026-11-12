@@ -9,7 +9,36 @@ const schema = z.object({
   email: z.string().email("Email không hợp lệ").max(200),
   password: z.string().min(6, "Mật khẩu tối thiểu 6 ký tự").max(200),
   name: z.string().max(100).optional(),
+  phone: z.string().max(50).optional(),
+  intent: z.string().max(100).optional(),
 });
+
+/**
+ * Optional Google Sheet / Webhook notifier for real-time lead sync.
+ */
+async function syncToGoogleSheet(lead: {
+  name?: string;
+  email: string;
+  phone?: string;
+  intent?: string;
+  createdAt: string;
+}) {
+  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+  if (!webhookUrl) return;
+
+  try {
+    await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...lead,
+        source: "AI MỞ Registration",
+      }),
+    });
+  } catch (err) {
+    console.warn("[lead-sync] Failed to sync to Google Sheet webhook:", err);
+  }
+}
 
 export async function POST(request: NextRequest) {
   // CSRF: reject cross-origin mutations.
@@ -39,6 +68,15 @@ export async function POST(request: NextRequest) {
       password: parsed.data.password,
       name: parsed.data.name,
     });
+
+    // Fire and forget lead sync to Google Sheet (if configured)
+    syncToGoogleSheet({
+      name: parsed.data.name,
+      email: parsed.data.email,
+      phone: parsed.data.phone,
+      intent: parsed.data.intent,
+      createdAt: new Date().toISOString(),
+    }).catch(() => {});
 
     const account = {
       userId: user.id,

@@ -66,12 +66,19 @@ export function Header() {
         </nav>
 
         {/* Right: Actions */}
-        <div className="nav-actions flex items-center gap-3 shrink-0">
+        <div className="nav-actions flex items-center gap-2 sm:gap-3 shrink-0">
           <Link
             href="/login"
-            className="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-neutral-800 hover:text-neutral-950 border border-neutral-300 rounded-xl hover:bg-neutral-50 transition-colors"
+            className="hidden sm:inline-flex items-center justify-center px-3.5 py-2 text-sm font-semibold text-neutral-700 hover:text-neutral-950 transition-colors"
           >
             Đăng nhập
+          </Link>
+
+          <Link
+            href="/register"
+            className="hidden sm:inline-flex items-center justify-center px-3.5 py-2 text-sm font-bold text-[#155EEF] bg-[#EAF2FF] border border-[#155EEF]/20 rounded-xl hover:bg-blue-100 transition-colors"
+          >
+            Đăng ký
           </Link>
 
           <Link
@@ -133,13 +140,23 @@ export function Header() {
           </div>
 
           <div className="pt-3 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-500">
-            <Link
-              href="/login"
-              onClick={() => setOpen(false)}
-              className="font-semibold text-neutral-800 hover:underline"
-            >
-              Đăng nhập tài khoản
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/login"
+                onClick={() => setOpen(false)}
+                className="font-semibold text-neutral-800 hover:underline"
+              >
+                Đăng nhập
+              </Link>
+              <span>•</span>
+              <Link
+                href="/register"
+                onClick={() => setOpen(false)}
+                className="font-bold text-[#155EEF] hover:underline"
+              >
+                Đăng ký miễn phí
+              </Link>
+            </div>
             <Link
               href="/promptkichban"
               onClick={() => setOpen(false)}

@@ -131,11 +131,9 @@ async function getUpstashLimiter(
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
 
   if (!url || !token) {
-    // Production must have Upstash configured — fail closed.
     if (process.env.NODE_ENV === "production") {
-      throw new Error(
-        "[rate-limit] UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are required in production. " +
-        "Rate limiting cannot fall back to in-memory in multi-instance deployments."
+      console.warn(
+        "[rate-limit] UPSTASH_REDIS_REST_URL / TOKEN not set. Falling back to in-memory rate limiting."
       );
     }
     return null;

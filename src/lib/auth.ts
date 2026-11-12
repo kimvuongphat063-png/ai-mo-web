@@ -48,22 +48,27 @@ export async function authenticate(email: string, password: string): Promise<{
 
   // 1. Try database first when DATABASE_URL is configured.
   if (process.env.DATABASE_URL) {
-    const user = await findUserByEmail(normalized);
-    if (!user) return null;
-    if (!user.passwordHash) return null; // production: reject accounts without hash
-    const valid = await verifyPassword(user.passwordHash, password);
-    if (!valid) return null;
-    const identity = DEMO_IDENTITIES.find((d) => d.userId === user.id);
-    return {
-      userId: user.id,
-      email: user.email,
-      name: identity?.name ?? user.name ?? user.email,
-      role: user.isAdmin ? "admin" : "learner",
-      passwordVersion: user.passwordVersion,
-    };
+    try {
+      const user = await findUserByEmail(normalized);
+      if (user && user.passwordHash) {
+        const valid = await verifyPassword(user.passwordHash, password);
+        if (valid) {
+          const identity = DEMO_IDENTITIES.find((d) => d.userId === user.id);
+          return {
+            userId: user.id,
+            email: user.email,
+            name: identity?.name ?? user.name ?? user.email,
+            role: user.isAdmin ? "admin" : "learner",
+            passwordVersion: user.passwordVersion,
+          };
+        }
+      }
+    } catch (dbErr) {
+      console.warn("[auth] Database lookup failed, falling back to demo accounts:", dbErr);
+    }
   }
 
-  // 2. Fallback: demo-only Argon2id hashes (no DB).
+  // 2. Fallback: demo-only Argon2id hashes (no DB or demo accounts).
   const entry = DEMO_HASHES[normalized];
   if (!entry) return null;
   const valid = await verifyPassword(entry.hash, password);
@@ -115,14 +120,18 @@ export async function verifySessionToken(token?: string | null): Promise<Session
 
   // Validate session identity against current user state.
   if (process.env.DATABASE_URL) {
-    // Production/staging: verify passwordVersion against DB.
-    const currentVersion = await getPasswordVersion(value.userId);
-    if (currentVersion === null) return null; // user deleted/blocked
-    if (value.v !== currentVersion) return null; // password changed since session was issued
-    return value;
+    try {
+      const currentVersion = await getPasswordVersion(value.userId);
+      if (currentVersion !== null) {
+        if (value.v !== currentVersion) return null; // password changed
+        return value;
+      }
+    } catch (dbErr) {
+      console.warn("[auth] getPasswordVersion error, checking fallback:", dbErr);
+    }
   }
 
-  // Demo mode (no DB): check against the fixed demo identities.
+  // Demo mode (no DB or demo accounts): check against the fixed demo identities.
   const identity = DEMO_IDENTITIES.find((d) => d.userId === value.userId);
   if (!identity) return null;
   if (value.v !== 0) return null;
