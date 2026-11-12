@@ -13,7 +13,12 @@ export function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [intent, setIntent] = useState("all");
-  const [error, setError] = useState("");
+  const errorParam = search.get("error");
+  const [error, setError] = useState(
+    errorParam === "google_oauth_pending"
+      ? "Hệ thống đang sẵn sàng cho Google OAuth. Vui lòng thêm GOOGLE_CLIENT_ID trên Vercel hoặc đăng ký qua form bên dưới."
+      : errorParam || ""
+  );
   const [busy, setBusy] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -69,11 +74,8 @@ export function RegisterForm() {
 
       {/* ── GOOGLE SOCIAL SIGN-IN OPTION ─────────────────────────────── */}
       <div className="space-y-3">
-        <button
-          type="button"
-          onClick={() => {
-            alert("Tính năng Đăng nhập nhanh bằng Google đang được kết nối với Google OAuth Client ID của bạn. Vui lòng đăng ký qua form bên dưới trong lúc này!");
-          }}
+        <a
+          href={`/api/auth/google${search.get("next") ? `?next=${encodeURIComponent(search.get("next")!)}` : ""}`}
           className="w-full py-2.5 px-4 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-800 font-semibold text-xs transition-all flex items-center justify-center gap-2.5 shadow-2xs cursor-pointer"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -95,7 +97,7 @@ export function RegisterForm() {
             />
           </svg>
           <span>Đăng ký nhanh bằng Google (Gmail)</span>
-        </button>
+        </a>
 
         <div className="relative flex items-center justify-center">
           <div className="w-full border-t border-neutral-200"></div>

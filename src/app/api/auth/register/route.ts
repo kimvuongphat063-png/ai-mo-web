@@ -4,6 +4,7 @@ import { createSessionToken, SESSION_COOKIE, sessionCookieOptions } from "@/lib/
 import { requireSameOrigin } from "@/lib/csrf";
 import { checkRateLimit } from "@/lib/rate-limit-v2";
 import { createUser } from "@/lib/user-store";
+import { syncLeadToGoogleSheet } from "@/lib/lead-sync";
 
 const schema = z.object({
   email: z.string().email("Email không hợp lệ").max(200),
@@ -70,12 +71,12 @@ export async function POST(request: NextRequest) {
     });
 
     // Fire and forget lead sync to Google Sheet (if configured)
-    syncToGoogleSheet({
+    syncLeadToGoogleSheet({
       name: parsed.data.name,
       email: parsed.data.email,
       phone: parsed.data.phone,
       intent: parsed.data.intent,
-      createdAt: new Date().toISOString(),
+      method: "Form đăng ký website",
     }).catch(() => {});
 
     const account = {
