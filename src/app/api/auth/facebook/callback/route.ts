@@ -5,9 +5,11 @@ import { syncLeadToGoogleSheet } from "@/lib/lead-sync";
 import { randomBytes } from "node:crypto";
 
 export async function GET(request: NextRequest) {
-  const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "ai-mo-web.vercel.app";
-  const protocol = request.headers.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
-  const redirectUri = `${protocol}://${host}/api/auth/facebook/callback`;
+  const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "";
+  const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
+  const redirectUri = isLocal
+    ? `http://${host}/api/auth/facebook/callback`
+    : "https://ai-mo-web.vercel.app/api/auth/facebook/callback";
 
   const searchParams = request.nextUrl.searchParams;
   const code = searchParams.get("code");

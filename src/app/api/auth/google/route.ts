@@ -15,10 +15,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Determine external host for redirect_uri
-  const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "ai-mo-web.vercel.app";
-  const protocol = request.headers.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
-  const redirectUri = `${protocol}://${host}/api/auth/google/callback`;
+  // Determine external host for redirect_uri — always match the URI registered in Google Console
+  const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "";
+  const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
+  const redirectUri = isLocal
+    ? `http://${host}/api/auth/google/callback`
+    : "https://ai-mo-web.vercel.app/api/auth/google/callback";
 
   // CSRF state containing next url and random nonce
   const nonce = randomBytes(16).toString("hex");

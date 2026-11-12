@@ -5,9 +5,11 @@ import { syncLeadToGoogleSheet } from "@/lib/lead-sync";
 import { randomBytes } from "node:crypto";
 
 export async function GET(request: NextRequest) {
-  const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "ai-mo-web.vercel.app";
-  const protocol = request.headers.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
-  const redirectUri = `${protocol}://${host}/api/auth/google/callback`;
+  const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "";
+  const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
+  const redirectUri = isLocal
+    ? `http://${host}/api/auth/google/callback`
+    : "https://ai-mo-web.vercel.app/api/auth/google/callback";
 
   const searchParams = request.nextUrl.searchParams;
   const code = searchParams.get("code");
@@ -64,7 +66,8 @@ export async function GET(request: NextRequest) {
     if (!tokenRes.ok || !tokenData.access_token) {
       console.error("[google-oauth] Token exchange failed:", tokenData);
       const loginUrl = new URL("/login", request.url);
-      loginUrl.searchParams.set("error", "Không thể lấy mã truy cập từ máy chủ Google");
+      const errorMsg = tokenData.error_description || tokenData.error || "Không thể lấy mã truy cập từ máy chủ Google";
+      loginUrl.searchParams.set("error", `Lỗi Google OAuth: ${errorMsg}`);
       return NextResponse.redirect(loginUrl);
     }
 
