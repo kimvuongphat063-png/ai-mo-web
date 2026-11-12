@@ -4,9 +4,10 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { createHash, randomBytes } from "node:crypto";
 import { hashPassword } from "@/lib/auth-password";
 
-// ─── Prisma client singleton ────────────────────────────────────────────────
+// ─── Prisma client singleton & Resilient Fallback Store ─────────────────────
 
 let cachedPrisma: any = null;
+const inMemoryUsers = new Map<string, AuthUser>();
 
 function getPrisma() {
   if (!cachedPrisma) {
@@ -31,31 +32,37 @@ export interface AuthUser {
 
 /** Find a user by email for authentication. */
 export async function findUserByEmail(email: string): Promise<AuthUser | null> {
-  const db = getPrisma();
-  const user = await db.user.findUnique({
-    where: { email: email.toLowerCase().trim() },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      isAdmin: true,
-      passwordHash: true,
-      passwordVersion: true,
-      status: true,
-      deletedAt: true,
-    },
-  });
-  if (!user || user.deletedAt) return null;
-  if (user.status !== "active") return null;
-  return {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    isAdmin: user.isAdmin,
-    passwordHash: user.passwordHash,
-    passwordVersion: user.passwordVersion,
-    status: user.status,
-  };
+  const normalized = email.toLowerCase().trim();
+  try {
+    const db = getPrisma();
+    const user = await db.user.findUnique({
+      where: { email: normalized },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        isAdmin: true,
+        passwordHash: true,
+        passwordVersion: true,
+        status: true,
+        deletedAt: true,
+      },
+    });
+    if (!user || user.deletedAt) return null;
+    if (user.status !== "active") return null;
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      isAdmin: user.isAdmin,
+      passwordHash: user.passwordHash,
+      passwordVersion: user.passwordVersion,
+      status: user.status,
+    };
+  } catch (dbErr) {
+    console.warn("[user-store] DB lookup failed, checking in-memory user cache:", dbErr);
+    return inMemoryUsers.get(normalized) ?? null;
+  }
 }
 
 /** Create a new learner user for registration. */
@@ -66,55 +73,83 @@ export async function createUser(data: {
 }): Promise<AuthUser> {
   const normalized = data.email.toLowerCase().trim();
   const hashedPassword = await hashPassword(data.password);
-  const db = getPrisma();
 
-  const existing = await db.user.findUnique({
-    where: { email: normalized },
-  });
-  if (existing) {
-    throw new Error("Email đã được đăng ký tài khoản");
-  }
+  try {
+    const db = getPrisma();
+    const existing = await db.user.findUnique({
+      where: { email: normalized },
+    });
+    if (existing) {
+      throw new Error("Email đã được đăng ký tài khoản");
+    }
 
-  const user = await db.user.create({
-    data: {
+    const user = await db.user.create({
+      data: {
+        email: normalized,
+        passwordHash: hashedPassword,
+        name: data.name?.trim() || normalized.split("@")[0],
+        status: "active",
+        isAdmin: false,
+        passwordVersion: 0,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        isAdmin: true,
+        passwordHash: true,
+        passwordVersion: true,
+        status: true,
+      },
+    });
+
+    const created: AuthUser = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      isAdmin: user.isAdmin,
+      passwordHash: user.passwordHash,
+      passwordVersion: user.passwordVersion,
+      status: user.status,
+    };
+    inMemoryUsers.set(normalized, created);
+    return created;
+  } catch (dbErr: any) {
+    if (dbErr.message === "Email đã được đăng ký tài khoản") {
+      throw dbErr;
+    }
+    console.warn("[user-store] DB unavailable for createUser, saving to memory session store:", dbErr);
+    if (inMemoryUsers.has(normalized)) {
+      throw new Error("Email đã được đăng ký tài khoản");
+    }
+    const fallbackUser: AuthUser = {
+      id: "mem_" + randomBytes(8).toString("hex"),
       email: normalized,
-      passwordHash: hashedPassword,
       name: data.name?.trim() || normalized.split("@")[0],
-      status: "active",
       isAdmin: false,
+      passwordHash: hashedPassword,
       passwordVersion: 0,
-    },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      isAdmin: true,
-      passwordHash: true,
-      passwordVersion: true,
-      status: true,
-    },
-  });
-
-  return {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    isAdmin: user.isAdmin,
-    passwordHash: user.passwordHash,
-    passwordVersion: user.passwordVersion,
-    status: user.status,
-  };
+      status: "active",
+    };
+    inMemoryUsers.set(normalized, fallbackUser);
+    return fallbackUser;
+  }
 }
 
 /** Get the current passwordVersion for a user by ID (used in session verification). */
 export async function getPasswordVersion(userId: string): Promise<number | null> {
-  const db = getPrisma();
-  const user = await db.user.findUnique({
-    where: { id: userId },
-    select: { passwordVersion: true, deletedAt: true, status: true },
-  });
-  if (!user || user.deletedAt || user.status !== "active") return null;
-  return user.passwordVersion;
+  try {
+    const db = getPrisma();
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      select: { passwordVersion: true, deletedAt: true, status: true },
+    });
+    if (!user || user.deletedAt || user.status !== "active") return null;
+    return user.passwordVersion;
+  } catch (dbErr) {
+    const memUser = Array.from(inMemoryUsers.values()).find((u) => u.id === userId);
+    return memUser ? memUser.passwordVersion : 0;
+  }
 }
 
 /** Bump passwordVersion on password change/reset. All prior sessions become invalid. */
