@@ -6,7 +6,7 @@ import { getSession } from "@/lib/auth";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "19+ App HTML Miễn Phí Chạy Offline — AI MỞ Studio",
+  title: "19+ App Miễn Phí Chạy Offline — AI MỞ Studio",
   description:
     "Bộ sưu tập công cụ số và động cơ giải toán offline độc lập. Bảo mật dữ liệu 100% trên thiết bị cá nhân, chạy mượt mà không cần internet.",
   alternates: {
@@ -48,7 +48,7 @@ export default async function AppsPage() {
             </span>
             <span className="flex items-center gap-1.5 text-neutral-700 bg-neutral-100 px-3 py-1.5 rounded-xl border border-neutral-200">
               <Download className="w-4 h-4 text-neutral-600" />
-              Tải file HTML về dùng vĩnh viễn
+              Tải file về máy dùng vĩnh viễn
             </span>
           </div>
         </div>

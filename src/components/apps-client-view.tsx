@@ -51,7 +51,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
     { key: "all", label: "Tất cả công cụ", icon: Layers, count: apps.length },
     {
       key: "commercial",
-      label: "Kinh doanh & Định giá",
+      label: "Kinh doanh & Bán lẻ",
       icon: Calculator,
       count: apps.filter((a) => a.suite === "commercial").length,
     },
@@ -73,6 +73,15 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
       icon: Keyboard,
       count: apps.filter((a) => a.suite === "cognitive").length,
     },
+  ];
+
+  const quickTags = [
+    { label: "📐 Toán Cấp 1", query: "toán cấp 1", suite: "education" },
+    { label: "⚡ Toán Cấp 2 BigInt", query: "toán cấp 2", suite: "education" },
+    { label: "🎒 Ôn tập HK1 Lớp 4", query: "lớp 4", suite: "education" },
+    { label: "🛒 Tính lãi sàn TMĐT", query: "lãi thật", suite: "commercial" },
+    { label: "📋 Báo giá A4", query: "báo giá", suite: "commercial" },
+    { label: "⌨️ Luyện gõ 10 ngón", query: "gõ 10 ngón", suite: "cognitive" },
   ];
 
   const featuredApps = useMemo(() => {
@@ -115,39 +124,47 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
 
   return (
     <div className="space-y-12">
-      {/* ── TẦNG 1: COMMAND CENTER (SEARCH & SUITE FILTER TOOLBAR) ────────── */}
-      <div className="bg-white/80 backdrop-blur-md rounded-3xl border border-neutral-200/90 p-4 sm:p-5 shadow-sm space-y-4">
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-          {/* Search Box with ⌘K */}
-          <div className="relative flex-1 max-w-lg">
-            <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              ref={searchInputRef}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Tìm kiếm công cụ theo tên, chức năng hoặc thuật toán..."
-              className="w-full pl-10 pr-20 py-2.5 rounded-2xl border border-neutral-200 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:border-[#155EEF] focus:ring-2 focus:ring-[#155EEF]/10 transition-all bg-neutral-50/60"
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-              {query ? (
+      {/* ── TẦNG 1: COMMAND CENTER (BỘ ĐIỀU HƯỚNG & TÌM KIẾM TRỰC QUAN) ────────── */}
+      <div className="bg-white/80 backdrop-blur-md rounded-3xl border border-neutral-200/90 p-5 sm:p-6 shadow-xs space-y-4">
+        {/* Hàng 1: Bộ chọn Suite dạng Segmented Control nổi bật */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+          <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-neutral-100/80 border border-neutral-200/60 overflow-x-auto no-scrollbar">
+            {suiteFilters.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = selectedSuite === tab.key;
+              return (
                 <button
-                  onClick={() => setQuery("")}
-                  className="p-1 text-neutral-400 hover:text-neutral-700 rounded-md"
-                  aria-label="Xóa tìm kiếm"
+                  key={tab.key}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => {
+                    setSelectedSuite(tab.key);
+                    setQuery("");
+                  }}
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    isActive
+                      ? "bg-white text-[#155EEF] shadow-sm border border-neutral-200/90 font-bold"
+                      : "text-neutral-600 hover:text-neutral-900 hover:bg-white/60"
+                  }`}
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? "text-[#155EEF]" : "text-neutral-500"}`} />
+                  <span>{tab.label}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                      isActive
+                        ? "bg-[#EAF2FF] text-[#155EEF] font-bold"
+                        : "bg-neutral-200/70 text-neutral-500"
+                    }`}
+                  >
+                    {tab.count}
+                  </span>
                 </button>
-              ) : (
-                <kbd className="hidden sm:inline-flex items-center px-2 py-0.5 text-[11px] font-mono text-neutral-400 bg-neutral-100 border border-neutral-200 rounded-md">
-                  ⌘K
-                </kbd>
-              )}
-            </div>
+              );
+            })}
           </div>
 
-          {/* Quick Counter */}
-          <div className="flex items-center justify-between md:justify-end gap-3 text-xs text-neutral-500 font-medium">
+          {/* Quick Counter & Reset */}
+          <div className="flex items-center justify-between lg:justify-end gap-3 text-xs text-neutral-500 px-1">
             <span>
               Tìm thấy <strong className="text-neutral-900 font-bold">{filteredApps.length}</strong> / {apps.length} công cụ
             </span>
@@ -157,7 +174,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                   setQuery("");
                   setSelectedSuite("all");
                 }}
-                className="text-[#155EEF] hover:underline font-semibold cursor-pointer"
+                className="text-[#155EEF] hover:underline font-bold cursor-pointer"
               >
                 Đặt lại
               </button>
@@ -165,32 +182,63 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
           </div>
         </div>
 
-        {/* Suite Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar border-t border-neutral-100">
-          {suiteFilters.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = selectedSuite === tab.key;
+        {/* Hàng 2: Thanh tìm kiếm toàn diện với ⌘K và Live Count */}
+        <div className="relative">
+          <Search className="w-4 h-4 text-[#155EEF] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <input
+            ref={searchInputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Tìm kiếm công cụ theo tên, chức năng hoặc môn học (vd: Toán cấp 1, BigInt, Lớp 4, Tính lãi đơn...)..."
+            className="w-full pl-11 pr-32 sm:pr-36 py-3 rounded-2xl border border-neutral-200/90 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:border-[#155EEF] focus:ring-3 focus:ring-[#155EEF]/10 transition-all bg-white shadow-2xs"
+          />
+          <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-2">
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                className="p-1 text-neutral-400 hover:text-neutral-700 rounded-md transition-colors cursor-pointer"
+                aria-label="Xóa tìm kiếm"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+            <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-[#155EEF] bg-[#EAF2FF] border border-[#155EEF]/20 rounded-lg">
+              <Sparkles className="w-3 h-3 text-[#155EEF]" />
+              <span>{filteredApps.length} app</span>
+            </span>
+            <kbd className="hidden md:inline-flex items-center px-2 py-1 text-[10px] font-mono text-neutral-400 bg-neutral-100 border border-neutral-200 rounded-md">
+              ⌘K
+            </kbd>
+          </div>
+        </div>
+
+        {/* Hàng 3: Gợi ý tìm nhanh (Quick Filter Tags) trực quan */}
+        <div className="flex flex-wrap items-center gap-2 pt-0.5 text-xs">
+          <span className="font-semibold text-neutral-400 text-[11px] shrink-0">
+            Gợi ý tìm nhanh:
+          </span>
+          {quickTags.map((tag) => {
+            const isCurrent = query.toLowerCase() === tag.query.toLowerCase();
             return (
               <button
-                key={tab.key}
+                key={tag.label}
                 type="button"
-                aria-pressed={isActive}
-                onClick={() => setSelectedSuite(tab.key)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                  isActive
-                    ? "bg-[#155EEF] text-white shadow-sm shadow-[#155EEF]/20"
-                    : "bg-neutral-100/80 text-neutral-600 hover:bg-neutral-200/70"
+                onClick={() => {
+                  if (isCurrent) {
+                    setQuery("");
+                  } else {
+                    setQuery(tag.query);
+                    if (tag.suite) setSelectedSuite(tag.suite);
+                  }
+                }}
+                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                  isCurrent
+                    ? "bg-[#155EEF] text-white shadow-2xs"
+                    : "bg-neutral-100/90 hover:bg-neutral-200/80 text-neutral-700 border border-neutral-200/60"
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-neutral-500"}`} />
-                <span>{tab.label}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                    isActive ? "bg-white/20 text-white" : "bg-neutral-200/80 text-neutral-600"
-                  }`}
-                >
-                  {tab.count}
-                </span>
+                {tag.label}
               </button>
             );
           })}
