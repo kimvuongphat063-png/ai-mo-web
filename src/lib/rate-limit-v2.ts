@@ -193,21 +193,12 @@ export async function checkRateLimit(
       };
     } catch (err) {
       console.error(`[rate-limit] Upstash error for policy ${policy}:`, err);
-      // In production, don't fall back — fail closed.
-      if (process.env.NODE_ENV === "production") {
-        throw new Error(`[rate-limit] Upstash failure in production: ${err}`);
-      }
     }
   }
 
-  // Development fallback to in-memory.
-  if (process.env.NODE_ENV !== "production") {
-    const mem = memSlidingWindow(`${p.prefix}:${identifier}`, p.limit, p.windowMs);
-    return { ...mem, provider: "memory" };
-  }
-
-  // Should never reach here due to getUpstashLimiter() throwing in production.
-  throw new Error("[rate-limit] Production without Upstash — refusing to continue");
+  // Fallback to in-memory sliding window when Upstash is not available or fails.
+  const mem = memSlidingWindow(`${p.prefix}:${identifier}`, p.limit, p.windowMs);
+  return { ...mem, provider: "memory" };
 }
 
 /**
