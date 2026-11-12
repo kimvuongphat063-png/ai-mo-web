@@ -29,7 +29,7 @@ export default async function AppsPage() {
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 leading-[1.15]">
-            19+ Ứng dụng HTML độc lập{" "}
+            19+ Ứng dụng độc lập{" "}
             <span className="text-[#155EEF]">chạy 100% offline</span>
           </h1>
 
