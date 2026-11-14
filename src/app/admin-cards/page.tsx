@@ -15,7 +15,7 @@ import {
   FileText,
   Save,
 } from "lucide-react";
-import { DEFAULT_HOME_CONTENT, type HomeContent } from "@/app/api/admin/home-images/route";
+import { DEFAULT_HOME_CONTENT, type HomeContent } from "@/types/home-content";
 
 interface CardDef {
   id: string;
