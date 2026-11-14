@@ -130,11 +130,6 @@ const navItems: NavItem[] = [
       },
     ],
   },
-  {
-    key: "games",
-    label: "Game",
-    href: "/games",
-  },
 ];
 
 export function Header() {
