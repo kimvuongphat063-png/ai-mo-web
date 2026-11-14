@@ -72,19 +72,6 @@ const navItems: NavItem[] = [
     key: "apps",
     label: "App miễn phí",
     href: "/apps",
-    children: [
-      {
-        href: "/apps",
-        label: "14+ App HTML dùng ngay",
-        desc: "Chạy trực tiếp trên trình duyệt, không cần cài đặt hay internet",
-        badge: "Free",
-      },
-      {
-        href: "/apps",
-        label: "Bộ App tải về chạy Offline",
-        desc: "Bảo mật dữ liệu 100% trên máy tính cá nhân, zero telemetry",
-      },
-    ],
   },
   {
     key: "learn",
@@ -95,7 +82,7 @@ const navItems: NavItem[] = [
         href: "/guides",
         label: "Kiến thức AI & Blog",
         desc: "Bài viết thực chiến, cẩm nang 12 skill Claude Code cho Vibe Coding",
-        badge: "MỚI",
+        badge: "Blog",
         highlight: true,
       },
       {
@@ -114,12 +101,6 @@ const navItems: NavItem[] = [
         desc: "Kho prompt starter kit và tài liệu chọn lọc miễn phí",
       },
     ],
-  },
-  {
-    key: "guides",
-    label: "Kiến thức AI",
-    href: "/guides",
-    badge: "Blog",
   },
   {
     key: "products",

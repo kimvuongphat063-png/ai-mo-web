@@ -353,13 +353,40 @@ export function AuthNav({ isMobile, onNavigate }: AuthNavProps) {
             {isAdmin && (
               <>
                 <div className="my-1 border-t border-neutral-100" />
+                <div className="px-4 py-1 text-[10px] font-extrabold uppercase tracking-wider text-amber-700">
+                  Lối tắt Quản trị
+                </div>
                 <Link
                   href="/admin"
                   onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-2.5 px-4 py-2 bg-amber-50/60 hover:bg-amber-100/70 text-amber-900 transition-colors font-bold"
+                  className="flex items-center gap-2.5 px-4 py-1.5 hover:bg-neutral-50 text-neutral-800 transition-colors"
                 >
-                  <Shield className="w-4 h-4 text-amber-600" />
-                  <span>Bảng điều khiển Quản trị (Admin)</span>
+                  <Shield className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Tổng quan Quản trị</span>
+                </Link>
+                <Link
+                  href="/admin/articles"
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-1.5 hover:bg-neutral-50 text-neutral-800 transition-colors"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+                  <span>Bài viết Blog & Chèn ảnh</span>
+                </Link>
+                <Link
+                  href="/admin/products"
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-1.5 hover:bg-neutral-50 text-neutral-800 transition-colors"
+                >
+                  <ShoppingBag className="w-3.5 h-3.5 text-purple-600" />
+                  <span>Quản lý Sản phẩm số & App</span>
+                </Link>
+                <Link
+                  href="/admin-cards"
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-1.5 hover:bg-neutral-50 text-neutral-800 transition-colors"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Đổi Ảnh & Chữ Trang Chủ</span>
                 </Link>
               </>
             )}

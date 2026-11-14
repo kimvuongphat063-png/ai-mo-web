@@ -1,1 +1,24 @@
-import {DashboardShell} from "@/components/dashboard";import {products,money} from "@/lib/store";export default function Page(){return <DashboardShell area="Admin"><div className="dash-heading"><h1>Products</h1><p>Review and manage marketplace listings.</p></div><div className="table-wrap"><table><thead><tr><th>Product</th><th>Creator</th><th>Price</th><th>Status</th></tr></thead><tbody>{products.map(p=><tr key={p.id}><td>{p.name}</td><td>{p.creator}</td><td>{money(p.price)}</td><td><span className="status">Published</span></td></tr>)}</tbody></table></div></DashboardShell>}
+import { DashboardShell } from "@/components/dashboard";
+import { readCms } from "@/lib/cms";
+import { AdminProductsClient } from "./products-client";
+import { requirePageRole } from "@/lib/auth";
+
+export const metadata = {
+  title: "Quản lý Sản phẩm số & App — Admin AI MỞ",
+};
+
+export default async function AdminProductsPage() {
+  await requirePageRole("admin");
+  const cms = await readCms();
+
+  return (
+    <DashboardShell admin title="Quản lý Sản phẩm số & Ứng dụng">
+      <div className="mb-6">
+        <p className="text-sm text-neutral-600">
+          Thêm mới, sửa giá, cập nhật link tải app desktop, webapp, tài nguyên số hoặc khóa học. Sản phẩm xuất bản sẽ tự động hiển thị trên toàn trang web.
+        </p>
+      </div>
+      <AdminProductsClient initialProducts={cms.products} />
+    </DashboardShell>
+  );
+}

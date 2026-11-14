@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock3 } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { ArticleMarkdown } from "@/components/article-markdown";
 
 import { findCmsArticle, isPublic, readCms } from "@/lib/cms";
 
@@ -29,7 +28,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const articles = (await readCms()).articles.filter(isPublic).sort((a, b) => a.sortOrder - b.sortOrder);
   const currentIndex = articles.findIndex((item) => item.id === article.id);
   const nextArticle = articles[(currentIndex + 1) % articles.length];
-  const paragraphs = article.content.split(/\n\s*\n/).filter(Boolean);
 
   return (
     <main id="main-content" className="article-page">
@@ -64,9 +62,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               />
             </div>
           )}
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {article.content}
-          </ReactMarkdown>
+          <ArticleMarkdown content={article.content} />
         </div>
       </article>
 

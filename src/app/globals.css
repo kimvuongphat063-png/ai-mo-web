@@ -157,7 +157,8 @@ button, input {
    ============================================================ */
 
 .site-header {
-  height: 56px;
+  min-height: 64px;
+  height: auto;
   border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
