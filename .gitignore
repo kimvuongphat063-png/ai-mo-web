@@ -37,7 +37,8 @@ yarn-error.log*
 !.env.example
 
 # local data — CMS/Studio JSON stores, learner progress, and backups
-/data/
+/data/*
+!/data/cms.json
 /backups/
 *.log
 

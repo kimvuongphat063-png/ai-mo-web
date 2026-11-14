@@ -1,0 +1,652 @@
+{
+  "version": 2,
+  "updatedAt": "2026-11-14T08:08:00.809Z",
+  "homepage": {
+    "eyebrow": "HỆ SINH THÁI AI CHO NGƯỜI MỚI",
+    "title": "Đừng chỉ hỏi AI. Hãy làm được việc.",
+    "description": "Lộ trình, công cụ và tài nguyên tiếng Việt giúp bạn biến AI thành năng lực thật — bắt đầu từ số 0.",
+    "primaryLabel": "Chọn lộ trình của bạn",
+    "primaryHref": "/courses",
+    "stats": [
+      {
+        "value": "2.400+",
+        "label": "học viên thực hành"
+      },
+      {
+        "value": "21 ngày",
+        "label": "xây workflow đầu tiên"
+      },
+      {
+        "value": "4,9/5",
+        "label": "đánh giá trung bình"
+      }
+    ]
+  },
+  "products": [
+    {
+      "status": "published",
+      "featured": true,
+      "sortOrder": 0,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "c1",
+      "slug": "ai-thuc-chien-21-ngay",
+      "title": "AI Thực Chiến: Từ số 0 đến trợ lý đầu tiên",
+      "summary": "Lộ trình 21 ngày giúp người mới dùng AI đúng cách và tạo quy trình tiết kiệm 10+ giờ mỗi tuần.",
+      "description": "Lộ trình 21 ngày giúp người mới dùng AI đúng cách và tạo quy trình tiết kiệm 10+ giờ mỗi tuần.",
+      "longDescription": "Không học mẹo rời rạc. Bạn đi từ tư duy nền tảng đến một hệ thống AI cá nhân có thể dùng ngay cho công việc, nội dung và vận hành.",
+      "kind": "course",
+      "ownership": "owned",
+      "category": "Khóa học",
+      "price": 1290000,
+      "compareAt": 1890000,
+      "pricingModel": "Thanh toán một lần",
+      "rating": 4.9,
+      "reviews": 342,
+      "badge": "LỘ TRÌNH CHỦ LỰC",
+      "accent": "#ff6b4a",
+      "formats": [
+        "42 video",
+        "Workbook",
+        "Cộng đồng"
+      ],
+      "features": [
+        "Học trọn đời",
+        "Bài tập thực hành",
+        "12 mẫu prompt",
+        "Hỗ trợ 1:1 định kỳ"
+      ],
+      "creator": "Duyệt Nguyễn",
+      "updated": "24/07/2026",
+      "level": "Người mới",
+      "duration": "8 giờ 40 phút",
+      "outcomes": [
+        "Viết prompt có cấu trúc và kiểm chứng đầu ra",
+        "Tạo trợ lý AI cho công việc lặp lại",
+        "Xây workflow nội dung từ ý tưởng đến xuất bản",
+        "Biết chọn công cụ phù hợp, không chạy theo xu hướng"
+      ],
+      "modules": [
+        {
+          "id": "module-c1-1",
+          "title": "01 — Làm chủ nền tảng",
+          "description": "",
+          "sortOrder": 0,
+          "lessons": [
+            {
+              "id": "lesson-c1-1-1",
+              "slug": "chao-mung",
+              "title": "Bắt đầu đúng: AI làm được và không làm được gì?",
+              "duration": "08:12",
+              "youtube": "dQw4w9WgXcQ",
+              "summary": "",
+              "exercise": "",
+              "resources": [],
+              "preview": true,
+              "sortOrder": 0,
+              "status": "published"
+            },
+            {
+              "id": "lesson-c1-1-2",
+              "slug": "prompt-5-lop",
+              "title": "Công thức prompt 5 lớp",
+              "duration": "18:30",
+              "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+              "summary": "",
+              "exercise": "",
+              "resources": [],
+              "preview": false,
+              "sortOrder": 1,
+              "status": "published"
+            },
+            {
+              "id": "lesson-c1-1-3",
+              "slug": "kiem-chung",
+              "title": "Kiểm chứng và bảo mật dữ liệu",
+              "duration": "14:05",
+              "youtube": "",
+              "summary": "",
+              "exercise": "",
+              "resources": [],
+              "preview": false,
+              "sortOrder": 2,
+              "status": "published"
+            }
+          ]
+        },
+        {
+          "id": "module-c1-2",
+          "title": "02 — Xây hệ thống cá nhân",
+          "description": "",
+          "sortOrder": 1,
+          "lessons": [
+            {
+              "id": "lesson-c1-2-1",
+              "slug": "tro-ly-dau-tien",
+              "title": "Tạo trợ lý AI đầu tiên",
+              "duration": "24:10",
+              "youtube": "",
+              "summary": "",
+              "exercise": "",
+              "resources": [],
+              "preview": false,
+              "sortOrder": 0,
+              "status": "published"
+            },
+            {
+              "id": "lesson-c1-2-2",
+              "slug": "workflow-noi-dung",
+              "title": "Workflow nội dung 60 phút",
+              "duration": "31:20",
+              "youtube": "",
+              "summary": "",
+              "exercise": "",
+              "resources": [],
+              "preview": false,
+              "sortOrder": 1,
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status": "published",
+      "featured": true,
+      "sortOrder": 1,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "c2",
+      "slug": "content-engine-ai",
+      "title": "Content Engine AI",
+      "summary": "Biến một ý tưởng thành 30 nội dung đúng giọng thương hiệu.",
+      "description": "Biến một ý tưởng thành 30 nội dung đúng giọng thương hiệu.",
+      "longDescription": "Hệ thống nghiên cứu, viết và tái sử dụng nội dung dành cho solopreneur và đội marketing nhỏ.",
+      "kind": "course",
+      "ownership": "owned",
+      "category": "Khóa học",
+      "price": 890000,
+      "pricingModel": "Thanh toán một lần",
+      "rating": 4.8,
+      "reviews": 186,
+      "badge": "BÁN CHẠY",
+      "accent": "#9b7cff",
+      "formats": [
+        "28 video",
+        "Notion kit"
+      ],
+      "features": [
+        "30 template",
+        "Case study Việt Nam",
+        "Cập nhật miễn phí"
+      ],
+      "creator": "Duyệt Nguyễn",
+      "updated": "18/07/2026",
+      "level": "Cơ bản",
+      "duration": "5 giờ 15 phút",
+      "outcomes": [
+        "Xây bản đồ nội dung 30 ngày",
+        "Giữ giọng thương hiệu nhất quán",
+        "Rút ngắn 70% thời gian sản xuất"
+      ],
+      "modules": [
+        {
+          "id": "module-c2-1",
+          "title": "Nền móng nội dung",
+          "description": "",
+          "sortOrder": 0,
+          "lessons": [
+            {
+              "id": "lesson-c2-1-1",
+              "slug": "ban-do-noi-dung",
+              "title": "Bản đồ nội dung có mục tiêu",
+              "duration": "16:20",
+              "youtube": "",
+              "summary": "",
+              "exercise": "",
+              "resources": [],
+              "preview": true,
+              "sortOrder": 0,
+              "status": "published"
+            },
+            {
+              "id": "lesson-c2-1-2",
+              "slug": "brand-voice",
+              "title": "Huấn luyện AI theo giọng thương hiệu",
+              "duration": "22:10",
+              "youtube": "",
+              "summary": "",
+              "exercise": "",
+              "resources": [],
+              "preview": false,
+              "sortOrder": 1,
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status": "published",
+      "featured": true,
+      "sortOrder": 2,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "t1",
+      "slug": "promptdesk",
+      "title": "PromptDesk",
+      "summary": "Kho prompt riêng tư, tìm nhanh và chèn vào mọi ứng dụng chỉ bằng phím tắt.",
+      "description": "Kho prompt riêng tư, tìm nhanh và chèn vào mọi ứng dụng chỉ bằng phím tắt.",
+      "longDescription": "Một workspace nhỏ gọn để lưu, gắn biến, phiên bản hóa và sử dụng prompt mà không làm gián đoạn dòng công việc.",
+      "kind": "desktop",
+      "ownership": "owned",
+      "category": "Ứng dụng desktop",
+      "price": 490000,
+      "pricingModel": "Giấy phép trọn đời / 1 máy",
+      "rating": 4.9,
+      "reviews": 214,
+      "badge": "MADE IN VIETNAM",
+      "accent": "#176b5b",
+      "formats": [
+        "Windows",
+        "macOS"
+      ],
+      "features": [
+        "Hoạt động offline",
+        "Biến prompt thông minh",
+        "Tìm kiếm tức thì",
+        "Đồng bộ tùy chọn"
+      ],
+      "creator": "AI MỞ Studio",
+      "updated": "22/07/2026",
+      "platform": [
+        "Windows 10/11 64-bit",
+        "macOS 13 Ventura trở lên"
+      ],
+      "requirements": [
+        "RAM 4 GB",
+        "250 MB dung lượng",
+        "Internet chỉ cần khi cập nhật"
+      ],
+      "changelog": [
+        "v2.4 — Thêm thư viện team và hotkey mới",
+        "v2.3 — Import CSV, cải thiện tìm kiếm",
+        "v2.2 — Chế độ tối và backup cục bộ"
+      ]
+    },
+    {
+      "status": "published",
+      "featured": true,
+      "sortOrder": 3,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "t2",
+      "slug": "caption-flow",
+      "title": "Caption Flow",
+      "summary": "Lập kế hoạch, viết và duyệt nội dung mạng xã hội trong một luồng.",
+      "description": "Lập kế hoạch, viết và duyệt nội dung mạng xã hội trong một luồng.",
+      "longDescription": "Web app cộng tác dành cho creator và đội nhỏ, tối ưu tiếng Việt và giữ dữ liệu dự án minh bạch.",
+      "kind": "webapp",
+      "ownership": "owned",
+      "category": "Web app",
+      "price": 199000,
+      "pricingModel": "Gói Pro / tháng",
+      "rating": 4.7,
+      "reviews": 98,
+      "badge": "DÙNG THỬ",
+      "accent": "#2979ff",
+      "formats": [
+        "Web app",
+        "PWA"
+      ],
+      "features": [
+        "120 lượt tạo/tháng",
+        "3 workspace",
+        "Lịch nội dung",
+        "Xuất CSV"
+      ],
+      "creator": "AI MỞ Studio",
+      "updated": "20/07/2026",
+      "platform": [
+        "Web app",
+        "PWA"
+      ],
+      "requirements": [],
+      "changelog": [],
+      "usage": [
+        "120 lượt AI mỗi tháng",
+        "Tối đa 3 thành viên",
+        "Lịch sử 90 ngày"
+      ],
+      "privacy": "Dữ liệu được mã hóa khi truyền; nội dung không dùng để huấn luyện mô hình công khai."
+    },
+    {
+      "status": "published",
+      "featured": false,
+      "sortOrder": 4,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "r1",
+      "slug": "prompt-starter-kit",
+      "title": "Prompt Starter Kit",
+      "summary": "25 prompt nền tảng và checklist kiểm chứng dành cho người mới.",
+      "description": "25 prompt nền tảng và checklist kiểm chứng dành cho người mới.",
+      "longDescription": "Bộ khởi động ngắn gọn giúp bạn có kết quả tốt ngay trong tuần đầu dùng AI.",
+      "kind": "resource",
+      "ownership": "owned",
+      "category": "Tài nguyên",
+      "price": 0,
+      "pricingModel": "Miễn phí",
+      "rating": 4.9,
+      "reviews": 530,
+      "badge": "TẢI MIỄN PHÍ",
+      "accent": "#f3c94f",
+      "formats": [
+        "PDF",
+        "Notion"
+      ],
+      "features": [
+        "25 prompt",
+        "Checklist an toàn",
+        "Ví dụ tiếng Việt"
+      ],
+      "creator": "AI MỞ Studio",
+      "updated": "12/07/2026",
+      "downloadUrl": "",
+      "fileType": "PDF"
+    },
+    {
+      "status": "published",
+      "featured": false,
+      "sortOrder": 5,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "b1",
+      "slug": "solo-ai-business-bundle",
+      "title": "Solo AI Business Bundle",
+      "summary": "Bộ vận hành AI gọn nhẹ cho người làm kinh doanh một mình.",
+      "description": "Bộ vận hành AI gọn nhẹ cho người làm kinh doanh một mình.",
+      "longDescription": "Kết hợp khóa học, ứng dụng desktop và tài nguyên để bạn xây hệ thống từ học đến làm.",
+      "kind": "bundle",
+      "ownership": "owned",
+      "category": "Bundle",
+      "price": 1490000,
+      "compareAt": 2670000,
+      "pricingModel": "Thanh toán một lần",
+      "rating": 4.9,
+      "reviews": 126,
+      "badge": "TIẾT KIỆM 44%",
+      "accent": "#e95e8c",
+      "formats": [
+        "Course",
+        "App",
+        "Notion",
+        "PDF"
+      ],
+      "features": [
+        "Truy cập trọn đời",
+        "Mọi cập nhật",
+        "License cá nhân"
+      ],
+      "creator": "AI MỞ Studio",
+      "updated": "21/07/2026",
+      "productIds": [],
+      "bundleContents": [
+        "AI Thực Chiến: Từ số 0 đến trợ lý đầu tiên",
+        "PromptDesk — license cá nhân",
+        "Content OS Notion template",
+        "50 prompt bán hàng có đạo đức"
+      ]
+    },
+    {
+      "status": "published",
+      "featured": false,
+      "sortOrder": 6,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "a1",
+      "slug": "notion-ai",
+      "title": "Notion AI",
+      "summary": "Workspace tích hợp AI phù hợp khi tài liệu và dự án đã nằm trong Notion.",
+      "description": "Workspace tích hợp AI phù hợp khi tài liệu và dự án đã nằm trong Notion.",
+      "longDescription": "Đánh giá độc lập dựa trên trải nghiệm thực tế. Mạnh ở khả năng hỏi đáp trên workspace, tóm tắt và biến tài liệu thành kế hoạch.",
+      "kind": "affiliate",
+      "ownership": "affiliate",
+      "category": "Đối tác đề xuất",
+      "price": 0,
+      "pricingModel": "Thuê bao theo gói Notion",
+      "rating": 4.7,
+      "reviews": 88,
+      "badge": "ĐÃ KIỂM THỬ",
+      "accent": "#202020",
+      "formats": [
+        "Web",
+        "Desktop",
+        "Mobile"
+      ],
+      "features": [
+        "AI trong workspace",
+        "Tìm kiếm doanh nghiệp",
+        "Tóm tắt tài liệu"
+      ],
+      "creator": "Notion",
+      "updated": "15/07/2026",
+      "vendor": "Notion Labs",
+      "affiliateUrl": "https://www.notion.so/product/ai",
+      "disclosure": "AI MỞ có thể nhận hoa hồng nếu bạn đăng ký qua liên kết này, không làm tăng giá bạn trả.",
+      "pros": [
+        "Tích hợp sâu với tài liệu",
+        "Trải nghiệm gọn và dễ bắt đầu",
+        "Cộng tác nhóm tốt"
+      ],
+      "cons": [
+        "Chi phí tăng theo thành viên",
+        "Không phù hợp nếu không dùng Notion"
+      ],
+      "bestFor": "Cá nhân và đội nhỏ đã quản lý kiến thức trên Notion.",
+      "clicks": 0
+    },
+    {
+      "status": "published",
+      "featured": false,
+      "sortOrder": 7,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "a2",
+      "slug": "canva-pro",
+      "title": "Canva Pro",
+      "summary": "Bộ thiết kế và AI trực quan cho người không chuyên sáng tạo nội dung nhanh.",
+      "description": "Bộ thiết kế và AI trực quan cho người không chuyên sáng tạo nội dung nhanh.",
+      "longDescription": "Canva Pro phù hợp khi bạn cần xuất bản thường xuyên mà không muốn học công cụ thiết kế phức tạp.",
+      "kind": "affiliate",
+      "ownership": "affiliate",
+      "category": "Đối tác đề xuất",
+      "price": 0,
+      "pricingModel": "Thuê bao tháng hoặc năm",
+      "rating": 4.8,
+      "reviews": 154,
+      "badge": "LỰA CHỌN DỄ BẮT ĐẦU",
+      "accent": "#7d5cff",
+      "formats": [
+        "Web",
+        "Desktop",
+        "Mobile"
+      ],
+      "features": [
+        "Magic Studio",
+        "Brand Kit",
+        "Kho tài nguyên"
+      ],
+      "creator": "Canva",
+      "updated": "10/07/2026",
+      "vendor": "Canva Pty Ltd",
+      "affiliateUrl": "https://www.canva.com/pro/",
+      "disclosure": "Liên kết đối tác minh bạch: chúng tôi có thể nhận hoa hồng, còn mức giá của bạn không đổi.",
+      "pros": [
+        "Rất dễ dùng",
+        "Template phong phú",
+        "Tốt cho social content"
+      ],
+      "cons": [
+        "Thiết kế dễ trùng lặp",
+        "Một số AI giới hạn theo gói"
+      ],
+      "bestFor": "Creator, chủ shop và đội marketing không có designer chuyên trách.",
+      "clicks": 0
+    }
+  ],
+  "paths": [
+    {
+      "status": "published",
+      "featured": false,
+      "sortOrder": 0,
+      "image": "",
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "id": "path-ai-starter",
+      "slug": "bat-dau-voi-ai",
+      "title": "Bắt đầu với AI",
+      "description": "Lộ trình thực hành AI dành cho người mới.",
+      "excerpt": "Đi từ nền tảng đến workflow đầu tiên theo từng bước rõ ràng.",
+      "audience": "Người mới",
+      "duration": "21 ngày",
+      "steps": [
+        {
+          "id": "step-1",
+          "title": "Học nền tảng",
+          "description": "Hoàn thành chương trình AI Thực Chiến.",
+          "productId": "c1",
+          "sortOrder": 0
+        }
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "status": "published",
+      "featured": true,
+      "sortOrder": 0,
+      "image": "/images/blog/12-skill-claude-code.jpg",
+      "accent": "#155EEF",
+      "seo": {
+        "title": "Cẩm Nang 12 Skill Claude Code Xịn Nhất 2026 Cho Dân Vibe Coding | AI MỞ",
+        "description": "Tổng hợp 12 skill Claude Code đỉnh nhất hiện nay: Superpowers, Matt Pocock, UI/UX Pro Max, Caveman, Vercel Deploy... Giúp bạn làm chủ quy trình Vibe Coding từ ý tưởng đến sản phẩm hoàn chỉnh."
+      },
+      "id": "article-12-skill-claude-code",
+      "slug": "cam-nang-12-skill-claude-code",
+      "title": "Cẩm nang 12 Skill Claude Code xịn nhất cho dân Vibe Coding",
+      "description": "Tổng hợp 12 skill Claude Code đỉnh nhất hiện nay giúp bạn làm chủ quy trình Vibe Coding: từ lập kế hoạch bài bản (Superpowers), tự động review bắt bug (Matt Pocock), thiết kế giao diện chuẩn UI/UX Pro Max đến deploy Vercel chỉ 1 lệnh.",
+      "excerpt": "Tổng hợp 12 skill Claude Code được cộng đồng đánh giá cao nhất: từ Superpowers, Matt Pocock, UI/UX Pro Max đến deploy Vercel và kiểm thử toàn diện.",
+      "content": "Xu hướng **Vibe Coding** — phong cách lập trình kết hợp tư duy ý tưởng và để AI trực tiếp viết mã — đang bùng nổ mạnh mẽ trong năm 2026. Tuy nhiên, nếu bạn chỉ giao việc cho Claude Code một cách ngẫu hứng bằng các prompt chung chung, bạn sẽ rất nhanh gặp phải tình trạng: code phình to khó bảo trì, bug logic ngầm, và giao diện trông như một bản mẫu dựng tạm.\n\nChìa khóa để biến Claude Code từ một \"trợ lý gõ code tự động\" thành một **Tech Lead thực thụ** chính là trang bị hệ thống **Agent Skills**. Skills cung cấp cho AI quy trình làm việc chuẩn mực, các best-practice của chuyên gia hàng đầu và khả năng tự kiểm soát chất lượng đầu ra.\n\nDưới đây là cẩm nang tổng hợp **12 Skill Claude Code được cộng đồng đánh giá cao và thực chiến nhất hiện nay**, được đội ngũ **AI MỞ Studio** tuyển chọn và kiểm chứng thực tế.\n\n---\n\n## 3 Skill Trụ Cột Đột Phá Quy Trình Vibe Coding\n\nTrong toàn bộ bộ sưu tập, đây là 3 skill có tác động lớn nhất đến tư duy và năng suất làm việc hàng ngày của bạn:\n\n### 1. Superpowers — Chuẩn Hóa Quy Trình Plan ➔ Design ➔ Build\n* **Link cài đặt:** [https://lnkd.in/dKp8VwQa](https://lnkd.in/dKp8VwQa)\n* **Công dụng cốt lõi:** Thay vì để AI vừa nghĩ vừa gõ code bừa bãi, Superpowers buộc Claude Code phải tuân thủ nghiêm ngặt 3 giai đoạn:\n  1. **Lập kế hoạch (Plan):** Xác định phạm vi tính năng, luồng dữ liệu và rủi ro tiềm ẩn.\n  2. **Thiết kế kiến trúc (Design):** Định hình cấu trúc component, schema database và hợp đồng API.\n  3. **Thực thi (Build):** Chia nhỏ công việc thành các bước có thể kiểm chứng độc lập.\n* **Tại sao nên dùng:** Giúp bạn kiểm soát 100% dự án, loại bỏ tình trạng code bị \"lạc đề\" hoặc sinh ra các module không liên quan.\n\n### 2. Matt Pocock Skills — AI Tự Review Code & Quét Sạch Bug Trước Khi Test\n* **Link cài đặt:** [https://lnkd.in/dR3n-Tzb](https://lnkd.in/dR3n-Tzb)\n* **Công dụng cốt lõi:** Được biên soạn bởi chuyên gia TypeScript Matt Pocock, skill này biến Claude thành một chuyên viên kiểm thử mã nguồn cao cấp.\n* **Tại sao nên dùng:** AI sẽ tự động rà soát TypeScript types, phát hiện race condition, chặn memory leak và chỉ ra các lỗ hổng logic tiềm ẩn trước khi bạn tốn thời gian chạy thử ứng dụng.\n\n### 3. UI/UX Pro Max — Nâng Tầm Thẩm Mỹ Giao Diện Web & App Chuyên Nghiệp\n* **Link cài đặt:** [https://lnkd.in/dW9cYmFv](https://lnkd.in/dW9cYmFv)\n* **Công dụng cốt lõi:** Cung cấp cho AI cơ sở dữ liệu khổng lồ về 80+ phong cách thiết kế, 192 bảng màu hài hòa, 74 cặp font chữ tiêu chuẩn và quy chuẩn tiếp cận WCAG.\n* **Tại sao nên dùng:** Giúp ứng dụng của bạn thoát khỏi giao diện \"generic AI\" (trông nhợt nhạt giống hệt template mẫu), mang lại trải nghiệm thị giác cao cấp, tinh tế và có cá tính thương hiệu riêng.\n\n---\n\n## Bảng Tổng Hợp 12 Skill Claude Code Đỉnh Nhất 2026\n\nDưới đây là bảng tra cứu nhanh 12 skill để bạn dễ dàng lựa chọn theo nhu cầu thực tế:\n\n| STT | Tên Skill | Công Dụng Cốt Lõi | Link Truy Cập |\n| :---: | :--- | :--- | :---: |\n| **01** | **Superpowers** | Chuẩn hóa quy trình Plan ➔ Design ➔ Build bài bản | [Truy cập](https://lnkd.in/dKp8VwQa) |\n| **02** | **Matt Pocock Skills** | AI tự động rà soát code, bắt lỗi logic và TypeScript | [Truy cập](https://lnkd.in/dR3n-Tzb) |\n| **03** | **UI/UX Pro Max** | Thiết kế giao diện hiện đại, chọn font và phối màu chuẩn | [Truy cập](https://lnkd.in/dW9cYmFv) |\n| **04** | **Caveman** | Viết code tối giản, loại bỏ boilerplate dư thừa (KISS / YAGNI) | [Truy cập](https://lnkd.in/dh6SgUeq) |\n| **05** | **Humanizer** | Xử lý ngôn ngữ tự nhiên, viết văn phong mềm mại và chân thực | [Truy cập](https://lnkd.in/dN2xLrPk) |\n| **06** | **Find Skills** | Tự động đề xuất và tìm kiếm skill phù hợp bài toán hiện tại | [Truy cập](https://lnkd.in/dZ4bHjWm) |\n| **07** | **Deploy to Vercel** | Triển khai website lên môi trường Cloud Vercel chỉ với 1 lệnh | [Truy cập](https://lnkd.in/dC7tQaNs) |\n| **08** | **Brainstorming** | Phản biện giả định, đào sâu ý tưởng giải pháp trước khi gõ code | [Truy cập](https://lnkd.in/dJ5_PvXr) |\n| **09** | **TDD** | Viết Unit Test kiểm thử trước khi viết code logic (Red-Green-Refactor) | [Truy cập](https://lnkd.in/dB8mKdTy) |\n| **10** | **Excalidraw** | Tự động tạo sơ đồ kiến trúc, diagram và system flow trực quan | [Truy cập](https://lnkd.in/dY1fRCHu) |\n| **11** | **Remotion** | Tạo video và hoạt cảnh chuyển động tự động bằng code React | [Truy cập](https://lnkd.in/dS6wNbGe) |\n| **12** | **Web Quality** | Đánh giá toàn diện SEO, Core Web Vitals, tốc độ và bảo mật web | [Truy cập](https://lnkd.in/dEOzMqLj) |\n\n---\n\n## Khám Phá Chi Tiết 9 Skill Hỗ Trợ Đắc Lực Còn Lại\n\n### 4. Caveman — Viết Code Tối Giản, Giữ Codebase Siêu Sạch\n* **Link cài đặt:** [https://lnkd.in/dh6SgUeq](https://lnkd.in/dh6SgUeq)\n* Triết lý: Áp dụng nguyên lý *KISS (Keep It Simple, Stupid)* và *YAGNI (You Aren't Gonna Need It)*. Skill này ngăn chặn triệt để thói quen \"over-engineering\" thường thấy ở AI, chỉ tạo ra lượng code tối thiểu cần thiết để giải quyết triệt để bài toán.\n\n### 5. Humanizer — Tinh Chỉnh Văn Phong Mượt Mà, Không \"Mùi AI\"\n* **Link cài đặt:** [https://lnkd.in/dN2xLrPk](https://lnkd.in/dN2xLrPk)\n* Khi bạn cần tạo nội dung giao diện (microcopy), thông báo lỗi, tài liệu hướng dẫn hay bài viết blog, Humanizer sẽ loại bỏ những câu từ sáo rỗng, công thức máy móc để mang lại văn phong tự nhiên, ấm áp và gần gũi như con người viết.\n\n### 6. Find Skills — La Bàn Tìm Kiếm Skill Tự Động\n* **Link cài đặt:** [https://lnkd.in/dZ4bHjWm](https://lnkd.in/dZ4bHjWm)\n* Thay vì phải tự đi tìm trên GitHub, bạn chỉ cần mô tả bài toán bạn đang làm (ví dụ: \"tôi cần làm thanh toán Stripe\" hay \"tôi cần tối ưu truy vấn PostgreSQL\"), Find Skills sẽ tự quét kho tài nguyên và kích hoạt bộ skill tương ứng cho bạn.\n\n### 7. Deploy to Vercel — 1 Câu Lệnh Là Web Lên Mạng\n* **Link cài đặt:** [https://lnkd.in/dC7tQaNs](https://lnkd.in/dC7tQaNs)\n* Tự động hóa toàn bộ quá trình kiểm tra môi trường, build dự án và kích hoạt deployment lên Vercel. Bạn không cần phải rời terminal hay cấu hình thủ công phức tạp.\n\n### 8. Brainstorming — Đào Sâu Ý Tưởng Cùng Bạn Trước Khi Bắt Tay Vào Làm\n* **Link cài đặt:** [https://lnkd.in/dJ5_PvXr](https://lnkd.in/dJ5_PvXr)\n* Skill này đóng vai trò như một người đồng sáng lập (co-founder) thông thái: nó đặt lại cho bạn các câu hỏi phản biện, phân tích ưu nhược điểm của các giải pháp thay thế, giúp bạn định hình sản phẩm rõ ràng trước khi tốn thời gian gõ dòng code đầu tiên.\n\n### 9. TDD (Test-Driven Development) — Đảm Bảo Không Bao Giờ Hỏng Code Cũ\n* **Link cài đặt:** [https://lnkd.in/dB8mKdTy](https://lnkd.in/dB8mKdTy)\n* Thiết lập chu trình: Viết test thất bại (Red) ➔ Viết code tối thiểu để test vượt qua (Green) ➔ Tái cấu trúc mã nguồn (Refactor). Với TDD, dự án của bạn luôn có một tấm lưới bảo vệ an toàn 100%.\n\n### 10. Excalidraw — Trực Quan Hóa Hệ Thống Thành Sơ Đồ Vẽ Tay\n* **Link cài đặt:** [https://lnkd.in/dY1fRCHu](https://lnkd.in/dY1fRCHu)\n* Mô tả luồng dữ liệu, phân quyền database hay sơ đồ người dùng bằng sơ đồ tương tác Excalidraw dạng vẽ tay độc đáo, giúp bạn và đồng đội nắm bắt kiến trúc tổng thể chỉ trong 5 giây.\n\n### 11. Remotion — Sáng Tạo Video Bằng Lập Trình React\n* **Link cài đặt:** [https://lnkd.in/dS6wNbGe](https://lnkd.in/dS6wNbGe)\n* Biến code React và Tailwind thành video clip sinh động, hỗ trợ tự động hóa việc làm trailer giới thiệu tính năng, video quảng cáo ngắn hoặc video tài liệu hướng dẫn sử dụng sản phẩm.\n\n### 12. Web Quality — Giám Sát Hiệu Năng & Điểm Chất Lượng Web\n* **Link cài đặt:** [https://lnkd.in/dEOzMqLj](https://lnkd.in/dEOzMqLj)\n* Kiểm tra toàn diện chỉ số Core Web Vitals (LCP, FID, CLS), khả năng tương thích di động, khả năng tiếp cận và các tiêu chí chuẩn SEO, giúp website của bạn luôn đạt điểm xanh tối đa trên Google PageSpeed.\n\n---\n\n## Hướng Dẫn Kích Hoạt & Cài Đặt Skill Trong Dự Án\n\nViệc tích hợp các skill vào dự án của bạn rất đơn giản:\n\n1. **Cấu hình cục bộ (Project Level):** Tạo thư mục `.claude/skills/` ngay trong thư mục gốc của dự án. Mỗi skill là một thư mục chứa tệp hướng dẫn `SKILL.md`.\n2. **Cấu hình toàn cục (Global Level):** Đặt skill vào thư mục cấu hình cá nhân của bạn để dùng chung cho mọi dự án trên máy tính.\n3. **Gọi lệnh tự nhiên:** Trong lúc trò chuyện với Claude Code, bạn chỉ cần gõ yêu cầu hoặc nhắc tên skill (ví dụ: *\"hãy dùng skill Superpowers để lập kế hoạch cho tính năng này\"*), AI sẽ tự động đọc tệp chỉ dẫn và tuân thủ đúng quy trình.\n\n---\n\n## Trải Nghiệm Thực Chiến Cùng Hệ Sinh Thái AI MỞ\n\nTại **AI MỞ Studio**, toàn bộ nền tảng và các ứng dụng bạn đang sử dụng đều được xây dựng dựa trên chính những quy chuẩn và skill lập trình AI tối ưu này:\n* **[19+ Ứng Dụng HTML Chạy Offline Miễn Phí](/apps):** Bộ công cụ giải toán và tiện ích số hoạt động 100% trên thiết bị cá nhân, bảo mật tuyệt đối không gửi dữ liệu ra ngoài.\n* **[PromptKichBan Studio](/tools):** Không gian sáng tạo kịch bản video AI chuyên nghiệp dành cho Veo 3, Sora và Grok với quy trình phân tích góc quay, hook và nhịp phim tự động.\n\n---\n\n## Câu Hỏi Thường Gặp (FAQ)\n\n### Skill Claude Code có dùng được cho Antigravity hay Cursor không?\nCó! Định dạng của Agent Skills bản chất là tài liệu chỉ dẫn kèm theo metadata có cấu trúc (markdown, system prompt và tool definitions). Bạn hoàn toàn có thể sao chép tệp `SKILL.md` vào thư mục skills của Antigravity hoặc hệ thống prompt của Cursor để đạt hiệu quả tương đương.\n\n### Người chưa biết lập trình có áp dụng được 12 skill này không?\nRất nên dùng! Đặc biệt là các skill như **Superpowers** và **Brainstorming**, chúng sẽ giúp bạn sắp xếp tư duy logic mạch lạc, hướng dẫn AI thực hiện từng bước thay vì bị bối rối trước lượng mã nguồn phức tạp.\n\n### Tôi nên bắt đầu với skill nào trước tiên?\nHãy bắt đầu ngay với bộ ba: **Superpowers** (để giữ kỷ luật quy trình) + **UI/UX Pro Max** (để sản phẩm làm ra trông đẹp mắt và dùng thích ngay) + **Deploy to Vercel** (để đưa thành quả lên mạng chia sẻ cho bạn bè trong 1 phút).",
+      "category": "Kỹ năng AI",
+      "readTime": 8,
+      "author": "AI MỞ Studio"
+    },
+    {
+      "status": "published",
+      "featured": true,
+      "sortOrder": 1,
+      "image": "",
+      "accent": "#b9e769",
+      "seo": {
+        "title": "Viết prompt có cấu trúc | AI MỞ",
+        "description": "Năm thành phần giúp bạn giao việc rõ ràng và kiểm chứng đầu ra từ AI."
+      },
+      "id": "article-prompt",
+      "slug": "viet-prompt-co-cau-truc",
+      "title": "Viết prompt có cấu trúc",
+      "description": "Một prompt tốt không cần dài. Nó cần đủ bối cảnh để AI hiểu việc, đủ tiêu chí để bạn đánh giá kết quả và đủ rõ để có thể dùng lại.",
+      "excerpt": "Năm thành phần giúp prompt dễ kiểm chứng và tái sử dụng.",
+      "content": "Bắt đầu bằng kết quả bạn muốn nhận, thay vì bắt đầu bằng một vai trò hoa mỹ. Hãy mô tả đầu ra cụ thể: một email dài bao nhiêu, dành cho ai và người đọc cần làm gì sau đó.\n\nTiếp theo, thêm bối cảnh tối thiểu mà AI cần biết. Bối cảnh tốt gồm mục tiêu, đối tượng, dữ liệu đầu vào và những gì đã thử. Đừng đưa cả kho tài liệu nếu chỉ hai đoạn có liên quan.\n\nSau đó đặt ràng buộc và tiêu chí kiểm tra. Yêu cầu AI chỉ ra giả định, đánh dấu dữ kiện chưa chắc chắn và trình bày theo một định dạng bạn có thể rà soát nhanh.\n\nCông thức ngắn để bắt đầu là: bối cảnh, nhiệm vụ, ràng buộc, định dạng đầu ra và tiêu chí đạt. Chạy thử với một ví dụ thật, sửa điểm mơ hồ rồi mới lưu prompt thành mẫu dùng lại.",
+      "category": "Hướng dẫn",
+      "readTime": 5,
+      "author": "AI MỞ Studio"
+    },
+    {
+      "status": "published",
+      "featured": false,
+      "sortOrder": 2,
+      "image": "",
+      "accent": "#ff7a59",
+      "seo": {
+        "title": "5 dữ liệu không nên đưa vào chatbot công khai",
+        "description": "Checklist bảo mật dữ liệu cá nhân và công việc khi sử dụng chatbot AI."
+      },
+      "id": "article-data-safety",
+      "slug": "du-lieu-khong-nen-dua-vao-chatbot",
+      "title": "5 dữ liệu không nên đưa vào chatbot công khai",
+      "description": "Tiện lợi không có nghĩa là mọi dữ liệu đều nên được sao chép vào cửa sổ chat. Một checklist ngắn giúp bạn dừng lại đúng lúc.",
+      "excerpt": "Nhận diện thông tin nhạy cảm trước khi chúng rời khỏi thiết bị của bạn.",
+      "content": "Không nhập mật khẩu, mã xác thực, khóa API hoặc thông tin đăng nhập dưới bất kỳ hình thức nào. Nếu cần nhờ AI xử lý cấu hình, hãy thay toàn bộ bí mật bằng dữ liệu giả.\n\nTránh đưa hồ sơ khách hàng, số điện thoại, địa chỉ, dữ liệu sức khỏe và giấy tờ định danh vào chatbot công khai. Hãy ẩn danh dữ liệu trước, chỉ giữ những trường thật sự cần cho nhiệm vụ.\n\nTài liệu nội bộ chưa công bố, hợp đồng và số liệu kinh doanh cũng cần được xem là dữ liệu nhạy cảm. Kiểm tra chính sách của tổ chức và chế độ lưu lịch sử trước khi sử dụng công cụ.\n\nNguyên tắc dễ nhớ: nếu bạn không sẵn sàng gửi dữ liệu đó cho một bên thứ ba qua email, đừng dán nó vào chatbot. Khi nghi ngờ, hãy dùng ví dụ tổng hợp hoặc công cụ được doanh nghiệp phê duyệt.",
+      "category": "An toàn AI",
+      "readTime": 6,
+      "author": "AI MỞ Studio"
+    },
+    {
+      "status": "published",
+      "featured": false,
+      "sortOrder": 3,
+      "image": "",
+      "accent": "#8d78ff",
+      "seo": {
+        "title": "Chọn AI tool theo workflow, không theo FOMO",
+        "description": "Khung đánh giá công cụ AI dựa trên công việc thực tế thay vì xu hướng."
+      },
+      "id": "article-tool-workflow",
+      "slug": "chon-ai-tool-theo-workflow",
+      "title": "Chọn AI tool theo workflow, không theo FOMO",
+      "description": "Một công cụ mới chỉ có giá trị khi nó giải quyết được nút thắt cụ thể mà không tạo thêm nhiều bước vận hành.",
+      "excerpt": "Bốn câu hỏi để đánh giá công cụ trước khi trả tiền và chuyển dữ liệu.",
+      "content": "Hãy bắt đầu bằng một công việc lặp lại, không bắt đầu bằng danh sách tính năng. Ghi lại đầu vào, đầu ra, thời gian hiện tại và bước nào đang gây chậm nhất.\n\nDùng công cụ mới cho ba tình huống thật. Đo thời gian hoàn thành, số lần phải sửa và mức độ dễ chuyển kết quả sang bước tiếp theo. Một bản demo đẹp không thay thế được thử nghiệm này.\n\nTính cả chi phí ẩn: thời gian học, công chuyển dữ liệu, giới hạn gói, khả năng xuất dữ liệu và rủi ro phụ thuộc nền tảng. Công cụ rẻ có thể trở nên đắt nếu buộc cả đội thay đổi quy trình.\n\nChỉ giữ công cụ nếu nó giảm được một chỉ số cụ thể sau thời gian thử. Nếu không, quay về quy trình cũ và ghi lại điều kiện để đánh giá lại trong tương lai.",
+      "category": "Công cụ",
+      "readTime": 7,
+      "author": "AI MỞ Studio"
+    },
+    {
+      "status": "published",
+      "featured": false,
+      "sortOrder": 4,
+      "image": "",
+      "accent": "#f3c94f",
+      "seo": {
+        "title": "Kiểm chứng câu trả lời của AI trong 10 phút",
+        "description": "Quy trình kiểm chứng nhanh nguồn, dữ kiện và giả định trong đầu ra AI."
+      },
+      "id": "article-verify-output",
+      "slug": "kiem-chung-cau-tra-loi-ai",
+      "title": "Kiểm chứng câu trả lời của AI trong 10 phút",
+      "description": "Bạn không cần kiểm tra mọi từ với cùng mức độ. Hãy ưu tiên những dữ kiện có thể gây thiệt hại nếu sai.",
+      "excerpt": "Một quy trình nhanh để tách dữ kiện, ý kiến và giả định trước khi sử dụng.",
+      "content": "Đầu tiên, đánh dấu mọi con số, tên riêng, ngày tháng, trích dẫn và khẳng định nhân quả. Đây là các điểm cần nguồn độc lập, không phải lời xác nhận lặp lại từ chính chatbot.\n\nMở nguồn gốc thay vì chỉ đọc đoạn trích trong kết quả tìm kiếm. Kiểm tra ngày xuất bản, tác giả, phạm vi dữ liệu và xem nguồn có thật sự nói điều mà câu trả lời khẳng định hay không.\n\nVới quyết định quan trọng, tìm ít nhất hai nguồn độc lập. Nếu các nguồn bất đồng, ghi rõ sự không chắc chắn thay vì ép chúng thành một kết luận duy nhất.\n\nCuối cùng, yêu cầu AI liệt kê giả định đã dùng rồi tự đánh giá giả định nào ảnh hưởng lớn nhất tới kết quả. Bước này không thay thế kiểm chứng, nhưng giúp bạn biết nên tập trung thời gian ở đâu.",
+      "category": "Kỹ năng",
+      "readTime": 6,
+      "author": "AI MỞ Studio"
+    }
+  ]
+}

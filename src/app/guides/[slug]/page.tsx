@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock3 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import { findCmsArticle, isPublic, readCms } from "@/lib/cms";
 
@@ -44,12 +46,63 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <div className="article-rule container" aria-hidden="true"><span>AI MỞ / THỰC HÀNH</span><i /></div>
 
       <article className="article-content container">
-        <aside aria-label="Thông tin bài viết"><span>Chủ đề</span><strong>{article.category}</strong><span>Thời gian</span><strong>{article.readTime} phút</strong></aside>
+        <aside aria-label="Thông tin bài viết">
+          <span>Chủ đề</span>
+          <strong>{article.category}</strong>
+          <span>Thời gian</span>
+          <strong>{article.readTime} phút</strong>
+        </aside>
         <div className="article-prose">
           <p className="article-lead">{article.description}</p>
-          {paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+          {article.image && (
+            <div className="mb-8 overflow-hidden rounded-2xl border border-neutral-200/80 shadow-xs">
+              <img
+                src={article.image}
+                alt={article.title}
+                className="w-full h-auto object-cover max-h-[520px]"
+                loading="eager"
+              />
+            </div>
+          )}
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {article.content}
+          </ReactMarkdown>
         </div>
       </article>
+
+      {/* JSON-LD Structured Data for Search Engines & GEO (Generative Engines) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: article.title,
+            description: article.description,
+            image: article.image ? `https://www.heyaimo.com${article.image}` : undefined,
+            author: {
+              "@type": "Organization",
+              name: article.author || "AI MỞ Studio",
+              url: "https://www.heyaimo.com",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "AI MỞ",
+              url: "https://www.heyaimo.com",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.heyaimo.com/favicon.ico",
+              },
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `https://www.heyaimo.com/guides/${article.slug}`,
+            },
+            articleSection: article.category,
+            timeRequired: `PT${article.readTime}M`,
+          }),
+        }}
+      />
 
       {nextArticle && nextArticle.id !== article.id && (
         <section className="article-next container" aria-label="Bài viết tiếp theo">
