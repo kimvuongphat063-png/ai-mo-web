@@ -14,6 +14,7 @@ export const statusSchema = z.enum(["draft", "published", "archived"]);
 export const productKindSchema = z.enum(["course", "desktop", "webapp", "affiliate", "bundle", "resource"]);
 export const entityTypeSchema = z.enum(["products", "courses", "paths", "tools", "affiliates", "bundles", "resources", "articles"]);
 const requiredText = z.string().trim().min(1).max(5_000);
+const longText = z.string().trim().min(1).max(500_000);
 const shortText = requiredText.max(180);
 const slugSchema = z.string().trim().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug chỉ gồm chữ thường, số và dấu gạch ngang").max(100);
 const urlSchema = z.string().trim().url().max(500);
@@ -41,7 +42,7 @@ export const lessonSchema = z.object({
 });
 export const moduleSchema = z.object({ id: z.string().trim().min(1).max(100), title: shortText, description: z.string().trim().max(1_200).default(""), sortOrder: z.number().int().min(0).default(0), lessons: z.array(lessonSchema).max(200).default([]) });
 
-const productBase = commonSchema.merge(commerceSchema).extend({ summary: requiredText.max(500), longDescription: requiredText.max(5_000), ownership: z.enum(["owned", "affiliate"]).default("owned") });
+const productBase = commonSchema.merge(commerceSchema).extend({ summary: requiredText.max(500), longDescription: z.string().trim().min(1).max(50_000), ownership: z.enum(["owned", "affiliate"]).default("owned") });
 const courseSchema = productBase.extend({ kind: z.literal("course"), ownership: z.literal("owned").default("owned"), level: shortText, duration: shortText, outcomes: stringList, modules: z.array(moduleSchema).max(50).default([]) });
 const desktopSchema = productBase.extend({ kind: z.literal("desktop"), ownership: z.literal("owned").default("owned"), platform: stringList, requirements: stringList, changelog: stringList });
 const webappSchema = productBase.extend({ kind: z.literal("webapp"), ownership: z.literal("owned").default("owned"), platform: stringList, requirements: stringList, changelog: stringList, usage: stringList, privacy: z.string().trim().max(2_000).default("") });
@@ -51,7 +52,7 @@ const resourceSchema = productBase.extend({ kind: z.literal("resource"), ownersh
 export const productSchema = z.discriminatedUnion("kind", [courseSchema, desktopSchema, webappSchema, affiliateSchema, bundleSchema, resourceSchema]);
 
 export const pathSchema = commonSchema.extend({ excerpt: requiredText.max(500), audience: shortText, duration: shortText, steps: z.array(z.object({ id: z.string().min(1), title: shortText, description: z.string().trim().max(1_000).default(""), productId: z.string().trim().max(100).default(""), sortOrder: z.number().int().min(0).default(0) })).max(100).default([]) });
-export const articleSchema = commonSchema.extend({ excerpt: requiredText.max(500), content: requiredText.max(100_000), category: shortText, readTime: z.number().int().min(1).max(999), author: shortText.default("AI MỞ Studio") });
+export const articleSchema = commonSchema.extend({ excerpt: requiredText.max(500), content: longText, category: shortText, readTime: z.number().int().min(1).max(999), author: shortText.default("AI MỞ Studio") });
 
 export const cmsSchema = z.object({
   version: z.literal(2).default(2), updatedAt: z.string().datetime().default(() => new Date().toISOString()),
