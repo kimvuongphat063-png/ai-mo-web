@@ -124,6 +124,11 @@ const navItems: NavItem[] = [
       },
     ],
   },
+  {
+    key: "games",
+    label: "Game",
+    href: "/games",
+  },
 ];
 
 export function Header() {
@@ -134,6 +139,7 @@ export function Header() {
     tools: false,
     apps: false,
     products: false,
+    games: false,
   });
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { query, setQuery } = useSearch();
