@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Footer, Header } from "./site-shell";
+import { DonateCoffeeWidget } from "./donate-coffee";
 
 /**
  * Renders the public marketing chrome (Header/Footer) for every route
@@ -16,13 +17,21 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     pathname === "/promptkichban" ||
     pathname?.startsWith("/promptkichban/");
 
-  if (isStudio) return <>{children}</>;
+  if (isStudio) {
+    return (
+      <>
+        {children}
+        <DonateCoffeeWidget />
+      </>
+    );
+  }
 
   return (
     <>
       <Header />
       {children}
       <Footer />
+      <DonateCoffeeWidget />
     </>
   );
 }

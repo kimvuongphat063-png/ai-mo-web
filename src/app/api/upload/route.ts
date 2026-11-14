@@ -42,7 +42,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ok: true, data: result }, { status: 201 });
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Lỗi khi xử lý tệp tải lên.";
+    const rawMessage = err instanceof Error ? err.message : "";
+    const isValidation =
+      rawMessage.startsWith("Dung lượng tệp") ||
+      rawMessage.startsWith("Không thể xác định") ||
+      rawMessage.startsWith("Định dạng tệp") ||
+      rawMessage.startsWith("Tên tệp");
+    const message = isValidation ? rawMessage : "Lỗi khi xử lý tệp tải lên.";
     console.error("[POST /api/upload]", err);
     return NextResponse.json({ error: message }, { status: 400 });
   }

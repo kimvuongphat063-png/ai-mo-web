@@ -23,7 +23,7 @@ export async function syncLeadToGoogleSheet(lead: LeadData): Promise<boolean> {
     phone: lead.phone || "",
     intent: lead.intent || "Tất cả công cụ",
     method: lead.method || "Form đăng ký website",
-    source: lead.source || "AI MỞ Platform (ai-mo-web.vercel.app)",
+    source: lead.source || "AI MỞ Platform (heyaimo.com)",
     sheetId: "1Zfg-amVnsiQJCCr-Ea3IK4rAAwSkHOcqreBnTTsQTug",
   };
 

@@ -41,7 +41,7 @@ export async function generateMetadata({
     title: `${app.title} — App HTML Miễn Phí Chạy Offline`,
     description: `${app.summary} Sử dụng trực tiếp trên web hoặc tải file HTML về máy dùng offline 100% không cần mạng.`,
     alternates: {
-      canonical: `https://ai-mo-web.vercel.app/apps/${app.slug}`,
+      canonical: `https://www.heyaimo.com/apps/${app.slug}`,
     },
   };
 }

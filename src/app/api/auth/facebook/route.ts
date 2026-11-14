@@ -15,12 +15,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Determine external host for redirect_uri — always match URI in Facebook Developer Console
+  // Determine external host for redirect_uri — matches URI in Facebook Developer Console
   const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "";
   const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
-  const redirectUri = isLocal
-    ? `http://${host}/api/auth/facebook/callback`
-    : "https://ai-mo-web.vercel.app/api/auth/facebook/callback";
+  const proto = request.headers.get("x-forwarded-proto") || (isLocal ? "http" : "https");
+  const redirectUri = host
+    ? `${proto}://${host}/api/auth/facebook/callback`
+    : "https://www.heyaimo.com/api/auth/facebook/callback";
 
   // CSRF state containing next url and random nonce
   const nonce = randomBytes(16).toString("hex");

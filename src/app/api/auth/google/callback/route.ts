@@ -7,9 +7,10 @@ import { randomBytes } from "node:crypto";
 export async function GET(request: NextRequest) {
   const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "";
   const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
-  const redirectUri = isLocal
-    ? `http://${host}/api/auth/google/callback`
-    : "https://ai-mo-web.vercel.app/api/auth/google/callback";
+  const proto = request.headers.get("x-forwarded-proto") || (isLocal ? "http" : "https");
+  const redirectUri = host
+    ? `${proto}://${host}/api/auth/google/callback`
+    : "https://www.heyaimo.com/api/auth/google/callback";
 
   const searchParams = request.nextUrl.searchParams;
   const code = searchParams.get("code");
@@ -132,7 +133,7 @@ export async function GET(request: NextRequest) {
   } catch (err: any) {
     console.error("[google-oauth] Callback exception:", err);
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("error", "Lỗi xử lý xác thực Google: " + (err.message || "vui lòng thử lại"));
+    loginUrl.searchParams.set("error", "Đăng nhập Google không thành công. Vui lòng thử lại.");
     return NextResponse.redirect(loginUrl);
   }
 }

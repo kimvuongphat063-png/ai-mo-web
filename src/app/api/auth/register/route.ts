@@ -14,33 +14,6 @@ const schema = z.object({
   intent: z.string().max(100).optional(),
 });
 
-/**
- * Optional Google Sheet / Webhook notifier for real-time lead sync.
- */
-async function syncToGoogleSheet(lead: {
-  name?: string;
-  email: string;
-  phone?: string;
-  intent?: string;
-  createdAt: string;
-}) {
-  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
-  if (!webhookUrl) return;
-
-  try {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...lead,
-        source: "AI MỞ Registration",
-      }),
-    });
-  } catch (err) {
-    console.warn("[lead-sync] Failed to sync to Google Sheet webhook:", err);
-  }
-}
-
 export async function POST(request: NextRequest) {
   // CSRF: reject cross-origin mutations.
   const csrf = requireSameOrigin(request);
@@ -52,7 +25,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: errorMsg }, { status: 400 });
   }
 
-  // Rate limit: 5 register attempts / 15 min per IP
+  // Rate limit: 3 register attempts / 10 min per IP
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   const rl = await checkRateLimit("register", ip);
   if (!rl.allowed) {
@@ -99,8 +72,13 @@ export async function POST(request: NextRequest) {
     response.cookies.set(SESSION_COOKIE, createSessionToken(account), sessionCookieOptions);
     return response;
   } catch (err: any) {
+    // Whitelist only the errors we authored; everything else is opaque.
+    const known =
+      err?.message === "Email đã được đăng ký tài khoản" ||
+      err?.message === "Không thể tạo tài khoản lúc này. Vui lòng thử lại sau.";
+    console.error("[POST /api/auth/register]", err);
     return NextResponse.json(
-      { error: err.message || "Không thể tạo tài khoản. Vui lòng thử lại." },
+      { error: known ? err.message : "Không thể tạo tài khoản. Vui lòng thử lại." },
       { status: 400 },
     );
   }

@@ -18,7 +18,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aimo.vn"),
+  metadataBase: new URL("https://www.heyaimo.com"),
   title: {
     default: "AI MỞ — Học AI từ gốc, dùng được vào việc",
     template: "%s — AI MỞ",

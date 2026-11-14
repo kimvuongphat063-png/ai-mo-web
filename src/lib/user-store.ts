@@ -7,7 +7,6 @@ import { hashPassword } from "@/lib/auth-password";
 // ─── Prisma client singleton & Resilient Fallback Store ─────────────────────
 
 let cachedPrisma: any = null;
-const inMemoryUsers = new Map<string, AuthUser>();
 
 function getPrisma() {
   if (!cachedPrisma) {
@@ -60,8 +59,8 @@ export async function findUserByEmail(email: string): Promise<AuthUser | null> {
       status: user.status,
     };
   } catch (dbErr) {
-    console.warn("[user-store] DB lookup failed, checking in-memory user cache:", dbErr);
-    return inMemoryUsers.get(normalized) ?? null;
+    console.error("[user-store] DB lookup failed in findUserByEmail:", dbErr);
+    return null;
   }
 }
 
@@ -103,7 +102,7 @@ export async function createUser(data: {
       },
     });
 
-    const created: AuthUser = {
+    return {
       id: user.id,
       email: user.email,
       name: user.name,
@@ -112,27 +111,10 @@ export async function createUser(data: {
       passwordVersion: user.passwordVersion,
       status: user.status,
     };
-    inMemoryUsers.set(normalized, created);
-    return created;
   } catch (dbErr: any) {
-    if (dbErr.message === "Email đã được đăng ký tài khoản") {
-      throw dbErr;
-    }
-    console.warn("[user-store] DB unavailable for createUser, saving to memory session store:", dbErr);
-    if (inMemoryUsers.has(normalized)) {
-      throw new Error("Email đã được đăng ký tài khoản");
-    }
-    const fallbackUser: AuthUser = {
-      id: "mem_" + randomBytes(8).toString("hex"),
-      email: normalized,
-      name: data.name?.trim() || normalized.split("@")[0],
-      isAdmin: false,
-      passwordHash: hashedPassword,
-      passwordVersion: 0,
-      status: "active",
-    };
-    inMemoryUsers.set(normalized, fallbackUser);
-    return fallbackUser;
+    if (dbErr.message === "Email đã được đăng ký tài khoản") throw dbErr;
+    console.error("[user-store] createUser failed — no in-memory fallback in production:", dbErr);
+    throw new Error("Không thể tạo tài khoản lúc này. Vui lòng thử lại sau.");
   }
 }
 
@@ -147,8 +129,8 @@ export async function getPasswordVersion(userId: string): Promise<number | null>
     if (!user || user.deletedAt || user.status !== "active") return null;
     return user.passwordVersion;
   } catch (dbErr) {
-    const memUser = Array.from(inMemoryUsers.values()).find((u) => u.id === userId);
-    return memUser ? memUser.passwordVersion : 0;
+    console.error("[user-store] DB lookup failed in getPasswordVersion:", dbErr);
+    return null;
   }
 }
 

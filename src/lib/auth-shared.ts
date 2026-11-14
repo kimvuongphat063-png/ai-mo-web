@@ -73,9 +73,24 @@ export function assertStrongSecret(secret: string, label = "AUTH_SECRET"): void 
 
 export function getSecret(): string {
   const secret = process.env.AUTH_SECRET;
-  if (!secret) {
+
+  if (!secret || secret === FALLBACK_SECRET) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "[config] AUTH_SECRET is required in production. The fallback secret is " +
+        "committed to a public repo — anyone could forge an admin session. " +
+        "Generate one with: openssl rand -base64 48",
+      );
+    }
     return FALLBACK_SECRET;
   }
+
+  if (secret.length < 32 && process.env.NODE_ENV === "production") {
+    throw new Error(
+      `[config] AUTH_SECRET is too short (${secret.length} chars, need >= 32).`,
+    );
+  }
+
   assertStrongSecret(secret);
   return secret;
 }

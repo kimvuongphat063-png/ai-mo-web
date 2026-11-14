@@ -20,14 +20,15 @@ export interface UploadResult {
 }
 
 const ALLOWED_MIME_TYPES: Record<UploadCategory, string[]> = {
-  images: ["image/jpeg", "image/png", "image/webp", "image/gif", "image/svg+xml"],
+  // SVG is intentionally excluded: it is XML that can carry <script> and
+  // would execute on our origin if ever served inline.
+  images: ["image/jpeg", "image/png", "image/webp", "image/gif"],
   documents: ["application/pdf", "text/plain", "text/markdown"],
   all: [
     "image/jpeg",
     "image/png",
     "image/webp",
     "image/gif",
-    "image/svg+xml",
     "application/pdf",
     "text/plain",
     "text/markdown",
@@ -56,11 +57,10 @@ export async function processAndSaveUpload(
   const detectedType = await fileTypeFromBuffer(buffer);
   let mimeType: string | undefined = detectedType?.mime;
 
-  // Fallback for plain text or SVG which file-type may not flag as binary
+  // Fallback for plain text, which file-type cannot detect (not binary).
+  // Never trust `file.type` for anything scriptable — the client sets it.
   if (!mimeType) {
-    if (file.type === "image/svg+xml") {
-      mimeType = "image/svg+xml";
-    } else if (file.type === "text/plain" || file.name.endsWith(".txt")) {
+    if (file.type === "text/plain" || file.name.endsWith(".txt")) {
       mimeType = "text/plain";
     } else if (file.type === "text/markdown" || file.name.endsWith(".md")) {
       mimeType = "text/markdown";

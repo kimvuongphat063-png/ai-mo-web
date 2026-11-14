@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Bộ sưu tập công cụ số và động cơ giải toán offline độc lập. Bảo mật dữ liệu 100% trên thiết bị cá nhân, chạy mượt mà không cần internet.",
   alternates: {
-    canonical: "https://ai-mo-web.vercel.app/apps",
+    canonical: "https://www.heyaimo.com/apps",
   },
 };
 
