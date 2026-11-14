@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Footer, Header } from "./site-shell";
 import { DonateCoffeeWidget } from "./donate-coffee";
+import { SearchProvider } from "./home-search-context";
 
 /**
  * Renders the public marketing chrome (Header/Footer) for every route
@@ -19,19 +20,19 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
   if (isStudio) {
     return (
-      <>
+      <SearchProvider>
         {children}
         <DonateCoffeeWidget />
-      </>
+      </SearchProvider>
     );
   }
 
   return (
-    <>
+    <SearchProvider>
       <Header />
       {children}
       <Footer />
       <DonateCoffeeWidget />
-    </>
+    </SearchProvider>
   );
 }

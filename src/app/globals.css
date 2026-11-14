@@ -45,6 +45,13 @@
   --color-terracotta-900: #081E48;
   
   --color-ink: #0F172A;
+
+  --animate-fade-in: fade-in 0.35s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 html, body {

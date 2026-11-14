@@ -1,15 +1,22 @@
 "use client";
 import Link from "next/link";
-import { ShoppingBag, Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu, X, ArrowRight, Search, Sparkles } from "lucide-react";
 import { useState } from "react";
-import { useCart } from "./cart-provider";
 import { AuthNav } from "./auth-nav";
+import { useSearch } from "./home-search-context";
 
 export function Logo() {
   return (
-    <Link href="/" className="logo flex items-center gap-1.5 shrink-0" aria-label="AI MỞ — Trang chủ">
-      <span className="font-black tracking-tight text-2xl text-neutral-900">
-        AI <span className="text-blue-600">MỞ</span>
+    <Link href="/" className="logo flex items-center gap-2 shrink-0 group" aria-label="AI MỞ — Trang chủ">
+      <span
+        className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-r from-[#0057ff] via-[#7c4dff] to-[#00b8d9] flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform"
+        aria-hidden="true"
+      >
+        <Sparkles className="w-4 h-4 fill-current" />
+      </span>
+      <span className="font-black tracking-tight text-xl sm:text-2xl text-neutral-900">
+        AI <span className="text-[#0057ff]">MỞ</span>
       </span>
     </Link>
   );
@@ -18,46 +25,55 @@ export function Logo() {
 interface NavItem {
   href: string;
   label: string;
-  hasDropdown?: boolean;
   badge?: string;
 }
 
 const navItems: NavItem[] = [
-  { href: "/tools", label: "Công cụ AI", hasDropdown: true },
-  { href: "/apps", label: "App miễn phí", hasDropdown: true },
-  { href: "/guides", label: "Học AI", hasDropdown: true },
-  { href: "/games", label: "Game", badge: "Sắp ra mắt" },
-  { href: "/products", label: "Sản phẩm số", hasDropdown: true },
+  { href: "/#cong-cu", label: "Công cụ AI" },
+  { href: "/apps", label: "App miễn phí" },
+  { href: "/#lo-trinh", label: "Học AI" },
+  { href: "/products", label: "Sản phẩm số" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const { items } = useCart();
+  const { query, setQuery } = useSearch();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (pathname === "/") {
+        const el = document.getElementById("cong-cu");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        router.push("/#cong-cu");
+      }
+    }
+  };
 
   return (
-    <header className="site-header sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-200/80 transition-all">
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between py-3.5 gap-4">
+    <header className="site-header sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-neutral-200/80 transition-all">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between py-3 gap-3">
         {/* Left: Brand Logo */}
         <Logo />
 
-        {/* Center: Desktop Navigation (>= 1024px) */}
+        {/* Center: Desktop Navigation */}
         <nav
           id="main-nav"
           aria-label="Điều hướng chính"
-          className="hidden lg:flex items-center gap-1.5 xl:gap-3"
+          className="hidden lg:flex items-center gap-1 xl:gap-2 ml-1"
         >
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="relative flex items-center gap-1 py-1.5 px-3 text-sm font-semibold text-neutral-800 hover:text-blue-600 transition-colors rounded-lg hover:bg-neutral-50 whitespace-nowrap"
+              className="py-1.5 px-3 text-sm font-semibold text-neutral-700 hover:text-[#0057ff] transition-colors rounded-full hover:bg-neutral-100/80 whitespace-nowrap"
             >
               <span>{item.label}</span>
-              {item.hasDropdown && (
-                <ChevronDown className="w-3.5 h-3.5 text-neutral-400 mt-0.5" />
-              )}
               {item.badge && (
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 border border-neutral-200">
+                <span className="ml-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 border border-neutral-200">
                   {item.badge}
                 </span>
               )}
@@ -65,40 +81,51 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Right: Actions */}
-        <div className="nav-actions flex items-center gap-2 sm:gap-3 shrink-0">
+        {/* Right: Search, Auth & CTA */}
+        <div className="nav-actions flex items-center gap-2 sm:gap-3 shrink-0 ml-auto">
+          {/* Header Search Input */}
+          <div className="relative hidden sm:flex items-center">
+            <Search className="w-4 h-4 text-neutral-400 absolute left-3 pointer-events-none" />
+            <input
+              id="siteSearch"
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
+              placeholder="Tìm công cụ, bài viết…"
+              aria-label="Tìm kiếm công cụ hoặc bài viết"
+              className="pl-9 pr-7 py-1.5 text-xs sm:text-sm bg-[#eef3ff] hover:bg-[#e6edfc] focus:bg-white text-neutral-900 placeholder:text-neutral-500 rounded-full border border-[#dde6f8] focus:border-[#0057ff] focus:ring-2 focus:ring-[#0057ff]/20 outline-none transition-all w-36 md:w-48 lg:w-56"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                aria-label="Xóa tìm kiếm"
+                className="absolute right-2.5 text-neutral-400 hover:text-neutral-700 text-xs font-bold"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
           <AuthNav />
 
           <Link
-            href="/tools"
-            className="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 text-sm font-bold text-white bg-[#155EEF] hover:bg-[#124bbf] rounded-xl shadow-sm transition-all whitespace-nowrap"
+            href="/#prompt"
+            className="hidden xs:inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white bg-[#0057ff] hover:bg-[#0043c7] rounded-full shadow-md shadow-blue-500/20 hover:shadow-blue-500/35 transition-all whitespace-nowrap"
           >
-            <span>Khám phá công cụ</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-
-          <Link
-            href="/cart"
-            className="cart-link relative flex items-center justify-center p-2 text-neutral-700 hover:text-neutral-900 transition-colors rounded-lg hover:bg-neutral-100"
-            aria-label={`Giỏ hàng có ${items.length} sản phẩm`}
-          >
-            <ShoppingBag className="w-5 h-5" />
-            {items.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                {items.length}
-              </span>
-            )}
+            <span>Bắt đầu miễn phí</span>
           </Link>
 
           {/* Mobile Menu Toggle (< 1024px) */}
           <button
-            className="menu-button lg:hidden p-2 text-neutral-700 hover:text-neutral-900 transition-colors rounded-lg hover:bg-neutral-100"
+            className="menu-button lg:hidden p-2 text-neutral-700 hover:text-neutral-900 transition-colors rounded-xl hover:bg-neutral-100 border border-neutral-200/60"
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-controls="main-nav-mobile"
             aria-label={open ? "Đóng menu" : "Mở menu"}
           >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -107,39 +134,59 @@ export function Header() {
       {open && (
         <div
           id="main-nav-mobile"
-          className="lg:hidden border-t border-neutral-200 bg-white px-5 py-5 space-y-3 shadow-xl"
+          className="lg:hidden border-t border-neutral-200 bg-white px-5 py-4 space-y-3 shadow-xl"
         >
+          {/* Mobile Search */}
+          <div className="relative flex items-center sm:hidden pb-1">
+            <Search className="w-4 h-4 text-neutral-400 absolute left-3 pointer-events-none" />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearchKeyDown(e);
+                  setOpen(false);
+                }
+              }}
+              placeholder="Tìm công cụ, bài viết…"
+              aria-label="Tìm kiếm di động"
+              className="w-full pl-9 pr-7 py-2 text-sm bg-[#eef3ff] text-neutral-900 placeholder:text-neutral-500 rounded-full border border-[#dde6f8] focus:border-[#0057ff] outline-none"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute right-3 text-neutral-400 hover:text-neutral-700 text-xs font-bold"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
           <div className="grid grid-cols-1 gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between py-2.5 px-3 text-sm font-semibold text-neutral-800 hover:text-blue-600 rounded-xl hover:bg-neutral-50 transition-colors"
+                className="flex items-center justify-between py-2.5 px-3 text-sm font-semibold text-neutral-800 hover:text-[#0057ff] rounded-xl hover:bg-neutral-50 transition-colors"
               >
                 <span>{item.label}</span>
-                {item.badge && (
-                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 border border-neutral-200">
-                    {item.badge}
-                  </span>
-                )}
+                <span className="text-neutral-400 text-xs">→</span>
               </Link>
             ))}
           </div>
 
-          <div className="pt-3 border-t border-neutral-100 flex flex-col gap-3 text-xs text-neutral-500">
+          <div className="pt-3 border-t border-neutral-100 flex flex-col gap-3">
             <AuthNav isMobile onNavigate={() => setOpen(false)} />
-            <div className="flex items-center justify-between pt-1 border-t border-neutral-100">
-              <span className="text-[11px] text-neutral-400">Nền tảng AI Mở</span>
-              <Link
-                href="/promptkichban"
-                onClick={() => setOpen(false)}
-                className="text-blue-600 font-bold flex items-center gap-1"
-              >
-                <span>Prompt Studio</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
+            <Link
+              href="/#prompt"
+              onClick={() => setOpen(false)}
+              className="w-full text-center py-2.5 text-sm font-bold text-white bg-[#0057ff] hover:bg-[#0043c7] rounded-full shadow-md shadow-blue-500/20"
+            >
+              Bắt đầu miễn phí
+            </Link>
           </div>
         </div>
       )}

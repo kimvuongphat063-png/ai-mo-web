@@ -9,7 +9,7 @@ export const accountNav = [
 ];
 
 const adminSections = [
-  { label: "Nội dung", links: [["/admin", "Tổng quan"], ["/admin/content/products", "Sản phẩm"], ["/admin/content/courses", "Khóa học"], ["/admin/content/paths", "Lộ trình"], ["/admin/content/tools", "Công cụ"], ["/admin/content/resources", "Góc học"], ["/admin/content/articles", "Bài viết"]] },
+  { label: "Nội dung", links: [["/admin", "Tổng quan"], ["/admin/home-cards", "Ảnh Trang Chủ"], ["/admin/content/products", "Sản phẩm"], ["/admin/content/courses", "Khóa học"], ["/admin/content/paths", "Lộ trình"], ["/admin/content/tools", "Công cụ"], ["/admin/content/resources", "Góc học"], ["/admin/content/articles", "Bài viết"]] },
   { label: "Đề xuất/Affiliate", links: [["/admin/content/affiliates", "Đề xuất/Affiliate"], ["/admin/content/bundles", "Bundle"]] },
   { label: "Khách hàng", links: [["/admin/orders", "Khách hàng & đơn hàng"], ["/admin/licenses", "Giấy phép"]] },
   { label: "Cài đặt", links: [["/admin/analytics", "Phân tích"], ["/admin/settings", "Cài đặt"]] },

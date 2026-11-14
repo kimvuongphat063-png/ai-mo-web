@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="data:," />
+    <title>AI MỞ — Redesign Preview · Nền sáng, đậm chất AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --bg:#f4f7ff;
+        --bg-soft:#eef3ff;
+        --surface:#ffffff;
+        --ink:#0c1526;
+        --ink-2:#3c4a68;
+        --muted:#68779a;
+        --line:#dde6f8;
+        --blue:#0057ff;
+        --blue-dark:#0043c7;
+        --violet:#7c4dff;
+        --cyan:#00b8d9;
+        --green:#0e9f6e;
+        --green-bg:#e3f7ee;
+        --amber:#b97a0c;
+        --amber-bg:#fdf1dc;
+        --grad:linear-gradient(92deg,#0057ff 0%,#7c4dff 55%,#00b8d9 110%);
+        --shadow:0 18px 44px -18px rgba(21,52,140,.22);
+        --shadow-sm:0 8px 24px -12px rgba(21,52,140,.18);
+        --r-lg:26px;
+        --r-md:18px;
+        --r-sm:12px;
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{
+        margin:0;background:var(--bg);color:var(--ink);
+        font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+        -webkit-font-smoothing:antialiased;line-height:1.55;
+      }
+      img{display:block;max-width:100%}
+      a{color:inherit;text-decoration:none}
+      button{font-family:inherit;cursor:pointer}
+      button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]){min-height:2.25rem}
+      .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+      .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .sparkle{flex:none}
+
+      /* ---------- Header ---------- */
+      header.site{
+        position:sticky;top:0;z-index:60;
+        background:rgba(255,255,255,.86);backdrop-filter:blur(14px);
+        border-bottom:1px solid var(--line);
+      }
+      .header-in{display:flex;align-items:center;gap:22px;height:68px}
+      .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;letter-spacing:-.02em}
+      .logo .mark{
+        width:38px;height:38px;border-radius:12px;background:var(--grad);
+        display:grid;place-items:center;color:#fff;box-shadow:0 8px 18px -8px rgba(80,60,255,.65);
+      }
+      .logo b{color:var(--blue)}
+      nav.main{display:flex;gap:2px;margin-left:4px}
+      nav.main a{
+        padding:9px 10px;border-radius:999px;font-weight:600;font-size:14.5px;color:var(--ink-2);
+        display:inline-flex;align-items:center;min-height:2.25rem;white-space:nowrap;
+      }
+      nav.main a:hover{background:var(--bg-soft);color:var(--ink)}
+      nav.main a .soon{font-size:10.5px;font-weight:700;background:var(--bg-soft);color:var(--muted);border:1px solid var(--line);padding:2px 7px;border-radius:999px;margin-left:6px;white-space:nowrap}
+      .header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+      .search-box{
+        display:flex;align-items:center;gap:8px;background:var(--bg-soft);
+        border:1px solid var(--line);border-radius:999px;padding:0 14px;height:40px;width:178px;
+      }
+      .search-box svg{color:var(--muted);flex:none}
+      .search-box input{border:0;background:transparent;outline:0;font:inherit;font-size:13.5px;width:100%;min-height:0;color:var(--ink)}
+      .search-box input::placeholder{color:var(--muted)}
+      .btn{
+        display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;
+        padding:10px 20px;font-size:14.5px;border:1px solid transparent;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+        min-height:2.75rem;justify-content:center;white-space:nowrap;
+      }
+      .btn:active{transform:translateY(1px)}
+      .btn-primary{background:var(--blue);color:#fff;box-shadow:0 12px 24px -12px rgba(0,87,255,.55)}
+      .btn-primary:hover{background:var(--blue-dark)}
+      .btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+      .btn-ghost:hover{border-color:#b9cdf5}
+      .btn-link{color:var(--ink-2);font-weight:600;padding:10px 8px}
+      .burger{display:none;background:#fff;border:1px solid var(--line);border-radius:12px;width:44px;height:44px;place-items:center}
+      .mobile-nav{display:none;border-top:1px solid var(--line);padding:10px 20px 16px;background:#fff}
+      .mobile-nav a{display:flex;align-items:center;justify-content:space-between;padding:12px 6px;font-weight:600;border-bottom:1px solid var(--bg-soft);min-height:2.75rem}
+      .mobile-nav a:last-child{border-bottom:0}
+      .mobile-nav.open{display:block}
+
+      /* ---------- Hero ---------- */
+      .hero{padding:26px 0 8px}
+      .hero-panel{
+        position:relative;border-radius:32px;overflow:hidden;
+        background:linear-gradient(115deg,#0b4de8 0%,#2f6bff 34%,#8f7bff 72%,#c9d8ff 100%);
+        padding:52px 54px 58px;color:#fff;
+      }
+      .hero-panel::before{
+        content:"";position:absolute;inset:0;
+        background-image:linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px);
+        background-size:44px 44px;
+        -webkit-mask-image:radial-gradient(620px 420px at 88% 108%,#000 0%,transparent 70%);
+                mask-image:radial-gradient(620px 420px at 88% 108%,#000 0%,transparent 70%);
+      }
+      .hero-panel::after{
+        content:"";position:absolute;width:520px;height:520px;border-radius:50%;
+        background:radial-gradient(circle,rgba(0,216,255,.5),transparent 65%);
+        top:-220px;right:-120px;pointer-events:none;
+      }
+      .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.04fr .96fr;gap:46px;align-items:center}
+      .hero-pill{
+        display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;
+        background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+        padding:7px 14px;border-radius:999px;backdrop-filter:blur(6px);
+      }
+      .hero h1{font-size:clamp(38px,4.6vw,58px);line-height:1.08;font-weight:900;letter-spacing:-.02em;margin:20px 0 16px}
+      .hero h1 .u{position:relative;white-space:nowrap}
+      .hero h1 .u svg{position:absolute;left:0;right:0;bottom:-10px;width:100%;height:12px}
+      .hero .sub{font-size:16.5px;color:rgba(255,255,255,.88);max-width:480px;margin:0 0 26px}
+      /* Prompt box */
+      .prompt-box{
+        background:#fff;border-radius:20px;padding:10px;max-width:560px;color:var(--ink);
+        box-shadow:0 0 0 1px rgba(255,255,255,.5),0 24px 50px -20px rgba(4,20,80,.55),0 0 42px -6px rgba(124,77,255,.55);
+      }
+      .prompt-box .pb-top{display:flex;gap:6px;align-items:flex-start}
+      .prompt-box .pb-spark{width:38px;height:38px;border-radius:11px;background:var(--bg-soft);display:grid;place-items:center;color:var(--violet);flex:none;margin-top:2px}
+      .prompt-box textarea{
+        flex:1;border:0;outline:0;resize:none;font:inherit;font-size:15.5px;line-height:1.5;
+        padding:9px 4px 4px;color:var(--ink);min-height:44px;background:transparent;
+      }
+      .prompt-box textarea::placeholder{color:#93a3c4}
+      .prompt-box .pb-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 4px 2px}
+      .model-chip{
+        border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;
+        font-size:13px;font-weight:600;color:var(--ink-2);min-height:2.25rem;
+      }
+      .model-chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+      .btn-create{
+        margin-left:auto;background:var(--grad);color:#fff;border:0;border-radius:999px;
+        font-weight:800;font-size:14.5px;padding:11px 22px;display:inline-flex;align-items:center;gap:8px;
+        box-shadow:0 12px 26px -10px rgba(96,64,255,.6);min-height:2.75rem;
+      }
+      .btn-create:hover{filter:brightness(1.07)}
+      .btn-create[disabled]{opacity:.75;cursor:wait}
+      .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;max-width:560px}
+      .chip{
+        background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;
+        border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;min-height:2.25rem;
+      }
+      .chip:hover{background:rgba(255,255,255,.26)}
+      .trust{margin-top:20px;font-size:13.5px;color:rgba(255,255,255,.85);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+      .trust svg{color:#5eead4}
+
+      /* generated result */
+      .gen-result{display:none;margin-top:18px;max-width:560px;background:#fff;color:var(--ink);border-radius:20px;padding:18px 20px;box-shadow:var(--shadow)}
+      .gen-result.show{display:block}
+      .gen-result h3{margin:0 0 4px;font-size:16.5px}
+      .gen-result .meta{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+      .scene{display:flex;gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
+      .scene .tc{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:600;color:var(--blue);background:var(--bg-soft);border-radius:8px;padding:4px 8px;height:fit-content;white-space:nowrap}
+      .scene p{margin:0;font-size:13.5px;color:var(--ink-2)}
+      .scene p b{color:var(--ink)}
+      .prompt-out{
+        margin-top:12px;background:#0d1730;color:#cfe0ff;border-radius:14px;padding:14px 16px;
+        font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word;
+      }
+      .gen-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+      .btn-small{padding:9px 16px;font-size:13.5px;min-height:2.5rem}
+
+      /* ---------- Demo card ---------- */
+      .demo-card{
+        background:#fff;border-radius:24px;color:var(--ink);box-shadow:0 34px 70px -28px rgba(3,16,64,.55);
+        overflow:hidden;transform:rotate(.4deg);
+      }
+      .demo-head{display:flex;align-items:center;gap:10px;padding:16px 20px 12px}
+      .demo-head .app-ic{width:36px;height:36px;border-radius:11px;background:var(--grad);display:grid;place-items:center;color:#fff}
+      .demo-head h3{margin:0;font-size:16.5px;line-height:1.25}
+      .demo-head p{margin:1px 0 0;font-size:12.5px;color:var(--muted)}
+      .badge-free{margin-left:auto;background:var(--green-bg);color:var(--green);font-weight:800;font-size:12px;padding:5px 11px;border-radius:999px;white-space:nowrap}
+      .demo-media{position:relative;margin:2px 14px 0;border-radius:16px;overflow:hidden}
+      .demo-media img{width:100%;height:238px;object-fit:cover}
+      .demo-media .play{
+        position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,transparent 40%,rgba(5,12,34,.45));
+        border:0;width:100%;color:#fff;
+      }
+      .demo-media .play .pbtn{
+        width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.94);color:var(--blue);
+        display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);
+      }
+      .demo-media .dur{position:absolute;top:12px;left:12px;background:rgba(8,15,36,.72);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;backdrop-filter:blur(4px)}
+      .demo-media .live-cap{position:absolute;left:12px;bottom:12px;color:#fff;font-size:12.5px;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+      .storyboard{padding:14px 20px 4px}
+      .storyboard .sb-label{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+      .storyboard .sb-label svg{color:var(--violet)}
+      .frames{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+      .frame{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff}
+      .frame img{width:100%;height:78px;object-fit:cover}
+      .frame figcaption{padding:7px 9px 8px;font-size:11px;line-height:1.4;color:var(--ink-2)}
+      .frame figcaption b{display:block;color:var(--ink);font-size:11.5px}
+      .frame figcaption .tc{font-family:"JetBrains Mono",monospace;color:var(--blue);font-weight:600}
+      .demo-prompt{margin:14px 20px 0;background:var(--bg-soft);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+      .demo-prompt .dp-head{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:6px}
+      .demo-prompt .dp-head button{margin-left:auto;border:0;background:#fff;border:1px solid var(--line);border-radius:8px;font-size:12px;font-weight:700;padding:5px 10px;color:var(--blue);min-height:2rem}
+      .demo-prompt p{margin:0;font-family:"JetBrains Mono",monospace;font-size:12px;line-height:1.65;color:#33436b;min-height:60px}
+      .demo-prompt p .caret{display:inline-block;width:8px;height:14px;background:var(--violet);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+      @keyframes blink{50%{opacity:0}}
+      .demo-steps{display:flex;gap:8px;padding:16px 20px 20px;flex-wrap:wrap}
+      .step-pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;background:#fff;border:1.5px solid var(--line);color:var(--muted);border-radius:999px;padding:7px 12px}
+      .step-pill .n{width:19px;height:19px;border-radius:50%;background:var(--bg-soft);display:grid;place-items:center;font-size:11px}
+      .step-pill.done{border-color:#bcd7ff;color:var(--ink)}
+      .step-pill.done .n{background:var(--blue);color:#fff}
+      .step-pill.active{border-color:var(--violet);color:var(--ink);box-shadow:0 0 0 3px rgba(124,77,255,.14)}
+      .step-pill.active .n{background:var(--violet);color:#fff}
+
+      /* ---------- Sections ---------- */
+      section.block{padding:58px 0 6px}
+      .sec-head{max-width:640px;margin-bottom:28px}
+      .sec-head h2{font-size:clamp(26px,3vw,34px);font-weight:800;letter-spacing:-.015em;margin:0 0 8px;line-height:1.2}
+      .sec-head p{margin:0;color:var(--muted);font-size:15.5px}
+      .sec-head .kick{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+      .sec-head .kick svg{color:var(--violet)}
+
+      .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+      .quick-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+      .quick-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+      .quick-card img{width:100%;height:168px;object-fit:cover}
+      .quick-card .qc-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+      .quick-card h3{margin:0;font-size:17.5px}
+      .quick-card p{margin:0;color:var(--muted);font-size:14px;flex:1}
+      .qc-link{margin-top:10px;font-weight:800;color:var(--blue);font-size:14.5px;display:inline-flex;gap:7px;align-items:center;min-height:2.25rem}
+      .qc-link svg{transition:transform .15s ease}
+      .quick-card:hover .qc-link svg{transform:translateX(3px)}
+
+      /* Bento */
+      .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+      .tool{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+      .tool .t-img{position:relative}
+      .tool .t-img img{width:100%;height:100%;object-fit:cover}
+      .tool .t-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:7px;flex:1}
+      .tool h3{margin:0;font-size:18px;line-height:1.3}
+      .tool p{margin:0;color:var(--muted);font-size:14px;flex:1}
+      .tool .t-foot{display:flex;align-items:center;gap:14px;margin-top:10px;flex-wrap:wrap}
+      .tool .use{font-weight:800;color:var(--blue);font-size:14.5px;display:inline-flex;align-items:center;gap:6px;min-height:2.25rem}
+      .tool .guide{font-weight:600;color:var(--ink-2);font-size:14px;min-height:2.25rem;display:inline-flex;align-items:center}
+      .badge{position:absolute;top:14px;left:14px;font-size:12px;font-weight:800;padding:5px 11px;border-radius:999px;z-index:2}
+      .badge.green{background:var(--green-bg);color:var(--green)}
+      .badge.amber{background:var(--amber-bg);color:var(--amber)}
+      .tool.big{grid-column:span 2;grid-row:span 2}
+      .tool.big .t-img img{height:300px}
+      .tool.big h3{font-size:21px}
+      .tool.wide{grid-column:span 2}
+      .tool.wide .t-img img{height:150px}
+      .tool.small .t-img img{height:150px}
+      .check-list{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:7px}
+      .check-list li{display:flex;gap:9px;font-size:14px;color:var(--ink-2);align-items:flex-start}
+      .check-list svg{color:var(--green);flex:none;margin-top:2px}
+      .search-empty{display:none;grid-column:1/-1;text-align:center;color:var(--muted);padding:26px;border:1px dashed var(--line);border-radius:var(--r-md);background:#fff;font-size:14.5px}
+      .search-empty.show{display:block}
+
+      /* Learning path */
+      .path-card{background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-sm);display:grid;grid-template-columns:.92fr 1.08fr;overflow:hidden}
+      .path-card .p-img{position:relative;min-height:320px}
+      .path-card .p-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+      .path-card .p-img .float-chip{
+        position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.94);border-radius:14px;
+        padding:10px 14px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow-sm);font-size:13px;font-weight:700;
+      }
+      .path-card .p-img .float-chip svg{color:var(--violet)}
+      .path-steps{padding:30px 32px}
+      .path-steps h3{margin:0 0 6px;font-size:21px}
+      .path-steps>p{margin:0 0 18px;color:var(--muted);font-size:14.5px}
+      .pstep{display:flex;gap:14px;padding:13px 0;border-top:1px dashed var(--line)}
+      .pstep:first-of-type{border-top:0}
+      .pstep .num{width:34px;height:34px;border-radius:12px;background:var(--bg-soft);color:var(--blue);font-weight:800;display:grid;place-items:center;flex:none}
+      .pstep b{display:block;font-size:15px}
+      .pstep span{font-size:13.5px;color:var(--muted)}
+
+      /* Articles */
+      .articles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+      .article{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+      .article:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+      .article img{width:100%;height:180px;object-fit:cover}
+      .article .a-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+      .article .a-meta{font-size:12.5px;font-weight:700;color:var(--blue);display:flex;gap:8px;align-items:center}
+      .article .a-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--muted)}
+      .article .a-meta .time{color:var(--muted);font-weight:600}
+      .article h3{margin:0;font-size:16.5px;line-height:1.4;flex:1}
+      .article p{margin:0;color:var(--muted);font-size:13.5px}
+
+      /* Explore */
+      .explore{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+      .x-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+      .x-card .x-img{width:100%;height:128px;object-fit:cover}
+      .x-card .x-in{padding:16px 20px 20px;display:flex;flex-direction:column;flex:1}
+      .x-card .x-in a{margin-top:auto;padding-top:10px}
+      .x-card h3{margin:0 0 5px;font-size:16px}
+      .x-card p{margin:0 0 12px;color:var(--muted);font-size:13.5px}
+      .x-card a{font-weight:800;color:var(--blue);font-size:14px;display:inline-flex;align-items:center;gap:6px;min-height:2.25rem}
+
+      /* CTA band */
+      .cta-band{margin:64px 0 0;border-radius:28px;background:linear-gradient(110deg,#eaf1ff,#f0eaff 55%,#e2f8fd);border:1px solid var(--line);padding:38px 40px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+      .cta-band h2{margin:0 0 6px;font-size:clamp(22px,2.6vw,28px);letter-spacing:-.01em}
+      .cta-band p{margin:0;color:var(--ink-2);font-size:15px;max-width:560px}
+      .cta-band .btn{margin-left:auto}
+
+      /* Footer */
+      footer.site{background:#0a142e;color:#c4d2f2;margin-top:70px}
+      .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px;padding:52px 0 38px}
+      .foot-grid .logo{color:#fff}
+      .foot-grid .logo b{color:#6ea8ff}
+      .foot-brand p{font-size:14px;color:#93a5cf;max-width:300px;margin:14px 0 0}
+      .foot-grid h4{color:#fff;font-size:13px;letter-spacing:.07em;text-transform:uppercase;margin:4px 0 14px}
+      .foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+      .foot-grid ul a{font-size:14px;color:#b9c8ec;padding:6px 0;display:inline-flex;min-height:2rem;align-items:center}
+      .foot-grid ul a:hover{color:#fff}
+      .foot-bottom{border-top:1px solid rgba(255,255,255,.12);padding:18px 0 24px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:#8498c4}
+      .foot-bottom .right{margin-left:auto;display:flex;gap:20px}
+      .foot-bottom a{min-height:2rem;display:inline-flex;align-items:center}
+
+      .coffee{
+        position:fixed;right:18px;bottom:18px;z-index:70;background:#fff;border:1px solid var(--line);
+        box-shadow:var(--shadow);border-radius:999px;padding:11px 18px;font-weight:700;font-size:14px;
+        display:inline-flex;gap:8px;align-items:center;color:var(--ink);
+      }
+      .coffee svg{color:var(--amber)}
+
+      .toast{
+        position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);z-index:80;background:var(--ink);color:#fff;
+        padding:12px 20px;border-radius:999px;font-size:14px;font-weight:600;box-shadow:var(--shadow);
+        transition:transform .3s ease;pointer-events:none;max-width:calc(100vw - 32px);text-align:center;
+      }
+      .toast.show{transform:translate(-50%,0)}
+
+      /* ---------- Chế độ tuỳ chỉnh ---------- */
+      .custom-fab{
+        position:fixed;left:18px;bottom:18px;z-index:90;background:var(--ink);color:#fff;border:0;
+        box-shadow:var(--shadow);border-radius:999px;padding:12px 20px;font-weight:800;font-size:14px;
+        display:inline-flex;gap:9px;align-items:center;
+      }
+      .custom-fab svg{color:#7dd3fc}
+      .custom-fab.on{background:var(--blue)}
+      .custom-panel{
+        position:fixed;left:18px;bottom:76px;z-index:90;width:min(348px,calc(100vw - 36px));
+        max-height:min(72vh,640px);overflow:auto;background:#fff;border:1px solid var(--line);
+        border-radius:20px;box-shadow:0 30px 60px -20px rgba(10,25,70,.35);padding:20px;
+      }
+      .custom-panel[hidden]{display:none}
+      .custom-panel h3{margin:0 0 4px;font-size:17px}
+      .custom-panel .cp-note{margin:0 0 16px;font-size:12.5px;color:var(--muted)}
+      .cp-group{margin-bottom:18px}
+      .cp-group>span{display:block;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin-bottom:9px}
+      .swatches{display:flex;gap:9px;flex-wrap:wrap}
+      .swatch{width:40px;height:40px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line),0 6px 14px -6px rgba(10,25,70,.4);padding:0;min-height:0}
+      .swatch[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink),0 6px 14px -6px rgba(10,25,70,.4)}
+      .tints{display:flex;gap:8px;flex-wrap:wrap}
+      .tint{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;color:var(--ink-2);min-height:2.25rem}
+      .tint[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+      .custom-panel label.cp-field{display:block;font-size:13px;font-weight:700;margin-bottom:10px}
+      .custom-panel textarea{
+        width:100%;margin-top:6px;border:1px solid var(--line);border-radius:12px;padding:9px 11px;
+        font:inherit;font-size:13.5px;line-height:1.45;resize:vertical;background:var(--bg);color:var(--ink);
+      }
+      .cp-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+      .cp-hint{font-size:12.5px;color:var(--muted);background:var(--bg-soft);border-radius:12px;padding:10px 12px;margin:0 0 16px;line-height:1.5}
+      .cp-hint b{color:var(--ink)}
+      body.editing main img{outline:2px dashed rgba(124,77,255,.0);outline-offset:-2px;cursor:pointer;transition:outline-color .15s ease}
+      body.editing main img:hover{outline-color:var(--violet)}
+      body.editing [data-editable]{outline:1.5px dashed rgba(0,87,255,.45);outline-offset:3px;border-radius:4px;cursor:text}
+      body.editing [data-editable]:focus{outline:2px solid var(--blue);background:rgba(0,87,255,.05)}
+      .img-modal{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:18px}
+      .img-modal[hidden]{display:none}
+      .img-modal .im-back{position:absolute;inset:0;background:rgba(7,14,34,.62);border:0;width:100%;height:100%;min-height:0}
+      .img-modal .im-card{position:relative;background:#fff;border-radius:22px;width:min(560px,100%);max-height:86vh;overflow:auto;padding:22px;box-shadow:var(--shadow)}
+      .img-modal h3{margin:0 0 4px;font-size:17px;padding-right:40px}
+      .img-modal .im-sub{margin:0 0 14px;font-size:13px;color:var(--muted)}
+      .im-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:17px;line-height:1;min-height:0}
+      .im-current{width:100%;height:150px;object-fit:cover;border-radius:14px;border:1px solid var(--line);margin-bottom:16px}
+      .im-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:16px}
+      .im-thumb{border:2px solid var(--line);border-radius:12px;overflow:hidden;padding:0;background:#fff;min-height:0}
+      .im-thumb img{width:100%;height:62px;object-fit:cover}
+      .im-thumb span{display:block;font-size:10.5px;font-weight:700;color:var(--ink-2);padding:5px 4px;line-height:1.3}
+      .im-thumb:hover{border-color:var(--blue)}
+      .im-thumb.sel{border-color:var(--violet);box-shadow:0 0 0 2px rgba(124,77,255,.25)}
+      .im-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+      .im-upload{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;font-weight:800;font-size:14px;border-radius:999px;padding:11px 20px;cursor:pointer;min-height:2.75rem}
+      @media (max-width:640px){
+        .im-grid{grid-template-columns:repeat(3,1fr)}
+        .custom-fab{left:auto;right:12px;bottom:auto;top:78px;padding:10px 16px;font-size:13.5px}
+        .custom-panel{left:12px;right:12px;width:auto;top:126px;bottom:auto;max-height:calc(100vh - 150px)}
+      }
+
+      @media (max-width:1180px){
+        .search-box{display:none}
+      }
+      @media (max-width:1020px){
+        nav.main{display:none}
+        .burger{display:grid}
+        .hero-grid{grid-template-columns:1fr;gap:36px}
+        .hero-panel{padding:38px 26px 44px}
+        .bento{grid-template-columns:repeat(2,1fr)}
+        .tool.big{grid-column:span 2;grid-row:auto}
+        .tool.big .t-img img{height:230px}
+        .explore{grid-template-columns:repeat(2,1fr)}
+        .foot-grid{grid-template-columns:1fr 1fr}
+      }
+      @media (max-width:640px){
+        .quick-grid,.articles{grid-template-columns:1fr}
+        .bento{grid-template-columns:1fr}
+        .tool.big,.tool.wide{grid-column:span 1}
+        .path-card{grid-template-columns:1fr}
+        .path-card .p-img{min-height:210px}
+        .explore{grid-template-columns:1fr}
+        .header-right .btn-link{display:none}
+        .header-right .btn-primary{padding:10px 14px;font-size:13.5px}
+        .cta-band{padding:28px 22px}
+        .cta-band .btn{margin-left:0;width:100%}
+        .foot-grid{grid-template-columns:1fr;gap:26px}
+        .demo-media img{height:200px}
+        .hero h1{font-size:36px}
+      }
+      @media (prefers-reduced-motion:reduce){
+        html{scroll-behavior:auto}
+        *{animation:none!important;transition:none!important}
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site">
+      <div class="wrap header-in">
+        <a class="logo" href="#top" aria-label="AI MỞ — trang chủ">
+          <span class="mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>
+          </span>
+          <span>AI&nbsp;<b>MỞ</b></span>
+        </a>
+        <nav class="main" aria-label="Điều hướng chính">
+          <a href="#cong-cu">Công cụ AI</a>
+          <a href="#cong-cu">App miễn phí</a>
+          <a href="#lo-trinh">Học AI</a>
+          <a href="#bai-viet">Bài viết</a>
+          <a href="#kham-pha">Game <span class="soon">Sắp ra mắt</span></a>
+        </nav>
+        <div class="header-right">
+          <label class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input id="siteSearch" type="search" placeholder="Tìm công cụ, bài viết…" aria-label="Tìm công cụ hoặc bài viết" />
+          </label>
+          <a class="btn-link" href="#cong-cu">Đăng nhập</a>
+          <a class="btn btn-primary" href="#prompt">Bắt đầu miễn phí</a>
+          <button class="burger" id="burgerBtn" aria-label="Mở menu" aria-expanded="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobileNav" aria-label="Menu di động">
+        <a href="#cong-cu">Công cụ AI <span>→</span></a>
+        <a href="#cong-cu">App miễn phí <span>→</span></a>
+        <a href="#lo-trinh">Học AI <span>→</span></a>
+        <a href="#bai-viet">Bài viết <span>→</span></a>
+        <a href="#cong-cu">Đăng nhập <span>→</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <!-- ================= HERO ================= -->
+      <section class="hero">
+        <div class="wrap">
+          <div class="hero-panel">
+            <div class="hero-grid">
+              <div>
+                <span class="hero-pill">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+                  AI Studio của AI Mở
+                </span>
+                <h1>Học AI bằng cách<br />tạo ra <span class="u">thứ dùng được.<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 9 C 60 2, 140 2, 198 8" fill="none" stroke="#38e1ff" stroke-width="5" stroke-linecap="round"/></svg></span></h1>
+                <p class="sub">Bộ công cụ AI thực tế, ứng dụng miễn phí và khóa học thực hành giúp bạn học AI nhanh, làm được ngay. Bắt đầu ngay tại đây — gõ ý tưởng, nhận kịch bản và prompt video.</p>
+
+                <form class="prompt-box" id="promptForm">
+                  <div class="pb-top">
+                    <span class="pb-spark" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>
+                    </span>
+                    <textarea id="ideaInput" rows="2" placeholder="Nhập ý tưởng video của bạn… ví dụ: video giới thiệu serum dưỡng da cho shop online" aria-label="Nhập ý tưởng video của bạn"></textarea>
+                  </div>
+                  <div class="pb-row" role="group" aria-label="Chọn model video">
+                    <button type="button" class="model-chip" data-model="Veo 3" aria-pressed="true">Veo 3</button>
+                    <button type="button" class="model-chip" data-model="Grok" aria-pressed="false">Grok</button>
+                    <button type="button" class="model-chip" data-model="Seedance 2.5" aria-pressed="false">Seedance 2.5</button>
+                    <button type="submit" class="btn-create" id="createBtn">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+                      <span id="createLabel">Tạo ngay</span>
+                    </button>
+                  </div>
+                </form>
+
+                <div class="chips" aria-label="Ý tưởng gợi ý">
+                  <button type="button" class="chip" data-idea="Video giới thiệu serum dưỡng da cho shop online, quay cận cảnh chất serum">💧 Serum dưỡng da</button>
+                  <button type="button" class="chip" data-idea="Video review iPhone cũ, kiểm tra màn hình, Face ID và pin trước khi mua">📱 Review iPhone cũ</button>
+                  <button type="button" class="chip" data-idea="Video thu cũ đổi mới iPhone, khách mang máy cũ đến shop kiểm tra và lên đời máy mới">🔄 Thu cũ đổi mới</button>
+                </div>
+
+                <div class="gen-result" id="genResult" aria-live="polite">
+                  <h3 id="genTitle">Kịch bản của bạn</h3>
+                  <div class="meta" id="genMeta"></div>
+                  <div id="genScenes"></div>
+                  <div class="prompt-out" id="genPrompt"></div>
+                  <div class="gen-actions">
+                    <button type="button" class="btn btn-primary btn-small" id="copyPromptBtn">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                      Copy prompt
+                    </button>
+                    <button type="button" class="btn btn-ghost btn-small" id="downloadBtn">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg>
+                      Tải kịch bản (.md)
+                    </button>
+                  </div>
+                </div>
+
+                <p class="trust">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  Công cụ thực hành · Hướng dẫn tiếng Việt · Không cần cài đặt
+                </p>
+              </div>
+
+              <!-- Demo card -->
+              <div class="demo-card" aria-label="Bản xem trước PromptKichBan">
+                <div class="demo-head">
+                  <span class="app-ic" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 9h18M8 5l2.5 4M14 5l2.5 4"/></svg>
+                  </span>
+                  <div>
+                    <h3>PromptKichBan Studio</h3>
+                    <p>Tạo kịch bản, storyboard và prompt video chỉ từ ý tưởng</p>
+                  </div>
+                  <span class="badge-free">Miễn phí</span>
+                </div>
+                <div class="demo-media">
+                  <img id="demoSlide" src="/images/home/hero-creator-preview.jpg" alt="Người sáng tạo quay video sản phẩm serum bằng điện thoại và đèn vòng trong studio" />
+                  <span class="dur">▶ Demo · 0:30</span>
+                  <button type="button" class="play" id="playBtn" aria-label="Phát bản demo storyboard">
+                    <span class="pbtn" id="playIcon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5-11-6.5z"/></svg>
+                    </span>
+                  </button>
+                  <span class="live-cap" id="slideCap">Hậu trường: quay video serum bằng điện thoại</span>
+                </div>
+                <div class="storyboard">
+                  <div class="sb-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+                    Storyboard · Video serum dưỡng da · 30 giây
+                  </div>
+                  <div class="frames">
+                    <figure class="frame" style="margin:0">
+                      <img src="/images/home/scene-1-serum-pastel.jpg" alt="Cảnh 1: chai serum trên nền hồng pastel" />
+                      <figcaption><b>Cảnh 1 · Hook</b><span class="tc">0–3s</span> Mở đầu bằng cận cảnh chai serum</figcaption>
+                    </figure>
+                    <figure class="frame" style="margin:0">
+                      <img src="/images/home/scene-2-serum-droplet.jpg" alt="Cảnh 2: nhỏ giọt serum lên lòng bàn tay" />
+                      <figcaption><b>Cảnh 2 · Chất serum</b><span class="tc">3–15s</span> Nhỏ giọt, khoe kết cấu trong suốt</figcaption>
+                    </figure>
+                    <figure class="frame" style="margin:0">
+                      <img src="/images/home/scene-3-serum-flatlay.jpg" alt="Cảnh 3: bộ sản phẩm skincare chụp flat-lay trên nền hồng" />
+                      <figcaption><b>Cảnh 3 · CTA</b><span class="tc">15–30s</span> Flat-lay sản phẩm, chốt lời mời</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="demo-prompt">
+                  <div class="dp-head">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+                    Prompt đã tạo · Veo 3
+                    <button type="button" id="copyDemoBtn">Copy</button>
+                  </div>
+                  <p id="typeTarget"></p>
+                </div>
+                <div class="demo-steps" aria-label="Quy trình 3 bước">
+                  <span class="step-pill done"><span class="n">1</span> Nhập ý tưởng</span>
+                  <span class="step-pill done"><span class="n">2</span> Kịch bản &amp; storyboard</span>
+                  <span class="step-pill active"><span class="n">3</span> Prompt video</span>
+                </div>
+              </div>
+              <!-- /Demo card -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= QUICK ACTIONS ================= -->
+      <section class="block" id="prompt">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="kick">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+              Bắt đầu trong 1 phút
+            </span>
+            <h2>Bạn muốn làm gì hôm nay?</h2>
+            <p>Mỗi lựa chọn đều mở ra một công cụ dùng được ngay — kèm ảnh minh họa đúng việc bạn sắp làm.</p>
+          </div>
+          <div class="quick-grid">
+            <article class="quick-card">
+              <img src="/images/home/action-prompt-kich-ban.jpg" alt="Chủ shop quay video giới thiệu sản phẩm bằng điện thoại qua đèn vòng" />
+              <div class="qc-body">
+                <h3>Tạo prompt video</h3>
+                <p>Từ một ý tưởng hoặc mô tả sản phẩm, nhận kịch bản, storyboard và prompt cho Veo 3, Grok, Seedance.</p>
+                <a class="qc-link" href="#top">Mở PromptKichBan <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+              </div>
+            </article>
+            <article class="quick-card">
+              <img src="/images/home/action-apps-free.jpg" alt="Điện thoại nằm ngang với các ô ứng dụng 3D đầy màu sắc bay lên trên nền trắng" />
+              <div class="qc-body">
+                <h3>Dùng app miễn phí</h3>
+                <p>14+ app HTML chạy ngay trên trình duyệt: tính lãi, định giá, lập kế hoạch… không cần cài đặt, không cần tài khoản.</p>
+                <a class="qc-link" href="#cong-cu">Xem kho app <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+              </div>
+            </article>
+            <article class="quick-card">
+              <img src="/images/home/action-learning-path.jpg" alt="Người học mỉm cười, ghi chép bên laptop khi học trực tuyến tại nhà" />
+              <div class="qc-body">
+                <h3>Học AI thực hành</h3>
+                <p>Lộ trình học theo dự án thật: mỗi bài học kết thúc bằng một sản phẩm bạn dùng hoặc bán được.</p>
+                <a class="qc-link" href="#lo-trinh">Xem lộ trình <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TOOLS BENTO ================= -->
+      <section class="block" id="cong-cu">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="kick">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+              Công cụ nổi bật
+            </span>
+            <h2>Công cụ AI &amp; app tính toán cho người bán hàng</h2>
+            <p>Không còn card trống với thanh xám: mỗi công cụ đều có ảnh thật của việc nó làm, nhìn 2 giây là hiểu.</p>
+          </div>
+          <div class="bento" id="bentoGrid">
+            <article class="tool big" data-searchable="promptkichban prompt kich ban video veo grok seedance storyboard kịch bản">
+              <div class="t-img">
+                <span class="badge green">Miễn phí</span>
+                <img src="/images/home/bento-prompt-studio.jpg" alt="Chủ shop livestream giới thiệu sản phẩm qua đèn vòng và điện thoại" />
+              </div>
+              <div class="t-body">
+                <h3>PromptKichBan — Tạo kịch bản &amp; prompt video từ ý tưởng</h3>
+                <p>Công cụ chủ lực của AI Mở: nhập ý tưởng hoặc mô tả sản phẩm, nhận trọn bộ đầu ra sẵn sàng dán vào công cụ tạo video AI.</p>
+                <ul class="check-list">
+                  <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Kịch bản chia cảnh kèm timecode và lời thoại</li>
+                  <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Storyboard từng cảnh: góc máy, chuyển động camera</li>
+                  <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Prompt tiếng Anh tối ưu cho Veo 3, Grok, Seedance 2 / 2.5</li>
+                  <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Kèm negative prompt, caption và hashtag đăng bài</li>
+                </ul>
+                <div class="t-foot">
+                  <a class="use" href="#top">Dùng ngay <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+                  <a class="guide" href="#bai-viet">Xem hướng dẫn</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="tool small" data-searchable="tính lãi thật từng đơn lợi nhuận phí ship sàn dashboard doanh thu">
+              <div class="t-img">
+                <span class="badge green">Sẵn dùng</span>
+                <img src="/images/home/bento-profit-calc.jpg" alt="Dashboard doanh thu và lợi nhuận trên màn hình laptop" />
+              </div>
+              <div class="t-body">
+                <h3>Tính lãi thật từng đơn</h3>
+                <p>Trừ đủ giá vốn, phí ship và phí sàn để thấy lãi thật của từng đơn hàng, thay vì nhìn doanh thu ảo.</p>
+                <div class="t-foot"><a class="use" href="#cong-cu">Dùng ngay <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a></div>
+              </div>
+            </article>
+
+            <article class="tool small" data-searchable="định giá bán khuyến mãi giá sản phẩm đóng gói đơn hàng shop online">
+              <div class="t-img">
+                <span class="badge green">Sẵn dùng</span>
+                <img src="/images/home/bento-pricing-tool.jpg" alt="Chủ shop online đóng gói sản phẩm chuẩn bị gửi đơn hàng" />
+              </div>
+              <div class="t-body">
+                <h3>Định giá bán &amp; khuyến mãi</h3>
+                <p>Tính giá bán và mức giảm an toàn để chạy khuyến mãi mà không âm vào tiền lãi của shop.</p>
+                <div class="t-foot"><a class="use" href="#cong-cu">Dùng ngay <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a></div>
+              </div>
+            </article>
+
+            <article class="tool wide" data-searchable="app html miễn phí kho ứng dụng trình duyệt điện thoại">
+              <div class="t-img">
+                <span class="badge amber">14+ app</span>
+                <img src="/images/home/bento-apps-hub.jpg" alt="Điện thoại với các biểu tượng ứng dụng đầy màu sắc bay xung quanh" />
+              </div>
+              <div class="t-body">
+                <h3>Kho app HTML miễn phí</h3>
+                <p>14+ ứng dụng nhỏ chạy thẳng trên trình duyệt điện thoại và máy tính: mở là dùng, không cài đặt, không đăng ký.</p>
+                <div class="t-foot"><a class="use" href="#cong-cu">Mở kho app <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a></div>
+              </div>
+            </article>
+            <p class="search-empty" id="searchEmpty">Không tìm thấy công cụ khớp với từ khóa — thử “video”, “lãi” hoặc “giá”.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LEARNING PATH ================= -->
+      <section class="block" id="lo-trinh">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="kick">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+              Lộ trình học AI
+            </span>
+            <h2>Học bằng cách làm ra sản phẩm</h2>
+            <p>Ba chặng ngắn, mỗi chặng kết thúc bằng một thứ bạn cầm được trên tay — không học lý thuyết suông.</p>
+          </div>
+          <div class="path-card">
+            <div class="p-img">
+              <img src="/images/home/path-step-1.jpg" alt="Người học AI đeo tai nghe, học và ghi chép bên laptop" />
+              <span class="float-chip">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+                Học đến đâu, ra sản phẩm đến đó
+              </span>
+            </div>
+            <div class="path-steps">
+              <h3>Lộ trình 3 chặng cho người mới</h3>
+              <p>Dành cho chủ shop, người bán hàng online và người mới chạm vào AI lần đầu.</p>
+              <div class="pstep">
+                <span class="num">1</span>
+                <div><b>Làm quen bằng công cụ có sẵn</b><span>Dùng PromptKichBan và kho app miễn phí để thấy AI giúp được việc gì ngay trong tuần đầu.</span></div>
+              </div>
+              <div class="pstep">
+                <span class="num">2</span>
+                <div><b>Viết prompt như người làm nghề</b><span>Học cấu trúc prompt, góc máy và chuyển động camera qua bài viết và ví dụ thật từng bước.</span></div>
+              </div>
+              <div class="pstep">
+                <span class="num">3</span>
+                <div><b>Ra sản phẩm hoàn chỉnh</b><span>Hoàn thiện một video, một trang bán hàng hoặc một quy trình tự động cho công việc của bạn.</span></div>
+              </div>
+              <div style="margin-top:20px">
+                <a class="btn btn-primary" href="#bai-viet">Bắt đầu chặng 1
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ARTICLES ================= -->
+      <section class="block" id="bai-viet">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="kick">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+              Kiến thức AI
+            </span>
+            <h2>Bài viết kiến thức AI</h2>
+            <p>Ảnh bìa là ảnh thật của đúng chủ đề bài viết — đọc tiêu đề, nhìn ảnh là biết bài nói về việc gì.</p>
+          </div>
+          <div class="articles" id="articleGrid">
+            <article class="article" data-searchable="prompt video ai hướng dẫn veo seedance cảnh quay storyboard">
+              <img src="/images/home/path-step-2.jpg" alt="Màn hình phần mềm dựng video với timeline nhiều lớp clip" />
+              <div class="a-body">
+                <span class="a-meta">Hướng dẫn <span class="dot"></span> <span class="time">5 phút đọc</span></span>
+                <h3>Viết prompt video AI sao cho ra đúng cảnh quay mình muốn</h3>
+                <p>Cấu trúc 5 phần của một prompt video tốt: chủ thể, hành động, góc máy, ánh sáng và chuyển động camera.</p>
+              </div>
+            </article>
+            <article class="article" data-searchable="lộ trình học ai người mới bắt đầu công cụ thực hành">
+              <img src="/images/home/path-step-3.jpg" alt="Học viên đeo tai nghe học trực tuyến và ghi chép vào sổ" />
+              <div class="a-body">
+                <span class="a-meta">Lộ trình <span class="dot"></span> <span class="time">7 phút đọc</span></span>
+                <h3>Người mới học AI: bắt đầu từ công cụ, đừng bắt đầu từ lý thuyết</h3>
+                <p>Vì sao làm ra một sản phẩm nhỏ trong tuần đầu quan trọng hơn đọc mười bài giới thiệu về AI.</p>
+              </div>
+            </article>
+            <article class="article" data-searchable="ai trên điện thoại chatbot ứng dụng gợi ý công cụ di động">
+              <img src="/images/home/article-ai-chatbot.jpg" alt="Người dùng trò chuyện với trợ lý AI trên điện thoại ngoài phố" />
+              <div class="a-body">
+                <span class="a-meta">Gợi ý công cụ <span class="dot"></span> <span class="time">6 phút đọc</span></span>
+                <h3>Dùng AI ngay trên điện thoại: 5 việc làm được trong hôm nay</h3>
+                <p>Viết caption, lên ý tưởng video, tính giá bán… những việc AI xử lý tốt ngay trên chiếc điện thoại bạn đang cầm.</p>
+              </div>
+            </article>
+            <p class="search-empty" id="articleEmpty">Không có bài viết khớp với từ khóa này.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= EXPLORE ================= -->
+      <section class="block" id="kham-pha">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="kick">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/></svg>
+              Đi tiếp
+            </span>
+            <h2>Khám phá thêm trên AI Mở</h2>
+            <p>Bốn lối đi rõ ràng thay cho khoảng trắng cũ: mỗi ô là một điểm đến cụ thể.</p>
+          </div>
+          <div class="explore">
+            <div class="x-card">
+              <img class="x-img" src="/images/home/article-serum-case-study.jpg" alt="Người mẫu nhỏ giọt serum dưỡng da lên tay" />
+              <div class="x-in">
+                <h3>PromptKichBan Studio</h3>
+                <p>Tạo kịch bản, storyboard và prompt video từ ý tưởng.</p>
+                <a href="#top">Dùng thử →</a>
+              </div>
+            </div>
+            <div class="x-card">
+              <img class="x-img" src="/images/home/article-apps-offline.jpg" alt="Nhiều điện thoại hiển thị biểu tượng ứng dụng đầy màu sắc" />
+              <div class="x-in">
+                <h3>14+ App HTML miễn phí</h3>
+                <p>Kho ứng dụng nhỏ chạy ngay trên trình duyệt.</p>
+                <a href="#cong-cu">Mở kho app →</a>
+              </div>
+            </div>
+            <div class="x-card">
+              <img class="x-img" src="/images/home/explore-courses.jpg" alt="Học viên học trực tuyến trên laptop và ghi chép trong quán cà phê" />
+              <div class="x-in">
+                <h3>Lộ trình học AI</h3>
+                <p>Học theo dự án thật, có sản phẩm ở cuối mỗi chặng.</p>
+                <a href="#lo-trinh">Xem lộ trình →</a>
+              </div>
+            </div>
+            <div class="x-card">
+              <img class="x-img" src="/images/home/explore-games.jpg" alt="Minh họa game trình duyệt nhiều màu sắc quanh chiếc laptop" />
+              <div class="x-in">
+                <h3>Game web giải trí</h3>
+                <p>Đang hoàn thiện — những game nhỏ làm bằng AI, chơi ngay trên web.</p>
+                <a href="#kham-pha">Sắp ra mắt</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-band">
+            <div>
+              <h2>Sẵn sàng tạo video đầu tiên bằng AI?</h2>
+              <p>Gõ một ý tưởng vào ô prompt ở đầu trang — 30 giây sau bạn có kịch bản, storyboard và prompt sẵn sàng cho Veo 3, Grok hoặc Seedance.</p>
+            </div>
+            <a class="btn btn-primary" href="#top">Thử PromptKichBan miễn phí
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a class="logo" href="#top">
+              <span class="mark" aria-hidden="true" style="width:38px;height:38px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.6L19.5 9l-5.6 1.9L12 16.5l-1.9-5.6L4.5 9l5.6-1.4L12 2z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>
+              </span>
+              <span>AI&nbsp;<b>MỞ</b></span>
+            </a>
+            <p>Nền tảng thực hành sản phẩm số &amp; công cụ AI tiếng Việt — học AI bằng cách tạo ra thứ dùng được. Dự án sản phẩm số độc lập · AI Mở Studio.</p>
+          </div>
+          <div>
+            <h4>Công cụ &amp; ứng dụng</h4>
+            <ul>
+              <li><a href="#cong-cu">PromptKichBan Studio</a></li>
+              <li><a href="#cong-cu">14+ App HTML miễn phí</a></li>
+              <li><a href="#cong-cu">Kho công cụ AI Mở</a></li>
+              <li><a href="#kham-pha">Game web (sắp có)</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Học tập &amp; kiến thức</h4>
+            <ul>
+              <li><a href="#lo-trinh">Lộ trình học AI</a></li>
+              <li><a href="#bai-viet">Bài viết kiến thức AI</a></li>
+              <li><a href="#bai-viet">Hướng dẫn PromptKichBan</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Tài khoản &amp; hỗ trợ</h4>
+            <ul>
+              <li><a href="#top">Đăng nhập</a></li>
+              <li><a href="#top">Điều khoản sử dụng</a></li>
+              <li><a href="#top">Quyền riêng tư</a></li>
+              <li><a href="#top">Trợ giúp / Liên hệ</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 AI MỞ. Bản quyền thuộc về AI Mở Studio. Không bán tài khoản lậu.</span>
+          <span class="right">
+            <a href="#top">Điều khoản</a>
+            <a href="#top">Quyền riêng tư</a>
+            <a href="#top">Hỗ trợ</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <button type="button" class="coffee" id="coffeeBtn">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M7 5c0-1 .8-1 .8-2M11 5c0-1 .8-1 .8-2"/></svg>
+      Mời cà phê
+    </button>
+    <!-- ================= TUỲ CHỈNH CÁ NHÂN HOÁ ================= -->
+    <button type="button" class="custom-fab" id="customFab" aria-expanded="false" aria-controls="customPanel">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Tuỳ chỉnh
+    </button>
+
+    <aside class="custom-panel" id="customPanel" hidden aria-label="Bảng tuỳ chỉnh giao diện">
+      <h3>Tuỳ chỉnh preview này</h3>
+      <p class="cp-note">Đổi ảnh, chữ và màu theo ý anh — áp dụng ngay trên trang, trong lần xem này.</p>
+      <p class="cp-hint"><b>Đổi ảnh:</b> bấm thẳng vào bất kỳ ảnh nào trên trang (hero, công cụ, bài viết, Khám phá…) để chọn ảnh mẫu khác hoặc tải ảnh của anh lên.<br /><b>Đổi chữ:</b> bấm vào tiêu đề có viền đứt nét và gõ lại.</p>
+      <div class="cp-group">
+        <span>Màu nhấn</span>
+        <div class="swatches" role="group" aria-label="Chọn màu nhấn">
+          <button type="button" class="swatch" data-accent="goc" aria-pressed="true" title="Xanh dương gốc" style="background:linear-gradient(135deg,#0057ff,#7c4dff 55%,#00b8d9)"></button>
+          <button type="button" class="swatch" data-accent="tim" aria-pressed="false" title="Tím AI" style="background:linear-gradient(135deg,#7c3aed,#a855f7 55%,#6366f1)"></button>
+          <button type="button" class="swatch" data-accent="ngoc" aria-pressed="false" title="Ngọc lục" style="background:linear-gradient(135deg,#059669,#10b981 55%,#06b6d4)"></button>
+          <button type="button" class="swatch" data-accent="hoanghon" aria-pressed="false" title="Hoàng hôn" style="background:linear-gradient(135deg,#ea580c,#f59e0b 55%,#ef4444)"></button>
+          <button type="button" class="swatch" data-accent="hong" aria-pressed="false" title="Hồng" style="background:linear-gradient(135deg,#db2777,#ec4899 55%,#8b5cf6)"></button>
+        </div>
+      </div>
+      <div class="cp-group">
+        <span>Tông nền trang</span>
+        <div class="tints" role="group" aria-label="Chọn tông nền trang">
+          <button type="button" class="tint" data-tint="xanh" aria-pressed="true">Xanh nhạt</button>
+          <button type="button" class="tint" data-tint="tim" aria-pressed="false">Tím nhạt</button>
+          <button type="button" class="tint" data-tint="mint" aria-pressed="false">Mint</button>
+          <button type="button" class="tint" data-tint="hong" aria-pressed="false">Hồng nhạt</button>
+        </div>
+      </div>
+      <div class="cp-group">
+        <span>Tiêu đề &amp; mô tả hero</span>
+        <label class="cp-field">Tiêu đề chính
+          <textarea id="editHeroTitle" rows="2">Học AI bằng cách&#10;tạo ra thứ dùng được.</textarea>
+        </label>
+        <label class="cp-field">Dòng mô tả
+          <textarea id="editHeroSub" rows="3">Bộ công cụ AI thực tế, ứng dụng miễn phí và khóa học thực hành giúp bạn học AI nhanh, làm được ngay. Bắt đầu ngay tại đây — gõ ý tưởng, nhận kịch bản và prompt video.</textarea>
+        </label>
+      </div>
+      <div class="cp-actions">
+        <button type="button" class="btn btn-ghost btn-small" id="resetCustomBtn">Đặt lại như ban đầu</button>
+        <button type="button" class="btn btn-primary btn-small" id="doneCustomBtn">Xong — đi đổi ảnh</button>
+        <button type="button" class="btn btn-ghost btn-small" id="exitCustomBtn">Tắt chế độ tuỳ chỉnh</button>
+      </div>
+    </aside>
+
+    <div class="img-modal" id="imgModal" hidden role="dialog" aria-modal="true" aria-labelledby="imgModalTitle">
+      <button type="button" class="im-back" id="imgModalBack" aria-label="Đóng bảng đổi ảnh"></button>
+      <div class="im-card">
+        <h3 id="imgModalTitle">Đổi ảnh</h3>
+        <p class="im-sub" id="imgModalSub">Chọn một ảnh mẫu bên dưới, hoặc tải ảnh của anh lên.</p>
+        <button type="button" class="im-close" id="imgModalClose" aria-label="Đóng">✕</button>
+        <img class="im-current" id="imgModalCurrent" src="/images/home/customizer-sample.jpg" alt="Ảnh đang dùng ở vị trí này" />
+        <div class="im-grid" id="imgGrid"></div>
+        <div class="im-actions">
+          <label class="im-upload" for="imgUpload">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 20h16"/></svg>
+            Tải ảnh của anh lên
+          </label>
+          <input type="file" id="imgUpload" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+          <button type="button" class="btn btn-ghost btn-small" id="imgResetBtn">Trả ảnh gốc</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <script>
+      (function () {
+        "use strict";
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function showToast(msg) {
+          var t = document.getElementById("toast");
+          t.textContent = msg;
+          t.classList.add("show");
+          window.clearTimeout(showToast._h);
+          showToast._h = window.setTimeout(function () { t.classList.remove("show"); }, 2600);
+        }
+
+        function copyText(text, okMsg) {
+          function done() { showToast(okMsg || "Đã copy vào clipboard ✓"); }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+          } else { fallback(); }
+          function fallback() {
+            var ta = document.createElement("textarea");
+            ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand("copy"); done(); }
+            catch (e) { showToast("Chưa copy được — hãy chọn và copy thủ công."); }
+            document.body.removeChild(ta);
+          }
+        }
+
+        /* ---------- Mobile menu ---------- */
+        var burger = document.getElementById("burgerBtn");
+        var mobileNav = document.getElementById("mobileNav");
+        burger.addEventListener("click", function () {
+          var open = mobileNav.classList.toggle("open");
+          burger.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        mobileNav.addEventListener("click", function (e) {
+          if (e.target.closest("a")) { mobileNav.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); }
+        });
+
+        /* ---------- Typewriter in demo card ---------- */
+        var DEMO_PROMPT = "Cinematic product video, vertical 9:16: a frosted glass serum bottle on a pastel pink set, soft morning light, gentle leaf shadows. Slow dolly-in, then a macro shot of one clear drop falling onto an open palm. Clean skincare commercial look, smooth camera movement, no text.";
+        var typeTarget = document.getElementById("typeTarget");
+        var typeTimer = null;
+        function startTyping() {
+          if (typeTimer) window.clearInterval(typeTimer);
+          if (reduced) { typeTarget.textContent = DEMO_PROMPT; return; }
+          var i = 0;
+          typeTarget.innerHTML = '<span class="caret"></span>';
+          typeTimer = window.setInterval(function () {
+            i++;
+            typeTarget.innerHTML = "";
+            typeTarget.appendChild(document.createTextNode(DEMO_PROMPT.slice(0, i)));
+            var c = document.createElement("span"); c.className = "caret";
+            typeTarget.appendChild(c);
+            if (i >= DEMO_PROMPT.length) {
+              window.clearInterval(typeTimer);
+              window.setTimeout(function () { typeTarget.textContent = DEMO_PROMPT; }, 1600);
+            }
+          }, 16);
+        }
+        var demoSeen = false;
+        if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting && !demoSeen) { demoSeen = true; startTyping(); io.disconnect(); }
+            });
+          }, { threshold: 0.35 });
+          io.observe(typeTarget);
+        } else { startTyping(); }
+
+        document.getElementById("copyDemoBtn").addEventListener("click", function () {
+          copyText(DEMO_PROMPT, "Đã copy prompt mẫu ✓");
+        });
+
+        /* ---------- Demo slideshow ---------- */
+        var slides = [
+          { src: ""/images/placeholder.jpg"", cap: "Hậu trường: quay video serum bằng điện thoại", alt: "Người sáng tạo quay video sản phẩm serum bằng điện thoại và đèn vòng trong studio" },
+          { src: ""/images/placeholder.jpg"", cap: "Cảnh 1 · Hook — cận cảnh chai serum", alt: "Cảnh 1: chai serum trên nền hồng pastel" },
+          { src: ""/images/placeholder.jpg"", cap: "Cảnh 2 · Chất serum — giọt serum trong suốt", alt: "Cảnh 2: nhỏ giọt serum lên lòng bàn tay" },
+          { src: ""/images/placeholder.jpg"", cap: "Cảnh 3 · CTA — flat-lay chốt lời mời", alt: "Cảnh 3: bộ sản phẩm skincare chụp flat-lay trên nền hồng" }
+        ];
+        slides.forEach(function (s) { var im = new Image(); im.src = s.src; });
+        var slideImg = document.getElementById("demoSlide");
+        var slideCap = document.getElementById("slideCap");
+        var playBtn = document.getElementById("playBtn");
+        var playIcon = document.getElementById("playIcon");
+        var playing = false, slideIdx = 0, slideTimer = null;
+        var ICON_PLAY = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5-11-6.5z"/></svg>';
+        var ICON_PAUSE = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>';
+        function showSlide(i) {
+          slideIdx = i;
+          slideImg.src = slides[i].src;
+          slideImg.alt = slides[i].alt;
+          slideCap.textContent = slides[i].cap;
+        }
+        function setPlaying(on) {
+          playing = on;
+          playIcon.innerHTML = on ? ICON_PAUSE : ICON_PLAY;
+          playBtn.setAttribute("aria-label", on ? "Tạm dừng bản demo" : "Phát bản demo storyboard");
+          if (slideTimer) window.clearInterval(slideTimer);
+          if (on) {
+            slideTimer = window.setInterval(function () { showSlide((slideIdx + 1) % slides.length); }, 2200);
+          }
+        }
+        playBtn.addEventListener("click", function () {
+          if (!playing) { showSlide(1); setPlaying(true); startTyping(); }
+          else { setPlaying(false); }
+        });
+
+        /* ---------- Prompt generator ---------- */
+        var form = document.getElementById("promptForm");
+        var ideaInput = document.getElementById("ideaInput");
+        var createBtn = document.getElementById("createBtn");
+        var createLabel = document.getElementById("createLabel");
+        var result = document.getElementById("genResult");
+        var currentModel = "Veo 3";
+        var currentPromptText = "";
+
+        document.querySelectorAll(".model-chip").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            document.querySelectorAll(".model-chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+            chip.setAttribute("aria-pressed", "true");
+            currentModel = chip.getAttribute("data-model");
+          });
+        });
+        document.querySelectorAll(".chip[data-idea]").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            ideaInput.value = chip.getAttribute("data-idea");
+            ideaInput.focus();
+          });
+        });
+
+        function cleanIdea(raw) {
+          var s = raw.trim().replace(/\s+/g, " ");
+          if (s.length > 90) s = s.slice(0, 90).trim();
+          return s;
+        }
+        function titleOf(idea) {
+          var s = idea.split(",")[0].replace(/^video\s+/i, "").trim();
+          return s.charAt(0).toUpperCase() + s.slice(1);
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var idea = cleanIdea(ideaInput.value);
+          if (!idea) {
+            showToast("Hãy nhập một ý tưởng video trước nhé — hoặc bấm một chip gợi ý bên dưới.");
+            ideaInput.focus();
+            return;
+          }
+          createBtn.disabled = true;
+          createLabel.textContent = "Đang tạo…";
+          window.setTimeout(function () {
+            var scenes = [
+              { tc: "0–3s", name: "Hook", text: "Mở đầu bắt mắt đúng chủ đề “" + titleOf(idea) + "” — cận cảnh chủ thể chính, chữ lớn trên màn hình trong 3 giây đầu." },
+              { tc: "3–15s", name: "Nội dung chính", text: "Quay cận từng chi tiết quan trọng, lời thoại ngắn gọn, mỗi ý một cảnh, chuyển động máy chậm và đều." },
+              { tc: "15–30s", name: "Chốt CTA", text: "Khung hình tổng kết sản phẩm/dịch vụ, hiện lời kêu gọi hành động và thông tin liên hệ của shop." }
+            ];
+            currentPromptText =
+              "Vertical video 9:16, 30 seconds. Topic: " + idea + ". " +
+              "Scene 1 (0-3s) hook close-up of the main subject, bright natural light. " +
+              "Scene 2 (3-15s) slow dolly-in on key details, clean composition, smooth camera movement. " +
+              "Scene 3 (15-30s) wide closing shot with clear call-to-action. " +
+              "Realistic commercial look, soft shadows, no watermark, no distorted hands, no extra text.";
+            document.getElementById("genTitle").textContent = "Kịch bản: " + titleOf(idea);
+            document.getElementById("genMeta").textContent = "Model: " + currentModel + " · Khổ dọc 9:16 · Thời lượng 30 giây · 3 cảnh";
+            var html = "";
+            scenes.forEach(function (sc) {
+              html += '<div class="scene"><span class="tc">' + sc.tc + '</span><p><b>' + sc.name + ":</b> " + sc.text + "</p></div>";
+            });
+            document.getElementById("genScenes").innerHTML = html;
+            document.getElementById("genPrompt").textContent = currentPromptText;
+            result.classList.add("show");
+            createBtn.disabled = false;
+            createLabel.textContent = "Tạo lại";
+            result.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" });
+          }, reduced ? 60 : 650);
+        });
+
+        document.getElementById("copyPromptBtn").addEventListener("click", function () {
+          if (currentPromptText) copyText(currentPromptText, "Đã copy prompt ✓ Dán vào " + currentModel + " để tạo video.");
+        });
+        document.getElementById("downloadBtn").addEventListener("click", function () {
+          if (!currentPromptText) return;
+          var idea = cleanIdea(ideaInput.value);
+          var md = "# Kịch bản video — " + titleOf(idea) + "\n\n" +
+            "- Model: " + currentModel + "\n- Khổ: dọc 9:16\n- Thời lượng: 30 giây\n\n" +
+            "## Các cảnh\n\n" +
+            "1. **0–3s · Hook:** Mở đầu cận cảnh chủ thể chính, chữ lớn trên màn hình.\n" +
+            "2. **3–15s · Nội dung chính:** Quay cận chi tiết quan trọng, lời thoại ngắn, máy di chuyển chậm.\n" +
+            "3. **15–30s · Chốt CTA:** Khung hình tổng kết, hiện lời kêu gọi hành động.\n\n" +
+            "## Prompt (" + currentModel + ")\n\n" + currentPromptText + "\n";
+          var blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url; a.download = "kich-ban-video.md";
+          document.body.appendChild(a); a.click();
+          document.body.removeChild(a);
+          window.setTimeout(function () { URL.revokeObjectURL(url); }, 800);
+          showToast("Đã tải file kịch bản (.md) ✓");
+        });
+
+        /* ---------- Search filter ---------- */
+        var searchInput = document.getElementById("siteSearch");
+        function norm(s) {
+          s = (s || "").toLowerCase().normalize("NFD");
+          var out = "";
+          for (var i = 0; i < s.length; i++) {
+            var c = s.charCodeAt(i);
+            if (c >= 0x300 && c <= 0x36f) continue;
+            out += (c === 0x111 ? "d" : s[i]);
+          }
+          return out;
+        }
+        function applySearch() {
+          var q = norm(searchInput.value.trim());
+          var anyTool = false, anyArticle = false;
+          document.querySelectorAll("#bentoGrid [data-searchable]").forEach(function (el) {
+            var hit = !q || norm(el.getAttribute("data-searchable") + " " + el.textContent).indexOf(q) !== -1;
+            el.style.display = hit ? "" : "none";
+            if (hit) anyTool = true;
+          });
+          document.querySelectorAll("#articleGrid [data-searchable]").forEach(function (el) {
+            var hit = !q || norm(el.getAttribute("data-searchable") + " " + el.textContent).indexOf(q) !== -1;
+            el.style.display = hit ? "" : "none";
+            if (hit) anyArticle = true;
+          });
+          document.getElementById("searchEmpty").classList.toggle("show", q !== "" && !anyTool);
+          document.getElementById("articleEmpty").classList.toggle("show", q !== "" && !anyArticle);
+        }
+        searchInput.addEventListener("input", applySearch);
+        searchInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            document.getElementById("cong-cu").scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+          }
+        });
+
+        /* ---------- Coffee ---------- */
+        document.getElementById("coffeeBtn").addEventListener("click", function () {
+          showToast("Cảm ơn bạn đã ủng hộ AI Mở ☕ Tính năng donate sẽ mở cùng bản chính thức.");
+        });
+
+        /* ---------- Tuỳ chỉnh cá nhân hoá ---------- */
+        var CATALOG = [
+          { src: ""/images/placeholder.jpg"", label: "Studio quay serum" },
+          { src: ""/images/placeholder.jpg"", label: "Quay video bằng điện thoại" },
+          { src: ""/images/placeholder.jpg"", label: "Livestream bán hàng" },
+          { src: ""/images/placeholder.jpg"", label: "Chai serum pastel" },
+          { src: ""/images/placeholder.jpg"", label: "Giọt serum" },
+          { src: ""/images/placeholder.jpg"", label: "Flat-lay skincare" },
+          { src: ""/images/placeholder.jpg"", label: "Dashboard doanh thu" },
+          { src: ""/images/placeholder.jpg"", label: "Đóng gói đơn hàng" },
+          { src: ""/images/placeholder.jpg"", label: "App 3D trên điện thoại" },
+          { src: ""/images/placeholder.jpg"", label: "Biểu tượng ứng dụng" },
+          { src: ""/images/placeholder.jpg"", label: "Kho app điện thoại" },
+          { src: ""/images/placeholder.jpg"", label: "Học AI với laptop" },
+          { src: ""/images/placeholder.jpg"", label: "Học online tại nhà" },
+          { src: ""/images/placeholder.jpg"", label: "Ghi chép khi học" },
+          { src: ""/images/placeholder.jpg"", label: "Học ở quán cà phê" },
+          { src: ""/images/placeholder.jpg"", label: "Dựng video" },
+          { src: ""/images/placeholder.jpg"", label: "AI trên điện thoại" },
+          { src: ""/images/placeholder.jpg"", label: "Serum dưỡng da" },
+          { src: ""/images/placeholder.jpg"", label: "Game trên laptop" }
+        ];
+        var customFab = document.getElementById("customFab");
+        var customPanel = document.getElementById("customPanel");
+        var imgModal = document.getElementById("imgModal");
+        var imgGrid = document.getElementById("imgGrid");
+        var imgUpload = document.getElementById("imgUpload");
+        var imgTarget = null;
+        var editing = false;
+
+        /* Ảnh: ghi nhớ ảnh gốc của từng vị trí */
+        var pageImgs = Array.prototype.slice.call(document.querySelectorAll("main img"));
+        pageImgs.forEach(function (im, i) {
+          im.setAttribute("data-img-id", "img" + i);
+          if (!im.getAttribute("data-orig-src")) {
+            im.setAttribute("data-orig-src", im.getAttribute("src"));
+            im.setAttribute("data-orig-alt", im.getAttribute("alt") || "");
+          }
+        });
+        /* Chữ: các tiêu đề bấm vào sửa được khi đang tuỳ chỉnh */
+        var editables = Array.prototype.slice.call(document.querySelectorAll(
+          ".sec-head h2, .quick-card h3, .tool h3, .article h3, .x-card h3, .path-steps h3, .cta-band h2, .demo-head h3, nav.main a"
+        ));
+        editables.forEach(function (el) {
+          el.setAttribute("data-editable", "");
+          el.setAttribute("data-orig-text", el.innerHTML);
+        });
+        var slidesOrig = slides.map(function (s) { return { src: s.src, cap: s.cap, alt: s.alt }; });
+        var heroH1 = document.querySelector(".hero h1");
+        var heroSub = document.querySelector(".hero .sub");
+        var heroH1Orig = heroH1.innerHTML;
+        var heroSubOrig = heroSub.textContent;
+
+        function syncFab() {
+          customFab.setAttribute("aria-expanded", editing && !customPanel.hidden ? "true" : "false");
+        }
+        function setEditing(on) {
+          editing = on;
+          document.body.classList.toggle("editing", on);
+          customPanel.hidden = !on;
+          customFab.classList.toggle("on", on);
+          syncFab();
+          editables.forEach(function (el) {
+            if (on) { el.setAttribute("contenteditable", "true"); el.setAttribute("spellcheck", "false"); }
+            else { el.removeAttribute("contenteditable"); }
+          });
+          pageImgs.forEach(function (im) {
+            if (on) {
+              im.setAttribute("tabindex", "0");
+              im.setAttribute("role", "button");
+              im.setAttribute("aria-label", "Đổi ảnh: " + (im.getAttribute("alt") || "ảnh minh họa"));
+            } else {
+              im.removeAttribute("tabindex");
+              im.removeAttribute("role");
+              im.removeAttribute("aria-label");
+            }
+          });
+          if (on) showToast("Đang tuỳ chỉnh: bấm vào ảnh để đổi, bấm vào tiêu đề để sửa chữ.");
+        }
+        customFab.addEventListener("click", function () {
+          if (!editing) { setEditing(true); return; }
+          customPanel.hidden = !customPanel.hidden;
+          syncFab();
+        });
+        document.getElementById("doneCustomBtn").addEventListener("click", function () {
+          customPanel.hidden = true;
+          syncFab();
+          showToast("Giờ bấm vào ảnh bất kỳ để đổi — nút Tuỳ chỉnh mở lại bảng này.");
+        });
+        document.getElementById("exitCustomBtn").addEventListener("click", function () {
+          setEditing(false);
+          showToast("Đã tắt chế độ tuỳ chỉnh — các thay đổi của anh vẫn giữ trên trang.");
+        });
+
+        /* Điều hướng bị chặn khi đang sửa chữ trên menu */
+        document.querySelector("nav.main").addEventListener("click", function (e) {
+          if (editing) e.preventDefault();
+        }, true);
+
+        /* ----- Đổi ảnh ----- */
+        function buildGrid(currentSrc) {
+          imgGrid.innerHTML = "";
+          CATALOG.forEach(function (item) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "im-thumb" + (item.src === currentSrc ? " sel" : "");
+            var im = document.createElement("img");
+            im.src = item.src; im.alt = item.label; im.loading = "lazy";
+            var sp = document.createElement("span");
+            sp.textContent = item.label;
+            b.appendChild(im); b.appendChild(sp);
+            b.addEventListener("click", function () { applyImage(item.src, item.label); });
+            imgGrid.appendChild(b);
+          });
+        }
+        function applyImage(src, label) {
+          if (!imgTarget) return;
+          imgTarget.src = src;
+          if (label) imgTarget.alt = label;
+          if (imgTarget.id === "demoSlide") {
+            slides[slideIdx].src = src;
+            if (label) slides[slideIdx].alt = label;
+            slideCap.textContent = label ? ("Ảnh của anh: " + label) : slideCap.textContent;
+            if (playing) setPlaying(false);
+          }
+          closeImgModal();
+          showToast("Đã đổi ảnh ✓");
+        }
+        function openImgModal(im) {
+          imgTarget = im;
+          var sec = im.closest("section");
+          var secName = "";
+          if (sec) {
+            var h = sec.querySelector(".sec-head h2, .sec-head .kick");
+            if (h) secName = h.textContent.trim();
+            if (im.closest(".hero-panel")) secName = "Hero — đầu trang";
+          }
+          document.getElementById("imgModalTitle").textContent = "Đổi ảnh" + (secName ? " · " + secName : "");
+          document.getElementById("imgModalCurrent").src = im.getAttribute("src");
+          buildGrid(im.getAttribute("src"));
+          imgModal.hidden = false;
+        }
+        function closeImgModal() { imgModal.hidden = true; imgTarget = null; imgUpload.value = ""; }
+        pageImgs.forEach(function (im) {
+          im.addEventListener("click", function () { if (editing) openImgModal(im); });
+          im.addEventListener("keydown", function (e) {
+            if (editing && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openImgModal(im); }
+          });
+        });
+        document.getElementById("imgModalClose").addEventListener("click", closeImgModal);
+        document.getElementById("imgModalBack").addEventListener("click", closeImgModal);
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !imgModal.hidden) closeImgModal(); });
+        document.getElementById("imgResetBtn").addEventListener("click", function () {
+          if (!imgTarget) return;
+          applyImage(imgTarget.getAttribute("data-orig-src"), imgTarget.getAttribute("data-orig-alt"));
+        });
+        imgUpload.addEventListener("change", function () {
+          var f = imgUpload.files && imgUpload.files[0];
+          if (!f || !imgTarget) return;
+          var reader = new FileReader();
+          reader.onload = function () { applyImage(String(reader.result), "Ảnh tải lên của anh"); };
+          reader.readAsDataURL(f);
+        });
+
+        /* ----- Màu nhấn & tông nền ----- */
+        var ACCENTS = {
+          goc:      { blue: "#0057ff", dark: "#0043c7", violet: "#7c4dff", cyan: "#00b8d9" },
+          tim:      { blue: "#7c3aed", dark: "#5b21b6", violet: "#a855f7", cyan: "#6366f1" },
+          ngoc:     { blue: "#059669", dark: "#047857", violet: "#10b981", cyan: "#06b6d4" },
+          hoanghon: { blue: "#ea580c", dark: "#c2410c", violet: "#f59e0b", cyan: "#ef4444" },
+          hong:     { blue: "#db2777", dark: "#be185d", violet: "#ec4899", cyan: "#8b5cf6" }
+        };
+        var TINTS = {
+          xanh: { bg: "#f4f7ff", soft: "#eef3ff" },
+          tim:  { bg: "#f7f5ff", soft: "#efeaff" },
+          mint: { bg: "#f2fbf7", soft: "#e4f6ec" },
+          hong: { bg: "#fdf5f8", soft: "#fceef3" }
+        };
+        var root = document.documentElement;
+        function applyAccent(key) {
+          var a = ACCENTS[key]; if (!a) return;
+          root.style.setProperty("--blue", a.blue);
+          root.style.setProperty("--blue-dark", a.dark);
+          root.style.setProperty("--violet", a.violet);
+          root.style.setProperty("--cyan", a.cyan);
+          root.style.setProperty("--grad", "linear-gradient(92deg," + a.blue + " 0%," + a.violet + " 55%," + a.cyan + " 110%)");
+          document.querySelectorAll(".swatch").forEach(function (s) {
+            s.setAttribute("aria-pressed", s.getAttribute("data-accent") === key ? "true" : "false");
+          });
+        }
+        function applyTint(key) {
+          var t = TINTS[key]; if (!t) return;
+          root.style.setProperty("--bg", t.bg);
+          root.style.setProperty("--bg-soft", t.soft);
+          document.querySelectorAll(".tint").forEach(function (s) {
+            s.setAttribute("aria-pressed", s.getAttribute("data-tint") === key ? "true" : "false");
+          });
+        }
+        document.querySelectorAll(".swatch").forEach(function (s) {
+          s.addEventListener("click", function () { applyAccent(s.getAttribute("data-accent")); });
+        });
+        document.querySelectorAll(".tint").forEach(function (s) {
+          s.addEventListener("click", function () { applyTint(s.getAttribute("data-tint")); });
+        });
+
+        /* ----- Tiêu đề & mô tả hero ----- */
+        function esc(s) {
+          return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+        var UNDERLINE = '<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 9 C 60 2, 140 2, 198 8" fill="none" stroke="#38e1ff" stroke-width="5" stroke-linecap="round"/></svg>';
+        document.getElementById("editHeroTitle").addEventListener("input", function (e) {
+          var lines = e.target.value.split("\n").map(function (x) { return x.trim(); }).filter(Boolean);
+          if (!lines.length) return;
+          var last = lines.pop();
+          var head = lines.length ? esc(lines.join("<br />")) + "<br />" : "";
+          heroH1.innerHTML = head + '<span class="u">' + esc(last) + UNDERLINE + "</span>";
+        });
+        document.getElementById("editHeroSub").addEventListener("input", function (e) {
+          heroSub.textContent = e.target.value;
+        });
+
+        /* ----- Đặt lại tất cả ----- */
+        document.getElementById("resetCustomBtn").addEventListener("click", function () {
+          pageImgs.forEach(function (im) {
+            im.src = im.getAttribute("data-orig-src");
+            im.alt = im.getAttribute("data-orig-alt");
+          });
+          slidesOrig.forEach(function (s, i) { slides[i].src = s.src; slides[i].cap = s.cap; slides[i].alt = s.alt; });
+          showSlide(0);
+          editables.forEach(function (el) { el.innerHTML = el.getAttribute("data-orig-text"); });
+          heroH1.innerHTML = heroH1Orig;
+          heroSub.textContent = heroSubOrig;
+          document.getElementById("editHeroTitle").value = "Học AI bằng cách\ntạo ra thứ dùng được.";
+          document.getElementById("editHeroSub").value = heroSubOrig;
+          root.style.removeProperty("--blue"); root.style.removeProperty("--blue-dark");
+          root.style.removeProperty("--violet"); root.style.removeProperty("--cyan");
+          root.style.removeProperty("--grad"); root.style.removeProperty("--bg");
+          root.style.removeProperty("--bg-soft");
+          document.querySelectorAll(".swatch").forEach(function (s) {
+            s.setAttribute("aria-pressed", s.getAttribute("data-accent") === "goc" ? "true" : "false");
+          });
+          document.querySelectorAll(".tint").forEach(function (s) {
+            s.setAttribute("aria-pressed", s.getAttribute("data-tint") === "xanh" ? "true" : "false");
+          });
+          showToast("Đã đặt lại toàn bộ tuỳ chỉnh ✓");
+        });
+      })();
+    </script>
+  </body>
+</html>
