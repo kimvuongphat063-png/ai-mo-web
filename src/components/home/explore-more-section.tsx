@@ -45,7 +45,7 @@ const cards = [
 ];
 
 export function ExploreMore() {
-  const { getImage } = useHomeImages();
+  const { getImage, content } = useHomeImages();
 
   return (
     <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-5 pt-14 sm:pt-16 pb-4" id="kham-pha">
@@ -55,10 +55,10 @@ export function ExploreMore() {
           Đi tiếp
         </span>
         <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-tight leading-tight text-[#0c1526] mb-2">
-          Khám phá thêm trên AI Mở
+          {content?.exploreTitle || "Khám phá thêm trên AI Mở"}
         </h2>
         <p className="text-[15.5px] text-[#68779a] m-0">
-          Bốn lối đi rõ ràng thay cho khoảng trắng cũ: mỗi ô là một điểm đến cụ thể.
+          {content?.exploreDesc || "Bốn lối đi rõ ràng thay cho khoảng trắng cũ: mỗi ô là một điểm đến cụ thể."}
         </p>
       </div>
 

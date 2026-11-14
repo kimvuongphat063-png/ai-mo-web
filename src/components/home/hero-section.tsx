@@ -85,7 +85,7 @@ export function HeroSection() {
   const typeTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const { show: showToast, Toast } = useToast();
-  const { getImage } = useHomeImages();
+  const { getImage, content } = useHomeImages();
 
   const activeSlides = [
     { src: getImage("hero-preview", "/images/home/hero-creator-preview.jpg"), cap: "Hậu trường: quay video serum bằng điện thoại", alt: "Người sáng tạo quay video sản phẩm serum" },
@@ -203,23 +203,29 @@ export function HeroSection() {
           <div className="space-y-5">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/30 text-[13px] font-bold backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5 fill-current" />
-              AI Studio của AI Mở
+              {content?.heroBadge || "AI Studio của AI Mở"}
             </span>
 
             <h1 className="text-[clamp(32px,4.6vw,54px)] leading-[1.1] font-black tracking-tight">
-              Học AI bằng cách
-              <br />
-              tạo ra{" "}
-              <span className="relative whitespace-nowrap">
-                thứ dùng được.
-                <svg className="absolute left-0 right-0 -bottom-2 w-full h-3" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M2 9 C 60 2, 140 2, 198 8" fill="none" stroke="#38e1ff" strokeWidth="5" strokeLinecap="round" />
-                </svg>
-              </span>
+              {content?.heroTitle ? (
+                content.heroTitle
+              ) : (
+                <>
+                  Học AI bằng cách
+                  <br />
+                  tạo ra{" "}
+                  <span className="relative whitespace-nowrap">
+                    thứ dùng được.
+                    <svg className="absolute left-0 right-0 -bottom-2 w-full h-3" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+                      <path d="M2 9 C 60 2, 140 2, 198 8" fill="none" stroke="#38e1ff" strokeWidth="5" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </>
+              )}
             </h1>
 
             <p className="text-[15px] sm:text-[16.5px] text-white/88 max-w-[480px] leading-relaxed">
-              Bộ công cụ AI thực tế, ứng dụng miễn phí và khóa học thực hành giúp bạn học AI nhanh, làm được ngay. Bắt đầu ngay tại đây — gõ ý tưởng, nhận kịch bản và prompt video.
+              {content?.heroDesc || "Bộ công cụ AI thực tế, ứng dụng miễn phí và khóa học thực hành giúp bạn học AI nhanh, làm được ngay. Bắt đầu ngay tại đây — gõ ý tưởng, nhận kịch bản và prompt video."}
             </p>
 
             {/* PROMPT BOX */}

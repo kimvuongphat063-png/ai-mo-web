@@ -80,10 +80,43 @@ export type CmsPath = z.infer<typeof pathSchema>;
 export type CmsArticle = z.infer<typeof articleSchema>;
 export type CmsEntityType = z.infer<typeof entityTypeSchema>;
 const cmsPath = path.join(process.cwd(), "data", "cms.json");
+const tmpCmsPath = path.join("/tmp", "cms.json");
+let inMemoryCms: CmsContent | null = null;
 let writeQueue: Promise<unknown> = Promise.resolve();
 
-async function loadCms(): Promise<CmsContent> { const raw = JSON.parse(await readFile(cmsPath, "utf8")); const migrated = cmsSchema.parse(migrateLegacyCms(raw)); if ((raw as { version?: number }).version !== 2) await persistCms(migrated); return migrated; }
-async function persistCms(input: unknown): Promise<CmsContent> { const value = cmsSchema.parse({ ...(input as object), version: 2, updatedAt: new Date().toISOString() }); await mkdir(path.dirname(cmsPath), { recursive: true }); const temp = `${cmsPath}.${process.pid}.${randomUUID()}.tmp`; await writeFile(temp, `${JSON.stringify(value, null, 2)}\n`, { encoding: "utf8", flag: "wx" }); await rename(temp, cmsPath); return value; }
+async function loadCms(): Promise<CmsContent> {
+  if (inMemoryCms) return inMemoryCms;
+  try {
+    const raw = JSON.parse(await readFile(tmpCmsPath, "utf8"));
+    inMemoryCms = cmsSchema.parse(migrateLegacyCms(raw));
+    return inMemoryCms;
+  } catch {
+    // fallback to repo file
+  }
+  const raw = JSON.parse(await readFile(cmsPath, "utf8"));
+  const migrated = cmsSchema.parse(migrateLegacyCms(raw));
+  inMemoryCms = migrated;
+  return migrated;
+}
+
+async function persistCms(input: unknown): Promise<CmsContent> {
+  const value = cmsSchema.parse({ ...(input as object), version: 2, updatedAt: new Date().toISOString() });
+  inMemoryCms = value;
+  try {
+    await mkdir(path.dirname(cmsPath), { recursive: true });
+    const temp = `${cmsPath}.${process.pid}.${randomUUID()}.tmp`;
+    await writeFile(temp, `${JSON.stringify(value, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
+    await rename(temp, cmsPath);
+  } catch {
+    // Fallback on read-only environments (e.g. Vercel Serverless)
+    try {
+      await writeFile(tmpCmsPath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+    } catch {
+      // inMemoryCms is already stored
+    }
+  }
+  return value;
+}
 function enqueue<T>(task: () => Promise<T>): Promise<T> { const operation = writeQueue.then(task, task); writeQueue = operation.catch(() => undefined); return operation; }
 export async function readCms(): Promise<CmsContent> { noStore(); await writeQueue; return loadCms(); }
 export async function writeCms(input: unknown): Promise<CmsContent> { return enqueue(() => persistCms(input)); }

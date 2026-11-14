@@ -48,28 +48,67 @@ const CATALOG = [
   { src: "/images/home/explore-games.jpg", label: "Game trên laptop" },
 ];
 
+export interface HomeContent {
+  heroBadge: string;
+  heroTitle: string;
+  heroDesc: string;
+  quickActionsTitle: string;
+  quickActionsDesc: string;
+  toolsTitle: string;
+  toolsDesc: string;
+  pathTitle: string;
+  pathDesc: string;
+  articlesTitle: string;
+  articlesDesc: string;
+  exploreTitle: string;
+  exploreDesc: string;
+}
+
+export const DEFAULT_HOME_CONTENT: HomeContent = {
+  heroBadge: "AI Studio của AI Mở",
+  heroTitle: "Học AI bằng cách tạo ra thứ dùng được.",
+  heroDesc: "Bộ công cụ AI thực tế, ứng dụng miễn phí và lộ trình thực hành dành cho người làm việc thật. Không lý thuyết suông.",
+  quickActionsTitle: "Bắt đầu nhanh với 3 việc phổ biến nhất",
+  quickActionsDesc: "Không cần đọc tài liệu dài dòng. Chọn một bài toán và thử ngay trên trình duyệt.",
+  toolsTitle: "Bộ công cụ AI giải quyết bài toán thật",
+  toolsDesc: "Mỗi công cụ xử lý một việc cụ thể, có thể dùng ngay mà không cần kết nối API phức tạp.",
+  pathTitle: "Lộ trình học AI thực chiến",
+  pathDesc: "Học theo sản phẩm đầu ra, không học theo tính năng trừu tượng.",
+  articlesTitle: "Kiến thức & Hướng dẫn thực hành",
+  articlesDesc: "Những bài viết thực chiến, chia sẻ kinh nghiệm dùng AI vào công việc hàng ngày.",
+  exploreTitle: "Khám phá thêm trên AI Mở",
+  exploreDesc: "Bốn lối đi rõ ràng: mỗi ô là một điểm đến cụ thể.",
+};
+
 interface HomeImagesContextType {
   images: Record<string, string>;
+  content: HomeContent;
   isEditMode: boolean;
   toggleEditMode: () => void;
   getImage: (cardId: string, fallback?: string) => string;
   openImageModal: (cardId: string, cardTitle: string) => void;
   updateImage: (cardId: string, url: string) => Promise<void>;
   resetImages: () => Promise<void>;
+  updateContent: (patch: Partial<HomeContent>) => Promise<void>;
+  resetContent: () => Promise<void>;
 }
 
 const HomeImagesContext = createContext<HomeImagesContextType>({
   images: DEFAULT_IMAGES,
+  content: DEFAULT_HOME_CONTENT,
   isEditMode: false,
   toggleEditMode: () => {},
   getImage: (id, fb) => fb || DEFAULT_IMAGES[id] || "",
   openImageModal: () => {},
   updateImage: async () => {},
   resetImages: async () => {},
+  updateContent: async () => {},
+  resetContent: async () => {},
 });
 
 export function HomeImagesProvider({ children }: { children: React.ReactNode }) {
   const [images, setImages] = useState<Record<string, string>>(DEFAULT_IMAGES);
+  const [content, setContent] = useState<HomeContent>(DEFAULT_HOME_CONTENT);
   const [isEditMode, setIsEditMode] = useState(false);
 
   // Modal state
@@ -96,13 +135,26 @@ export function HomeImagesProvider({ children }: { children: React.ReactNode }) 
       } catch {}
     }
 
+    const savedContent = localStorage.getItem("aimo_home_content");
+    if (savedContent) {
+      try {
+        setContent((prev) => ({ ...prev, ...JSON.parse(savedContent) }));
+      } catch {}
+    }
+
     // Also fetch from API
     fetch("/api/admin/home-images")
       .then((res) => res.json())
       .then((data) => {
-        if (data.ok && data.images) {
-          setImages((prev) => ({ ...prev, ...data.images }));
-          localStorage.setItem("aimo_home_images", JSON.stringify(data.images));
+        if (data.ok) {
+          if (data.images) {
+            setImages((prev) => ({ ...prev, ...data.images }));
+            localStorage.setItem("aimo_home_images", JSON.stringify(data.images));
+          }
+          if (data.content) {
+            setContent((prev) => ({ ...prev, ...data.content }));
+            localStorage.setItem("aimo_home_content", JSON.stringify(data.content));
+          }
         }
       })
       .catch(() => {});
@@ -209,16 +261,51 @@ export function HomeImagesProvider({ children }: { children: React.ReactNode }) 
     }
   };
 
+  const updateContent = async (patch: Partial<HomeContent>) => {
+    const updated = { ...content, ...patch };
+    setContent(updated);
+    localStorage.setItem("aimo_home_content", JSON.stringify(updated));
+
+    try {
+      await fetch("/api/admin/home-images", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "update_content", content: patch }),
+      });
+      showToast("Đã lưu nội dung trang chủ thành công! ✓");
+    } catch {
+      showToast("Đã lưu vào bộ nhớ trình duyệt ✓");
+    }
+  };
+
+  const resetContent = async () => {
+    setContent(DEFAULT_HOME_CONTENT);
+    localStorage.removeItem("aimo_home_content");
+    try {
+      await fetch("/api/admin/home-images", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reset_content" }),
+      });
+      showToast("Đã khôi phục nội dung gốc ✓");
+    } catch {
+      showToast("Đã đặt lại nội dung mặc định ✓");
+    }
+  };
+
   return (
     <HomeImagesContext.Provider
       value={{
         images,
+        content,
         isEditMode,
         toggleEditMode,
         getImage,
         openImageModal,
         updateImage,
         resetImages,
+        updateContent,
+        resetContent,
       }}
     >
       {children}

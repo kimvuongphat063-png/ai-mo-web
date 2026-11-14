@@ -12,7 +12,10 @@ import {
   ArrowRight,
   ImageIcon,
   Loader2,
+  FileText,
+  Save,
 } from "lucide-react";
+import { DEFAULT_HOME_CONTENT, type HomeContent } from "@/app/api/admin/home-images/route";
 
 interface CardDef {
   id: string;
@@ -98,23 +101,23 @@ const ALL_CARDS: CardDef[] = [
     tab: "tools",
     tabName: "Lưới Công Cụ Bento",
     title: "Tính lãi thật từng đơn",
-    desc: "Công cụ tính lợi nhuận đơn hàng sàn thương mại",
+    desc: "Công cụ tính lãi sàn Shopee / TikTok",
     defaultSrc: "/images/home/bento-profit-calc.jpg",
   },
   {
     id: "bento-pricing",
     tab: "tools",
     tabName: "Lưới Công Cụ Bento",
-    title: "Định giá bán & khuyến mãi",
-    desc: "Công cụ định giá an toàn và lập combo",
+    title: "Định giá bán sản phẩm",
+    desc: "Công cụ tìm điểm hòa vốn và giá bán",
     defaultSrc: "/images/home/bento-pricing-tool.jpg",
   },
   {
     id: "bento-apps",
     tab: "tools",
     tabName: "Lưới Công Cụ Bento",
-    title: "Kho app HTML miễn phí",
-    desc: "Card ngang rộng giới thiệu 14+ app",
+    title: "Kho app miễn phí",
+    desc: "Lối vào kho 14+ app chạy trực tiếp trên web",
     defaultSrc: "/images/home/bento-apps-hub.jpg",
   },
 
@@ -123,8 +126,8 @@ const ALL_CARDS: CardDef[] = [
     id: "path-main",
     tab: "path",
     tabName: "Lộ Trình Học",
-    title: "Ảnh bìa Lộ trình học 3 chặng",
-    desc: "Khung ảnh lớn bên trái mục 'Học bằng cách làm ra sản phẩm'",
+    title: "Ảnh chính: Lộ trình 3 chặng",
+    desc: "Ảnh lớn học viên thực hành bên cạnh 3 bước",
     defaultSrc: "/images/home/path-step-1.jpg",
   },
 
@@ -133,16 +136,16 @@ const ALL_CARDS: CardDef[] = [
     id: "article-1",
     tab: "articles",
     tabName: "Bài Viết Kiến Thức",
-    title: "Bài viết 1: Viết prompt video AI",
-    desc: "Ảnh bìa bài viết cấu trúc 5 phần của prompt",
+    title: "Bài viết 1: Viết prompt có cấu trúc",
+    desc: "Ảnh bìa bài hướng dẫn prompt 5 lớp",
     defaultSrc: "/images/home/path-step-2.jpg",
   },
   {
     id: "article-2",
     tab: "articles",
     tabName: "Bài Viết Kiến Thức",
-    title: "Bài viết 2: Bắt đầu từ công cụ",
-    desc: "Ảnh bìa bài viết học AI từ dự án nhỏ",
+    title: "Bài viết 2: 5 dữ liệu không đưa vào chatbot",
+    desc: "Ảnh bìa bài viết an toàn dữ liệu AI",
     defaultSrc: "/images/home/path-step-3.jpg",
   },
   {
@@ -197,12 +200,15 @@ const TABS = [
   { id: "path", label: "Lộ trình học (1)" },
   { id: "articles", label: "Bài viết mới (3)" },
   { id: "explore", label: "Khám phá thêm (4)" },
+  { id: "content", label: "📝 Tiêu đề & Nội dung" },
 ];
 
 export default function AdminCardsPage() {
   const [activeTab, setActiveTab] = useState("all");
   const [images, setImages] = useState<Record<string, string>>({});
+  const [content, setContent] = useState<HomeContent>(DEFAULT_HOME_CONTENT);
   const [uploadingId, setUploadingId] = useState<string | null>(null);
+  const [savingContent, setSavingContent] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
 
   const showToast = (msg: string) => {
@@ -210,14 +216,35 @@ export default function AdminCardsPage() {
     setTimeout(() => setToastMsg(""), 3000);
   };
 
-  // Load current image mappings
+  // Load current image mappings & content
   useEffect(() => {
+    // 1. Load from localStorage
+    const savedImg = localStorage.getItem("aimo_home_images");
+    if (savedImg) {
+      try {
+        setImages(JSON.parse(savedImg));
+      } catch {}
+    }
+    const savedContent = localStorage.getItem("aimo_home_content");
+    if (savedContent) {
+      try {
+        setContent(JSON.parse(savedContent));
+      } catch {}
+    }
+
+    // 2. Fetch from API
     fetch("/api/admin/home-images")
       .then((res) => res.json())
       .then((data) => {
-        if (data.ok && data.images) {
-          setImages(data.images);
-          localStorage.setItem("aimo_home_images", JSON.stringify(data.images));
+        if (data.ok) {
+          if (data.images) {
+            setImages(data.images);
+            localStorage.setItem("aimo_home_images", JSON.stringify(data.images));
+          }
+          if (data.content) {
+            setContent(data.content);
+            localStorage.setItem("aimo_home_content", JSON.stringify(data.content));
+          }
         }
       })
       .catch(() => {});
@@ -241,10 +268,28 @@ export default function AdminCardsPage() {
         localStorage.setItem("aimo_home_images", JSON.stringify(next));
         showToast(`Đã tải ảnh mới thành công cho ${cardId}! ✓`);
       } else {
-        showToast(data.error || "Lỗi tải ảnh lên.");
+        // Fallback local data URL
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const dataUrl = ev.target?.result as string;
+          const next = { ...images, [cardId]: dataUrl };
+          setImages(next);
+          localStorage.setItem("aimo_home_images", JSON.stringify(next));
+          showToast(`Đã lưu ảnh mới vào trình duyệt! ✓`);
+        };
+        reader.readAsDataURL(file);
       }
     } catch {
-      showToast("Lỗi kết nối khi tải ảnh.");
+      // Fallback local data URL
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const dataUrl = ev.target?.result as string;
+        const next = { ...images, [cardId]: dataUrl };
+        setImages(next);
+        localStorage.setItem("aimo_home_images", JSON.stringify(next));
+        showToast(`Đã lưu ảnh mới vào trình duyệt! ✓`);
+      };
+      reader.readAsDataURL(file);
     } finally {
       setUploadingId(null);
     }
@@ -284,6 +329,42 @@ export default function AdminCardsPage() {
     } catch {}
   };
 
+  const handleSaveContent = async () => {
+    setSavingContent(true);
+    localStorage.setItem("aimo_home_content", JSON.stringify(content));
+    try {
+      const res = await fetch("/api/admin/home-images", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "update_content", content }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast("Đã lưu tiêu đề & nội dung trang chủ thành công! ✓");
+      } else {
+        showToast("Đã lưu vào bộ nhớ trình duyệt ✓");
+      }
+    } catch {
+      showToast("Đã lưu vào bộ nhớ trình duyệt ✓");
+    } finally {
+      setSavingContent(false);
+    }
+  };
+
+  const handleResetContent = async () => {
+    if (!confirm("Khôi phục toàn bộ tiêu đề trang chủ về mặc định?")) return;
+    setContent(DEFAULT_HOME_CONTENT);
+    localStorage.removeItem("aimo_home_content");
+    try {
+      await fetch("/api/admin/home-images", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reset_content" }),
+      });
+      showToast("Đã khôi phục tiêu đề mặc định!");
+    } catch {}
+  };
+
   const filteredCards =
     activeTab === "all" ? ALL_CARDS : ALL_CARDS.filter((c) => c.tab === activeTab);
 
@@ -305,162 +386,338 @@ export default function AdminCardsPage() {
             </span>
             <div>
               <h1 className="text-xl sm:text-2xl font-black text-[#0c1526] tracking-tight">
-                Quản trị Hình ảnh Trang chủ
+                Quản trị Giao diện & Nội dung Trang chủ
               </h1>
               <p className="text-xs text-[#68779a]">
-                Tự do thay đổi ảnh cho từng card, từng section — cập nhật tức thì trên website
+                Tùy chỉnh 19 vị trí hình ảnh và nội dung tiêu đề trực quan theo từng phần.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={handleResetAll}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#dde6f8] bg-white hover:bg-neutral-50 text-xs font-bold text-neutral-700 transition-colors shadow-2xs"
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <Link
+              href="/admin/articles"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-[#0057ff] bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors border border-blue-200/60"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
-              Đặt lại toàn bộ ảnh gốc
-            </button>
+              <FileText className="w-3.5 h-3.5" />
+              <span>Quản lý Blog Kiến Thức</span>
+            </Link>
+            {activeTab !== "content" ? (
+              <button
+                type="button"
+                onClick={handleResetAll}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 rounded-xl transition-colors border border-red-200"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Khôi phục ảnh gốc</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleResetContent}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-neutral-600 bg-neutral-100 hover:bg-neutral-200 rounded-xl transition-colors"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Đặt lại chữ mặc định</span>
+              </button>
+            )}
             <Link
               href="/"
               target="_blank"
-              className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#0057ff] hover:bg-[#0043c7] text-white text-xs font-bold shadow-md shadow-blue-500/20 transition-all hover:scale-105"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-[#0057ff] hover:bg-[#0043c7] rounded-xl shadow-md shadow-blue-500/20 transition-all"
             >
-              <span>Xem trang chủ trực tiếp</span>
+              <span>Xem trang chủ</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
+      </header>
 
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-8 pt-8 space-y-6">
         {/* Tab Filters */}
-        <div className="max-w-7xl mx-auto mt-4 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          {TABS.map((t) => (
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          {TABS.map((tab) => (
             <button
-              key={t.id}
-              type="button"
-              onClick={() => setActiveTab(t.id)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-                activeTab === t.id
-                  ? "bg-[#0c1526] text-white shadow-sm"
-                  : "bg-white text-[#3c4a68] border border-[#dde6f8] hover:bg-neutral-50"
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold whitespace-nowrap transition-all ${
+                activeTab === tab.id
+                  ? "bg-[#0057ff] text-white shadow-md shadow-blue-500/20"
+                  : "bg-white text-neutral-600 border border-[#dde6f8] hover:border-[#0057ff] hover:text-[#0057ff]"
               }`}
             >
-              {t.label}
+              {tab.label}
             </button>
           ))}
         </div>
-      </header>
 
-      {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-8 pt-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCards.map((card) => {
-            const currentImg = images[card.id] || card.defaultSrc;
-            const isCustom = currentImg !== card.defaultSrc;
-            const isUploading = uploadingId === card.id;
+        {/* TAB 1-7: CARDS IMAGES GRID */}
+        {activeTab !== "content" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredCards.map((card) => {
+              const currentSrc = images[card.id] || card.defaultSrc;
+              const isCustomized = currentSrc !== card.defaultSrc;
+              const isUploading = uploadingId === card.id;
 
-            return (
-              <div
-                key={card.id}
-                className="bg-white border border-[#dde6f8] rounded-3xl overflow-hidden shadow-[0_8px_24px_-12px_rgba(21,52,140,.18)] flex flex-col hover:shadow-lg transition-all"
-              >
-                {/* Image Preview & Upload Overlay */}
-                <div className="relative h-52 w-full bg-neutral-100 group overflow-hidden">
-                  <Image
-                    src={currentImg}
-                    alt={card.title}
-                    fill
-                    className="object-cover group-hover:scale-102 transition-transform duration-300"
-                  />
+              return (
+                <div
+                  key={card.id}
+                  className="bg-white border border-[#dde6f8] rounded-3xl overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col"
+                >
+                  {/* Card Thumbnail */}
+                  <div className="relative w-full h-48 bg-neutral-100 overflow-hidden group">
+                    <Image
+                      src={currentSrc}
+                      alt={card.title}
+                      fill
+                      unoptimized
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
 
-                  {/* Badges */}
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                    <span className="bg-[#0c1526]/85 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-                      {card.tabName}
-                    </span>
-                    {isCustom && (
-                      <span className="bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs">
-                        Đã tuỳ chỉnh
+                    {/* Status Badge */}
+                    <div className="absolute top-3 left-3 z-10">
+                      {isCustomized ? (
+                        <span className="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-[#0e9f6e] text-white flex items-center gap-1 shadow-xs">
+                          <Check className="w-3 h-3" /> Đã tùy chỉnh
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-xs">
+                          Ảnh gốc
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Tab Tag */}
+                    <div className="absolute top-3 right-3 z-10">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/90 text-neutral-700 backdrop-blur-xs shadow-xs">
+                        {card.tabName}
                       </span>
+                    </div>
+
+                    {isUploading && (
+                      <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-xs flex items-center justify-center text-white text-xs font-bold gap-2">
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Đang tải ảnh lên...</span>
+                      </div>
                     )}
                   </div>
 
-                  {/* Upload Overlay Button */}
-                  <label className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white cursor-pointer transition-opacity backdrop-blur-2xs">
-                    {isUploading ? (
-                      <Loader2 className="w-8 h-8 animate-spin" />
-                    ) : (
-                      <>
-                        <Upload className="w-7 h-7 mb-1 drop-shadow-md" />
-                        <span className="text-xs font-bold drop-shadow-md">
-                          Bấm để tải ảnh mới lên
-                        </span>
-                      </>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/png,image/jpeg,image/webp,image/gif"
-                      disabled={isUploading}
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleFileUpload(card.id, file);
-                      }}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-
-                {/* Card Info & Controls */}
-                <div className="p-5 flex flex-col flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h3 className="text-base font-extrabold text-[#0c1526] leading-snug m-0">
+                  {/* Card Body */}
+                  <div className="p-5 flex flex-col flex-1 gap-2">
+                    <div className="flex-1">
+                      <h3 className="font-extrabold text-base text-[#0c1526] leading-snug">
                         {card.title}
                       </h3>
-                      <p className="text-xs text-[#68779a] mt-1">{card.desc}</p>
+                      <p className="text-xs text-[#68779a] mt-1 leading-relaxed">
+                        {card.desc}
+                      </p>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="pt-3 border-t border-neutral-100 flex items-center justify-between gap-2 mt-2">
+                      <label className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-[#0057ff] hover:bg-[#0043c7] shadow-xs shadow-blue-500/15 transition-all">
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>Tải ảnh mới</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleFileUpload(card.id, file);
+                          }}
+                        />
+                      </label>
+
+                      {isCustomized && (
+                        <button
+                          type="button"
+                          onClick={() => handleResetCard(card.id, card.defaultSrc)}
+                          className="inline-flex items-center gap-1 px-3 py-2 text-xs font-semibold text-neutral-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
+                          title="Khôi phục ảnh gốc"
+                        >
+                          <RotateCcw className="w-3 h-3" />
+                          <span>Đặt lại</span>
+                        </button>
+                      )}
                     </div>
                   </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
 
-                  <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between gap-2">
-                    {/* Upload button */}
-                    <label className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0057ff] hover:bg-[#0043c7] text-white text-xs font-bold cursor-pointer transition-colors shadow-xs">
-                      {isUploading ? (
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      ) : (
-                        <Upload className="w-3.5 h-3.5" />
-                      )}
-                      <span>{isUploading ? "Đang tải..." : "Tải ảnh từ máy"}</span>
-                      <input
-                        type="file"
-                        accept="image/png,image/jpeg,image/webp,image/gif"
-                        disabled={isUploading}
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) handleFileUpload(card.id, file);
-                        }}
-                        className="hidden"
-                      />
-                    </label>
+        {/* TAB 8: TEXT CONTENT & TITLES MANAGER */}
+        {activeTab === "content" && (
+          <div className="bg-white border border-[#dde6f8] rounded-3xl p-6 sm:p-8 shadow-xs space-y-8">
+            <div>
+              <h2 className="text-xl font-black text-[#0c1526] flex items-center gap-2">
+                <FileText className="w-5 h-5 text-[#0057ff]" />
+                <span>Chỉnh sửa Tiêu đề & Nội dung Trang Chủ</span>
+              </h2>
+              <p className="text-xs text-[#68779a] mt-1">
+                Thay đổi trực tiếp tiêu đề H1, slogan, badge và mô tả của từng section. Bấm "Lưu thay đổi" để áp dụng lên trang chủ.
+              </p>
+            </div>
 
-                    {/* Reset button if custom */}
-                    {isCustom && (
-                      <button
-                        type="button"
-                        onClick={() => handleResetCard(card.id, card.defaultSrc)}
-                        title="Khôi phục ảnh ban đầu"
-                        className="text-xs font-bold text-neutral-500 hover:text-red-600 inline-flex items-center gap-1 py-1.5 px-2.5 rounded-lg hover:bg-neutral-100 transition-colors"
-                      >
-                        <RotateCcw className="w-3.5 h-3.5" />
-                        <span>Ảnh gốc</span>
-                      </button>
-                    )}
-                  </div>
+            {/* 1. HERO SECTION */}
+            <div className="p-5 bg-blue-50/50 border border-blue-100 rounded-2xl space-y-4">
+              <h3 className="text-sm font-extrabold uppercase text-[#0057ff] tracking-wider">
+                1. Phần Hero (Đầu trang)
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1">
+                    Nhãn Badge nhỏ (Sparkle)
+                  </label>
+                  <input
+                    type="text"
+                    value={content.heroBadge}
+                    onChange={(e) => setContent({ ...content, heroBadge: e.target.value })}
+                    className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm font-semibold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1">
+                    Tiêu đề chính H1
+                  </label>
+                  <input
+                    type="text"
+                    value={content.heroTitle}
+                    onChange={(e) => setContent({ ...content, heroTitle: e.target.value })}
+                    className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm font-bold text-[#0c1526]"
+                  />
                 </div>
               </div>
-            );
-          })}
-        </div>
+              <div>
+                <label className="block text-xs font-bold text-neutral-700 mb-1">
+                  Mô tả ngắn Hero
+                </label>
+                <textarea
+                  rows={2}
+                  value={content.heroDesc}
+                  onChange={(e) => setContent({ ...content, heroDesc: e.target.value })}
+                  className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm"
+                />
+              </div>
+            </div>
+
+            {/* 2. QUICK ACTIONS */}
+            <div className="p-5 bg-neutral-50 border border-neutral-200 rounded-2xl space-y-4">
+              <h3 className="text-sm font-extrabold uppercase text-neutral-800 tracking-wider">
+                2. Phần 3 Card Hành Động Nhanh
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1">
+                    Tiêu đề section
+                  </label>
+                  <input
+                    type="text"
+                    value={content.quickActionsTitle}
+                    onChange={(e) => setContent({ ...content, quickActionsTitle: e.target.value })}
+                    className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1">
+                    Mô tả phụ
+                  </label>
+                  <input
+                    type="text"
+                    value={content.quickActionsDesc}
+                    onChange={(e) => setContent({ ...content, quickActionsDesc: e.target.value })}
+                    className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 3. BENTO TOOLS */}
+            <div className="p-5 bg-neutral-50 border border-neutral-200 rounded-2xl space-y-4">
+              <h3 className="text-sm font-extrabold uppercase text-neutral-800 tracking-wider">
+                3. Phần Lưới Công Cụ Bento
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1">
+                    Tiêu đề section
+                  </label>
+                  <input
+                    type="text"
+                    value={content.toolsTitle}
+                    onChange={(e) => setContent({ ...content, toolsTitle: e.target.value })}
+                    className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1">
+                    Mô tả phụ
+                  </label>
+                  <input
+                    type="text"
+                    value={content.toolsDesc}
+                    onChange={(e) => setContent({ ...content, toolsDesc: e.target.value })}
+                    className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 4. LEARNING PATH */}
+            <div className="p-5 bg-neutral-50 border border-neutral-200 rounded-2xl space-y-4">
+              <h3 className="text-sm font-extrabold uppercase text-neutral-800 tracking-wider">
+                4. Phần Lộ Trình Học AI
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1">
+                    Tiêu đề section
+                  </label>
+                  <input
+                    type="text"
+                    value={content.pathTitle}
+                    onChange={(e) => setContent({ ...content, pathTitle: e.target.value })}
+                    className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1">
+                    Mô tả phụ
+                  </label>
+                  <input
+                    type="text"
+                    value={content.pathDesc}
+                    onChange={(e) => setContent({ ...content, pathDesc: e.target.value })}
+                    className="w-full px-3.5 py-2 bg-white border border-neutral-200 rounded-xl text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Save Buttons */}
+            <div className="pt-4 border-t border-neutral-200 flex items-center justify-end gap-3">
+              <button
+                type="button"
+                onClick={handleResetContent}
+                className="px-5 py-2.5 rounded-xl text-xs font-bold text-neutral-600 hover:bg-neutral-100"
+              >
+                Đặt lại như ban đầu
+              </button>
+              <button
+                type="button"
+                disabled={savingContent}
+                onClick={handleSaveContent}
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#0057ff] hover:bg-[#0043c7] text-white rounded-xl text-sm font-bold shadow-md shadow-blue-500/20 disabled:opacity-50"
+              >
+                {savingContent ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                <span>Lưu thay đổi nội dung</span>
+              </button>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

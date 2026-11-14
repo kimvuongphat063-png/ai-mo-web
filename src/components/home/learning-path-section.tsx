@@ -6,7 +6,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { useHomeImages, CardImageEditor } from "./home-images-context";
 
 export function LearningPath() {
-  const { getImage } = useHomeImages();
+  const { getImage, content } = useHomeImages();
 
   return (
     <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-5 pt-14 sm:pt-16" id="lo-trinh">
@@ -16,10 +16,10 @@ export function LearningPath() {
           Lộ trình học AI
         </span>
         <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-tight leading-tight text-[#0c1526] mb-2">
-          Học bằng cách làm ra sản phẩm
+          {content?.pathTitle || "Học bằng cách làm ra sản phẩm"}
         </h2>
         <p className="text-[15.5px] text-[#68779a] m-0">
-          Ba chặng ngắn, mỗi chặng kết thúc bằng một thứ bạn cầm được trên tay — không học lý thuyết suông.
+          {content?.pathDesc || "Ba chặng ngắn, mỗi chặng kết thúc bằng một thứ bạn cầm được trên tay — không học lý thuyết suông."}
         </p>
       </div>
 

@@ -76,7 +76,7 @@ const tools = [
 
 export function BentoTools() {
   const { query } = useSearch();
-  const { getImage } = useHomeImages();
+  const { getImage, content } = useHomeImages();
   const q = norm(query.trim());
 
   const filtered = tools.filter((t) => {
@@ -92,10 +92,10 @@ export function BentoTools() {
           Công cụ nổi bật
         </span>
         <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-tight leading-tight text-[#0c1526] mb-2">
-          Công cụ AI &amp; app tính toán cho người bán hàng
+          {content?.toolsTitle || "Công cụ AI & app tính toán cho người bán hàng"}
         </h2>
         <p className="text-[15.5px] text-[#68779a] m-0">
-          Mỗi công cụ đều có ảnh thật của việc nó làm — nhìn 2 giây là hiểu.
+          {content?.toolsDesc || "Mỗi công cụ đều có ảnh thật của việc nó làm — nhìn 2 giây là hiểu."}
         </p>
       </div>
 

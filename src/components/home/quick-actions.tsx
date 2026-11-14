@@ -36,7 +36,7 @@ const actions = [
 ];
 
 export function QuickActions() {
-  const { getImage } = useHomeImages();
+  const { getImage, content } = useHomeImages();
 
   return (
     <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-5 pt-14 sm:pt-16">
@@ -46,10 +46,10 @@ export function QuickActions() {
           Bắt đầu trong 1 phút
         </span>
         <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-tight leading-tight text-[#0c1526] mb-2">
-          Bạn muốn làm gì hôm nay?
+          {content?.quickActionsTitle || "Bạn muốn làm gì hôm nay?"}
         </h2>
         <p className="text-[15.5px] text-[#68779a] m-0">
-          Mỗi lựa chọn đều mở ra một công cụ dùng được ngay — kèm ảnh minh họa đúng việc bạn sắp làm.
+          {content?.quickActionsDesc || "Mỗi lựa chọn đều mở ra một công cụ dùng được ngay — kèm ảnh minh họa đúng việc bạn sắp làm."}
         </p>
       </div>
 

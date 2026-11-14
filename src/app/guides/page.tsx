@@ -1,8 +1,9 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import { ArrowRight, Clock3, Sparkles } from "lucide-react";
+import { ArrowRight, Clock3, Sparkles, Edit3, Plus } from "lucide-react";
 
 import { isPublic, readCms, type CmsArticle } from "@/lib/cms";
+import { getSession } from "@/lib/auth";
 
 type GuideCardStyle = CSSProperties & { "--guide-accent": string };
 
@@ -34,6 +35,8 @@ function ArticleCard({ article, featured = false }: { article: CmsArticle; featu
 }
 
 export default async function Page() {
+  const session = await getSession();
+  const isAdmin = session?.role === "admin";
   const articles = (await readCms()).articles
     .filter(isPublic)
     .sort((a, b) => a.sortOrder - b.sortOrder);
@@ -43,6 +46,24 @@ export default async function Page() {
 
   return (
     <main id="main-content" className="guides-page">
+      {isAdmin && (
+        <aside className="bg-blue-50 border-b border-blue-200 py-2.5 px-4" aria-label="Thanh quản trị">
+          <div className="container flex items-center justify-between text-xs font-semibold text-blue-900">
+            <span className="flex items-center gap-1.5 font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-[#0057ff]" />
+              Bạn đang đăng nhập quyền Quản trị viên
+            </span>
+            <Link
+              href="/admin/articles"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#0057ff] hover:bg-[#0043c7] text-white rounded-lg font-bold shadow-xs transition-colors"
+            >
+              <Plus className="w-3 h-3" />
+              <span>Viết bài mới & Quản lý Blog</span>
+            </Link>
+          </div>
+        </aside>
+      )}
+
       <section className="guides-intro container">
         <div>
           <span className="eyebrow"><Sparkles aria-hidden="true" /> AI MỞ · 2026</span>

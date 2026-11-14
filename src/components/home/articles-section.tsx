@@ -48,7 +48,7 @@ const articles = [
 
 export function ArticlesSection() {
   const { query } = useSearch();
-  const { getImage } = useHomeImages();
+  const { getImage, content } = useHomeImages();
   const q = norm(query.trim());
 
   const filtered = articles.filter((a) => {
@@ -64,10 +64,10 @@ export function ArticlesSection() {
           Kiến thức AI
         </span>
         <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-tight leading-tight text-[#0c1526] mb-2">
-          Bài viết kiến thức AI
+          {content?.articlesTitle || "Bài viết kiến thức AI"}
         </h2>
         <p className="text-[15.5px] text-[#68779a] m-0">
-          Ảnh bìa là ảnh thật của đúng chủ đề bài viết — đọc tiêu đề, nhìn ảnh là biết bài nói về việc gì.
+          {content?.articlesDesc || "Ảnh bìa là ảnh thật của đúng chủ đề bài viết — đọc tiêu đề, nhìn ảnh là biết bài nói về việc gì."}
         </p>
       </div>
 
