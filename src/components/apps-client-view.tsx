@@ -32,6 +32,7 @@ import {
 import type { HtmlAppWithManifest } from "@/lib/apps-manifest";
 import type { AppSuiteKey } from "@/lib/apps-data";
 import { SUITE_DEFINITIONS } from "@/lib/apps-data";
+import { triggerCoffeePopup } from "./donate-coffee";
 
 interface Props {
   apps: HtmlAppWithManifest[];
@@ -536,6 +537,11 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
 
                       <a
                         href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                        onClick={() => {
+                          if (isLoggedIn) {
+                            triggerCoffeePopup("download");
+                          }
+                        }}
                         className="py-2.5 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-700 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                         title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
                       >
@@ -721,6 +727,11 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
 
                                 <a
                                   href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                                  onClick={() => {
+                                    if (isLoggedIn) {
+                                      triggerCoffeePopup("download");
+                                    }
+                                  }}
                                   className="py-2 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-700 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                                   title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
                                 >
@@ -799,6 +810,11 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
 
                             <a
                               href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                              onClick={() => {
+                                if (isLoggedIn) {
+                                  triggerCoffeePopup("download");
+                                }
+                              }}
                               className="py-2 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-600 text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer"
                               title={isLoggedIn ? `Tải file ${app.fileName}` : "Đăng nhập để tải file"}
                             >

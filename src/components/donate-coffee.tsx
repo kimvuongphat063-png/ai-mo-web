@@ -202,6 +202,15 @@ export function DonateModal({ isOpen, onClose, reason = "general" }: DonateModal
 }
 
 /**
+ * Helper to programmatically open the coffee donate modal from any component
+ */
+export function triggerCoffeePopup(reason: "download" | "general" = "download") {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("open-donate-coffee", { detail: { reason } }));
+  }
+}
+
+/**
  * Global Floating Coffee Button + Automatic Event Listener
  */
 export function DonateCoffeeWidget() {
@@ -209,7 +218,7 @@ export function DonateCoffeeWidget() {
   const [reason, setReason] = useState<"download" | "general">("general");
 
   useEffect(() => {
-    // Listen for custom trigger event
+    // Listen for custom trigger event (e.g. from app/game download)
     const handleOpen = (e: Event) => {
       const customEvent = e as CustomEvent<{ reason?: "download" | "general" }>;
       setReason(customEvent.detail?.reason || "general");
@@ -218,33 +227,66 @@ export function DonateCoffeeWidget() {
 
     window.addEventListener("open-donate-coffee", handleOpen);
 
-    // Global click listener for any download link to trigger donate modal nicely after 1.5s
+    // Global click listener for any download link (apps or games)
     const handleClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest("a");
       if (!target) return;
 
       const href = target.getAttribute("href") || "";
-      if (href.includes("/api/apps/") && href.includes("/download")) {
-        // Check if recently dismissed in last 2 days
-        try {
-          const dismissedUntil = localStorage.getItem("aimo_donate_dismissed_until");
-          if (dismissedUntil && Number(dismissedUntil) > Date.now()) {
-            return;
-          }
-        } catch {}
+      const isDownloadLink =
+        (href.includes("/api/apps/") || href.includes("/api/games/")) &&
+        href.includes("/download");
 
+      if (isDownloadLink) {
+        // Trigger donate modal fast (300ms) so mobile browsers don't freeze the action
         setTimeout(() => {
           setReason("download");
           setIsOpen(true);
-        }, 1800);
+        }, 300);
       }
     };
 
     document.addEventListener("click", handleClick);
 
+    // Smart auto-popup after 5 minutes of active browsing with engagement (scroll >= 35%)
+    let timerElapsed = false;
+    const triggerIfEligible = () => {
+      try {
+        const dismissedUntil = localStorage.getItem("aimo_donate_dismissed_until");
+        if (dismissedUntil && Number(dismissedUntil) > Date.now()) return;
+
+        const sessionShown = sessionStorage.getItem("aimo_donate_session_shown");
+        if (sessionShown) return;
+
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = docHeight > 0 ? window.scrollY / docHeight : 0;
+        if (scrolled >= 0.35) {
+          sessionStorage.setItem("aimo_donate_session_shown", "1");
+          setReason("general");
+          setIsOpen(true);
+          window.removeEventListener("scroll", handleScrollCheck);
+        }
+      } catch {}
+    };
+
+    const handleScrollCheck = () => {
+      if (timerElapsed) {
+        triggerIfEligible();
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollCheck, { passive: true });
+
+    const smartTimer = setTimeout(() => {
+      timerElapsed = true;
+      triggerIfEligible();
+    }, 5 * 60 * 1000);
+
     return () => {
       window.removeEventListener("open-donate-coffee", handleOpen);
       document.removeEventListener("click", handleClick);
+      window.removeEventListener("scroll", handleScrollCheck);
+      clearTimeout(smartTimer);
     };
   }, []);
 

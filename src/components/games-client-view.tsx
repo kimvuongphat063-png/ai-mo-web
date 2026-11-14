@@ -8,15 +8,19 @@ import {
   Maximize2,
   Volume2,
   Gamepad2,
+  Download,
+  Lock,
 } from "lucide-react";
 import type { GameItem, CollectionItem } from "@/lib/games-data";
+import { triggerCoffeePopup } from "./donate-coffee";
 
 interface Props {
   games: GameItem[];
   collections: CollectionItem[];
+  isLoggedIn?: boolean;
 }
 
-export function GamesClientView({ games, collections }: Props) {
+export function GamesClientView({ games, collections, isLoggedIn }: Props) {
   const [search, setSearch] = useState("");
   const [activeCollection, setActiveCollection] = useState<string>("all");
   const [activeModalGame, setActiveModalGame] = useState<GameItem | null>(null);
@@ -222,7 +226,7 @@ export function GamesClientView({ games, collections }: Props) {
                   <button
                     type="button"
                     onClick={() => setActiveModalGame(game)}
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0057ff] hover:bg-[#0043c7] text-white text-xs font-bold transition-all shadow-sm shadow-[#0057ff]/20 active:scale-95"
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0057ff] hover:bg-[#0043c7] text-white text-xs font-bold transition-all shadow-sm shadow-[#0057ff]/20 active:scale-95 cursor-pointer"
                   >
                     <Play className="w-3.5 h-3.5 fill-current" />
                     <span>Chơi ngay</span>
@@ -236,6 +240,23 @@ export function GamesClientView({ games, collections }: Props) {
                     className="p-2 rounded-xl bg-neutral-100 hover:bg-neutral-200/80 text-neutral-700 transition-colors"
                   >
                     <Maximize2 className="w-3.5 h-3.5" />
+                  </a>
+
+                  <a
+                    href={isLoggedIn ? `/api/games/${game.slug}/download` : `/login?next=${encodeURIComponent("/games")}`}
+                    onClick={() => {
+                      if (isLoggedIn) {
+                        triggerCoffeePopup("download");
+                      }
+                    }}
+                    title={isLoggedIn ? `Tải game offline ${game.slug}.zip về máy` : "Đăng nhập để tải game"}
+                    className="p-2 rounded-xl bg-neutral-100 hover:bg-neutral-200/80 text-neutral-700 transition-colors hover:text-[#0057ff] cursor-pointer"
+                  >
+                    {isLoggedIn ? (
+                      <Download className="w-3.5 h-3.5" />
+                    ) : (
+                      <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                    )}
                   </a>
                 </div>
               </div>
@@ -267,6 +288,24 @@ export function GamesClientView({ games, collections }: Props) {
 
               <div className="flex items-center gap-2">
                 <a
+                  href={isLoggedIn ? `/api/games/${activeModalGame.slug}/download` : `/login?next=${encodeURIComponent("/games")}`}
+                  onClick={() => {
+                    if (isLoggedIn) {
+                      triggerCoffeePopup("download");
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs font-semibold text-neutral-200 transition-colors"
+                  title={isLoggedIn ? "Tải trọn bộ game offline (.zip)" : "Đăng nhập để tải game"}
+                >
+                  {isLoggedIn ? (
+                    <Download className="w-3.5 h-3.5 text-neutral-200" />
+                  ) : (
+                    <Lock className="w-3.5 h-3.5 text-amber-400" />
+                  )}
+                  <span className="hidden sm:inline">Tải về (.zip)</span>
+                </a>
+
+                <a
                   href={`/games/play.html?g=${encodeURIComponent(activeModalGame.slug)}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -280,7 +319,7 @@ export function GamesClientView({ games, collections }: Props) {
                 <button
                   type="button"
                   onClick={() => setActiveModalGame(null)}
-                  className="p-1.5 rounded-xl bg-neutral-800 hover:bg-red-500/20 hover:text-red-400 text-neutral-400 transition-colors"
+                  className="p-1.5 rounded-xl bg-neutral-800 hover:bg-red-500/20 hover:text-red-400 text-neutral-400 transition-colors cursor-pointer"
                   aria-label="Đóng cửa sổ chơi game"
                 >
                   <X className="w-5 h-5" />

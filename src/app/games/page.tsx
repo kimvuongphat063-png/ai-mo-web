@@ -10,6 +10,7 @@ import {
 import type { Metadata } from "next";
 import { GAMES_DATA, GAME_COLLECTIONS } from "@/lib/games-data";
 import { GamesClientView } from "@/components/games-client-view";
+import { getSession } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "65+ Mini Game Web Trí Tuệ & Luyện Tư Duy — AI Mở Studio",
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function GamesPage() {
+export default async function GamesPage() {
+  const session = await getSession();
+  const isLoggedIn = Boolean(session);
+
   return (
     <main id="main-content" className="container py-10 sm:py-14 space-y-10 max-w-7xl mx-auto px-4 sm:px-6">
       {/* ── BREADCRUMBS ────────────────────────────────────────────────── */}
@@ -90,7 +94,7 @@ export default function GamesPage() {
       </section>
 
       {/* ── CLIENT INTERACTIVE GAMES VIEW ──────────────────────────────── */}
-      <GamesClientView games={GAMES_DATA} collections={GAME_COLLECTIONS} />
+      <GamesClientView games={GAMES_DATA} collections={GAME_COLLECTIONS} isLoggedIn={isLoggedIn} />
     </main>
   );
 }
