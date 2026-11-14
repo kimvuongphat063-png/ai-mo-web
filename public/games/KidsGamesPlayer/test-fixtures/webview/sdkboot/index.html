@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>fixture: SDK boot state</title>
+<script src="player-sdk.js"></script>
+<script>
+  // Test fixture: records the SDK state before the first host state and the transitions after.
+  var r = window.__results = {
+    mode: KidsSDK.mode,
+    activeBefore: KidsSDK.isActive(),
+    mutedBefore: KidsSDK.isMuted(),
+    changes: [],
+    saves: []
+  };
+  KidsSDK.onActiveChange(function (active, reason) { r.changes.push(active + ':' + reason); });
+  KidsSDK.onSave(function (reason) { r.saves.push(reason); });
+  var el = KidsSDK.audio.createAudio('beep.wav');
+  KidsSDK.audio.play(el).then(function (played) { r.playedBeforeHost = played; r.done = true; });
+</script>
+</head>
+<body>sdk</body>
+</html>

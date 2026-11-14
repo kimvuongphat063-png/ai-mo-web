@@ -1,0 +1,3 @@
+samples with TTS playing: 0/40, first at , end 3560.87
+samples with TTS playing: 0/40, first at , end 3562.31
+samples with TTS playing: 11/40, first at 3564.09, end 3564.58

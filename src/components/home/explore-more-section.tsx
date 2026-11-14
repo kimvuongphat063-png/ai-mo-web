@@ -37,10 +37,10 @@ const cards = [
     id: "explore-4",
     img: "/images/home/explore-games.jpg",
     alt: "Minh họa game trình duyệt nhiều màu sắc quanh chiếc laptop",
-    title: "Game web giải trí",
-    desc: "Đang hoàn thiện — những game nhỏ làm bằng AI, chơi ngay trên web.",
+    title: "65+ Game Web Trí Tuệ",
+    desc: "Kho mini game rèn luyện tư duy, trí nhớ và phản xạ trực tiếp trên web.",
     link: "/games",
-    linkLabel: "Sắp ra mắt",
+    linkLabel: "Chơi ngay",
   },
 ];
 

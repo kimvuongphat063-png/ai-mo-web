@@ -1,0 +1,11 @@
+<!doctype html>
+<script>
+  // Test fixture: no <html>, no <head>. The shim must still be the first script, after the doctype.
+  window.__results = {
+    shimFirst: window.__kgpSpeechV1 === true && typeof window.speechSynthesis === 'object',
+    firstScript: document.scripts[0].getAttribute('src'),
+    compatMode: document.compatMode,
+    done: true
+  };
+</script>
+<p>no head</p>

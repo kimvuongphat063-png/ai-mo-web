@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="vn.family.kidsgamesplayer.player.speech.VoiceCatalogTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-16T02:02:58.533Z" hostname="localhost" time="0.045">
+  <properties/>
+  <testcase name="resolvesByVoiceUriThenLanguage" classname="vn.family.kidsgamesplayer.player.speech.VoiceCatalogTest" time="0.003"/>
+  <testcase name="defaultFallsBackToEngineDefaultWithoutVietnamese" classname="vn.family.kidsgamesplayer.player.speech.VoiceCatalogTest" time="0.001"/>
+  <testcase name="atMost64Voices" classname="vn.family.kidsgamesplayer.player.speech.VoiceCatalogTest" time="0.036"/>
+  <testcase name="languageAliasVoicesOnlyWhenTheyAreTheInstalledVoiceOfTheirLocale" classname="vn.family.kidsgamesplayer.player.speech.VoiceCatalogTest" time="0.002"/>
+  <testcase name="dropsNetworkAndUninstalledVoicesAndPutsVietnameseFirst" classname="vn.family.kidsgamesplayer.player.speech.VoiceCatalogTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

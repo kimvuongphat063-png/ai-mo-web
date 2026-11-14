@@ -1,0 +1,68 @@
+### Home
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+[TypeError: fetch failed] {
+  [cause]: SocketError: other side closed
+      at Socket.onHttpSocketEnd (node:internal/deps/undici/undici:7833:26)
+      at Socket.emit (node:events:521:24)
+      at endReadableNT (node:internal/streams/readable:1736:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'UND_ERR_SOCKET',
+    socket: {
+      localAddress: '127.0.0.1',
+      localPort: 55705,
+      remoteAddress: '127.0.0.1',
+      remotePort: 9333,
+      remoteFamily: 'IPv4',
+      timeout: undefined,
+      bytesWritten: 173,
+      bytesRead: 0
+    }
+  }
+}
+
+Node.js v24.19.0
+speaking at 2278.83 (0)
+still speaking at 2280.36 (0)
+action done at 2280.42
+2280.43 started=0
+2280.46 started=0
+2280.49 started=0
+2280.54 started=0
+2280.59 started=0
+2280.65 started=0
+2280.68 started=0
+2280.72 started=0
+2280.78 started=0
+2280.81 started=0
+### screen off (power key)
+speaking at 2332.10 (1)
+still speaking at 2333.85 (1)
+action done at 2334.16
+2334.20 started=1
+2334.50 started=1
+2334.73 started=1
+2334.84 started=1
+2335.06 started=1
+2335.30 started=1
+2335.46 started=1
+2335.96 started=1
+2336.29 started=0
+2336.41 started=0
+Warning: Activity not started, intent has been delivered to currently running top-most instance.
+### parent gate (hold lock 2.6 s)
+speaking at 2379.26 (1)
+still speaking at 2380.90 (1)
+action done at 2383.70
+2383.71 started=0
+2383.75 started=0
+2383.78 started=0
+2383.82 started=0
+2383.85 started=0
+2383.89 started=0
+2383.92 started=0
+2383.96 started=0
+2383.99 started=0
+2384.02 started=0

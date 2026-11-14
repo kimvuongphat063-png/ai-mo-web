@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Kids Games Player</string>
+
+    <!-- Child menu -->
+    <string name="menu_title">Chọn trò chơi</string>
+    <string name="parent_button">Phụ huynh</string>
+    <string name="parent_hold_hint">Bố mẹ giữ nút này 2 giây</string>
+    <string name="menu_empty_title">Chưa có trò chơi</string>
+    <string name="menu_empty_body">Bố mẹ giữ nút Phụ huynh để thêm trò chơi nhé.</string>
+    <string name="menu_back_hint">Muốn đổi cài đặt? Bố mẹ giữ nút Phụ huynh.</string>
+
+    <!-- Game shell -->
+    <string name="cd_home">Về menu</string>
+    <string name="cd_sound_on">Đang bật tiếng, chạm để tắt</string>
+    <string name="cd_sound_off">Đang tắt tiếng, chạm để bật</string>
+    <string name="cd_restart">Chơi lại</string>
+    <string name="cd_parent">Phụ huynh, giữ 2 giây</string>
+    <string name="game_loading">Đang mở trò chơi…</string>
+    <string name="game_error_title">Game này cần sửa một chút</string>
+    <string name="game_error_menu">Về menu</string>
+    <string name="game_error_retry">Thử lại</string>
+    <string name="game_resume_title">Chơi tiếp nhé?</string>
+    <string name="restart_confirm">Chơi lại từ đầu?</string>
+    <string name="game_unresponsive">Game đang bị đứng</string>
+    <string name="game_blocked_silent">Game này chưa tắt tiếng được trên máy này. Bố mẹ hãy bật tiếng trong khu vực Phụ huynh hoặc cập nhật Android System WebView.</string>
+    <string name="webview_missing_title">Máy chưa sẵn sàng để chơi game</string>
+    <string name="webview_missing_body">Bố mẹ hãy kiểm tra Android System WebView (hoặc Chrome) trong cửa hàng ứng dụng của máy.</string>
+
+    <!-- PIN pad -->
+    <string name="pin_title_enter">Nhập PIN phụ huynh</string>
+    <string name="pin_title_create">Tạo PIN phụ huynh (6 số)</string>
+    <string name="pin_title_confirm">Nhập lại PIN để xác nhận</string>
+    <string name="pin_wrong">PIN chưa đúng</string>
+    <plurals name="pin_locked">
+        <item quantity="other">Nhập sai nhiều lần. Thử lại sau %d giây.</item>
+    </plurals>
+    <string name="pin_mismatch">Hai lần nhập khác nhau, hãy tạo lại.</string>
+    <string name="pin_too_simple">PIN quá dễ đoán, hãy chọn dãy số khác.</string>
+    <string name="pin_cancel">Hủy</string>
+    <string name="pin_checking">Đang kiểm tra…</string>
+    <string name="pin_created">Đã tạo PIN phụ huynh.</string>
+    <string name="cd_backspace">Xóa một số</string>
+
+    <!-- First run -->
+    <string name="setup_title">Chào bố mẹ!</string>
+    <string name="setup_intro">Ứng dụng mở các trò chơi HTML có sẵn trong máy, không cần mạng, không quảng cáo.</string>
+    <string name="setup_step_pin">1. Tạo PIN phụ huynh</string>
+    <string name="setup_step_folder">2. Chọn thư mục KidsGames</string>
+    <string name="setup_step_pinning">3. Bật Ghim ứng dụng</string>
+    <string name="setup_pin_done">Đã có PIN ✓</string>
+    <string name="setup_folder_none">Chưa chọn, có thể làm sau.</string>
+    <string name="setup_folder_done">Đã chọn thư mục ✓</string>
+    <string name="setup_pinning_body">Trong Cài đặt của máy, tìm “Ghim ứng dụng” (App pinning / Pin app) và bật; chọn yêu cầu mã khóa khi bỏ ghim nếu máy có. Hãy thử bỏ ghim một lần trước khi đưa máy cho bé.</string>
+    <string name="setup_try_samples">Thử game mẫu</string>
+    <string name="setup_done">Xong, vào menu</string>
+    <string name="btn_create_pin">Tạo PIN</string>
+    <string name="btn_choose_folder">Chọn thư mục</string>
+
+    <!-- Parent dashboard -->
+    <string name="parent_title">Khu vực phụ huynh</string>
+    <string name="parent_back_menu">Về menu</string>
+    <string name="section_folder">Thư mục game</string>
+    <string name="folder_none">Chưa chọn thư mục. Game mẫu vẫn chơi được.</string>
+    <string name="folder_selected">Đang dùng: %s</string>
+    <string name="folder_state_ok">Có quyền đọc thư mục.</string>
+    <string name="folder_state_lost">Nguồn game chưa truy cập được. Các game đã nạp vẫn chơi được. Hãy chọn lại thư mục.</string>
+    <string name="btn_refresh">Làm mới</string>
+    <string name="folder_disabled_pinned">Hãy kết thúc phiên (bỏ ghim) trước khi chọn thư mục hoặc mở Cài đặt.</string>
+    <string name="scan_running">Đang tìm game…</string>
+    <string name="scan_last">Lần quét gần nhất: %1$s (%2$s)</string>
+    <string name="folder_saved">Đã lưu thư mục game. Đang tìm game…</string>
+    <string name="folder_not_persistable">Nguồn này không cho phép lưu quyền lâu dài. Hãy tạo và chọn thư mục KidsGames trong bộ nhớ máy.</string>
+    <string name="folder_cancelled">Không đổi thư mục.</string>
+    <string name="folder_tip">Mẹo: tạo thư mục KidsGames trong bộ nhớ máy (không chọn gốc bộ nhớ hay thư mục Download). Chép cả thư mục game đã đóng gói vào đó; app tự nhận game mới. Xóa thư mục nguồn không xóa game đã nạp; dùng nút Ẩn.</string>
+
+    <string name="section_games">Game đang có</string>
+    <string name="games_empty">Chưa có game nào.</string>
+    <string name="game_hide">Ẩn</string>
+    <string name="game_show">Hiện</string>
+    <string name="game_reset">Xóa tiến trình</string>
+    <string name="game_reset_confirm_title">Xóa tiến trình “%s”?</string>
+    <string name="game_reset_confirm_body">Điểm và màn chơi đã lưu của game này sẽ bắt đầu lại từ đầu. Nội dung game, thư mục nguồn và các game khác không bị ảnh hưởng. Không thể hoàn tác.</string>
+    <string name="game_reset_done">Đã xóa tiến trình.</string>
+    <string name="confirm_yes">Đồng ý</string>
+    <string name="confirm_no">Không</string>
+    <string name="level_verified">kiểm tra đầy đủ</string>
+    <string name="level_basic">kiểm tra cơ bản</string>
+    <string name="state_builtin">game mẫu có sẵn</string>
+    <string name="state_available">nguồn có sẵn</string>
+    <string name="state_missing">thư mục nguồn không còn (bản đã nạp vẫn chơi được)</string>
+    <string name="state_permission_lost">mất quyền đọc nguồn</string>
+    <string name="state_provider_error">nguồn đang lỗi</string>
+    <string name="state_hidden">đang ẩn</string>
+    <string name="state_shadowed">không hiện cho bé vì thư mục đã có bản này</string>
+    <string name="state_not_ready">chưa chơi được</string>
+    <string name="game_line_version">bản %s</string>
+
+    <string name="section_issues">Thư mục chưa nạp được</string>
+
+    <string name="section_sound">Âm thanh và hướng màn hình</string>
+    <string name="sound_default">Bật tiếng trong game</string>
+    <string name="flip_orientation">Xoay ngược màn hình 180°</string>
+    <string name="mute_supported_note">WebView của máy hỗ trợ tắt tiếng từ app.</string>
+    <string name="mute_unsupported_note">WebView của máy không hỗ trợ tắt tiếng từ app. Game theo mẫu tự tắt tiếng; game khác sẽ bị chặn khi đang tắt tiếng, và game sẽ đóng khi rời màn chơi.</string>
+
+    <string name="section_speech">Giọng đọc</string>
+    <string name="speech_state_checking">Đang kiểm tra giọng đọc của máy…</string>
+    <string name="speech_state_vi">Giọng tiếng Việt: có — %s</string>
+    <string name="speech_state_no_vi">Chưa có giọng tiếng Việt offline. Game vẫn chơi được nhưng không đọc lời.</string>
+    <string name="speech_state_no_engine">Máy chưa có bộ chuyển văn bản thành giọng nói hoạt động. Game vẫn chơi được nhưng không đọc lời.</string>
+    <plurals name="speech_state_detail">
+        <item quantity="other">Bộ đọc: %1$s · %2$d giọng offline</item>
+    </plurals>
+    <string name="speech_install_hint">Cài giọng: Mở cài đặt giọng đọc → bộ đọc (ví dụ Google) → Cài đặt dữ liệu giọng nói → Tiếng Việt.</string>
+    <string name="speech_in_games">Đọc lời trong game</string>
+    <string name="btn_speech_test">Nghe thử</string>
+    <string name="btn_speech_settings">Mở cài đặt giọng đọc</string>
+    <string name="speech_tip">Game đọc lời bằng giọng tiếng Việt có sẵn trong máy, không cần mạng. Giọng đọc tắt theo nút loa, khi ra khỏi game hoặc khi mở khu phụ huynh.</string>
+    <string name="speech_test_phrase">Xin chào! Bé cùng chơi nhé.</string>
+    <string name="speech_test_sound_off">Đang tắt tiếng trong game. Bật “Bật tiếng trong game” để nghe thử.</string>
+    <string name="speech_test_no_voice">Máy chưa có giọng tiếng Việt offline. Bấm “Mở cài đặt giọng đọc” để cài.</string>
+    <string name="speech_test_not_ready">Bộ đọc chưa sẵn sàng. Thử lại sau vài giây.</string>
+    <string name="speech_test_failed">Bộ đọc của máy không đọc được câu thử.</string>
+    <string name="speech_settings_missing">Không mở được cài đặt giọng đọc. Hãy tìm “Chuyển văn bản thành giọng nói” trong Cài đặt của máy.</string>
+
+    <string name="section_session">Bảo vệ phiên</string>
+    <string name="pin_state_none">Chưa ghim ứng dụng. Có thể rời app bằng thao tác Android.</string>
+    <string name="pin_state_requesting">Hãy xác nhận trong hộp thoại Android.</string>
+    <string name="pin_state_pinned">Android đang ghim ứng dụng.</string>
+    <string name="pin_state_locked">Thiết bị đang ở chế độ lock task được quản lý.</string>
+    <string name="pin_state_denied">Android chưa ghim ứng dụng (đã hủy hoặc máy chưa bật tính năng). Hãy bật “Ghim ứng dụng” trong Cài đặt rồi thử lại.</string>
+    <string name="btn_start_session">Bắt đầu phiên cho bé</string>
+    <string name="btn_end_session">Kết thúc phiên</string>
+    <string name="btn_change_pin">Đổi PIN</string>
+    <string name="btn_open_security_settings">Mở Cài đặt bảo mật của máy</string>
+    <string name="session_not_ready">Hãy thử lại khi màn hình đang mở và máy không khóa.</string>
+    <string name="session_end_still_pinned">Android vẫn đang ghim. Hãy dùng thao tác bỏ ghim của máy rồi nhập mã khóa màn hình.</string>
+    <string name="two_codes_note">PIN của app bảo vệ cài đặt của app. Mã khóa màn hình bảo vệ việc bỏ ghim của Android. Hai mã không tự liên kết với nhau.</string>
+
+    <string name="section_diagnostics">Chẩn đoán</string>
+    <string name="btn_copy_diagnostics">Sao chép chẩn đoán</string>
+    <string name="diagnostics_copied">Đã sao chép nội dung chẩn đoán.</string>
+
+    <string name="recovery_title">Danh mục game bị hỏng</string>
+    <string name="recovery_body">App không đọc được danh mục game. Bố mẹ có thể dựng lại danh mục từ các game đã nạp; tiến trình được giữ khi còn thông tin định danh.</string>
+    <string name="btn_rebuild">Dựng lại danh mục</string>
+
+    <!-- Error code texts for parents -->
+    <string name="err_generic">Lỗi: %s</string>
+    <string name="err_manifest">game.json không hợp lệ</string>
+    <string name="err_schema">game.json dùng phiên bản chưa hỗ trợ</string>
+    <string name="err_bad_id">ID trong game.json không hợp lệ</string>
+    <string name="err_reserved_id">ID bắt đầu bằng “builtin.” chỉ dành cho game mẫu</string>
+    <string name="err_entry">Thiếu index.html</string>
+    <string name="err_incomplete">Đang chép hoặc bản game chưa đầy đủ (sẽ tự thử lại)</string>
+    <string name="err_source_changed">Thư mục thay đổi trong lúc nạp (sẽ tự thử lại)</string>
+    <string name="err_quota">Game vượt giới hạn dung lượng/số file</string>
+    <string name="err_path">Tên file không hợp lệ hoặc trùng nhau</string>
+    <string name="err_duplicate_id">Hai thư mục dùng cùng một ID; hãy sửa một thư mục</string>
+    <string name="err_no_space">Máy không đủ dung lượng trống</string>
+    <string name="err_io">Lỗi đọc/ghi file</string>
+    <string name="err_permission">Mất quyền đọc thư mục nguồn</string>
+    <string name="err_provider">Nguồn file đang lỗi</string>
+    <string name="err_revision_missing">Bản nội bộ bị thiếu</string>
+    <string name="err_player_api">Game cần phiên bản player mới hơn</string>
+    <string name="err_too_many_games">Đã đạt số game tối đa</string>
+</resources>

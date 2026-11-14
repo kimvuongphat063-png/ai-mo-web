@@ -1,0 +1,67 @@
+{
+  "game": "XepHinh",
+  "url": "http://127.0.0.1:9079/index.html",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "date": "2026-10-11T07:32:43.818Z",
+  "steps": [],
+  "checks": {
+    "start -> menu": {
+      "ok": true,
+      "note": ""
+    },
+    "picture decoded": {
+      "ok": true,
+      "note": ""
+    },
+    "a piece dropped in the wrong place slides home": {
+      "ok": true,
+      "note": ""
+    },
+    "2x2 solved": {
+      "ok": true,
+      "note": ""
+    },
+    "celebration": {
+      "ok": true,
+      "note": ""
+    },
+    "3x2 solved": {
+      "ok": true,
+      "note": ""
+    },
+    "3x3 solved": {
+      "ok": true,
+      "note": ""
+    },
+    "picture 4 3x3 solved": {
+      "ok": true,
+      "note": ""
+    },
+    "picture 6 3x3 solved": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"play\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"play\"}}"
+    },
+    "progress restored after reload": {
+      "ok": true,
+      "note": "{\"saveSchemaVersion\":1,\"done\":{\"0-0\":1,\"0-1\":1,\"0-2\":1,\"3-2\":1,\"5-2\":1}}"
+    },
+    "800x360: solved": {
+      "ok": true,
+      "note": ""
+    },
+    "2400x1080: solved": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": true,
+      "note": ""
+    }
+  },
+  "console": [],
+  "ignoredFaviconRequests": 8
+}

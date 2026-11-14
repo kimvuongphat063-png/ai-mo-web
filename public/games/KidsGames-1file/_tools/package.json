@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "Tools for the 10 one-file games. Run `npm install` here once: es2017check.js needs acorn.",
+  "dependencies": {
+    "acorn": "8.18.0"
+  }
+}

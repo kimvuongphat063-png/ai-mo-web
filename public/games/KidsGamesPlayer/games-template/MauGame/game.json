@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "family.template-bimbim",
+  "title": "Bim bim cho Shi",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "orientation": "landscape",
+  "playerApiVersion": 1,
+  "backgroundColor": "#FFF0D6",
+  "sortOrder": 40,
+  "files": []
+}

@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>fixture: storage isolation</title>
+<script>
+  // Test fixture: reports the stored 'score' and optionally writes a new one (#set=value).
+  var before = localStorage.getItem('score');
+  var m = /set=([a-z0-9]+)/.exec(location.hash);
+  if (m) localStorage.setItem('score', m[1]);
+  window.__results = { before: before, origin: location.origin, done: true };
+</script>
+</head>
+<body>storage</body>
+</html>

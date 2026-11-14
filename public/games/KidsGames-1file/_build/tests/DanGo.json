@@ -1,0 +1,83 @@
+{
+  "game": "DanGo",
+  "url": "http://127.0.0.1:9080/index.html",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "date": "2026-10-11T07:34:17.927Z",
+  "steps": [],
+  "checks": {
+    "start -> menu": {
+      "ok": true,
+      "note": ""
+    },
+    "free play opens": {
+      "ok": true,
+      "note": ""
+    },
+    "each of the 8 bars plays": {
+      "ok": true,
+      "note": "played 8"
+    },
+    "two fingers -> two notes": {
+      "ok": true,
+      "note": "played 10"
+    },
+    "glissando across the bars plays every bar once": {
+      "ok": true,
+      "note": "played 8"
+    },
+    "song opens": {
+      "ok": true,
+      "note": ""
+    },
+    "another bar still sounds, the light waits": {
+      "ok": true,
+      "note": ""
+    },
+    "twinkle played to the end": {
+      "ok": true,
+      "note": ""
+    },
+    "celebration": {
+      "ok": true,
+      "note": ""
+    },
+    "song jacques finished": {
+      "ok": true,
+      "note": ""
+    },
+    "song rowboat finished": {
+      "ok": true,
+      "note": ""
+    },
+    "song farm finished": {
+      "ok": true,
+      "note": ""
+    },
+    "song joy finished": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"play\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"play\"}}"
+    },
+    "songs restored after reload": {
+      "ok": true,
+      "note": "{\"saveSchemaVersion\":1,\"songs\":{\"twinkle\":1,\"jacques\":1,\"rowboat\":1,\"farm\":1,\"joy\":1}}"
+    },
+    "800x360: song finished": {
+      "ok": true,
+      "note": ""
+    },
+    "2400x1080: song finished": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": true,
+      "note": ""
+    }
+  },
+  "console": [],
+  "ignoredFaviconRequests": 8
+}

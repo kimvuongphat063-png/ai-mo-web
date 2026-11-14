@@ -1,0 +1,13 @@
+== API 26 lifecycle (debug 1.1.0, real Google TTS)
+home: TTS players started while speaking = 1
+home: TTS players started 1 s later = 0
+Warning: Activity not started, its current task has been brought to the front
+0
+power: TTS players started while speaking = 1
+power: TTS players started 1 s later = 0
+  100,  105  '' 'Về menu' vn.family.kidsgamesplayer.debug:id/btn_home
+ 1320,  361  'Chơi tiếp nhé?' '' 
+parent: TTS players started while speaking = 1
+parent: TTS players started 1 s later = 0
+  653,  427  'Nhập PIN phụ huynh' '' vn.family.kidsgamesplayer.debug:id/pin_title
+ 1320,  361  'Chơi tiếp nhé?' '' 

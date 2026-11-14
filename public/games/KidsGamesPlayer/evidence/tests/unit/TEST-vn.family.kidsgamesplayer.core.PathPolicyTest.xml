@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="vn.family.kidsgamesplayer.core.PathPolicyTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-11T02:58:27.184Z" hostname="localhost" time="0.845">
+  <properties/>
+  <testcase name="containmentUsesPathRelationNotStringPrefix" classname="vn.family.kidsgamesplayer.core.PathPolicyTest" time="0.803"/>
+  <testcase name="decodesUrlPathExactlyOnce" classname="vn.family.kidsgamesplayer.core.PathPolicyTest" time="0.002"/>
+  <testcase name="rejectsEncodedTraversalAndSeparators" classname="vn.family.kidsgamesplayer.core.PathPolicyTest" time="0.005"/>
+  <testcase name="collisionKeyIsCaseAndNormalizationInsensitive" classname="vn.family.kidsgamesplayer.core.PathPolicyTest" time="0.002"/>
+  <testcase name="acceptsNormalRelativePaths" classname="vn.family.kidsgamesplayer.core.PathPolicyTest" time="0.001"/>
+  <testcase name="rejectsTraversalAndAbsolutePaths" classname="vn.family.kidsgamesplayer.core.PathPolicyTest" time="0.001"/>
+  <testcase name="enforcesDepthLimit" classname="vn.family.kidsgamesplayer.core.PathPolicyTest" time="0.025"/>
+  <testcase name="normalizesToNfc" classname="vn.family.kidsgamesplayer.core.PathPolicyTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

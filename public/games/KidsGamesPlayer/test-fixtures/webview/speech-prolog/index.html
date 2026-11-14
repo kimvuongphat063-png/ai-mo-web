@@ -1,0 +1,7 @@
+﻿<!-- Test fixture: UTF-8 BOM, a comment that mentions <head> before the doctype, upper-case tags,
+     a quoted ">" in the head tag. The shim must land in the real head, in standards mode. -->
+<!DOCTYPE HTML>
+<HTML LANG="vi"><!-- c --><HEAD DATA-X="a>b">
+<META CHARSET="utf-8"><TITLE>Tiếng Việt</TITLE>
+<SCRIPT>window.__results = { shimFirst: window.__kgpSpeechV1 === true, firstScript: document.scripts[0].getAttribute("src"), headScripts: document.head.getElementsByTagName("script").length, compatMode: document.compatMode, title: document.title, done: true };</SCRIPT>
+</HEAD><BODY>prolog</BODY></HTML>

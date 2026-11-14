@@ -1,0 +1,4 @@
+samples with TTS playing: 0/40, first at , end 2800.01
+samples with TTS playing: 29/40, first at 2801.27, end 2803.70
+samples with TTS playing: 40/40, first at 2804.10, end 2808.02
+samples with TTS playing: 26/40, first at 2808.52, end 2811.12

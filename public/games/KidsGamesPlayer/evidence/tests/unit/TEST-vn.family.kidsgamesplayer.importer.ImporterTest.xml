@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="vn.family.kidsgamesplayer.importer.ImporterTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-11T02:58:34.836Z" hostname="localhost" time="6.519">
+  <properties/>
+  <testcase name="unicodeNamesAreServedByNfcPath" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.315"/>
+  <testcase name="incompleteVerifiedPackageIsNotCommitted" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.351"/>
+  <testcase name="leftoverStagingIsCleaned" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.226"/>
+  <testcase name="quotasUseRealBytes" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.67"/>
+  <testcase name="contentChangeWithSameSizeIsDetected" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="2.25"/>
+  <testcase name="verifiedPackageCopiesOnlyInventoryFiles" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.51"/>
+  <testcase name="missingEntryAndBrokenManifest" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.117"/>
+  <testcase name="caseCollisionInBasicFolderIsRejected" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.093"/>
+  <testcase name="basicFolderWithoutManifestImports" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.277"/>
+  <testcase name="brokenIconFallsBackToPlaceholder" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="1.1"/>
+  <testcase name="basicImportWaitsForMissingStaticReferences" classname="vn.family.kidsgamesplayer.importer.ImporterTest" time="0.606"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

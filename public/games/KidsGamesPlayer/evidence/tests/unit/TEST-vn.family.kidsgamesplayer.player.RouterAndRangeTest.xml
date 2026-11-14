@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="vn.family.kidsgamesplayer.player.RouterAndRangeTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-11T02:59:02.140Z" hostname="localhost" time="0.33">
+  <properties/>
+  <testcase name="rangeStreamMatchesWebViewSkipSemantics" classname="vn.family.kidsgamesplayer.player.RouterAndRangeTest" time="0.223"/>
+  <testcase name="servesOnlyAllowlistedFilesOfTheExactOrigin" classname="vn.family.kidsgamesplayer.player.RouterAndRangeTest" time="0.013"/>
+  <testcase name="rangeParsing" classname="vn.family.kidsgamesplayer.player.RouterAndRangeTest" time="0.003"/>
+  <testcase name="navigationAllowsOnlySameOriginHtmlPages" classname="vn.family.kidsgamesplayer.player.RouterAndRangeTest" time="0.002"/>
+  <testcase name="embeddedMediaDataUrisPassThrough" classname="vn.family.kidsgamesplayer.player.RouterAndRangeTest" time="0.075"/>
+  <testcase name="rejectsEverythingElse" classname="vn.family.kidsgamesplayer.player.RouterAndRangeTest" time="0.003"/>
+  <testcase name="hostStateJsonIsFixedShape" classname="vn.family.kidsgamesplayer.player.RouterAndRangeTest" time="0.007"/>
+  <testcase name="audioPolicy" classname="vn.family.kidsgamesplayer.player.RouterAndRangeTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,14 @@
+$ pack_game.py --input DanGo --validate-only  (exit 1)
+  Game: Đàn gõ cầu vồng [family.dan-go] version 1.0.0
+  Runtime files: 2 (253591 bytes)
+  ERROR: playerApiVersion is 1 but index.html does not load player-sdk.js
+  FAILED: 1 error(s)
+forbidden strings outside SDK: none
+embedded SDK: identical to games-template/MauGame/player-sdk.js
+new JS APIs: none
+new CSS: none
+es2017: 3 inline script(s) checked, 0 error(s)
+index.html size: 228678 bytes (0.22 MB)
+game.json: {"schemaVersion": 1, "id": "family.dan-go", "title": "Đàn gõ cầu vồng", "version": "1.0.0", "playerApiVersion": 1, "backgroundColor": "#FFF8E7", "sortOrder": 200}
+icon.png: 256x256 PNG
+RESULT: PASS

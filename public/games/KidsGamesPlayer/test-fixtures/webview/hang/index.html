@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>fixture: renderer hang</title>
+<script>
+  // Test fixture: an infinite loop after load; native controls must stay responsive.
+  window.__results = { done: true };
+  setTimeout(function () { for (;;) { /* hang */ } }, 400);
+</script>
+</head>
+<body>hang</body>
+</html>

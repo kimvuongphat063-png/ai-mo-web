@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed-icon silhouette: two smiling heads (Gi & Shi). Drawn for this project. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M42,40a14,14 0,1 1,-0.1 0zM68,36a16,16 0,1 1,-0.1 0zM24,78c0,-10 8,-16 18,-16s18,6 18,16zM48,80c0,-12 9,-18 20,-18s20,6 20,18z" />
+</vector>

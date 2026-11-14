@@ -1,0 +1,19 @@
+### sound button off (btn_sound 100,395)
+speaking before action: 1
+after action sample 0: 1
+after action sample 1: 1
+after action sample 2: 1
+after action sample 3: 1
+after action sample 4: 1
+after action sample 5: 0
+hint while muted:
+0
+### restart dialog (btn_restart 100,685)
+speaking before action: 1
+after action sample 0: 1
+after action sample 1: 0
+after action sample 2: 0
+after action sample 3: 0
+after action sample 4: 0
+after action sample 5: 0
+confirm_no" class="android.widget.ImageButton" package="vn.family.kidsgamesplayer" content-desc="Không" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[1068,611][1257,800]"

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "family.xep-hinh",
+  "title": "Xếp hình Gi & Shi",
+  "version": "1.0.0",
+  "playerApiVersion": 1,
+  "backgroundColor": "#E6F7F1",
+  "sortOrder": 190
+}

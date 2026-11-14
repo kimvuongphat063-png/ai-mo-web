@@ -1,0 +1,14 @@
+$ pack_game.py --input ToChu --validate-only  (exit 1)
+  Game: Tô chữ cái [family.to-chu] version 1.0.0
+  Runtime files: 2 (280177 bytes)
+  ERROR: playerApiVersion is 1 but index.html does not load player-sdk.js
+  FAILED: 1 error(s)
+forbidden strings outside SDK: none
+embedded SDK: identical to games-template/MauGame/player-sdk.js
+new JS APIs: none
+new CSS: none
+es2017: 3 inline script(s) checked, 0 error(s)
+index.html size: 252891 bytes (0.24 MB)
+game.json: {"schemaVersion": 1, "id": "family.to-chu", "title": "Tô chữ cái", "version": "1.0.0", "playerApiVersion": 1, "backgroundColor": "#E7F4FF", "sortOrder": 120}
+icon.png: 256x256 PNG
+RESULT: PASS

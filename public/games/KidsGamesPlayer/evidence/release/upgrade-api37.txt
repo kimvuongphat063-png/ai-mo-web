@@ -1,0 +1,42 @@
+# Cài đè 1.0.0 -> 1.1.0 trên emulator API 37 (kgp_api37), APK release đã ký sha256 e7e6145e25139b41cd8a7d0fb4f7b05141b7eabbb036a8fed5943d6219fd870e
+Trước: 'Lật thẻ con vật' ghép đúng cặp heo (checkpoint) — evidence/screens/upg37-before-checkpoint.webp; giữ nút Phụ huynh -> 'Nhập PIN phụ huynh' (PIN đã đặt)
+adb install -r: Success
+    versionCode=2 minSdk=26 targetSdk=37
+    versionName=1.1.0
+    lastUpdateTime=2026-10-16 08:17:38
+      firstInstallTime=2026-10-11 08:24:34
+
+## Menu trước
+== before (1.0.0)
+Chạm bong bóng
+Ghép màu
+Lật thẻ con vật
+Bim bim cho Shi
+VeTuDo
+-- scroll
+Chạm bong bóng
+Ghép màu
+Lật thẻ con vật
+Bim bim cho Shi
+VeTuDo
+
+## Menu sau
+== after (1.1.0)
+Chạm bong bóng
+Ghép màu
+Lật thẻ con vật
+Bim bim cho Shi
+VeTuDo
+-- scroll
+Chạm bong bóng
+Ghép màu
+Lật thẻ con vật
+Bim bim cho Shi
+VeTuDo
+
+Menu giống hệt: cùng danh sách game, trạng thái ẩn/hiện giữ nguyên như trước khi cập nhật
+Sau: PIN pad vẫn đòi PIN; mở 'Lật thẻ con vật' -> cặp heo vẫn đã ghép (evidence/screens/upg37-after-checkpoint.webp)
+
+## APK release cuối (sha256 da8098f17936c2d77de46e67f648e17b4538c45d3c87377a8cb0e8797c81b6a6) cài đè lên bản trên
+firstInstallTime=2026-10-11 08:24:34 (giữ nguyên), lastUpdateTime=2026-10-16 09:11:28
+Lật thẻ: cặp heo vẫn đã ghép (evidence/screens/final37-latthe-checkpoint.webp); Máy Kể Chuyện đọc truyện qua Google TTS (evidence/tts/final37-mkc.txt)

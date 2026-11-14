@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>fixture: speech (game pattern)</title>
+<script>
+  // Test fixture. This is the first script of the page: the host shim must already be in place.
+  var R = window.__results = {
+    shimFirst: window.__kgpSpeechV1 === true && typeof window.speechSynthesis === 'object' &&
+      typeof window.SpeechSynthesisUtterance === 'function',
+    firstScript: document.scripts[0].getAttribute('src'),
+    scriptsBefore: document.scripts.length,
+    compatMode: document.compatMode,
+    voiceEvents: 0,
+    voiceCount: -1,
+    voiceName: null,
+    log: [],
+    done: false
+  };
+</script>
+<script>
+  // Same pattern as the games in the repo's games/ folder (families A/B/C): capture the synth at load,
+  // pick a Vietnamese voice on voiceschanged (+ retries at 700/2500 ms), speak with voice/lang/
+  // rate/pitch, handle onend and onerror, cancel then speak 90 ms later when busy, and keep a
+  // fallback timer so a missing end never blocks a sentence chain.
+  (function () {
+    var synth = window.speechSynthesis;
+    var voice = null, cur = null, timer = 0;
+    function choose() {
+      var vs = [];
+      try { vs = synth.getVoices() || []; } catch (e) {}
+      var vi = vs.filter(function (v) { return /^vi([-_]|$)/i.test(v.lang || '') || /vietnam|tiếng việt/i.test(v.name || ''); });
+      voice = vi[0] || null;
+      R.voiceEvents++;
+      R.voiceCount = vs.length;
+      R.voiceName = voice ? voice.voiceURI : null;
+    }
+    if (synth) {
+      choose();
+      try { synth.addEventListener('voiceschanged', choose); } catch (e) { synth.onvoiceschanged = choose; }
+      setTimeout(choose, 700);
+      setTimeout(choose, 2500);
+    }
+    function finish(u, how) {
+      if (u._done) return;
+      u._done = true;
+      clearTimeout(u._fb);
+      if (cur === u) cur = null;
+      R.log.push(how + ':' + u.text);
+      if (u._then) u._then();
+    }
+    function say(text, then) {
+      clearTimeout(timer);
+      if (cur) { var old = cur; cur = null; finish(old, 'replaced'); }
+      if (!synth) { R.log.push('nosynth:' + text); if (then) setTimeout(then, 0); return; }
+      var u = new SpeechSynthesisUtterance(text);
+      if (voice) { u.voice = voice; u.lang = voice.lang; } else { u.lang = 'vi-VN'; }
+      u.rate = 0.9; u.pitch = 1.08; u.volume = 1;
+      u._then = then;
+      u.onstart = function () { R.log.push('start:' + text); };
+      u.onend = function () { finish(u, 'end'); };
+      u.onerror = function (e) { finish(u, 'error:' + e.error); };
+      u._fb = setTimeout(function () { finish(u, 'fallback'); }, 1800 + text.length * 120 / 0.9);
+      cur = u;
+      var go = function () { if (cur !== u) return; try { synth.speak(u); } catch (e) { finish(u, 'threw'); } };
+      if (synth.speaking || synth.pending) { try { synth.cancel(); } catch (e) {} timer = setTimeout(go, 90); }
+      else go();
+    }
+    function sayList(items) {
+      var i = 0;
+      R.listDone = false;
+      R.listStarted = Date.now();
+      (function step() {
+        if (i >= items.length) { R.listDone = true; R.listMs = Date.now() - R.listStarted; return; }
+        say(items[i++], function () { setTimeout(step, 140); });
+      })();
+    }
+    window.__speech = {
+      say: function (t) { say(t); },
+      sayList: sayList,
+      cancel: function () { synth.cancel(); },
+      state: function () { return { speaking: synth.speaking, pending: synth.pending, paused: synth.paused }; },
+      reload: function () { location.reload(); }
+    };
+  })();
+  R.done = true;
+</script>
+</head>
+<body>speech</body>
+</html>

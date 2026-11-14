@@ -1,0 +1,91 @@
+{
+  "game": "ToSo",
+  "url": "http://127.0.0.1:9073/index.html",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "date": "2026-10-11T07:24:25.213Z",
+  "steps": [],
+  "checks": {
+    "start -> menu": {
+      "ok": true,
+      "note": ""
+    },
+    "tile 3 -> trace 3": {
+      "ok": true,
+      "note": ""
+    },
+    "3 traced": {
+      "ok": true,
+      "note": ""
+    },
+    "after tracing -> counting screen": {
+      "ok": true,
+      "note": ""
+    },
+    "count 3 things by tapping": {
+      "ok": true,
+      "note": ""
+    },
+    "count done -> celebration": {
+      "ok": true,
+      "note": ""
+    },
+    "tapping the same thing twice counts once": {
+      "ok": true,
+      "note": ""
+    },
+    "4 traced and counted": {
+      "ok": true,
+      "note": ""
+    },
+    "0 traced + empty basket tapped": {
+      "ok": true,
+      "note": ""
+    },
+    "8 (self-crossing) traced": {
+      "ok": true,
+      "note": ""
+    },
+    "count 8": {
+      "ok": true,
+      "note": ""
+    },
+    "part 2 opens (never locked)": {
+      "ok": true,
+      "note": ""
+    },
+    "wrong card: no penalty, question stays": {
+      "ok": true,
+      "note": ""
+    },
+    "5 answers -> celebration": {
+      "ok": true,
+      "note": ""
+    },
+    "correct answers counted": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"menu\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"menu\"}}"
+    },
+    "progress restored after reload": {
+      "ok": true,
+      "note": "{\"saveSchemaVersion\":1,\"traced\":[1,0,0,1,1,0,0,0,1,0],\"quizCorrect\":5,\"quizRounds\":1}"
+    },
+    "800x360: digit 1 traced and counted": {
+      "ok": true,
+      "note": ""
+    },
+    "2400x1080: digit 2 traced and counted": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": true,
+      "note": ""
+    }
+  },
+  "console": [],
+  "ignoredFaviconRequests": 9
+}

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="13" failures="0" errors="0" skipped="0" time="0.000" timestamp="2026-10-11T03:38:15" hostname="localhost">
+  <testsuite name="vn.family.kidsgamesplayer.MainFlowTest" tests="2" failures="0" errors="0" skipped="0" time="66.514" timestamp="2026-10-11T03:38:15" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="menuShowsGamesAndRepeatedOpenCloseKeepsOneWebView" classname="vn.family.kidsgamesplayer.MainFlowTest" time="64.339" />
+    <testcase name="backOnMenuNeverFinishesTheActivity" classname="vn.family.kidsgamesplayer.MainFlowTest" time="2.175" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.PinPadTest" tests="1" failures="0" errors="0" skipped="0" time="2.659" timestamp="2026-10-11T03:38:15" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="cancelButtonDismissesKeypadAndReportsOnce" classname="vn.family.kidsgamesplayer.PinPadTest" time="2.659" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.StorageDeviceTest" tests="2" failures="0" errors="0" skipped="0" time="2.044" timestamp="2026-10-11T03:38:15" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="pinHashCostOnDevice" classname="vn.family.kidsgamesplayer.StorageDeviceTest" time="2.023" />
+    <testcase name="catalogAtomicFileRoundTripAndBackup" classname="vn.family.kidsgamesplayer.StorageDeviceTest" time="0.021" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.WebViewPolicyTest" tests="8" failures="0" errors="0" skipped="0" time="20.824" timestamp="2026-10-11T03:38:15" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="rendererCrashIsReported" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="2.382" />
+    <testcase name="dialogLoopIsRefused" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="1.877" />
+    <testcase name="sdkStartsInactiveAndMutedUntilHostState" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="1.736" />
+    <testcase name="muteFeatureGateIsSafe" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="1.835" />
+    <testcase name="localOriginServesModulesFetchRangeAndStorage" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="1.799" />
+    <testcase name="originsIsolateStorageAndSurviveRevisionChange" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="2.947" />
+    <testcase name="hungRendererKeepsNativeUiResponsive" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="2.557" />
+    <testcase name="escapeAttemptsAreBlocked" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="5.691" />
+  </testsuite>
+</testsuites>

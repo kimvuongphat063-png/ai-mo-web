@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-10-16T02:02:50.964Z" hostname="localhost" time="6.717">
+  <properties/>
+  <testcase name="resetProgressRotatesOnlyThatToken" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.467"/>
+  <testcase name="startupFallsBackToPreviousRevision" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.403"/>
+  <testcase name="garbageCollectionKeepsActivePreviousAndLeased" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.672"/>
+  <testcase name="builtinNamespaceIsReservedForTheApk" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.288"/>
+  <testcase name="updateKeepsIdentityAndOrigin" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.409"/>
+  <testcase name="newFolderAppearsWithoutRebuildingAnything" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.324"/>
+  <testcase name="lostSourceKeepsSnapshots" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.358"/>
+  <testcase name="concurrentScansDoNotRace" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="2.302"/>
+  <testcase name="manifestIdSurvivesFolderRenameAndRootChange" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.306"/>
+  <testcase name="duplicateManifestIdsAreReportedNotMerged" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.356"/>
+  <testcase name="catalogCanBeRebuiltFromIdentityFiles" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.233"/>
+  <testcase name="partialUpdateKeepsOldRevision" classname="vn.family.kidsgamesplayer.importer.ScanCoordinatorTest" time="0.59"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

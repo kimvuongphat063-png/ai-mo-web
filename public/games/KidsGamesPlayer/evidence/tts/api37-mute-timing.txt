@@ -1,0 +1,31 @@
+### baseline: hint, no action
+speaking at 1335.84
+action done at 1335.86
+1335.88 started=1
+1335.98 started=1
+1336.05 started=1
+1336.14 started=1
+1336.25 started=1
+1336.38 started=1
+1336.51 started=1
+1336.63 started=1
+1336.78 started=1
+1336.99 started=1
+1337.06 started=1
+1337.21 started=1
+### mute
+speaking at 1342.83
+action done at 1343.13
+1343.18 started=1
+1343.32 started=0
+1343.45 started=0
+1343.64 started=0
+1343.83 started=0
+1344.03 started=0
+1344.31 started=0
+1344.71 started=0
+1345.03 started=0
+1345.30 started=0
+1345.46 started=0
+1345.60 started=0
+  100,  395  '' 'Đang tắt tiếng, chạm để bật' vn.family.kidsgamesplayer:id/btn

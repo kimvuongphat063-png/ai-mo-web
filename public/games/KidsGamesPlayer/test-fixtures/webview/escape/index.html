@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>fixture: escape attempts</title>
+</head>
+<body style="margin:0">
+<button id="gesture" style="position:fixed;inset:0;width:100%;height:100%;font-size:40px">tap</button>
+<a id="blank" href="https://example.com/" target="_blank">blank</a>
+<a id="intent" href="intent://scan/#Intent;scheme=zxing;end">intent</a>
+<script>
+  // Test fixture (malicious behaviour on purpose): every attempt must be refused by the host.
+  var r = window.__results = { csp: [], alive: true };
+  document.addEventListener('securitypolicyviolation', function (e) { r.csp.push(e.violatedDirective); });
+  // With a real user gesture the popup request reaches the host's onCreateWindow (refused there).
+  document.getElementById('gesture').addEventListener('click', function () {
+    var w1 = window.open('https://example.com/', '_blank');
+    var w2 = window.open('index.html', '_blank');
+    r.gestureOpen = (w1 === null) + ',' + (w2 === null);
+    r.gestureDone = true;
+    setTimeout(function () {
+      r.gestureClosed = (w1 === null || w1.closed === true) && (w2 === null || w2.closed === true);
+    }, 1000);
+  });
+  try { r.openSame = window.open('index.html') === null; } catch (e) { r.openSame = 'threw'; }
+  try { r.openCross = window.open('https://example.com/') === null; } catch (e) { r.openCross = 'threw'; }
+  document.getElementById('blank').click();
+  document.getElementById('intent').click();
+  var f = document.createElement('iframe');
+  f.src = 'index.html';
+  document.body.appendChild(f);
+  try { new Worker('worker.js'); r.worker = 'created'; } catch (e) { r.worker = 'blocked'; }
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('sw.js').then(function () { r.sw = 'registered'; }, function () { r.sw = 'rejected'; });
+  } else {
+    r.sw = 'unavailable';
+  }
+  fetch('https://g-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.invalid/index.html').then(function (res) { r.otherGame = 'status:' + res.status; }, function () { r.otherGame = 'blocked'; });
+  fetch('https://example.com/').then(function (res) { r.external = 'status:' + res.status; }, function () { r.external = 'blocked'; });
+  fetch('http://example.com/').then(function (res) { r.cleartext = 'status:' + res.status; }, function () { r.cleartext = 'blocked'; });
+  fetch('file:///system/etc/hosts').then(function (res) { r.file = 'status:' + res.status; }, function () { r.file = 'blocked'; });
+  fetch('content://settings/system').then(function (res) { r.content = 'status:' + res.status; }, function () { r.content = 'blocked'; });
+  setTimeout(function () {
+    r.done = true;
+    // Top-level navigation attempts; the page must survive all of them.
+    location.href = 'https://example.com/';
+    setTimeout(function () { location.href = 'data:text/html,<h1>replaced</h1>'; }, 150);
+    setTimeout(function () { location.href = 'tel:123456'; }, 300);
+    setTimeout(function () { location.href = 'file:///sdcard/'; }, 450);
+  }, 1200);
+</script>
+</body>
+</html>

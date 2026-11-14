@@ -1,0 +1,17 @@
+{
+  "levels": [
+    { "shapes": ["circle", "square"] },
+    { "shapes": ["triangle", "star", "circle"] },
+    { "shapes": ["heart", "square", "star", "moon"] },
+    { "shapes": ["moon", "triangle", "heart", "circle", "star"] },
+    { "shapes": ["star", "heart", "moon", "square", "triangle", "circle"] }
+  ],
+  "colors": {
+    "circle": "#E8534A",
+    "square": "#3D8BD9",
+    "triangle": "#3BAE5A",
+    "star": "#F2B630",
+    "heart": "#E5679E",
+    "moon": "#8E6BD1"
+  }
+}

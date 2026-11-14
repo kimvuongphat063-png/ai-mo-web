@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Debug-only components used by instrumentation tests. Never merged into release. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity
+            android:name=".debug.WebViewTestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.KidsGames" />
+    </application>
+</manifest>

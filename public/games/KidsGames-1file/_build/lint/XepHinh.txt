@@ -1,0 +1,14 @@
+$ pack_game.py --input XepHinh --validate-only  (exit 1)
+  Game: Xếp hình Gi & Shi [family.xep-hinh] version 1.0.0
+  Runtime files: 2 (666134 bytes)
+  ERROR: playerApiVersion is 1 but index.html does not load player-sdk.js
+  FAILED: 1 error(s)
+forbidden strings outside SDK: none
+embedded SDK: identical to games-template/MauGame/player-sdk.js
+new JS APIs: none
+new CSS: none
+es2017: 3 inline script(s) checked, 0 error(s)
+index.html size: 613761 bytes (0.59 MB)
+game.json: {"schemaVersion": 1, "id": "family.xep-hinh", "title": "Xếp hình Gi & Shi", "version": "1.0.0", "playerApiVersion": 1, "backgroundColor": "#E6F7F1", "sortOrder": 190}
+icon.png: 256x256 PNG
+RESULT: PASS

@@ -1,0 +1,68 @@
+# Cài đè 1.0.0 -> 1.1.0 trên emulator API 26 (kgp_api26), APK release đã ký sha256 e7e6145e25139b41cd8a7d0fb4f7b05141b7eabbb036a8fed5943d6219fd870e
+PIN pad trước khi cập nhật: có (giữ nút Phụ huynh -> 'Nhập PIN phụ huynh')
+adb install -r: Success
+    versionCode=2 minSdk=26 targetSdk=37
+    versionName=1.1.0
+    firstInstallTime=2026-10-11 10:29:29
+    lastUpdateTime=2026-10-16 08:11:24
+
+## Menu trước
+== before (1.0.0) page 1
+Chạm bong bóng
+Ghép màu
+Lật thẻ con vật
+Tô nét
+-- scroll 1
+Tô chữ cái
+Tô số và đếm
+Pop-it
+Bắt bóng đúng màu
+-- scroll 2
+Tô màu Gi & Shi
+Nối các điểm
+Tìm bóng
+Xếp hình Gi & Shi
+Đàn gõ cầu vồng
+Ai Song O Dau
+Bac Si Thu Nhi
+Cun San So 7
+-- scroll 3
+Đàn gõ cầu vồng
+Ai Song O Dau
+Bac Si Thu Nhi
+Cun San So 7
+May Ke Chuyen
+
+## Menu sau
+== after (1.1.0) page 1
+Chạm bong bóng
+Ghép màu
+Lật thẻ con vật
+Tô nét
+-- scroll 1
+Tô chữ cái
+Tô số và đếm
+Pop-it
+Bắt bóng đúng màu
+-- scroll 2
+Tô màu Gi & Shi
+Nối các điểm
+Tìm bóng
+Xếp hình Gi & Shi
+Đàn gõ cầu vồng
+Ai Song O Dau
+Bac Si Thu Nhi
+Cun San So 7
+-- scroll 3
+Đàn gõ cầu vồng
+Ai Song O Dau
+Bac Si Thu Nhi
+Cun San So 7
+May Ke Chuyen
+
+Kết quả so sánh: giống hệt
+PIN pad sau khi cập nhật: có (không quay về màn thiết lập)
+
+## APK release cuối (sha256 da8098f17936c2d77de46e67f648e17b4538c45d3c87377a8cb0e8797c81b6a6) cài đè lên bản trên
+firstInstallTime=2026-10-11 10:29:29 (giữ nguyên), lastUpdateTime=2026-10-16 09:17:08
+Tập game trong menu giống hệt bản 1.0.0 (17 game); PIN pad vẫn đòi PIN

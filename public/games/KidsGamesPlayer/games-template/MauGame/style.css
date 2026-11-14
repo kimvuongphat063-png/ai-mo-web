@@ -1,0 +1,23 @@
+/* Full-screen, no scrolling, no text selection or long-press menus: touch-first game page. */
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #FFF0D6;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}

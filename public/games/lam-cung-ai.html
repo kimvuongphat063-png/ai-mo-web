@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Làm phần mềm cùng AI — AI Mở Studio</title>
+<meta name="description" content="Triết lý, nguyên tắc và cách AI Mở Studio cùng AI làm app Android, 64 game và website; cách áp dụng cho game khác, công cụ nội bộ và sản phẩm thương mại.">
+<meta name="color-scheme" content="light dark">
+<meta name="kgp-repo" content="">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="site/style.css">
+</head>
+<body class="guide-page">
+<a class="skip" href="#noi-dung">Bỏ qua, tới nội dung</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="./"><span aria-hidden="true">🚀</span> <strong>AI Mở</strong> Studio</a>
+    <nav aria-label="Mục lục">
+      <a href="./#choi">Chơi game</a>
+      <a href="./#tai">Tải về</a>
+      <a href="./#cai">Cài cho bé</a>
+      <a href="lam-cung-ai.html" aria-current="page">Làm cùng AI</a>
+      <a href="./#hoi">Hỏi đáp</a>
+      <a class="gh-link" data-gh="" href="#" hidden>GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<header class="guide-hero">
+  <div class="wrap guide-hero-in">
+    <div>
+      <p class="eyebrow">Hướng dẫn cho người lớn và vibe coder</p>
+      <h1>Làm phần mềm cùng AI: cách dự án này được làm</h1>
+      <p class="lead">Một phụ huynh không viết dòng mã nào, vẫn có một app Android chạy thật, 64 trò chơi và trang web này. Bí quyết không nằm ở câu lệnh “thần kỳ” mà ở <strong>cách làm việc</strong>: đặc tả rõ, luật ít mà cứng, đòi bằng chứng, sửa lỗi bằng handover. Cách làm đó dùng được cho game khác, công cụ nội bộ, và cả sản phẩm để bán.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="stats" aria-label="Con số của dự án">
+      <li><b>1.370</b><span>dòng đặc tả cho app, viết trước khi có dòng mã nào</span></li>
+      <li><b>64</b><span>trò chơi, làm theo lô bởi nhiều phiên AI chạy song song</span></li>
+      <li><b>6 ngày</b><span>11–16/10: app, 61 game và bản cập nhật có giọng đọc</span></li>
+      <li><b>88 + 23</b><span>unit test và test thiết bị (chạy trên 2 emulator) ở bản 1.1.0</span></li>
+    </ul>
+  </div>
+</header>
+
+<div class="wrap guide-layout">
+  <aside class="toc" aria-label="Mục lục trang">
+    <details open>
+      <summary>Trong trang này</summary>
+      <ol>
+        <li><a href="#tom-tat">Tóm tắt một phút</a></li>
+        <li><a href="#cau-chuyen">Câu chuyện dự án</a></li>
+        <li><a href="#triet-ly">Triết lý và nguyên tắc</a></li>
+        <li><a href="#phan-vai">Người làm gì, AI làm gì</a></li>
+        <li><a href="#player">Dựng player</a></li>
+        <li><a href="#game">Dựng game</a></li>
+        <li><a href="#sua-loi">Sửa lỗi bằng handover</a></li>
+        <li><a href="#ap-dung">Không chỉ game cho trẻ</a></li>
+        <li><a href="#thuong-mai">Nếu muốn bán sản phẩm</a></li>
+        <li><a href="#bat-dau">Bắt đầu dự án của bạn</a></li>
+        <li><a href="#prompt">Prompt mẫu</a></li>
+        <li><a href="#loi-hay-gap">Lỗi hay gặp</a></li>
+        <li><a href="#tai-lieu">Tài liệu gốc</a></li>
+      </ol>
+    </details>
+  </aside>
+
+  <main class="article" id="noi-dung">
+
+    <section id="tom-tat">
+      <h2>Tóm tắt một phút</h2>
+      <ul class="tldr">
+        <li><b>Người giữ “cái gì” và “vì sao”, AI lo “làm thế nào”.</b> Bố mẹ quyết bé chơi gì, an toàn đến đâu. AI chọn công nghệ, viết mã, viết test, tự chạy thử.</li>
+        <li><b>Viết đặc tả trước.</b> Một tài liệu dài, rõ, chốt sẵn mọi mặc định, rồi giao cho AI bằng một câu: “đọc và làm từ đầu đến cuối”.</li>
+        <li><b>Chia thành vỏ và nội dung.</b> App (vỏ) lo an toàn; game (nội dung) chỉ là thư mục HTML theo một hợp đồng. Nhờ vậy nhiều phiên AI làm song song, thêm game không cần build lại app.</li>
+        <li><b>Không tin, đòi bằng chứng.</b> “Đã kiểm thử” chỉ được viết khi có log và ảnh; báo cáo ghi rõ PASS, FAIL, NOT_RUN, BLOCKED.</li>
+        <li><b>Lỗi đi qua handover.</b> Đo nguyên nhân, chốt quyết định với người, viết yêu cầu và kiểm thử bắt buộc, rồi giao cho một phiên AI mới.</li>
+      </ul>
+    </section>
+
+    <section id="cau-chuyen">
+      <h2>Câu chuyện dự án</h2>
+      <p>Bố mẹ muốn các bé chơi những game học tập do chính mình nhờ AI làm, trên một điện thoại Android, mà không có quảng cáo, không vào mạng, không tự thoát sang ứng dụng khác. Mở game HTML bằng trình duyệt thì bé bấm vài cái là ra ngoài, nên cần một app “vỏ” riêng để chạy game.</p>
+      <ol class="timeline guide-timeline">
+        <li><b>Trước 11/10: viết đặc tả.</b> Bố mẹ trò chuyện với AI về nhu cầu; AI tra tài liệu chính thức của Android rồi viết “bible” 1.370 dòng, 25 mục: thiết kế, phạm vi, kiến trúc, an ninh, kiểm thử, cách bàn giao.</li>
+        <li><b>11/10: app 1.0.0.</b> Giao bible cho Claude Code. AI tự dựng project, viết mã, chạy test trên emulator Android 8 và Android 17, ký APK, viết báo cáo. Cùng ngày, một phiên khác làm 10 game theo SDK của app từ một brief riêng.</li>
+        <li><b>11–15/10: hơn 50 game một file.</b> Lô đầu 10 game (11–12/10). Sau đó bốn file prompt “Bộ game 2…5”, mỗi file 10 game, chạy trong bốn phiên AI song song (14–15/10).</li>
+        <li><b>Thử trên điện thoại thật.</b> Game có lời đọc khi mở bằng Chrome nhưng im lặng trong app. Người phát hiện khi chơi thử: lỗi chỉ lộ ra khi đem game làm cho trình duyệt vào chạy trong app, và phải nghe bằng tai mới thấy.</li>
+        <li><b>16/10: bản 1.1.0.</b> Một phiên AI phân tích nguyên nhân và cùng bố mẹ chốt cách sửa, viết thành handover. Phiên mới đọc handover, làm trọn vẹn, tìm thêm hai lỗi thật trên Android 8, thử cài đè giữ nguyên dữ liệu.</li>
+        <li><b>28/10: lên GitHub.</b> AI dựng trang web này, đóng gói tải về, xóa mọi thông tin về máy tính của tác giả trước khi công khai.</li>
+      </ol>
+    </section>
+
+    <section id="triet-ly">
+      <h2>Triết lý và nguyên tắc</h2>
+      <p>Chín nguyên tắc dưới đây là phần đáng giá nhất của dự án. Mỗi nguyên tắc kèm ví dụ thật trong repo.</p>
+      <div class="principles">
+        <article class="principle">
+          <span class="p-num">1</span>
+          <h3>Người giữ “cái gì” và “vì sao”, AI lo “làm thế nào”</h3>
+          <p>Quyết định sản phẩm (cho ai, làm gì, không làm gì) là việc của người. Chọn thư viện, kiến trúc, tên biến, màu nút là việc của AI, và AI không được hỏi lại những việc đó.</p>
+          <p class="eg"><b>Trong dự án:</b> bible mở đầu bằng “Không yêu cầu chủ dự án lựa chọn framework, màu sắc, tên class, thư viện hay cấu trúc thư mục”. Bố mẹ chỉ chốt: offline, PIN phụ huynh, bé không thoát ra được, thêm game bằng cách chép thư mục.</p>
+        </article>
+        <article class="principle">
+          <span class="p-num">2</span>
+          <h3>Đặc tả là sản phẩm chính, mã là thứ sinh lại được</h3>
+          <p>Thời gian đầu tư vào tài liệu cho lợi nhiều nhất. Một đặc tả tốt chốt sẵn mặc định, nói rõ phạm vi bản đầu và những gì để sau, và nói <em>trung thực</em> giới hạn của nền tảng.</p>
+          <p class="eg"><b>Trong dự án:</b> bible có bảng “mong muốn → cam kết thực tế”, ví dụ “Bé chỉ ở trong app” được diễn đạt lại thành “ghim ứng dụng hạn chế chuyển app, không hứa chặn nút nguồn”. Có cả mục “Vì sao chọn phương án này” so sánh sáu cách làm khác.</p>
+        </article>
+        <article class="principle">
+          <span class="p-num">3</span>
+          <h3>Ít luật, nhưng là luật cứng</h3>
+          <p>Một danh sách ngắn những điều không bao giờ được phá, kể cả để “cho demo chạy”. Trong khung đó AI được tự do. Luật nhiều quá thì AI lẫn; không có luật thì AI đi tắt.</p>
+          <p class="eg"><b>Trong dự án:</b> không quyền Internet; không cầu nối JavaScript có quyền; không đổi khóa ký (đổi là không cài đè được, gia đình mất dữ liệu); mã định danh game là vĩnh viễn; không in PIN.</p>
+        </article>
+        <article class="principle">
+          <span class="p-num">4</span>
+          <h3>Bằng chứng thay cho lời hứa</h3>
+          <p>AI rất dễ viết “đã kiểm thử, mọi thứ hoạt động”. Hãy đòi log, ảnh chụp, số test chạy thật, và bốn nhãn trạng thái: PASS, FAIL, NOT_RUN, BLOCKED. “PASS trên emulator” khác “PASS trên máy thật”.</p>
+          <p class="eg"><b>Trong dự án:</b> báo cáo 1.1.0 ghi thẳng: giọng đọc PASS với 3 game đại diện, NOT_RUN với 47 game còn lại từng cái một; mục tiêu “câu đầu &lt; 500 ms” chưa đạt trên emulator Android 17.</p>
+        </article>
+        <article class="principle">
+          <span class="p-num">5</span>
+          <h3>Thử như người dùng thật, ở chỗ khó nhất</h3>
+          <p>Đọc mã không phải là kiểm thử. AI phải mở ứng dụng thật, chạm và kéo thật, ở nhiều cỡ màn hình, mất mạng, tải lại, cố tình làm sai. Rồi người thử trên thiết bị thật những gì máy không làm được: nghe bằng tai, ghim ứng dụng, chọn thư mục.</p>
+          <p class="eg"><b>Trong dự án:</b> mỗi game được chơi trọn bằng chạm giả lập ở 390×844, 844×390 và 1280×800. App được thử trên emulator Android 8 với WebView rất cũ (Chromium 69), nơi phát hiện nhiều lỗi nhất.</p>
+        </article>
+        <article class="principle">
+          <span class="p-num">6</span>
+          <h3>Chia thành vỏ và nội dung, nối bằng hợp đồng</h3>
+          <p>Một phần ổn định, ít thay đổi, lo an toàn (vỏ). Nhiều phần nhỏ, thay được, chỉ cần đúng một định dạng (nội dung). Hợp đồng giữa hai bên được viết thành tài liệu và có công cụ kiểm tra.</p>
+          <p class="eg"><b>Trong dự án:</b> player không biết gì về từng game. Game là thư mục HTML; game theo SDK có thêm <code>game.json</code> và <code>player-sdk.js</code>, được <code>pack_game.py</code> kiểm tra. Nhờ vậy bốn phiên AI làm 40 game cùng lúc mà không giẫm chân nhau, và thêm game không cần APK mới.</p>
+        </article>
+        <article class="principle">
+          <span class="p-num">7</span>
+          <h3>Thay đổi đi qua handover, không sửa vội trong lúc chat</h3>
+          <p>Khi gặp lỗi hay muốn thêm tính năng: đo nguyên nhân trước, chốt quyết định với người, viết yêu cầu phải đạt và kiểm thử bắt buộc, rồi giao cho một phiên AI mới với ngữ cảnh sạch.</p>
+          <p class="eg"><b>Trong dự án:</b> lỗi “game im lặng trong app” được giải quyết bằng <code>HANDOVER_TTS_v1.1.0.md</code> (xem <a href="#sua-loi">mục sửa lỗi</a>).</p>
+        </article>
+        <article class="principle">
+          <span class="p-num">8</span>
+          <h3>Ghi nhớ cho phiên sau</h3>
+          <p>AI không nhớ gì giữa các phiên. Bộ nhớ dài hạn của dự án là tài liệu: sổ quyết định, trạng thái tiến độ, sổ tay cho AI. Mỗi cái bẫy đã gặp một lần phải được ghi lại để không gặp lần hai.</p>
+          <p class="eg"><b>Trong dự án:</b> <code>DECISIONS.md</code> (22 quyết định và lý do), <code>BUILD_STATUS.md</code>, <code>AI_PLAYBOOK.md</code> (bảng các bẫy, ví dụ “WebView Android 8 làm hỏng chữ có dấu khi gửi giữa trang và app”).</p>
+        </article>
+        <article class="principle">
+          <span class="p-num">9</span>
+          <h3>An toàn và riêng tư là mặc định</h3>
+          <p>Không thu thập dữ liệu nếu không cần. Không để khóa, mật khẩu, đường dẫn máy tính hay thông tin cá nhân lọt vào mã nguồn, file nén, log hay báo cáo. Việc khó hoàn tác (xóa dữ liệu, đổi khóa, công bố) luôn hỏi người trước.</p>
+          <p class="eg"><b>Trong dự án:</b> trước khi đưa lên GitHub, AI quét toàn bộ hơn 1.100 file, kể cả bên trong APK và ZIP, và thay mọi đường dẫn, tên máy, cấu hình máy trong bản công khai.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="phan-vai">
+      <h2>Người làm gì, AI làm gì</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>AI làm</th><th>Người làm</th></tr></thead>
+          <tbody>
+            <tr><td>Toàn bộ mã, hình, âm thanh, icon, test, build, ký (khi có khóa), đóng gói, tài liệu, báo cáo</td><td>Quyết định sản phẩm: làm gì, cho ai, không làm gì</td></tr>
+            <tr><td>Tự chọn chi tiết kỹ thuật, ghi lý do vào sổ quyết định</td><td>Những bước chỉ chủ thiết bị làm được: cài app, cấp quyền, tạo PIN thật, <b>nghe bằng tai</b>, thử trên máy thật</td></tr>
+            <tr><td>Thử như người dùng thật trên emulator và trình duyệt tự động</td><td>Giữ và sao lưu khóa ký, mật khẩu, tài khoản</td></tr>
+            <tr><td>Báo cáo trung thực cái đã thử và cái chưa thử được</td><td>Duyệt trước mọi việc khó hoàn tác: xóa dữ liệu, đổi khóa, công bố, chi tiền</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Người không cần biết lập trình, nhưng cần biết <b>đọc báo cáo một cách hoài nghi</b>: hỏi “đã chạy thật chưa, bằng chứng đâu, cái gì chưa thử”.</p>
+    </section>
+
+    <section id="player">
+      <h2>Dựng player (app Android)</h2>
+      <h3>Kiến trúc trong một hình</h3>
+      <div class="flow" role="img" aria-label="Luồng: phụ huynh chép thư mục game vào KidsGames, app kiểm tra và chép thành bản nội bộ, đưa vào danh mục, bé chọn trên menu, game chạy trong WebView có origin riêng và bị chặn mạng; khu phụ huynh nằm sau mã PIN.">
+        <div class="flow-step"><b>Thư mục <code>KidsGames</code></b><span>Phụ huynh chép game vào bộ nhớ máy</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step"><b>Nạp và kiểm tra</b><span>Chép thành bản nội bộ không đổi; chép dở thì giữ bản cũ</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step"><b>Menu của bé</b><span>Icon to, không chữ khó, nút nhà về menu</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step accent"><b>WebView chơi game</b><span>Mỗi game một “địa chỉ” riêng, chặn mạng, chỉ đọc file của chính game</span></div>
+      </div>
+      <div class="flow flow-side">
+        <div class="flow-step side"><b>Khu phụ huynh (sau PIN)</b><span>Chọn thư mục, ẩn game, xóa tiến trình, giọng đọc, bắt đầu phiên cho bé với ghim ứng dụng</span></div>
+      </div>
+
+      <h3>Các bước đã làm</h3>
+      <ol class="steps-plain">
+        <li><b>Nghiên cứu và chốt thiết kế.</b> AI so sánh sáu cách làm (bảng dưới), đọc tài liệu chính thức của Android, chọn cách đơn giản nhất đáp ứng đủ yêu cầu.</li>
+        <li><b>Viết bible.</b> Mục 0 là “lệnh thực thi cho AI”: làm hết, không dừng ở kế hoạch, tự quyết chi tiết, không dùng cờ bỏ qua quyền, không công bố hay mua gì. Các mục sau chốt trải nghiệm, định dạng game, an ninh WebView, âm thanh, PIN, SDK cho game, công cụ, kiểm thử, định nghĩa “xong”.</li>
+        <li><b>Một câu lệnh khởi động.</b> “Đọc toàn bộ bible và thực thi từ đầu đến cuối… không dừng ở kế hoạch và không hỏi tôi các quyết định kỹ thuật thông thường.”</li>
+        <li><b>Làm theo sáu mốc, mỗi mốc có cửa kiểm tra.</b> AI chỉ sang mốc sau khi qua cửa, và ghi trạng thái vào <code>BUILD_STATUS.md</code> để phiên sau làm tiếp được nếu bị ngắt.</li>
+        <li><b>Bàn giao.</b> APK đã ký và kiểm chữ ký, mã nguồn, 3 game mẫu, khuôn làm game, công cụ đóng gói và xem thử game, hướng dẫn cho bố mẹ, prompt làm game cho AI, báo cáo kiểm thử.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Sáu mốc của bible và “cửa” phải qua</caption>
+          <thead><tr><th>Mốc</th><th>Nội dung</th><th>Cửa kiểm tra (rút gọn)</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>Môi trường, project, WebView nạp file nội bộ</td><td>Chứng minh sớm chạy được HTTPS giả lập cục bộ mà không cần quyền Internet</td></tr>
+            <tr><td>B</td><td>Từ thư mục đến game</td><td>Chép thêm một game vào thư mục thì menu nhận ra, không sửa APK</td></tr>
+            <tr><td>C</td><td>Player đúng vòng đời</td><td>Hai game dùng chung khóa lưu không đè nhau; đổi game hay ra nền thì hết tiếng</td></tr>
+            <tr><td>D</td><td>Điều khiển trẻ và phụ huynh</td><td>Không có đường từ game tới cài đặt hay bỏ ghim</td></tr>
+            <tr><td>E</td><td>Quy trình làm game</td><td>Một thư mục mới được đóng gói rồi chạy giống nhau trên trình duyệt và trong app</td></tr>
+            <tr><td>F</td><td>Bản bàn giao</td><td>File truy xuất được, mã nguồn không chứa bí mật, trạng thái test đúng thực tế</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Vì sao chọn “app Kotlin + WebView” (rút gọn từ bible mục 23)</caption>
+          <thead><tr><th>Phương án</th><th>Vấn đề với yêu cầu</th><th>Quyết định</th></tr></thead>
+          <tbody>
+            <tr><td>Mở game trong trình duyệt hoặc PWA</td><td>Không quản lý được nhiều game, phiên chơi, cài đặt phụ huynh</td><td>Không chọn</td></tr>
+            <tr><td>Mỗi game một APK</td><td>Trái mục tiêu thêm game mà không build lại</td><td>Không chọn</td></tr>
+            <tr><td>Khung Capacitor, Cordova, Flutter</td><td>Thêm thư viện và cầu nối nhưng không giải quyết thư mục, ghim ứng dụng, vòng đời</td><td>Không cần</td></tr>
+            <tr><td>Máy chủ HTTP nội bộ trong app</td><td>Thêm cổng mạng, vòng đời, bề mặt tấn công</td><td>Không cần</td></tr>
+            <tr><td>WebView đọc thẳng thư mục</td><td>Đang chép dở thì bé mở trúng bản hỏng</td><td>Không ưu tiên</td></tr>
+            <tr><td><b>Thư mục → bản nội bộ không đổi → WebView</b></td><td>Tốn thêm dung lượng và phải có bộ nạp</td><td><b>Chọn</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Bài học: hãy để AI <b>so sánh các phương án thật sự khác nhau</b> và viết lý do, thay vì hỏi “dùng framework nào tốt nhất”. Đánh giá này đúng cho một app gia đình với nhiều game nhỏ, không phải kết luận chung về framework.</p>
+    </section>
+
+    <section id="game">
+      <h2>Dựng game</h2>
+      <p>Có hai con đường, cả hai đều cho ra một thư mục HTML chép thẳng vào điện thoại.</p>
+      <div class="two-col">
+        <div class="card-plain">
+          <h3>A. Game theo SDK của app</h3>
+          <p>Dành cho game cần chạy ổn định trong app, kể cả máy cũ. Hợp đồng gồm: <code>index.html</code>, <code>game.json</code> (mã định danh vĩnh viễn), <code>icon.png</code> và <code>player-sdk.js</code> chép nguyên văn. SDK lo tạm dừng, tắt tiếng, lưu tiến trình, vòng lặp khung hình.</p>
+          <p>Công cụ: khuôn mẫu <code>MauGame</code>, <code>pack_game.py</code> kiểm tra trước khi giao, <code>preview_game.py</code> xem thử với đúng luật chặn mạng như app. Đã dùng cho 3 game mẫu và 10 game trong <code>KidsGames-1file/</code>.</p>
+        </div>
+        <div class="card-plain">
+          <h3>B. Lô 10 game một file</h3>
+          <p>Dành cho làm nhanh nhiều game chạy cả trên trình duyệt. Mỗi game chỉ là <code>index.html</code> tự chứa và <code>icon.png</code>. Mỗi lô là một file prompt; bốn lô chạy song song trong bốn phiên AI.</p>
+          <p>Đổi lại, game làm cho trình duyệt mới có thể hỏng trên WebView cũ: trên Android 8 chưa cập nhật, 16/51 game không khởi động. Bài học: <b>ghi rõ thiết bị mục tiêu ngay trong prompt</b>.</p>
+        </div>
+      </div>
+
+      <h3>Giải phẫu một prompt làm lô game</h3>
+      <p>File <code>games/Bo game 2.md</code> (163 dòng) có sáu phần. Cấu trúc này dùng lại được cho bất kỳ việc “sản xuất hàng loạt” nào: trang web, mẫu báo cáo, bài học, màn hình công cụ.</p>
+      <ol class="anatomy">
+        <li><b>Yêu cầu gốc, chép nguyên văn lời người.</b> Giữ được tinh thần (“dùng nhiều token và lặp lại cho đến khi bạn tự hào về nó… trước khi nói xong, tự thử như một người dùng thật”).</li>
+        <li><b>Bối cảnh: những gì đã có hoặc đang làm ở nơi khác.</b> Danh sách game đã có và 30 game của ba phiên song song, để không trùng ý tưởng, không trùng tên, không đụng thư mục của nhau.</li>
+        <li><b>Mười việc cụ thể.</b> Tên, tên thư mục, mô tả lối chơi đủ chi tiết.</li>
+        <li><b>Tiêu chuẩn bắt buộc cho mọi game.</b> Một file, chạy offline; tiếng Việt có dấu; bé chưa biết đọc vẫn hiểu nhờ hình và giọng đọc, nhưng không có giọng vẫn chơi được; không phạt, không thua, không đồng hồ ép; mở khóa mọi màn ngay từ đầu; âm thanh tự tổng hợp; chạm và chuột; vừa mọi màn hình từ 360×640 tới 1920×1080; mượt 60 hình/giây; lưu tiến độ; không lỗi console.</li>
+        <li><b>Quy trình đã chứng minh hiệu quả.</b> Viết bộ dùng chung trước; làm một game mẫu hoàn chỉnh làm chuẩn; chia các game còn lại cho agent con nhưng phải tự kiểm lại từng cái; ít nhất ba lượt đánh bóng, nhìn ảnh chụp “như một giám đốc nghệ thuật và như một bé 5 tuổi”.</li>
+        <li><b>Kiểm thử bắt buộc và mẫu báo cáo.</b> Chơi trọn mỗi game bằng chạm thật ở ba cỡ màn hình, cố ý sai, xoay máy, tải lại, mất mạng; báo cáo cả những gì <b>chưa</b> kiểm được.</li>
+      </ol>
+      <p class="note">Chạy song song có giá: bốn phiên AI cùng mở nhiều Chrome tự động làm máy chậm hẳn, các kiểm thử phụ thuộc thời gian dễ chập chờn, và có lúc chạm giới hạn sử dụng của tài khoản. Hãy để mỗi phiên một thư mục riêng và chấp nhận chạy chậm hơn.</p>
+    </section>
+
+    <section id="sua-loi">
+      <h2>Sửa lỗi bằng handover: câu chuyện bản 1.1.0</h2>
+      <ol class="timeline guide-timeline">
+        <li><b>Người phát hiện.</b> Trên điện thoại thật, game đọc lời khi mở bằng Chrome nhưng im lặng trong app.</li>
+        <li><b>Một phiên AI phân tích, chưa sửa.</b> WebView của Android không có phần đọc của Web Speech API. AI đọc mã của 50 game, thấy ba “họ” mã khác nhau nhưng cùng một cách gọi API, và mọi game đều tự xử lý khi không có giọng.</li>
+        <li><b>Người chốt quyết định.</b> App tự cung cấp giọng đọc cho trang game, không sửa game nào. Loại phương án thu âm sẵn từng câu rồi sửa 50 game. Đây là ngoại lệ có chủ đích với một nguyên tắc của bible, nên phải mở thật hẹp và ghi vào sổ quyết định.</li>
+        <li><b>Viết handover</b> gồm 9 phần: bối cảnh và quyết định, tài liệu phải đọc, yêu cầu phải đạt, thiết kế đề xuất (có bước “đo nguyên nhân trước khi viết mã”), kiểm thử bắt buộc, bàn giao, môi trường, ràng buộc giữ nguyên, tiêu chí hoàn thành.</li>
+        <li><b>Phiên mới làm trọn vẹn.</b> Chỉ một câu: “Đọc handover và làm từ đầu đến cuối”. AI đo lại nguyên nhân, viết mã, và tìm thêm hai lỗi thật mà không ai đoán trước: WebView Android 8 làm hỏng chữ có dấu khi gửi tin nhắn, và Google TTS liệt kê cả giọng chưa tải.</li>
+        <li><b>Bằng chứng và giới hạn.</b> 88 unit test, 23/23 test thiết bị trên cả hai emulator, thử cài đè giữ PIN và tiến trình. Báo cáo ghi rõ phần chưa đạt và phần người cần tự thử trên máy thật.</li>
+      </ol>
+      <div class="callout">
+        <b>Vì sao handover tốt hơn “sửa giúp tôi” trong lúc chat?</b>
+        Phiên phân tích và phiên sửa tách nhau, nên phiên sửa bắt đầu với ngữ cảnh sạch và một nhiệm vụ đóng gói đầy đủ. Quyết định khó được người duyệt trước, không phải sau. Tiêu chí “xong” có trước khi viết mã, nên không ai tự hạ chuẩn giữa chừng.
+      </div>
+    </section>
+
+    <section id="ap-dung">
+      <h2>Không chỉ game cho trẻ</h2>
+      <p>Bỏ đi chữ “game” và “trẻ em”, dự án này là hai thứ dùng lại được: một <b>mô hình sản phẩm</b> (vỏ an toàn + nội dung cắm vào) và một <b>quy trình làm việc với AI</b> (đặc tả → giao → bằng chứng → handover → ghi nhớ).</p>
+      <div class="uses">
+        <div class="use"><span aria-hidden="true">🎮</span><h3>Game khác</h3><p>Game luyện trí nhớ cho ông bà, game ôn bài cho cả lớp, minigame cho sự kiện của cửa hàng. Prompt lô game dùng lại gần như nguyên vẹn, chỉ đổi đối tượng và tiêu chuẩn.</p></div>
+        <div class="use"><span aria-hidden="true">🏪</span><h3>Máy tính bảng tại quầy</h3><p>Khảo sát khách hàng, đăng ký, xếp hàng, tra cứu sản phẩm. Đúng mô hình của player: khóa máy, chạy offline, mã PIN quản trị, mỗi màn hình là một thư mục HTML thay được.</p></div>
+        <div class="use"><span aria-hidden="true">🧰</span><h3>Công cụ nội bộ</h3><p>Checklist kiểm tra hiện trường không cần mạng, máy tính báo giá, tài liệu đào tạo tương tác, công cụ xử lý file Excel hay PDF lặp lại hằng ngày.</p></div>
+        <div class="use"><span aria-hidden="true">⚙️</span><h3>Tự động hóa, không cần app</h3><p>Script xử lý dữ liệu, báo cáo định kỳ, website giới thiệu. Quy trình giữ nguyên: đặc tả ngắn, luật không được phá, kiểm thử có bằng chứng, handover khi cần sửa.</p></div>
+        <div class="use"><span aria-hidden="true">💼</span><h3>Sản phẩm thương mại</h3><p>Làm được, với điều kiện thêm những phần mà dự án gia đình bỏ qua: pháp lý, phát hành, bảo mật, hỗ trợ khách hàng (xem mục kế tiếp).</p></div>
+      </div>
+
+      <h3>Bản đồ chuyển đổi: dự án này → dự án của bạn</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Trong repo này</th><th>Trong dự án của bạn</th></tr></thead>
+          <tbody>
+            <tr><td><code>specs/…Bible.md</code></td><td>Bản đặc tả sản phẩm (<code>SPEC.md</code>): mục tiêu, phạm vi, mặc định, kiến trúc, kiểm thử, định nghĩa xong</td></tr>
+            <tr><td>Luật không được phá (AI_PLAYBOOK mục 3)</td><td>Danh sách ràng buộc: bảo mật, dữ liệu, những thứ không bao giờ đổi</td></tr>
+            <tr><td>Mốc A–F có cửa kiểm tra</td><td>Các mốc nhỏ, mỗi mốc có điều kiện qua cửa đo được</td></tr>
+            <tr><td><code>player-sdk.js</code>, <code>GAME_FORMAT.md</code></td><td>Hợp đồng giữa vỏ và nội dung: định dạng, API, công cụ kiểm tra</td></tr>
+            <tr><td><code>games/Bo game N.md</code></td><td>Prompt sản xuất theo lô</td></tr>
+            <tr><td><code>HANDOVER_TTS_v1.1.0.md</code></td><td>Phiếu yêu cầu thay đổi</td></tr>
+            <tr><td><code>DECISIONS.md</code>, <code>BUILD_STATUS.md</code></td><td>Sổ quyết định và nhật ký tiến độ</td></tr>
+            <tr><td><code>BUILD_REPORT.md</code>, <code>evidence/</code></td><td>Báo cáo kiểm thử kèm bằng chứng</td></tr>
+            <tr><td><code>AI_PLAYBOOK.md</code></td><td>Sổ tay cho AI: bản đồ repo, quy trình, bẫy đã gặp</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="thuong-mai">
+      <h2>Nếu muốn bán sản phẩm</h2>
+      <p>Dự án gia đình được phép bỏ qua nhiều thứ mà sản phẩm thương mại thì không. AI giúp được ở hầu hết các việc dưới đây, nhưng <b>trách nhiệm vẫn là của bạn</b>, và các phần pháp lý, bảo mật nên có người có chuyên môn xem lại.</p>
+      <ul class="checklist">
+        <li><b>Quyền sở hữu.</b> Giấy phép của mã nguồn và thư viện dùng kèm; bản quyền hình ảnh, âm thanh, font, nhân vật. Repo này chưa có giấy phép mở, và hình Gi &amp; Shi là của gia đình tác giả.</li>
+        <li><b>Dữ liệu người dùng.</b> Chính sách quyền riêng tư; quy định bảo vệ dữ liệu cá nhân nơi bạn bán; với sản phẩm cho trẻ em, các quy định riêng còn chặt hơn. Cách an toàn nhất vẫn là không thu thập gì, như app này.</li>
+        <li><b>Phát hành.</b> Tài khoản nhà phát triển, yêu cầu về phiên bản Android mục tiêu và chính sách của chợ ứng dụng, quy trình ký và lưu giữ khóa ký, kế hoạch cập nhật.</li>
+        <li><b>Chất lượng.</b> Thử trên nhiều máy thật của nhiều hãng; hiệu năng trên máy yếu; khả năng tiếp cận (chữ to, tương phản, đọc màn hình); kiểm thử tự động chạy lại mỗi lần sửa.</li>
+        <li><b>Bảo mật.</b> Nhờ người có chuyên môn rà soát; dùng AI như một người rà soát độc lập (một phiên chỉ đọc, chỉ báo lỗi, không sửa).</li>
+        <li><b>Vận hành.</b> Hỗ trợ khách hàng, sao lưu, ghi nhận lỗi (nếu có gửi dữ liệu thì phải xin phép), quy trình phát hành có handover và báo cáo như repo này.</li>
+      </ul>
+    </section>
+
+    <section id="bat-dau">
+      <h2>Bắt đầu dự án của bạn</h2>
+      <ol class="steps">
+        <li><b>Viết một trang “vì sao”.</b> Ai dùng, họ đang khổ vì việc gì, thế nào là thành công, và những gì bạn <b>không</b> muốn (ví dụ: không tài khoản, không quảng cáo).</li>
+        <li><b>Để AI phỏng vấn bạn</b> rồi viết đặc tả (prompt 1). Đọc kỹ, sửa, hỏi lại chỗ không hiểu. Đây là bước quan trọng nhất.</li>
+        <li><b>Chốt luật không được phá</b> và định nghĩa “xong”: chạy được trên thiết bị nào, kiểm thử nào phải qua, bàn giao gì.</li>
+        <li><b>Giao đặc tả</b> cho một agent lập trình (prompt 2). Để nó tự quyết chi tiết; đừng chen vào chọn thư viện.</li>
+        <li><b>Đọc báo cáo một cách hoài nghi.</b> Bằng chứng đâu, cái gì NOT_RUN, cái gì cần bạn tự thử.</li>
+        <li><b>Tự thử trên thiết bị thật</b>, như người dùng cuối, ở chỗ khó nhất (máy cũ, mạng yếu, người dùng vụng).</li>
+        <li><b>Gặp lỗi thì viết handover</b> (prompt 4) và giao cho phiên mới, không sửa vội trong một cuộc chat dài.</li>
+        <li><b>Ghi lại bài học</b> vào sổ tay cho AI (prompt 7) trước khi đóng mỗi phiên.</li>
+      </ol>
+    </section>
+
+    <section id="prompt">
+      <h2>Prompt mẫu</h2>
+      <p>Thay phần trong ngoặc vuông. Các prompt này cố ý dài và cụ thể: với AI, mơ hồ là nguồn gốc của hầu hết kết quả tệ.</p>
+
+      <div class="prompt">
+        <div class="prompt-head"><span>1 · Phỏng vấn để viết đặc tả</span><button type="button" class="copy">Sao chép</button></div>
+        <pre><code>Tôi muốn làm [mô tả 2–3 câu: cho ai, giải quyết việc gì]. Chưa viết mã.
+Hãy phỏng vấn tôi theo từng nhóm câu hỏi (người dùng, việc họ làm, dữ liệu, thiết bị, an toàn và riêng tư, cách phân phối, những gì KHÔNG làm) cho đến khi đủ thông tin.
+Sau đó tra tài liệu chính thức của các nền tảng liên quan, so sánh vài phương án thật sự khác nhau, rồi viết SPEC.md để một AI lập trình khác đọc là làm được từ đầu đến cuối, gồm:
+- mục 0: lệnh thực thi cho AI (làm hết, không dừng ở kế hoạch, tự quyết chi tiết kỹ thuật, không công bố hay mua gì);
+- mục tiêu, phạm vi bản đầu và những gì để sau;
+- bảng các mặc định đã chốt; bảng "mong muốn → cam kết thực tế" về giới hạn của nền tảng;
+- kiến trúc, ranh giới trách nhiệm, luật không được phá;
+- các mốc, mỗi mốc có điều kiện qua cửa đo được;
+- ma trận kiểm thử, định nghĩa "xong", mẫu báo cáo với nhãn PASS / FAIL / NOT_RUN / BLOCKED;
+- vì sao chọn phương án này.</code></pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span>2 · Giao đặc tả cho agent</span><button type="button" class="copy">Sao chép</button></div>
+        <pre><code>Đọc toàn bộ SPEC.md và thực thi từ đầu đến cuối. Tự quyết các chi tiết kỹ thuật thông thường và ghi lý do vào DECISIONS.md; không hỏi tôi chọn thư viện, tên biến, màu sắc.
+Làm theo từng mốc; sau mỗi mốc cập nhật BUILD_STATUS.md để có thể làm tiếp nếu bị ngắt.
+Chỉ viết "đã kiểm thử" khi đã chạy thật và có log hoặc ảnh; dùng nhãn PASS / FAIL / NOT_RUN / BLOCKED.
+Bước nào cần tôi làm trên thiết bị thì ghi rõ từng thao tác và vẫn hoàn thành mọi phần còn lại.
+Không xóa dữ liệu, không công bố, không đổi khóa hay mật khẩu khi chưa hỏi tôi.</code></pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span>3 · Sản xuất theo lô (game, màn hình, mẫu…)</span><button type="button" class="copy">Sao chép</button></div>
+        <pre><code>Làm [10] [game / màn hình / mẫu tài liệu] theo danh sách dưới đây, mỗi cái trong một thư mục riêng, đúng tên đã ghi.
+Đã có hoặc đang được làm ở nơi khác (không làm trùng, không sửa thư mục của chúng): [danh sách].
+Danh sách cần làm: [tên — thư mục — mô tả cụ thể].
+Tiêu chuẩn bắt buộc cho mọi cái: [thiết bị và trình duyệt mục tiêu, ngôn ngữ, phong cách, khả năng dùng khi mất mạng, kích thước màn hình, hiệu năng, không lỗi console…].
+Cách làm: viết phần dùng chung trước; làm một cái mẫu hoàn chỉnh làm chuẩn chất lượng; có thể chia phần còn lại cho agent con nhưng phải tự kiểm thử lại từng cái; đánh bóng ít nhất ba lượt bằng cách xem ảnh chụp.
+Trước khi báo xong: tự dùng thử như người dùng thật ở [các kích thước / thiết bị], thao tác thật, cố tình làm sai, tải lại, mất mạng; chụp ảnh; báo cáo bảng kết quả, đã kiểm gì và CHƯA kiểm được gì.</code></pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span>4 · Viết handover cho lỗi hoặc tính năng</span><button type="button" class="copy">Sao chép</button></div>
+        <pre><code>Chưa sửa gì. Hãy điều tra vấn đề sau: [mô tả, cách tái hiện, điều mong đợi, thiết bị].
+Đo và tìm nguyên nhân thật (đọc mã, chạy thử). Đưa tôi 2–3 phương án kèm ưu nhược điểm để tôi chọn.
+Sau khi tôi chọn, viết HANDOVER.md gồm: bối cảnh và quyết định đã chốt; tài liệu phải đọc; yêu cầu phải đạt; thiết kế đề xuất (có bước đo lại trước khi viết mã); kiểm thử bắt buộc; những gì phải bàn giao; ràng buộc giữ nguyên; tiêu chí hoàn thành.</code></pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span>5 · Kiểm thử như người dùng thật</span><button type="button" class="copy">Sao chép</button></div>
+        <pre><code>Đừng chỉ đọc mã. Chạy ứng dụng thật (trình duyệt tự động hoặc emulator), thao tác bằng chạm hoặc click thật theo kịch bản: [kịch bản].
+Thử ở [kích thước / thiết bị], kể cả máy cũ nhất cần hỗ trợ; mất mạng; tải lại; xoay màn hình; cố tình nhập sai.
+Chụp ảnh từng bước, ghi lại lỗi console. Báo cáo bảng PASS / FAIL / NOT_RUN kèm đường dẫn bằng chứng, và danh sách những gì tôi cần tự thử trên thiết bị thật.</code></pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span>6 · Rà soát độc lập</span><button type="button" class="copy">Sao chép</button></div>
+        <pre><code>Bạn là người kiểm định độc lập, không phải người viết. Đọc yêu cầu gốc [file] và kết quả hiện tại.
+Liệt kê: chỗ chưa đạt yêu cầu, chỗ báo cáo nói quá so với bằng chứng, rủi ro bảo mật và riêng tư (bí mật, đường dẫn máy tính, dữ liệu cá nhân trong repo), việc khó hoàn tác chưa được hỏi.
+Không sửa gì, chỉ báo cáo, xếp theo mức nghiêm trọng.</code></pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span>7 · Ghi nhớ cho phiên sau</span><button type="button" class="copy">Sao chép</button></div>
+        <pre><code>Trước khi kết thúc: cập nhật AI_PLAYBOOK.md với những gì phiên này học được (lệnh build và test, quyết định mới và lý do, bẫy đã gặp và cách tránh). Viết ngắn, cụ thể, để một phiên AI mới chỉ đọc file này là làm tiếp được. Cập nhật DECISIONS.md và BUILD_STATUS.md nếu có thay đổi.</code></pre>
+      </div>
+    </section>
+
+    <section id="loi-hay-gap">
+      <h2>Lỗi hay gặp khi “vibe code”</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Lỗi</th><th>Cách tránh</th></tr></thead>
+          <tbody>
+            <tr><td>Yêu cầu mơ hồ: “làm app đẹp, dễ dùng”</td><td>Nói rõ người dùng, việc họ làm, thiết bị, giới hạn, ví dụ cụ thể</td></tr>
+            <tr><td>Không có định nghĩa “xong”</td><td>Viết tiêu chí nghiệm thu đo được trước khi giao việc</td></tr>
+            <tr><td>Tin chữ “đã test xong”</td><td>Đòi log, ảnh, số test, nhãn NOT_RUN cho phần chưa chạy</td></tr>
+            <tr><td>Sửa nhiều thứ trong một cuộc chat rất dài</td><td>Mỗi thay đổi lớn một handover, một phiên mới</td></tr>
+            <tr><td>AI tự đổi thứ không được đổi (khóa ký, mã định danh, định dạng dữ liệu)</td><td>Ghi thành luật không được phá, nhắc lại trong mỗi handover</td></tr>
+            <tr><td>Chỉ thử trên máy của mình</td><td>Thử trên thiết bị cũ nhất cần hỗ trợ; người tự thử phần máy không làm được</td></tr>
+            <tr><td>Lộ bí mật hoặc thông tin máy khi công khai</td><td>Loại trừ file bí mật ngay từ đầu; quét toàn bộ, kể cả file nén, trước khi đưa lên</td></tr>
+            <tr><td>Không ghi lại bài học</td><td>Sổ tay cho AI, sổ quyết định; cập nhật trước khi đóng phiên</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tai-lieu">
+      <h2>Tài liệu gốc trong repo</h2>
+      <ul class="doc-list">
+        <li><a data-gh="specs/KidsGames_Player_Claude_Code_Bible.md" href="specs/KidsGames_Player_Claude_Code_Bible.md">Bible của app</a><span>Đặc tả 1.370 dòng đã giao cho AI để làm bản 1.0.0</span></li>
+        <li><a data-gh="specs/BRIEF_10_GAME_1FILE.md" href="specs/BRIEF_10_GAME_1FILE.md">Brief 10 game theo SDK</a><span>Mẫu brief cho game phải chạy cả trên Android 8</span></li>
+        <li><a data-gh="games/Bo game 2.md" href="games/Bo%20game%202.md">Prompt Bộ game 2</a><span>Mẫu prompt sản xuất 10 game một lúc (có cả Bộ 3, 4, 5)</span></li>
+        <li><a data-gh="specs/HANDOVER_TTS_v1.1.0.md" href="specs/HANDOVER_TTS_v1.1.0.md">Handover bản 1.1.0</a><span>Mẫu phiếu yêu cầu thay đổi</span></li>
+        <li><a data-gh="KidsGamesPlayer/docs/DECISIONS.md" href="KidsGamesPlayer/docs/DECISIONS.md">Sổ quyết định</a><span>22 quyết định và chỗ lệch so với bible, kèm lý do</span></li>
+        <li><a data-gh="KidsGamesPlayer/BUILD_REPORT.md" href="KidsGamesPlayer/BUILD_REPORT.md">Báo cáo kiểm thử</a><span>Mẫu báo cáo trung thực với PASS / FAIL / NOT_RUN</span></li>
+        <li><a data-gh="AI_PLAYBOOK.md" href="AI_PLAYBOOK.md">AI_PLAYBOOK.md</a><span>Đưa cho AI để cùng bạn làm tiếp dự án này</span></li>
+      </ul>
+      <p class="back-home"><a class="btn btn-yellow" href="./#choi">▶ Về chơi game</a> <a class="btn btn-ghost" href="./">Trang chủ</a></p>
+    </section>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <img src="site/img/logo_aimo.svg" alt="AI Mở Studio" width="130" height="38" style="opacity:0.9">
+    <p>© 2026 <strong>AI Mở Studio</strong> · Hệ sinh thái ứng dụng &amp; game sáng tạo an toàn cho trẻ em.</p>
+  </div>
+</footer>
+
+<script src="site/app.js"></script>
+</body>
+</html>

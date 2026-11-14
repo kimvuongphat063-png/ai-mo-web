@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "builtin.balloon-pop",
+  "title": "Chạm bong bóng",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "orientation": "landscape",
+  "playerApiVersion": 1,
+  "backgroundColor": "#7ACAFE",
+  "sortOrder": 10,
+  "files": [
+    {
+      "path": "assets/chime.ogg",
+      "size": 6291,
+      "sha256": "f78eda9afd4986342682acadf0e85c17516d46e833b424efc8c670c087253893"
+    },
+    {
+      "path": "assets/gi-cheer.webp",
+      "size": 28488,
+      "sha256": "cff7a3dbbb2bd5430743de6e8672f3130e46251491080cedab5f3bd96d7936b2"
+    },
+    {
+      "path": "assets/gi.webp",
+      "size": 22696,
+      "sha256": "4fd33ee3c27d03252ff4e0fe323131009a6d45ed4afc5b5bdc67b0126750147d"
+    },
+    {
+      "path": "assets/music.ogg",
+      "size": 102425,
+      "sha256": "c6eec5417691e05ab7b7a6ffaba50667c2c7c8d2d106c8455407c467dc9a194f"
+    },
+    {
+      "path": "assets/pop.ogg",
+      "size": 4984,
+      "sha256": "94b0f9e7c196c04449b1270e3f3e6fb675d4a5ac2e3e2bbd5619721c38d4b284"
+    },
+    {
+      "path": "assets/shi-cheer.webp",
+      "size": 26102,
+      "sha256": "bc0aa84d5a73b7ab817bd18c277e9725706f877d544bbbfd20e4e6aefa9ddb2d"
+    },
+    {
+      "path": "assets/shi.webp",
+      "size": 22894,
+      "sha256": "48baed40e2ed5cb89e233b5baa005edff36ee7e7c1e3c515a3d3688ab3320dc3"
+    },
+    {
+      "path": "assets/sky.webp",
+      "size": 31028,
+      "sha256": "844f8f87b9cd08b670fc81da8635335bcad2539dcd994ac6c295091978edf4a1"
+    },
+    {
+      "path": "game.js",
+      "size": 11962,
+      "sha256": "04b90e954df401654812c85e38d839b9b07e94020ffb6c5f944c7caae3945009"
+    },
+    {
+      "path": "icon.png",
+      "size": 21876,
+      "sha256": "e7aa0ca344989577bb5d9c82ce7e33b59dfc663f7253f0f6d4bdb50fbc1e2492"
+    },
+    {
+      "path": "index.html",
+      "size": 465,
+      "sha256": "40da609eaa54e69348cad7232202392fa56faa5e311a4d25cdaf0b70d11e3c78"
+    },
+    {
+      "path": "player-sdk.js",
+      "size": 15693,
+      "sha256": "6c463293c619ce08860870229aa5a8841348de621d585715b7ea5b2a1069c90f"
+    },
+    {
+      "path": "style.css",
+      "size": 363,
+      "sha256": "73b026bedf3e01350e5e99c677360b641ab64ed776b9797b3582802382496779"
+    }
+  ]
+}

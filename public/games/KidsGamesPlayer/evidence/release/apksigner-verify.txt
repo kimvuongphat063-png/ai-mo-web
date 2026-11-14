@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Kids Games Player, OU=Family, O=Family, C=VN
+Signer #1 certificate SHA-256 digest: c0e5bcc74c463e7ce5556a95514fd34014c25cf2854cde2c487ad82597282530
+Signer #1 certificate SHA-1 digest: bde54d87c7db9f51dcc945ad975ffadfaa362c03
+Signer #1 certificate MD5 digest: 83052098be2458cb072b1d100b712ebf
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 4096
+Signer #1 public key SHA-256 digest: 3eb367b4107af45e6e019a11c0e32f8b7b76d7333efcf170f313de6e9d256152
+Signer #1 public key SHA-1 digest: 26407c30079c9d20d7dd57cd42fc0e8049c0cbdf
+Signer #1 public key MD5 digest: 1f6d31d42be90332c3fd748e8ae118ef

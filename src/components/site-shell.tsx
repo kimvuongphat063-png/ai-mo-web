@@ -74,6 +74,12 @@ const navItems: NavItem[] = [
     href: "/apps",
   },
   {
+    key: "games",
+    label: "Game",
+    href: "/games",
+    badge: "65+",
+  },
+  {
     key: "learn",
     label: "Học AI",
     href: "/guides",
@@ -518,8 +524,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/games" className="hover:text-white transition-colors text-neutral-500">
-                  Game web giải trí (Sắp có)
+                <Link href="/games" className="hover:text-white transition-colors">
+                  Kho Game Web Trí Tuệ (65+)
                 </Link>
               </li>
             </ul>

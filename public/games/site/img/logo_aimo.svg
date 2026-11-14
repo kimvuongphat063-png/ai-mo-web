@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 150" width="540" height="150">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#315ee8"/>
+      <stop offset="50%" stop-color="#557ff7"/>
+      <stop offset="100%" stop-color="#24a979"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD13B"/>
+      <stop offset="100%" stop-color="#FFA800"/>
+    </linearGradient>
+    <filter id="shadow" x="-8%" y="-8%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#182042" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Mascot / Icon Group -->
+  <g transform="translate(15, 15)" filter="url(#shadow)">
+    <!-- Back rounded badge -->
+    <rect x="0" y="0" width="118" height="118" rx="30" fill="url(#bgGrad)"/>
+    <rect x="4" y="4" width="110" height="110" rx="26" fill="none" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="2"/>
+    
+    <!-- Sparkle Stars -->
+    <path d="M 24 24 Q 30 30 36 30 Q 30 30 24 36 Q 30 30 24 24" fill="#FFD13B"/>
+    <circle cx="94" cy="28" r="4" fill="#FFD13B"/>
+    <circle cx="22" cy="92" r="3.5" fill="#FFFFFF" opacity="0.8"/>
+
+    <!-- Open Book / AI Brain Origami Icon -->
+    <path d="M 59 40 C 47 34, 30 35, 25 43 L 25 85 C 31 78, 48 77, 59 84 C 70 77, 87 78, 93 85 L 93 43 C 88 35, 71 34, 59 40 Z" fill="#FFFFFF" opacity="0.95"/>
+    <path d="M 59 40 L 59 84" stroke="#315ee8" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Magic Sparkle Center -->
+    <circle cx="59" cy="54" r="8" fill="url(#goldGrad)"/>
+    <path d="M 59 42 L 59 66 M 47 54 L 71 54" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+    
+    <!-- Joyful Smile / Gamepad arc -->
+    <path d="M 40 98 Q 59 110 78 98" fill="none" stroke="#FFD13B" stroke-width="4.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Typography: AI MỞ -->
+  <text x="156" y="80" font-family="'Baloo 2', 'Nunito', 'Segoe UI Rounded', system-ui, sans-serif" font-weight="900" font-size="64" fill="#201c39" letter-spacing="1">AI MỞ</text>
+  
+  <!-- STUDIO Badge -->
+  <rect x="368" y="36" width="138" height="42" rx="14" fill="url(#goldGrad)" filter="url(#shadow)"/>
+  <text x="437" y="65" font-family="'Baloo 2', 'Nunito', 'Segoe UI Rounded', system-ui, sans-serif" font-weight="900" font-size="20" fill="#201c39" text-anchor="middle" letter-spacing="2">STUDIO</text>
+
+  <!-- Tagline -->
+  <text x="158" y="116" font-family="'Nunito', 'Segoe UI Rounded', system-ui, sans-serif" font-weight="800" font-size="20" fill="#315ee8" letter-spacing="1.5">SÂN CHƠI GAME SÁNG TẠO</text>
+  <circle cx="432" cy="110" r="4" fill="#24a979"/>
+  <text x="444" y="116" font-family="'Nunito', 'Segoe UI Rounded', system-ui, sans-serif" font-weight="700" font-size="18" fill="#24a979">100% OFFLINE</text>
+</svg>

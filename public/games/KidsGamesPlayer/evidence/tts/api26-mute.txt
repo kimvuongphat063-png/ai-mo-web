@@ -1,0 +1,9 @@
+== API 26, May Ke Chuyen, debug 1.1.0, Google TTS 3.12.9, vi-vn-x-gft-local
+-- speaking (sound on):
+  ID:255 -- type:android.media.AudioTrack -- u/pid:10054/11633 -- state:started -- attr:AudioAttributes: usage=1 content=1 flags=0x0 tags= bundle=null
+-- 1 s after tapping the sound button (off):
+-- page events:
+{"error":"no game page","pages":[]}
+-- new sentence while muted, 2 s:
+-- page events (silent, timed):
+{"error":"no game page","pages":[]}

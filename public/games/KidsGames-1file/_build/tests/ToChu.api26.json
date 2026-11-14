@@ -1,0 +1,93 @@
+{
+  "game": "ToChu",
+  "url": "http://127.0.0.1:8872/index.html",
+  "browser": "Android 8.0 emulator WebView Mozilla/5.0 (Linux; Android 8.0.0; Android SDK built for x86_64 Build/OSR1.180418.026; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 Mobile Safari/537.36",
+  "indexSha256": "25eb03d957af9c3838b473ead6bf4f025ad5554aeabfd57941ccc6d24fd4c7b8",
+  "date": "2026-10-11T07:49:37.770Z",
+  "steps": [],
+  "checks": {
+    "start -> grid": {
+      "ok": true,
+      "note": ""
+    },
+    "grid tile A -> trace screen": {
+      "ok": true,
+      "note": ""
+    },
+    "A traced -> done overlay": {
+      "ok": true,
+      "note": ""
+    },
+    "next -> Ă": {
+      "ok": true,
+      "note": ""
+    },
+    "Ă traced (4 strokes incl. breve)": {
+      "ok": true,
+      "note": ""
+    },
+    "off-path scribble does not progress": {
+      "ok": true,
+      "note": ""
+    },
+    "grid button -> grid": {
+      "ok": true,
+      "note": ""
+    },
+    "O: shortcut across the circle does not complete": {
+      "ok": true,
+      "note": ""
+    },
+    "O traced along the circle": {
+      "ok": true,
+      "note": ""
+    },
+    "lowercase switch saved": {
+      "ok": true,
+      "note": ""
+    },
+    "lowercase a opened": {
+      "ok": true,
+      "note": ""
+    },
+    "a traced": {
+      "ok": true,
+      "note": ""
+    },
+    "replay restarts the same letter": {
+      "ok": true,
+      "note": ""
+    },
+    "i traced (stroke + tapped dot)": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"trace\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"trace\"}}"
+    },
+    "progress restored after reload": {
+      "ok": true,
+      "note": "{\"saveSchemaVersion\":1,\"up\":[1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],\"lo\":[1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"mode\":\"lo\"}"
+    },
+    "natural WebView viewport (no size emulation): letter b traced": {
+      "ok": true,
+      "note": ""
+    },
+    "natural WebView viewport (no size emulation): letter g traced": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": false,
+      "note": "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8872/index.html?sheet=1 | [log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8872/index.html | [log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8872/index.html | [log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8872/index.html"
+    }
+  },
+  "console": [
+    "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8872/index.html?sheet=1",
+    "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8872/index.html",
+    "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8872/index.html",
+    "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8872/index.html"
+  ],
+  "ignoredFaviconRequests": 6
+}

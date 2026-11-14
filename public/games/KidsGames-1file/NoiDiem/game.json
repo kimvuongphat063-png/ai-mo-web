@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "family.noi-diem",
+  "title": "Nối các điểm",
+  "version": "1.0.0",
+  "playerApiVersion": 1,
+  "backgroundColor": "#F3ECFF",
+  "sortOrder": 170
+}

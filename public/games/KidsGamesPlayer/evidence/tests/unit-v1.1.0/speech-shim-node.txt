@@ -1,0 +1,10 @@
+PASS installs the standard globals with no voices
+PASS only a port posted without a source window is accepted
+PASS voices arrive with voiceschanged; speak/start/end like a browser
+PASS cancel: state at once, errors later, app told, late events ignored
+PASS family-A pattern: speaking||pending -> cancel -> speak after 90 ms
+PASS pause stops the current utterance and holds the rest until resume
+PASS errors, boundary, document language and limits
+PASS before the port: queued, flushed after hello; never connected: synthesis-unavailable
+PASS a new channel for the same page drops what was sent on the old one
+TOTAL 9 FAILED 0

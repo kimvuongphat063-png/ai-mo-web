@@ -1,0 +1,95 @@
+{
+  "game": "ToNet",
+  "url": "http://127.0.0.1:9071/index.html",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "date": "2026-10-11T07:21:18.288Z",
+  "steps": [],
+  "checks": {
+    "start -> menu": {
+      "ok": true,
+      "note": ""
+    },
+    "level 1 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 2 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 3 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 4 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 5 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 6 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 7 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 8 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 9 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 10 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "level 11 traced by finger": {
+      "ok": true,
+      "note": ""
+    },
+    "maze: dead end sends the rabbit back by itself": {
+      "ok": true,
+      "note": ""
+    },
+    "maze: back at the junction": {
+      "ok": true,
+      "note": ""
+    },
+    "maze finished": {
+      "ok": true,
+      "note": ""
+    },
+    "spiral: straight shortcut does not finish": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"play\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"play\"}}"
+    },
+    "progress restored after reload": {
+      "ok": true,
+      "note": "{\"saveSchemaVersion\":1,\"done\":[1,1,1,1,1,1,1,1,1,1,1,1]}"
+    },
+    "800x360: level 7 traced": {
+      "ok": true,
+      "note": ""
+    },
+    "2400x1080: level 10 traced": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": true,
+      "note": ""
+    }
+  },
+  "console": [],
+  "ignoredFaviconRequests": 9
+}

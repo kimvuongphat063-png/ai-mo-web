@@ -1,0 +1,17 @@
+### Home key
+speaking at 1378.87
+action done at 1378.99
+1379.01 started=1
+1379.13 started=1
+1379.30 started=1
+1379.54 started=1
+1379.79 started=1
+1379.95 started=0
+1380.07 started=0
+1380.35 started=0
+1380.52 started=0
+1380.73 started=0
+1380.86 started=0
+1380.94 started=0
+Warning: Activity not started, its current task has been brought to the front
+after return: 0

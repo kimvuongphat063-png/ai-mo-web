@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "family.ghep-bong",
+  "title": "Tìm bóng",
+  "version": "1.0.0",
+  "playerApiVersion": 1,
+  "backgroundColor": "#FFF0E0",
+  "sortOrder": 180
+}

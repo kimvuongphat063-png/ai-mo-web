@@ -1,0 +1,16 @@
+1792114368 -
+1792114368 -
+1792114369 -
+1792114369 -
+1792114370 -
+1792114370 -
+1792114371 STARTED AudioPlaybackConfiguration piid:287 deviceIds:[] type:android.media.AudioTrack u/pid:10182/7607 state:started attr:AudioAttributes: usage=US
+1792114371 STARTED AudioPlaybackConfiguration piid:287 deviceIds:[2] type:android.media.AudioTrack u/pid:10182/7607 state:started attr:AudioAttributes: usage=U
+1792114372 STARTED AudioPlaybackConfiguration piid:287 deviceIds:[2] type:android.media.AudioTrack u/pid:10182/7607 state:started attr:AudioAttributes: usage=U
+1792114372 STARTED AudioPlaybackConfiguration piid:287 deviceIds:[2] type:android.media.AudioTrack u/pid:10182/7607 state:started attr:AudioAttributes: usage=U
+1792114372 STARTED AudioPlaybackConfiguration piid:287 deviceIds:[2] type:android.media.AudioTrack u/pid:10182/7607 state:started attr:AudioAttributes: usage=U
+1792114373 STARTED AudioPlaybackConfiguration piid:287 deviceIds:[2] type:android.media.AudioTrack u/pid:10182/7607 state:started attr:AudioAttributes: usage=U
+1792114373 -
+1792114373 -
+1792114373 -
+1792114373 -

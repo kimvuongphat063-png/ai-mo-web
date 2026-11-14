@@ -1,0 +1,24 @@
+Kids Games Player 1.0.0 release (APK sha256 aea6cc2a…), emulator kgp_api37 (Android 17, WebView 145.0.7632.218)
+Nguồn: adb shell dumpsys audio → AudioPlaybackConfiguration của uid 10244 (app). Không có player = không phát ra loa.
+Thời điểm: 2026-10-11T10:03:34+07:00
+
+1. Mở 'Chạm bong bóng' từ menu (chưa chạm trong game) | piid:383 type:AAudio state:started
+2. Chạm nút chơi trong game (cử chỉ thật)        | piid:383 type:AAudio state:started
+3. +6 s đang chơi                                        | piid:383 type:AAudio state:started
+4. Bấm nút loa native → tắt tiếng                 | piid:383 type:AAudio state:stopped
+5. Bấm lại → bật tiếng (game vẫn đang chơi)  | piid:391 type:AAudio state:started
+6. Giữ nút khóa 2 s → bàn phím PIN mở (keypad=1) | (không có player)
+7. Bấm 'Hủy' trên bàn phím (keypad còn=0)          | piid:399 type:AAudio state:started
+8. Phím Home (app ra nền)                               | piid:399 type:AAudio state:stopped
+9. +6 s ở nền                                          | (không có player)
+10. Mở lại app → màn 'Chơi tiếp nhé?'           | (không có player)
+11. Chạm 'Chơi tiếp' (game nạp lại từ checkpoint) | piid:407 type:AAudio state:started
+12. Chạm trong game ('Chạm để chơi' nếu có, rồi nút chơi) | piid:407 type:AAudio state:started
+13. Tắt màn hình (KEYCODE_SLEEP)                       | piid:407 type:AAudio state:stopped
+14. +6 s màn hình tắt                                  | (không có player)
+15. Bật màn hình, mở khóa → 'Chơi tiếp nhé?' (chưa chạm) | (không có player)
+16. Nút nhà → menu                                     | piid:415 type:AAudio state:stopped
+17. 'Lật thẻ' (HTML <audio>): chạm chơi + lật 1 thẻ | piid:423 type:AAudio state:started
+18. Lật thẻ thứ hai                                  | piid:423 type:AAudio state:started
+
+Ghi chú: 'state:started' nghĩa là luồng ra loa đang mở (có thể đang phát im lặng); 'không có player' nghĩa là không thể có tiếng. Âm lượng thực tế cần nghe trên máy thật.

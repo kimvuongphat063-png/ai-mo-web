@@ -1,0 +1,33 @@
+package vn.family.kidsgamesplayer.core
+
+/** Stable error codes shown to parents (translated in ui/ErrorTexts) and kept in diagnostics. */
+object ErrorCodes {
+    const val MANIFEST_TOO_LARGE = "MANIFEST_TOO_LARGE"
+    const val MANIFEST_INVALID_JSON = "MANIFEST_INVALID_JSON"
+    const val MANIFEST_INVALID_FIELD = "MANIFEST_INVALID_FIELD"
+    const val MANIFEST_UNSUPPORTED_SCHEMA = "MANIFEST_UNSUPPORTED_SCHEMA"
+    const val MANIFEST_BAD_ID = "MANIFEST_BAD_ID"
+    const val MANIFEST_RESERVED_ID = "MANIFEST_RESERVED_ID"
+    const val MANIFEST_BAD_ENTRY = "MANIFEST_BAD_ENTRY"
+    const val MANIFEST_BAD_PATH = "MANIFEST_BAD_PATH"
+    const val MANIFEST_BAD_FILES = "MANIFEST_BAD_FILES"
+    const val MANIFEST_UNSUPPORTED_PLAYER_API = "MANIFEST_UNSUPPORTED_PLAYER_API"
+
+    const val MISSING_ENTRY = "MISSING_ENTRY"
+    const val INCOMPLETE_PACKAGE = "INCOMPLETE_PACKAGE"
+    const val SOURCE_CHANGED = "SOURCE_CHANGED"
+    const val QUOTA_BYTES = "QUOTA_BYTES"
+    const val QUOTA_FILES = "QUOTA_FILES"
+    const val QUOTA_DEPTH = "QUOTA_DEPTH"
+    const val QUOTA_FILE_SIZE = "QUOTA_FILE_SIZE"
+    const val QUOTA_ENTRY_SIZE = "QUOTA_ENTRY_SIZE"
+    const val QUOTA_GAMES = "QUOTA_GAMES"
+    const val PATH_REJECTED = "PATH_REJECTED"
+    const val PATH_COLLISION = "PATH_COLLISION"
+    const val DUPLICATE_ID = "DUPLICATE_ID"
+    const val NO_SPACE = "NO_SPACE"
+    const val IO_ERROR = "IO_ERROR"
+    const val PERMISSION_LOST = "PERMISSION_LOST"
+    const val PROVIDER_ERROR = "PROVIDER_ERROR"
+    const val REVISION_MISSING = "REVISION_MISSING"
+}

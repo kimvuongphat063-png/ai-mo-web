@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/game_bg"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <!-- Native control strip: its own area outside the WebView, never over game content. -->
+    <LinearLayout
+        android:id="@+id/control_strip"
+        android:layout_width="@dimen/control_strip_width"
+        android:layout_height="match_parent"
+        android:background="@color/teal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_round_button"
+            android:contentDescription="@string/cd_home"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_home" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btn_sound"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_round_button"
+            android:contentDescription="@string/cd_sound_on"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_volume_on" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btn_restart"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_round_button"
+            android:contentDescription="@string/cd_restart"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_replay" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <vn.family.kidsgamesplayer.ui.HoldButton
+            android:id="@+id/btn_parent"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_round_button"
+            android:contentDescription="@string/cd_parent"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/game_area"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/web_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Swallows touches while the game is paused behind a native overlay. -->
+        <View
+            android:id="@+id/input_blocker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="false"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/loading_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cream"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+                android:adjustViewBounds="true"
+                android:importantForAccessibility="no"
+                android:src="@drawable/mascot_shi_sparkle" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/loading_icon"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:importantForAccessibility="no"
+                    android:scaleType="fitCenter" />
+
+                <ProgressBar
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/teal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/game_loading"
+                    android:textAppearance="@style/KidsText.Body" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/error_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cream"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:importantForAccessibility="no"
+                android:src="@drawable/mascot_gi_think" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/error_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="420dp"
+                    android:text="@string/game_error_title"
+                    android:textAppearance="@style/KidsText.Title" />
+
+                <TextView
+                    android:id="@+id/error_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:maxWidth="420dp"
+                    android:textAppearance="@style/KidsText.Body"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/error_home"
+                        android:layout_width="84dp"
+                        android:layout_height="84dp"
+                        android:background="@drawable/bg_big_play"
+                        android:contentDescription="@string/game_error_menu"
+                        android:padding="20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_home" />
+
+                    <ImageButton
+                        android:id="@+id/error_retry"
+                        android:layout_width="84dp"
+                        android:layout_height="84dp"
+                        android:layout_marginStart="24dp"
+                        android:background="@drawable/bg_big_play"
+                        android:contentDescription="@string/game_error_retry"
+                        android:padding="20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_replay" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/resume_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cream"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="190dp"
+                android:adjustViewBounds="true"
+                android:importantForAccessibility="no"
+                android:src="@drawable/mascot_both_wave" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/game_resume_title"
+                    android:textAppearance="@style/KidsText.Title" />
+
+                <ImageButton
+                    android:id="@+id/resume_play"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_big_play"
+                    android:contentDescription="@string/game_resume_title"
+                    android:padding="28dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_play" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/confirm_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/scrim"
+            android:clickable="true"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_panel"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_replay"
+                    app:tint="@color/teal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/restart_confirm"
+                    android:textAppearance="@style/KidsText.Title" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/confirm_no"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:background="@drawable/bg_key"
+                        android:contentDescription="@string/confirm_no"
+                        android:padding="18dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_close"
+                        app:tint="@color/coral" />
+
+                    <ImageButton
+                        android:id="@+id/confirm_yes"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:layout_marginStart="32dp"
+                        android:background="@drawable/bg_big_play"
+                        android:contentDescription="@string/confirm_yes"
+                        android:padding="18dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_check" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
+</LinearLayout>

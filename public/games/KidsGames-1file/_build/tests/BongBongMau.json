@@ -1,0 +1,63 @@
+{
+  "game": "BongBongMau",
+  "url": "http://127.0.0.1:9075/index.html",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "date": "2026-10-11T07:27:15.783Z",
+  "steps": [],
+  "checks": {
+    "start -> menu": {
+      "ok": true,
+      "note": ""
+    },
+    "wrong bubble: wobble only, score unchanged": {
+      "ok": true,
+      "note": ""
+    },
+    "red: 10 right bubbles -> target complete": {
+      "ok": true,
+      "note": ""
+    },
+    "celebration shown": {
+      "ok": true,
+      "note": ""
+    },
+    "next -> blue target": {
+      "ok": true,
+      "note": ""
+    },
+    "blue complete": {
+      "ok": true,
+      "note": ""
+    },
+    "shape level (triangle) complete": {
+      "ok": true,
+      "note": ""
+    },
+    "number level (4) complete": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"menu\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"menu\"}}"
+    },
+    "progress restored after reload": {
+      "ok": true,
+      "note": "{\"saveSchemaVersion\":1,\"done\":{\"0-0\":1,\"0-1\":1,\"1-2\":1,\"2-3\":1}}"
+    },
+    "800x360: target complete": {
+      "ok": true,
+      "note": ""
+    },
+    "2400x1080: target complete": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": true,
+      "note": ""
+    }
+  },
+  "console": [],
+  "ignoredFaviconRequests": 8
+}

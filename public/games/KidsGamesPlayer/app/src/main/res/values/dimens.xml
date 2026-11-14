@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="control_strip_width">76dp</dimen>
+    <dimen name="card_min_width">156dp</dimen>
+    <dimen name="card_icon_max">132dp</dimen>
+    <dimen name="parent_button_size">48dp</dimen>
+    <dimen name="corner_card">22dp</dimen>
+    <dimen name="menu_header_height">100dp</dimen>
+</resources>

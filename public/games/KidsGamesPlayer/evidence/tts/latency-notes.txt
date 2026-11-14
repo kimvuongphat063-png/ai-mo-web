@@ -1,0 +1,10 @@
+# Độ trễ speak -> onStart của câu đầu, emulator API 37, Google TTS (Speech Recognition and Synthesis from Google), giọng vi-vn-x-gft-local
+## Trong tiến trình test (AndroidTtsEngineDeviceTest, engine Google bị force-stop trước, chờ headStartMs sau READY)
+head start 3 s: 1091 ms (engine nguội), 604 ms (engine ấm) — real-engine-api37-vi-cold/warm.txt
+head start 8 s: 818 ms; 15 s: 1077 ms — real-engine-api37-vi-headstart8s/15s.txt
+thí nghiệm (không giữ trong mã): làm ấm bằng speak âm lượng 0 rồi chờ 15 s: 717 / 507 ms; không làm ấm: 996 / 563 ms => không khác biệt rõ
+câu thứ hai ngay sau đó: 3–71 ms
+## Trong app debug (WebView + game mẫu 'Chạm bong bóng'): force-stop app, mở lại, chờ 6 s ở menu, mở game (9 s), đọc một câu dài
+bản trước khi sửa: 2505 ms, 1959 ms; sau khi sửa (dừng làm ấm nếu câu thật tới): 2705, 1970, 1807 ms
+engine đã ấm trong cùng phiên: 22 ms, 520 ms
+## API 26 (Google TTS 3.12.9): xem real-engine-api26-*.txt — có làm ấm + 3 s ở menu: 3 ms; không làm ấm: 523–656 ms

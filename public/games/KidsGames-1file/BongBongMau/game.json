@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "family.bong-bong-mau",
+  "title": "Bắt bóng đúng màu",
+  "version": "1.0.0",
+  "playerApiVersion": 1,
+  "backgroundColor": "#DDF3FF",
+  "sortOrder": 150
+}

@@ -1,0 +1,39 @@
+ KgpTtsProbe: state=READY engine=Speech Recognition and Synthesis from Google initMs=3875 error=null
+ KgpTtsProbe: voices(13)=vi-vn-x-gft-local[vi-VN]*, vi-vn-x-vic-local[vi-VN], vi-vn-x-vid-local[vi-VN], vi-vn-x-vie-local[vi-VN], vi-vn-x-vif-local[vi-VN], en-us-x-iob-local[en-US], en-us-x-iog-local[en-US], en-us-x-iol-local[en-US], en-us-x-iom-local[en-US], en-us-x-sfg-local[en-US], en-us-x-tpc-local[en-US], en-us-x-tpd-local[en-US], en-us-x-tpf-local[en-US]
+ KgpTtsProbe: raw en-us-x-iob-local en-US q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-iob-network en-US q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-iog-local en-US q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-iog-network en-US q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-iol-local en-US q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-iol-network en-US q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-iom-local en-US q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-iom-network en-US q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-sfg-local en-US q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-sfg-network en-US q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-tpc-local en-US q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-tpc-network en-US q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-tpd-local en-US q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-tpd-network en-US q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-tpf-local en-US q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw en-us-x-tpf-network en-US q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-VN-language vi-VN q=400 l=200 net=false features=[networkTimeoutMs, legacySetLanguageVoice, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-gft-local vi-VN q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-gft-network vi-VN q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-vic-local vi-VN q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-vic-network vi-VN q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-vid-local vi-VN q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-vid-network vi-VN q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-vie-local vi-VN q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-vie-network vi-VN q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-vif-local vi-VN q=400 l=200 net=false features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw vi-vn-x-vif-network vi-VN q=400 l=200 net=true features=[networkTimeoutMs, networkRetriesCount]
+ KgpTtsProbe: raw defaultVoice=en-US-language defaultEngine=com.google.android.tts
+ KgpTtsProbe: raw isLanguageAvailable(vi-VN)=1
+ KgpTtsProbe: raw isLanguageAvailable(en-US)=1
+ KgpTtsProbe: raw isLanguageAvailable(de-DE)=1
+ KgpTtsProbe: raw isLanguageAvailable(ja-JP)=1
+ KgpTtsProbe: head start 8000 ms
+ KgpTtsProbe: speak #1 with vi-vn-x-gft-local accepted=true
+ KgpTtsProbe: #1 events=[start, range, range, range, range, range, range, range, done] speak->start=818 ms, start->done=2770 ms
+ KgpTtsProbe: speak #2 with vi-vn-x-gft-local accepted=true
+ KgpTtsProbe: #2 events=[start, range, range, range, range, range, range, range, done] speak->start=6 ms, start->done=2792 ms

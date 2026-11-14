@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "family.color-match",
+  "title": "Ghép màu",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "orientation": "landscape",
+  "playerApiVersion": 1,
+  "backgroundColor": "#F6E3C6",
+  "sortOrder": 20,
+  "files": []
+}

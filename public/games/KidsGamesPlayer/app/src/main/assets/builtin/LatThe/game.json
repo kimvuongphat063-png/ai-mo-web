@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "id": "builtin.animal-memory",
+  "title": "Lật thẻ con vật",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "orientation": "landscape",
+  "playerApiVersion": 1,
+  "backgroundColor": "#D7ECE6",
+  "sortOrder": 30,
+  "files": [
+    {
+      "path": "assets/animals/bunny.svg",
+      "size": 907,
+      "sha256": "f903556b9e23e445440c61c1d9261888242fb3fb527ee8ad313645996ff71579"
+    },
+    {
+      "path": "assets/animals/cat.svg",
+      "size": 1026,
+      "sha256": "dd7785966a0de0b6d00de5d6f41e1c86784b4be52f0797bf6327b62f676f70fc"
+    },
+    {
+      "path": "assets/animals/cow.svg",
+      "size": 1014,
+      "sha256": "b75ecf01133bf88b5f805dd0ea648ef534c973391608620d2db184ff768b2e06"
+    },
+    {
+      "path": "assets/animals/dog.svg",
+      "size": 968,
+      "sha256": "3c66088472318a53bd4bc304b0a1eedb36885986b42534424276d03558a28ee7"
+    },
+    {
+      "path": "assets/animals/duck.svg",
+      "size": 671,
+      "sha256": "a67245cc76de8f5d87ec2d8e998b1e75578a4c75e6bddbaa9841d733a1b27236"
+    },
+    {
+      "path": "assets/animals/fish.svg",
+      "size": 803,
+      "sha256": "2bef9f1c4c7658103db8d91b76964fe946f55fb179ec0ccea902f36e10494e8f"
+    },
+    {
+      "path": "assets/animals/frog.svg",
+      "size": 898,
+      "sha256": "e9995324445294db2631990715f9ff5a44e26f4a67a7210764df5e4e05a33540"
+    },
+    {
+      "path": "assets/animals/pig.svg",
+      "size": 756,
+      "sha256": "d024f368b3cfb7958b363a23944a62f335ce7f526503cf633c7b48a2d393dc21"
+    },
+    {
+      "path": "assets/card-back.webp",
+      "size": 19598,
+      "sha256": "97ffd0086c5a72fc0a46a47f4a6343bcbe40d7e95a47ed9e4d353ace326a0aec"
+    },
+    {
+      "path": "assets/flip.ogg",
+      "size": 4503,
+      "sha256": "fba356bff49aac71ad4c6a1194e2daddf52d164ab78b6e5ae1f8c6da01cdf182"
+    },
+    {
+      "path": "assets/gi-cheer.webp",
+      "size": 25168,
+      "sha256": "77be3f730bbf30919d30e7386485cd78b57cb3277758e86fe772479f465462b6"
+    },
+    {
+      "path": "assets/highfive.webp",
+      "size": 45786,
+      "sha256": "f92a119f0c7bf330907f77c41539a6a5422073cb32da2586d08db72b4dabb553"
+    },
+    {
+      "path": "assets/match.ogg",
+      "size": 6587,
+      "sha256": "b44da665c4baf9436badeffc4eb7ec83cba634d2a82d733c40b72c14381b7818"
+    },
+    {
+      "path": "assets/shi-sparkle.webp",
+      "size": 20874,
+      "sha256": "df079fba1ed73a855246402701c4662cb25c5905eecb3809aa00e23f00478046"
+    },
+    {
+      "path": "assets/win.ogg",
+      "size": 14089,
+      "sha256": "518e64941524fbf3a3bc0e6930df522ed700703ea2daefd0bfe465d023e049f0"
+    },
+    {
+      "path": "game.js",
+      "size": 6711,
+      "sha256": "51e81eb000fa296fc8714f9459378bf11a7de4b825ebec7a567a0c18c0e55a30"
+    },
+    {
+      "path": "icon.png",
+      "size": 10647,
+      "sha256": "ea1881fea1537741fa1e670ba76ecdd546d26aa00b9863e10bb1c357c4821d38"
+    },
+    {
+      "path": "index.html",
+      "size": 861,
+      "sha256": "a92418e2fee81c5dda272d8077444a06a79be66bf02a25679ceb0febc39a2aff"
+    },
+    {
+      "path": "player-sdk.js",
+      "size": 15693,
+      "sha256": "6c463293c619ce08860870229aa5a8841348de621d585715b7ea5b2a1069c90f"
+    },
+    {
+      "path": "style.css",
+      "size": 3520,
+      "sha256": "bd5213662a80fcbcdf002dc51b7154776ae4c7313fe79636ed3c522ddfa08869"
+    }
+  ]
+}

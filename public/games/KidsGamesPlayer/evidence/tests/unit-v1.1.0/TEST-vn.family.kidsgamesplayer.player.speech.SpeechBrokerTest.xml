@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-10-16T02:02:58.325Z" hostname="localhost" time="0.163">
+  <properties/>
+  <testcase name="losingAudibilityStopsTheEngineAndTheRestStaysSilent" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.118"/>
+  <testcase name="queueAndRateLimits" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.003"/>
+  <testcase name="audibleUtterancesGoToTheEngineOneAtATimeInOrder" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.003"/>
+  <testcase name="closedBrokerIgnoresEverything" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.001"/>
+  <testcase name="helloAnswersWithOfflineVoices" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.002"/>
+  <testcase name="failuresAreReportedPerUtterance" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.002"/>
+  <testcase name="longTextIsCutAndBadMessagesAreIgnored" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.005"/>
+  <testcase name="notAudibleMeansNoEngineButTimedStartAndEnd" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.009"/>
+  <testcase name="pageCancelStopsTheEngineWithoutEchoingEvents" classname="vn.family.kidsgamesplayer.player.speech.SpeechBrokerTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

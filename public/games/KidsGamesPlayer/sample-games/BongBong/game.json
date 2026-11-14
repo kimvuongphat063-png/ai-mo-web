@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "family.balloon-pop",
+  "title": "Chạm bong bóng",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "orientation": "landscape",
+  "playerApiVersion": 1,
+  "backgroundColor": "#7ACAFE",
+  "sortOrder": 10,
+  "files": []
+}

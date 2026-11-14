@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "family.pop-it",
+  "title": "Pop-it",
+  "version": "1.0.0",
+  "playerApiVersion": 1,
+  "backgroundColor": "#FDE8F0",
+  "sortOrder": 140
+}

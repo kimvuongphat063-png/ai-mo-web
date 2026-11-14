@@ -1,0 +1,95 @@
+{
+  "apk": {
+    "file": "downloads/KidsGamesPlayer-v1.1.0.apk",
+    "version": "1.1.0",
+    "certSha256": "c0e5bcc74c463e7ce5556a95514fd34014c25cf2854cde2c487ad82597282530"
+  },
+  "collections": [
+    { "id": "bo1", "name": "Bộ 1", "note": "10 game HTML đầu tiên, cho bé 5–7 tuổi" },
+    { "id": "bo2", "name": "Bộ 2", "note": "10 game HTML, cho bé 5–7 tuổi" },
+    { "id": "bo3", "name": "Bộ 3", "note": "10 game HTML, cho bé 5–7 tuổi" },
+    { "id": "bo4", "name": "Bộ 4", "note": "10 game HTML, cho bé 5–7 tuổi" },
+    { "id": "bo5", "name": "Bộ 5", "note": "10 game HTML, cho bé 5–7 tuổi" },
+    { "id": "them", "name": "Thêm", "note": "Game lẻ" },
+    { "id": "sdk", "name": "10 game theo SDK", "note": "Viết theo SDK của app, chạy được cả trên Android 8" },
+    { "id": "mau", "name": "Game mẫu", "note": "Đi kèm app; “Bim bim cho Shi” là khuôn để làm game mới" }
+  ],
+  "packs": [
+    { "file": "downloads/KidsGames-tat-ca.zip", "name": "Tất cả game", "filter": "all" },
+    { "file": "downloads/KidsGames-android8.zip", "name": "Game chạy được trên Android 8", "filter": "android8" }
+  ],
+  "games": [
+    { "dir": "games/Lat The Tri Nho", "title": "Lật Thẻ Trí Nhớ", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Lật thẻ tìm cặp giống nhau, chơi 2 bé, sưu tập sticker" },
+    { "dir": "games/Quai Vat An Banh", "title": "Quái Vật Ăn Bánh", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Đếm 1–10, cộng trừ bằng cách cho quái vật ăn bánh" },
+    { "dir": "games/Bong Bong Bay", "title": "Bong Bóng Bay", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Bắn bong bóng có chữ cái, số, màu hay hình đúng yêu cầu" },
+    { "dir": "games/Be Tap Danh Van", "title": "Bé Tập Đánh Vần", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Ghép chữ cái thành từ theo hình" },
+    { "dir": "games/To Mau Ky Dieu", "title": "Tô Màu Kỳ Diệu", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Sách tô màu: đổ màu vùng, bút sáp, hình dán, đũa thần" },
+    { "dir": "games/Me Cung Tho Con", "title": "Mê Cung Thỏ Con", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Dẫn thỏ con qua mê cung sinh ngẫu nhiên" },
+    { "dir": "games/Dan Cau Vong", "title": "Đàn Cầu Vồng", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Đàn mộc cầm 8 phím: chơi tự do, học bài hát, thu âm" },
+    { "dir": "games/Ghep Hinh Vui", "title": "Ghép Hình Vui", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Ghép hình jigsaw 4–20 mảnh" },
+    { "dir": "games/Doan Tau Quy Luat", "title": "Đoàn Tàu Quy Luật", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Tìm quy luật dãy AB, ABC, dãy số trên toa tàu" },
+    { "dir": "games/Tiem Kem Cua Be", "title": "Tiệm Kem Của Bé", "collection": "bo1", "ages": "5–7", "voice": true, "blurb": "Làm kem đúng đơn khách, dùng xu mua vị và đồ trang trí" },
+
+    { "dir": "games/Be Tap Viet", "title": "Bé Tập Viết", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Tập tô 29 chữ cái, số 0–9, hình cơ bản theo đúng nét" },
+    { "dir": "games/Dong Ho Vui", "title": "Đồng Hồ Vui", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Học xem giờ với đồng hồ kim to và cảnh sinh hoạt" },
+    { "dir": "games/Ro Bot Lap Trinh", "title": "Rô-bốt Lập Trình", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Lập trình mũi tên cho rô-bốt nhặt pin về đích, không cần chữ" },
+    { "dir": "games/Bac Si Thu Nhi", "title": "Bác Sĩ Thú Nhí", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Làm bác sĩ chữa sốt, trầy xước, đau răng cho bạn thú" },
+    { "dir": "games/Noi So Ve Tranh", "title": "Nối Số Vẽ Tranh", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Nối điểm theo thứ tự để hiện tranh tô màu, chuyển động" },
+    { "dir": "games/Tim Bong Cho Ban", "title": "Tìm Bóng Cho Bạn", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Kéo đồ vật vào đúng cái bóng đen" },
+    { "dir": "games/Xep Thap Cao", "title": "Xếp Tháp Cao", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Chạm đúng lúc xếp khối thành tháp cao tận trời sao" },
+    { "dir": "games/Ban Nhac Thu Con", "title": "Ban Nhạc Thú Con", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Soạn nhạc trên lưới, mỗi hàng một bạn thú" },
+    { "dir": "games/Cai Gi Bien Mat", "title": "Cái Gì Biến Mất?", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Thỏ ảo thuật giấu một đồ vật, bé nhớ món biến mất" },
+    { "dir": "games/Dan Hinh Tao Canh", "title": "Dán Hình Tạo Cảnh", "collection": "bo2", "ages": "5–7", "voice": true, "blurb": "Chọn nền, kéo sticker dựng cảnh nông trại, biển, vũ trụ" },
+
+    { "dir": "games/Dau Thanh Ky Dieu", "title": "Dấu Thanh Kỳ Diệu", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "Học 6 thanh điệu, chọn dấu đúng cho từ theo hình" },
+    { "dir": "games/Ca Sau So Sanh", "title": "Cá Sấu So Sánh", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "So sánh nhiều/ít, lớn/bé, xoay cá sấu về phía lớn hơn" },
+    { "dir": "games/Noi Ong Nuoc", "title": "Nối Ống Nước", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "Xoay ống dẫn nước từ vòi tới chậu hoa, hồ cá" },
+    { "dir": "games/Thu Cung Cua Be", "title": "Thú Cưng Của Bé", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "Nuôi thú ảo: cho ăn, tắm, chơi, ru ngủ" },
+    { "dir": "games/Tim Diem Khac Nhau", "title": "Tìm Điểm Khác Nhau", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "Tìm điểm khác giữa hai bức tranh" },
+    { "dir": "games/Qua Duong An Toan", "title": "Qua Đường An Toàn", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "An toàn giao thông: đèn xanh, nhìn hai bên, mũ bảo hiểm" },
+    { "dir": "games/Chem Trai Cay", "title": "Chém Trái Cây", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "Vuốt chém trái cây, không bom, không thua" },
+    { "dir": "games/Buom Doi Xung", "title": "Bướm Đối Xứng", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "Tô cánh bướm đối xứng, có kính vạn hoa" },
+    { "dir": "games/Cam Xuc Cua Be", "title": "Cảm Xúc Của Bé", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "Nhận biết, gọi tên cảm xúc, tập hít thở" },
+    { "dir": "games/Khung Long Chay Nhay", "title": "Khủng Long Chạy Nhảy", "collection": "bo3", "ages": "5–7", "voice": true, "blurb": "Khủng long tự chạy, chạm để nhảy, nhặt trái cây, không thua" },
+
+    { "dir": "games/Ghep Cau Vui", "title": "Ghép Câu Vui", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Xếp thẻ từ thành câu theo hình" },
+    { "dir": "games/Chia Deu Banh", "title": "Chia Đều Bánh", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Chia đều bánh kẹo cho bạn thú đi picnic" },
+    { "dir": "games/Xep Hinh Tangram", "title": "Xếp Hình Tangram", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Ghép 7 mảnh tangram thành mèo, thuyền, nhà" },
+    { "dir": "games/Vuon Hoa Cua Be", "title": "Vườn Hoa Của Bé", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Gieo hạt, tưới nước, bắt sâu cho vườn lớn dần" },
+    { "dir": "games/Cai Nao Khac Loai", "title": "Cái Nào Khác Loại", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Chọn hình không cùng nhóm" },
+    { "dir": "games/Phong Thi Nghiem Mau", "title": "Phòng Thí Nghiệm Màu", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Pha màu: đỏ + vàng = cam…" },
+    { "dir": "games/Ban Keo Mau", "title": "Bắn Kẹo Màu", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Bắn kẹo, ghép 3 viên cùng màu cho nổ" },
+    { "dir": "games/May Ke Chuyen", "title": "Máy Kể Chuyện", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Chọn nhân vật, nơi chốn, đồ vật kỳ diệu; máy kể chuyện có lời đọc" },
+    { "dir": "games/Tim Hinh Chung", "title": "Tìm Hình Chung", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Tìm hình giống nhau duy nhất giữa hai thẻ" },
+    { "dir": "games/Ran Va Thang", "title": "Rắn Và Thang", "collection": "bo4", "ages": "5–7", "voice": true, "blurb": "Cờ rắn và thang cho bé, lắc xúc xắc đếm ô" },
+
+    { "dir": "games/Vo Tay Dem Tieng", "title": "Vỗ Tay Đếm Tiếng", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Vỗ tay đếm số tiếng trong từ" },
+    { "dir": "games/Can Thang Bang", "title": "Cân Thăng Bằng", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "So sánh nặng nhẹ, làm cân thăng bằng" },
+    { "dir": "games/Sudoku Hinh", "title": "Sudoku Hình", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Sudoku bằng trái cây và con thú, 4×4 và 6×6" },
+    { "dir": "games/Mac Gi Hom Nay", "title": "Mặc Gì Hôm Nay", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Nhìn thời tiết, chọn quần áo phù hợp" },
+    { "dir": "games/Doan Xem La Gi", "title": "Đoán Xem Là Gì?", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Đoán hình bị che qua lỗ nhìn, ảnh mờ dần" },
+    { "dir": "games/Ai Song O Dau", "title": "Ai Sống Ở Đâu", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Đưa con vật về đúng nhà: rừng, biển, sa mạc, Bắc Cực" },
+    { "dir": "games/Sut Bong Ghi Ban", "title": "Sút Bóng Ghi Bàn", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Vuốt sút phạt đền qua thủ môn thú" },
+    { "dir": "games/Xay Nha Gach Mau", "title": "Xây Nhà Gạch Màu", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Xây nhà gạch màu theo mẫu hoặc tự do" },
+    { "dir": "games/Sap Xep Cau Chuyen", "title": "Sắp Xếp Câu Chuyện", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Xếp thẻ hình đúng thứ tự: vòng đời, việc hằng ngày" },
+    { "dir": "games/Khao Co Khung Long", "title": "Khảo Cổ Khủng Long", "collection": "bo5", "ages": "5–7", "voice": true, "blurb": "Chà cát tìm xương, ghép khủng long" },
+
+    { "dir": "games/Cun San So 7", "title": "Cún Săn Số 7", "collection": "them", "blurb": "Kéo cún đớp đúng số 7, né số khác" },
+
+    { "dir": "KidsGames-1file/ToNet", "title": "Tô nét", "collection": "sdk", "ages": "3–5", "android8": true, "blurb": "Kéo theo đường chấm đưa ong, ô tô, cá về đích (12 màn)" },
+    { "dir": "KidsGames-1file/ToChu", "title": "Tô chữ cái", "collection": "sdk", "ages": "4–6", "android8": true, "blurb": "Tô 29 chữ cái tiếng Việt đúng thứ tự nét, chữ hoa và chữ thường" },
+    { "dir": "KidsGames-1file/ToSo", "title": "Tô số và đếm", "collection": "sdk", "ages": "4–6", "android8": true, "blurb": "Tô số 0–9, chạm đếm đồ vật, chọn thẻ số đúng" },
+    { "dir": "KidsGames-1file/PopIt", "title": "Pop-it", "collection": "sdk", "ages": "3–7", "android8": true, "blurb": "Bấm hoặc vuốt bóng silicon, nhiều ngón cùng lúc" },
+    { "dir": "KidsGames-1file/BongBongMau", "title": "Bắt bóng đúng màu", "collection": "sdk", "ages": "3–6", "android8": true, "blurb": "Chạm bong bóng theo màu, theo hình, theo số" },
+    { "dir": "KidsGames-1file/ToMau", "title": "Tô màu AI Mở", "collection": "sdk", "ages": "4–7", "android8": true, "blurb": "Tô kín 6 tranh sáng tạo AI Mở, có tẩy và hoàn tác" },
+    { "dir": "KidsGames-1file/NoiDiem", "title": "Nối các điểm", "collection": "sdk", "ages": "4–7", "android8": true, "blurb": "Nối 1 → 2 → 3… để hiện hình chuyển động" },
+    { "dir": "KidsGames-1file/GhepBong", "title": "Tìm bóng", "collection": "sdk", "ages": "3–6", "android8": true, "blurb": "Kéo con vật, trái cây, xe vào đúng cái bóng" },
+    { "dir": "KidsGames-1file/XepHinh", "title": "Xếp hình AI Mở", "collection": "sdk", "ages": "4–7", "android8": true, "blurb": "Ghép tranh 4, 6 hoặc 9 mảnh" },
+    { "dir": "KidsGames-1file/DanGo", "title": "Đàn gõ cầu vồng", "collection": "sdk", "ages": "3–7", "android8": true, "blurb": "Gõ 8 phím Đô–Rê–Mi, chơi theo đèn 5 bài dân ca" },
+
+    { "dir": "KidsGamesPlayer/sample-games/BongBong", "title": "Chạm bong bóng", "collection": "mau", "android8": true, "blurb": "Chạm bong bóng bay cùng AI Mở" },
+    { "dir": "KidsGamesPlayer/sample-games/GhepMau", "title": "Ghép màu", "collection": "mau", "android8": true, "blurb": "Kéo hình vào đúng ô" },
+    { "dir": "KidsGamesPlayer/sample-games/LatThe", "title": "Lật thẻ con vật", "collection": "mau", "android8": true, "blurb": "Lật thẻ tìm cặp con vật" },
+    { "dir": "KidsGamesPlayer/games-template/MauGame", "title": "Bim bim cho Shi", "collection": "mau", "android8": true, "template": true, "blurb": "Khuôn mẫu để làm game mới: chạm bim bim đút cho Shi" }
+  ]
+}

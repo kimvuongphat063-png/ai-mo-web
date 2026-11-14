@@ -1,0 +1,69 @@
+{
+  "game": "ToMau",
+  "url": "http://127.0.0.1:8876/index.html",
+  "browser": "Android 8.0 emulator WebView Mozilla/5.0 (Linux; Android 8.0.0; Android SDK built for x86_64 Build/OSR1.180418.026; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 Mobile Safari/537.36",
+  "indexSha256": "a402117cee284ccc70312d846f7a452cf128909300edbfb08a29ecbffd61016b",
+  "date": "2026-10-11T07:45:06.188Z",
+  "steps": [],
+  "checks": {
+    "start -> picture list": {
+      "ok": true,
+      "note": ""
+    },
+    "picture 1 decoded and ready": {
+      "ok": true,
+      "note": ""
+    },
+    "tap fills the background red": {
+      "ok": true,
+      "note": ""
+    },
+    "second region filled blue, background stays red": {
+      "ok": true,
+      "note": "{\"before\":[255,255,255,0],\"afterBlue\":[30,99,214,0]}"
+    },
+    "undo restores the previous color": {
+      "ok": true,
+      "note": ""
+    },
+    "eraser turns the area white again": {
+      "ok": true,
+      "note": ""
+    },
+    "flood fill time per tap < 150 ms (Android 8 emulator WebView 69)": {
+      "ok": true,
+      "note": "first 42.3 ms, max 57.2 ms over 37 fills (budget on a weak phone: 150 ms)"
+    },
+    "done -> frame + celebration": {
+      "ok": true,
+      "note": ""
+    },
+    "next picture opens": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"pick\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"pick\"}}"
+    },
+    "after reload the picture is rebuilt from saved taps": {
+      "ok": true,
+      "note": "ops 37/37, replay 8.1 ms per tap"
+    },
+    "natural WebView viewport (no size emulation): taps map to the right pixels": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": false,
+      "note": "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8876/index.html | [log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8876/index.html | [log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8876/index.html | [log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8876/index.html"
+    }
+  },
+  "console": [
+    "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8876/index.html",
+    "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8876/index.html",
+    "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8876/index.html",
+    "[log.warning] The Web Audio autoplay policy will be re-enabled in Chrome 70 (October 2018). Please check that your website is compatible with it. https://goo.gl/7K7WLu http://127.0.0.1:8876/index.html"
+  ],
+  "ignoredFaviconRequests": 5
+}

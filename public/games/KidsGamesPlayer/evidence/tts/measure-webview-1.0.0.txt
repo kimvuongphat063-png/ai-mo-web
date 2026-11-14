@@ -1,0 +1,12 @@
+# 4.1 đo nguyên nhân — bản debug 1.0.0 (chưa có shim), game mẫu 'Lật thẻ con vật', tools/qa/webview_probe.mjs
+## API 37 (kgp_api37, WebView com.google.android.webview 145.0.7632.218)
+{"url":"https://g-860a3adb9cf854278b2ea3bc2e1659c4.invalid/index.html","value":"{\"ua\":\"Mozilla/5.0 (Linux; Android 10; K; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/145.0.0.0 Mobile Safari/537.36\",\"typeofSS\":\"undefined\",\"typeofUtt\":\"undefined\",\"ownDesc\":\"none\",\"voices0\":-1,\"voices3s\":-1,\"voiceschangedEvents\":0}"}
+
+adb shell settings get secure tts_default_synth -> null (mặc định = engine ưu tiên cao nhất)
+pm list packages | grep -i tts -> com.google.android.tts (GoogleTtsService, uid 10182), com.google.android.apps.accessibility.voiceaccess
+
+## API 26 (kgp_api26, WebView com.android.chrome 69.0.3497.100)
+{"url":"https://g-4525eaff7391132c552fe31ef8066ac3.invalid/index.html","value":"{\"ua\":\"Mozilla/5.0 (Linux; Android 8.0.0; Android SDK built for x86_64 Build/OSR1.180418.026; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 Mobile Safari/537.36\",\"typeofSS\":\"undefined\",\"typeofUtt\":\"undefined\",\"ownDesc\":\"none\",\"voices0\":-1,\"voices3s\":-1,\"voiceschangedEvents\":0}"}
+
+adb shell settings get secure tts_default_synth -> null
+pm list packages | grep -i tts -> com.google.android.tts versionName=3.12.9 (userId 10054)

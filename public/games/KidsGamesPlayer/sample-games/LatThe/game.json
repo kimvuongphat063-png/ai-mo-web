@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "family.animal-memory",
+  "title": "Lật thẻ con vật",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "orientation": "landscape",
+  "playerApiVersion": 1,
+  "backgroundColor": "#D7ECE6",
+  "sortOrder": 30,
+  "files": []
+}

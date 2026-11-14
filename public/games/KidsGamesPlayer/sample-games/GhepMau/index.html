@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Ghép màu</title>
+<link rel="stylesheet" href="style.css">
+<script src="player-sdk.js"></script>
+</head>
+<body>
+<div id="stage">
+  <img id="room" src="assets/room.webp" alt="">
+  <div id="progress"></div>
+  <div id="slots"></div>
+  <div id="pieces"></div>
+  <img id="gi" class="buddy left" src="assets/gi-think.webp" alt="">
+  <img id="shi" class="buddy right" src="assets/shi-clap.webp" alt="">
+  <div id="overlay" class="overlay">
+    <div id="overlay-title" class="title">Ghép màu</div>
+    <button id="go" class="big-button" aria-label="Chơi"><span class="play-icon"></span></button>
+  </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>

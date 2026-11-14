@@ -1,0 +1,9 @@
+narrating at 2831.01 (1)
+lock held 2.6 s, done at 2833.99
+2834.01 started=0
+2834.11 started=0
+2834.17 started=0
+2834.26 started=0
+2834.32 started=0
+2834.38 started=0
+samples with TTS playing: 37/40, first at 2854.16, end 2856.20

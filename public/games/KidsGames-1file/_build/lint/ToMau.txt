@@ -1,0 +1,14 @@
+$ pack_game.py --input ToMau --validate-only  (exit 1)
+  Game: Tô màu Gi & Shi [family.to-mau] version 1.0.0
+  Runtime files: 2 (401570 bytes)
+  ERROR: playerApiVersion is 1 but index.html does not load player-sdk.js
+  FAILED: 1 error(s)
+forbidden strings outside SDK: none
+embedded SDK: identical to games-template/MauGame/player-sdk.js
+new JS APIs: none
+new CSS: none
+es2017: 3 inline script(s) checked, 0 error(s)
+index.html size: 358012 bytes (0.34 MB)
+game.json: {"schemaVersion": 1, "id": "family.to-mau", "title": "Tô màu Gi & Shi", "version": "1.0.0", "playerApiVersion": 1, "backgroundColor": "#FFFFFF", "sortOrder": 160}
+icon.png: 256x256 PNG
+RESULT: PASS

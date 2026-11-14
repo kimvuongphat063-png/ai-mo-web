@@ -1,0 +1,95 @@
+{
+  "game": "PopIt",
+  "url": "http://127.0.0.1:9074/index.html",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "date": "2026-10-11T07:25:49.566Z",
+  "steps": [],
+  "checks": {
+    "start -> menu": {
+      "ok": true,
+      "note": ""
+    },
+    "9 boards, each with >= 14 bubbles": {
+      "ok": true,
+      "note": "[31,24,19,33,15,17,19,23,25]"
+    },
+    "two fingers at once pop two rows": {
+      "ok": true,
+      "note": "7/7"
+    },
+    "all popped -> board flipped to the other side": {
+      "ok": true,
+      "note": ""
+    },
+    "flip -> celebration": {
+      "ok": true,
+      "note": ""
+    },
+    "replay keeps playing the flipped board": {
+      "ok": true,
+      "note": ""
+    },
+    "count mode toggled on": {
+      "ok": true,
+      "note": ""
+    },
+    "taps pop single bubbles": {
+      "ok": true,
+      "note": ""
+    },
+    "board heart cleared and flipped": {
+      "ok": true,
+      "note": ""
+    },
+    "board star cleared and flipped": {
+      "ok": true,
+      "note": ""
+    },
+    "board square cleared and flipped": {
+      "ok": true,
+      "note": ""
+    },
+    "board dino cleared and flipped": {
+      "ok": true,
+      "note": ""
+    },
+    "board icecream cleared and flipped": {
+      "ok": true,
+      "note": ""
+    },
+    "board fish cleared and flipped": {
+      "ok": true,
+      "note": ""
+    },
+    "board gi cleared and flipped": {
+      "ok": true,
+      "note": ""
+    },
+    "board shi cleared and flipped": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"menu\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"menu\"}}"
+    },
+    "flip counts restored after reload": {
+      "ok": true,
+      "note": "{\"saveSchemaVersion\":1,\"flips\":{\"circle\":1,\"heart\":1,\"star\":1,\"square\":1,\"dino\":1,\"icecream\":1,\"fish\":1,\"gi\":1,\"shi\":1},\"count\":true}"
+    },
+    "800x360: star board cleared": {
+      "ok": true,
+      "note": ""
+    },
+    "2400x1080: star board cleared": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": true,
+      "note": ""
+    }
+  },
+  "console": [],
+  "ignoredFaviconRequests": 8
+}

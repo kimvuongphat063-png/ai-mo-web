@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="23" failures="0" errors="0" skipped="0" time="0.000" timestamp="2026-10-16T02:16:52" hostname="localhost">
+  <testsuite name="vn.family.kidsgamesplayer.AndroidTtsEngineDeviceTest" tests="1" failures="0" errors="0" skipped="0" time="10.850" timestamp="2026-10-16T02:16:52" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="platformEngineSettlesAndSpeaksOffline" classname="vn.family.kidsgamesplayer.AndroidTtsEngineDeviceTest" time="10.850" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.MainFlowTest" tests="2" failures="0" errors="0" skipped="0" time="59.988" timestamp="2026-10-16T02:16:52" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="menuShowsGamesAndRepeatedOpenCloseKeepsOneWebView" classname="vn.family.kidsgamesplayer.MainFlowTest" time="57.580" />
+    <testcase name="backOnMenuNeverFinishesTheActivity" classname="vn.family.kidsgamesplayer.MainFlowTest" time="2.408" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.PinPadTest" tests="1" failures="0" errors="0" skipped="0" time="1.530" timestamp="2026-10-16T02:16:52" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="cancelButtonDismissesKeypadAndReportsOnce" classname="vn.family.kidsgamesplayer.PinPadTest" time="1.530" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.SpeechBridgeTest" tests="8" failures="0" errors="0" skipped="0" time="23.590" timestamp="2026-10-16T02:16:52" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="longTextIsCutTo1000Characters" classname="vn.family.kidsgamesplayer.SpeechBridgeTest" time="2.630" />
+    <testcase name="withoutTheAppTheGameStaysSilentAndTimed" classname="vn.family.kidsgamesplayer.SpeechBridgeTest" time="8.339" />
+    <testcase name="notAudibleMeansNoEngineButTheSentenceChainKeepsItsPace" classname="vn.family.kidsgamesplayer.SpeechBridgeTest" time="3.143" />
+    <testcase name="cancelStopsTheEngineAndThePageGetsInterrupted" classname="vn.family.kidsgamesplayer.SpeechBridgeTest" time="1.544" />
+    <testcase name="shimIsTheFirstScriptInStandardsMode" classname="vn.family.kidsgamesplayer.SpeechBridgeTest" time="1.989" />
+    <testcase name="gamePatternSpeaksThroughTheEngineInOrder" classname="vn.family.kidsgamesplayer.SpeechBridgeTest" time="2.340" />
+    <testcase name="withoutAVietnameseVoiceTheGameStaysSilent" classname="vn.family.kidsgamesplayer.SpeechBridgeTest" time="1.309" />
+    <testcase name="messagesOfAnOlderPageAreIgnored" classname="vn.family.kidsgamesplayer.SpeechBridgeTest" time="2.296" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.SpeechPlayerFlowTest" tests="1" failures="0" errors="0" skipped="0" time="6.269" timestamp="2026-10-16T02:16:52" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="voiceFollowsSoundButtonRestartDialogAndHome" classname="vn.family.kidsgamesplayer.SpeechPlayerFlowTest" time="6.269" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.StorageDeviceTest" tests="2" failures="0" errors="0" skipped="0" time="2.588" timestamp="2026-10-16T02:16:52" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="pinHashCostOnDevice" classname="vn.family.kidsgamesplayer.StorageDeviceTest" time="2.570" />
+    <testcase name="catalogAtomicFileRoundTripAndBackup" classname="vn.family.kidsgamesplayer.StorageDeviceTest" time="0.018" />
+  </testsuite>
+  <testsuite name="vn.family.kidsgamesplayer.WebViewPolicyTest" tests="8" failures="0" errors="0" skipped="0" time="21.064" timestamp="2026-10-16T02:16:52" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5556" />
+    </properties>
+    <testcase name="rendererCrashIsReported" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="2.014" />
+    <testcase name="dialogLoopIsRefused" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="1.854" />
+    <testcase name="sdkStartsInactiveAndMutedUntilHostState" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="1.592" />
+    <testcase name="muteFeatureGateIsSafe" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="1.388" />
+    <testcase name="localOriginServesModulesFetchRangeAndStorage" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="1.603" />
+    <testcase name="originsIsolateStorageAndSurviveRevisionChange" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="3.981" />
+    <testcase name="hungRendererKeepsNativeUiResponsive" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="2.894" />
+    <testcase name="escapeAttemptsAreBlocked" classname="vn.family.kidsgamesplayer.WebViewPolicyTest" time="5.738" />
+  </testsuite>
+</testsuites>

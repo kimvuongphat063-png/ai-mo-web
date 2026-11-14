@@ -1,0 +1,14 @@
+$ pack_game.py --input ToSo --validate-only  (exit 1)
+  Game: Tô số và đếm [family.to-so] version 1.0.0
+  Runtime files: 2 (308643 bytes)
+  ERROR: playerApiVersion is 1 but index.html does not load player-sdk.js
+  FAILED: 1 error(s)
+forbidden strings outside SDK: none
+embedded SDK: identical to games-template/MauGame/player-sdk.js
+new JS APIs: none
+new CSS: none
+es2017: 3 inline script(s) checked, 0 error(s)
+index.html size: 275596 bytes (0.26 MB)
+game.json: {"schemaVersion": 1, "id": "family.to-so", "title": "Tô số và đếm", "version": "1.0.0", "playerApiVersion": 1, "backgroundColor": "#EAF8E6", "sortOrder": 130}
+icon.png: 256x256 PNG
+RESULT: PASS

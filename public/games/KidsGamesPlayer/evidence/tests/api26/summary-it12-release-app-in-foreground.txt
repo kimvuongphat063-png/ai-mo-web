@@ -1,0 +1,23 @@
+PASS MainFlowTest.menuShowsGamesAndRepeatedOpenCloseKeepsOneWebView (60.465s)
+PASS MainFlowTest.backOnMenuNeverFinishesTheActivity (4.311s)
+PASS PinPadTest.cancelButtonDismissesKeypadAndReportsOnce (1.431s)
+PASS StorageDeviceTest.pinHashCostOnDevice (3.633s)
+PASS StorageDeviceTest.catalogAtomicFileRoundTripAndBackup (0.024s)
+PASS WebViewPolicyTest.rendererCrashIsReported (3.289s)
+PASS WebViewPolicyTest.dialogLoopIsRefused (2.926s)
+FAIL WebViewPolicyTest.sdkStartsInactiveAndMutedUntilHostState (2.759s)
+    org.junit.ComparisonFailure: expected:<[tru]e> but was:<[fals]e>
+    	at org.junit.Assert.assertEquals(Assert.java:117)
+    	at org.junit.Assert.assertEquals(Assert.java:146)
+    	at vn.family.kidsgamesplayer.WebViewPolicyTest.sdkStartsInactiveAndMutedUntilHostState(WebViewPolicyTest.kt:142)
+PASS WebViewPolicyTest.muteFeatureGateIsSafe (2.150s)
+PASS WebViewPolicyTest.localOriginServesModulesFetchRangeAndStorage (2.062s)
+PASS WebViewPolicyTest.originsIsolateStorageAndSurviveRevisionChange (4.131s)
+PASS WebViewPolicyTest.hungRendererKeepsNativeUiResponsive (2.576s)
+FAIL WebViewPolicyTest.escapeAttemptsAreBlocked (11.051s)
+    java.lang.AssertionError
+    	at org.junit.Assert.fail(Assert.java:87)
+    	at org.junit.Assert.assertTrue(Assert.java:42)
+    	at org.junit.Assert.assertTrue(Assert.java:53)
+    	at vn.family.kidsgamesplayer.WebViewPolicyTest.escapeAttemptsAreBlocked(WebViewPolicyTest.kt:116)
+TOTAL 13 FAILED 2

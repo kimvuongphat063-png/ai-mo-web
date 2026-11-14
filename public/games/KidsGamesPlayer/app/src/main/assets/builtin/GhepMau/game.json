@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "id": "builtin.color-match",
+  "title": "Ghép màu",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "orientation": "landscape",
+  "playerApiVersion": 1,
+  "backgroundColor": "#F6E3C6",
+  "sortOrder": 20,
+  "files": [
+    {
+      "path": "assets/gi-clap.webp",
+      "size": 19532,
+      "sha256": "b55252efd0d2cae1c5a49ca448f02cb3c5030297362aeea735f3f1554cc7adda"
+    },
+    {
+      "path": "assets/gi-think.webp",
+      "size": 20402,
+      "sha256": "73538760735427995c7da970c9b32df7b157061caa9d0a7cb0a7f3079b90bf80"
+    },
+    {
+      "path": "assets/room.webp",
+      "size": 26534,
+      "sha256": "efaeaf5848859c914a52421d9c52972693ef561b31064d251db4ff5026f82ebe"
+    },
+    {
+      "path": "assets/shapes/circle-slot.svg",
+      "size": 185,
+      "sha256": "505307f8bc20e41f1803f426922dec60a5874a208deed29c7e69c6674ae2d940"
+    },
+    {
+      "path": "assets/shapes/circle.svg",
+      "size": 160,
+      "sha256": "1cc2d23a0cf8e7a57bcaa70920cb573a65e10db3ef62b36bc111f0c0aadd6b7e"
+    },
+    {
+      "path": "assets/shapes/heart-slot.svg",
+      "size": 259,
+      "sha256": "1e542b47cc9f963adb21418af0f2e655bd2209c6a34cdb40289238e071efb703"
+    },
+    {
+      "path": "assets/shapes/heart.svg",
+      "size": 234,
+      "sha256": "891cd8da9334f2e847b14726d10185fdc8b3b095fec6b01a7508af1e063a8b80"
+    },
+    {
+      "path": "assets/shapes/moon-slot.svg",
+      "size": 213,
+      "sha256": "2b5804526188acff969ef4a9725d3c0342b10f16389100489abe1965d275d15a"
+    },
+    {
+      "path": "assets/shapes/moon.svg",
+      "size": 188,
+      "sha256": "f1f9102acb34317190b4c066195100ff7a4ac4dd8faa86a59ec486151171c5b8"
+    },
+    {
+      "path": "assets/shapes/square-slot.svg",
+      "size": 205,
+      "sha256": "60efd2406ed313d1f4167785da3697f3108a56ecc374c96df468f3b074efdfe7"
+    },
+    {
+      "path": "assets/shapes/square.svg",
+      "size": 180,
+      "sha256": "3c3dfd8c5b3d9918d95f08bebe3e9313d99eeda4db56e441523cb2dec84f3c92"
+    },
+    {
+      "path": "assets/shapes/star-slot.svg",
+      "size": 305,
+      "sha256": "c13381590c2e0bb7190a3e8115f84d46f71ebac2ddf0c371960251533a3ddacb"
+    },
+    {
+      "path": "assets/shapes/star.svg",
+      "size": 280,
+      "sha256": "070bcb7b55ad3c32a4298a1e007ff70cf5b2555d7b350ee65ab7ab5fe18839c3"
+    },
+    {
+      "path": "assets/shapes/triangle-slot.svg",
+      "size": 213,
+      "sha256": "88763c36547c8f2046c2a5a587651b0b00f15165743eabafe955aff171568a6e"
+    },
+    {
+      "path": "assets/shapes/triangle.svg",
+      "size": 188,
+      "sha256": "8369e2f5e9113c132d340c247f0ea217b81292071c90554524c2ecdbdb38d582"
+    },
+    {
+      "path": "assets/shi-cheer.webp",
+      "size": 23870,
+      "sha256": "f3e0d94abece3ef81b48799e8bb13e8935f0cc4f9f91fff5aadb629850ef3709"
+    },
+    {
+      "path": "assets/shi-clap.webp",
+      "size": 19300,
+      "sha256": "10aadad2da027b7a913c47c67c539ab9b7b523900ae14f7d5e5c48d143e07d73"
+    },
+    {
+      "path": "assets/snap.ogg",
+      "size": 5269,
+      "sha256": "acd6e6d39fcfd1030f38a3dbfa7ebec9421cfd529d73c3f19594e2f1390a9609"
+    },
+    {
+      "path": "assets/try-again.ogg",
+      "size": 7087,
+      "sha256": "2e95af9a501805e4f0d7dd1158f23e00601e7615e5f273ae6604d0fc14300ac2"
+    },
+    {
+      "path": "assets/win.ogg",
+      "size": 14089,
+      "sha256": "518e64941524fbf3a3bc0e6930df522ed700703ea2daefd0bfe465d023e049f0"
+    },
+    {
+      "path": "game.js",
+      "size": 8363,
+      "sha256": "1ce7e860d51005fd8a1774d9bbb4a33390a17b2fe99a6afaad4817c9fecc2ab0"
+    },
+    {
+      "path": "icon.png",
+      "size": 18675,
+      "sha256": "b5ceb6011152d68e4c7abe43135ac2ab89929af0e49fae32d1e16df752c773f7"
+    },
+    {
+      "path": "index.html",
+      "size": 830,
+      "sha256": "c6e14f2fd9a85c2fc079a90da50c0cff90025310723d493d7af629cb926703f4"
+    },
+    {
+      "path": "levels.json",
+      "size": 475,
+      "sha256": "a1d43974410cb0c539e4ccc5f69729ea96e46efa7391be354014a91750249924"
+    },
+    {
+      "path": "player-sdk.js",
+      "size": 15693,
+      "sha256": "6c463293c619ce08860870229aa5a8841348de621d585715b7ea5b2a1069c90f"
+    },
+    {
+      "path": "style.css",
+      "size": 3143,
+      "sha256": "0866f5ccdb02b4e84216e87a539ed677b06aa38b9444d4f388dc2e16c960b2f7"
+    }
+  ]
+}

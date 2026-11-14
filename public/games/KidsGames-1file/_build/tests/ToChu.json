@@ -1,0 +1,87 @@
+{
+  "game": "ToChu",
+  "url": "http://127.0.0.1:9072/index.html",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "date": "2026-10-11T07:23:19.369Z",
+  "steps": [],
+  "checks": {
+    "start -> grid": {
+      "ok": true,
+      "note": ""
+    },
+    "grid tile A -> trace screen": {
+      "ok": true,
+      "note": ""
+    },
+    "A traced -> done overlay": {
+      "ok": true,
+      "note": ""
+    },
+    "next -> Ă": {
+      "ok": true,
+      "note": ""
+    },
+    "Ă traced (4 strokes incl. breve)": {
+      "ok": true,
+      "note": ""
+    },
+    "off-path scribble does not progress": {
+      "ok": true,
+      "note": ""
+    },
+    "grid button -> grid": {
+      "ok": true,
+      "note": ""
+    },
+    "O: shortcut across the circle does not complete": {
+      "ok": true,
+      "note": ""
+    },
+    "O traced along the circle": {
+      "ok": true,
+      "note": ""
+    },
+    "lowercase switch saved": {
+      "ok": true,
+      "note": ""
+    },
+    "lowercase a opened": {
+      "ok": true,
+      "note": ""
+    },
+    "a traced": {
+      "ok": true,
+      "note": ""
+    },
+    "replay restarts the same letter": {
+      "ok": true,
+      "note": ""
+    },
+    "i traced (stroke + tapped dot)": {
+      "ok": true,
+      "note": ""
+    },
+    "pause/resume (visibility + host state)": {
+      "ok": true,
+      "note": "{\"hidden\":{\"active\":false,\"muted\":true,\"frozen\":true,\"audio\":\"suspended\"},\"visible\":{\"active\":true,\"advanced\":true,\"screen\":\"trace\"},\"host\":{\"active\":false,\"frozen\":true,\"muted\":true},\"resumed\":{\"active\":true,\"advanced\":true,\"screen\":\"trace\"}}"
+    },
+    "progress restored after reload": {
+      "ok": true,
+      "note": "{\"saveSchemaVersion\":1,\"up\":[1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],\"lo\":[1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"mode\":\"lo\"}"
+    },
+    "800x360: letter b traced": {
+      "ok": true,
+      "note": ""
+    },
+    "2400x1080: letter g traced": {
+      "ok": true,
+      "note": ""
+    },
+    "console clean (no errors/warnings/exceptions)": {
+      "ok": true,
+      "note": ""
+    }
+  },
+  "console": [],
+  "ignoredFaviconRequests": 9
+}
