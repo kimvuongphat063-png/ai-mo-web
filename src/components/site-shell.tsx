@@ -510,7 +510,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/apps" className="hover:text-white transition-colors">
-                  14+ App HTML miễn phí
+                  95+ App HTML miễn phí
                 </Link>
               </li>
               <li>

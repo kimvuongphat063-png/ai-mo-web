@@ -63,7 +63,7 @@ export function RegisterForm() {
           Đăng ký tài khoản AI MỞ
         </h1>
         <p className="text-xs text-neutral-600 max-w-sm mx-auto">
-          Tạo tài khoản để tải trọn bộ 19+ App offline, lưu kịch bản và nhận tài liệu đào tạo.
+          Tạo tài khoản để tải trọn bộ 95+ App offline, lưu kịch bản và nhận tài liệu đào tạo.
         </p>
       </div>
 

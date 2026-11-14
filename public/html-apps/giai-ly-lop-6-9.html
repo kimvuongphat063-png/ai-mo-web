@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Giải Lý 6–9 · AI Mở</title>
+<meta name="theme-color" content="#1d3f8f">
+<style>
+
+
+
+
+
+
+:root{--bg:#fff9ea;--card:#ffffff;--ink:#1b2150;--text:#232842;--mute:#6a6f8a;--line:#1b2150;--soft:#ece9dd;--g6:#bff0d4;--g7:#ffe27a;--g8:#d8ccff;--g9:#ffb9a6;--ok:#12805a;--okbg:#d6f5e6;--bad:#c62f3a;--badbg:#ffe0e0;--mid:#a35a00;--midbg:#ffeccb;--accent:#ff6b4a;--hl:#fff1a8;--sh:#1b2150}
+@media (prefers-color-scheme:dark){:root{--bg:#12142a;--card:#1c2040;--ink:#f1f1ff;--text:#e6e8f8;--mute:#9da3c4;--line:#8c93d6;--soft:#2a2f58;--g6:#1f5a45;--g7:#6b5a10;--g8:#463a86;--g9:#7a3a2c;--ok:#6fe0ae;--okbg:#17402f;--bad:#ff8c93;--badbg:#4a1f27;--mid:#ffc76b;--midbg:#4a3512;--accent:#ff8c6e;--hl:#4a4310;--sh:#05061a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif,system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.55;padding-bottom:78px}
+body:before{content:'';position:fixed;inset:0;z-index:-1;background-image:radial-gradient(var(--soft) 1.4px,transparent 1.5px);background-size:22px 22px;opacity:.9}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:8px 14px;background:var(--bg);border-bottom:2.5px solid var(--line)}
+.logo{width:36px;height:36px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;border:2.5px solid var(--line);box-shadow:2px 2px 0 var(--sh);flex:none}
+.top h1{font-size:17px;margin:0;line-height:1.1;color:var(--ink)}.top small{display:block;font-size:11.5px;color:var(--mute)}
+.top .sp{flex:1}.join{color:var(--ink);background:var(--g7);border:2.5px solid var(--line);border-radius:20px;padding:4px 12px;font-size:13px;text-decoration:none;font-weight:700;white-space:nowrap;box-shadow:2px 2px 0 var(--sh)}
+@media (max-width:480px){.top small{display:none}}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;background:var(--card);border-top:2.5px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom))}
+nav.tabs button{flex:1;font:inherit;font-size:11.5px;font-weight:700;border:none;background:none;color:var(--mute);padding:4px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;border-radius:12px}
+nav.tabs button i{font-style:normal;font-size:20px;line-height:1.2}
+nav.tabs button[aria-selected=true]{color:var(--ink);background:var(--g7)}
+@media (min-width:760px){body{padding-bottom:30px}nav.tabs{position:sticky;top:57px;bottom:auto;max-width:860px;margin:14px auto 0;border:2.5px solid var(--line);border-radius:16px;box-shadow:3px 3px 0 var(--sh);z-index:15}nav.tabs button{flex-direction:row;justify-content:center;gap:6px;font-size:14px;padding:8px}}
+main{max-width:860px;margin:0 auto;padding:14px 12px 20px}
+.page{display:none}.page.on{display:block}
+h2{font-size:20px;margin:0 0 4px;color:var(--ink)}h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+p.sub{margin:0 0 12px;color:var(--mute);font-size:14px}
+.card{background:var(--card);border:2.5px solid var(--line);border-radius:18px;box-shadow:4px 4px 0 var(--sh);padding:16px;margin-bottom:16px}
+.hero{background:var(--g7);position:relative;overflow:hidden}.hero h2{font-size:24px;line-height:1.2}.hero p{margin:6px 0 14px;font-size:15px;color:var(--ink)}
+.hero:after{content:'F = ma';position:absolute;right:-8px;top:-6px;font-size:54px;font-weight:800;opacity:.12;transform:rotate(-8deg);color:var(--ink)}
+.btn{font:inherit;font-weight:800;font-size:15px;padding:11px 18px;border-radius:14px;border:2.5px solid var(--line);background:var(--accent);color:#fff;cursor:pointer;box-shadow:3px 3px 0 var(--sh);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--sh)}
+.btn.alt{background:var(--card);color:var(--ink)}.btn.sm{padding:6px 12px;font-size:13px;border-radius:12px;box-shadow:2px 2px 0 var(--sh)}.btn.good{background:var(--ok)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>.grow{flex:1;min-width:140px}
+label{display:block;font-size:13.5px;font-weight:700;margin:14px 0 5px;color:var(--ink)}
+select,input[type=text],textarea{width:100%;font:inherit;font-size:16px;padding:11px 13px;border:2.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--text)}
+input.math{font-size:19px}textarea{resize:vertical}
+select:focus,input:focus,textarea:focus,button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.help{font-size:13px;color:var(--mute);margin-top:5px}
+.keys{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px;-webkit-overflow-scrolling:touch}
+.keys button{flex:none;min-width:40px;font:inherit;font-size:16px;font-weight:700;padding:5px 10px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 var(--sh)}
+.keys button:active{transform:translate(2px,2px);box-shadow:none}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.chip{font:inherit;font-size:13px;font-weight:600;padding:5px 11px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}.stat{background:var(--card);border:2.5px solid var(--line);border-radius:16px;padding:10px 6px;text-align:center;box-shadow:3px 3px 0 var(--sh)}.stat b{display:block;font-size:24px;color:var(--ink);line-height:1.1}.stat span{font-size:12px;color:var(--mute);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.tc{display:flex;flex-direction:column;gap:4px;text-align:left;font:inherit;border:2.5px solid var(--line);border-radius:16px;padding:12px;cursor:pointer;color:var(--ink);box-shadow:3px 3px 0 var(--sh);min-height:112px}
+.tc:active{transform:translate(3px,3px);box-shadow:none}.tc .ic{font-size:21px;font-weight:800;line-height:1;font-family:'Cambria Math','Segoe UI',Arial,sans-serif}.tc b{font-size:14px;line-height:1.25}.tc small{font-size:11.5px;opacity:.75;margin-top:auto;font-weight:600}
+.g6{background:var(--g6)}.g7{background:var(--g7)}.g8{background:var(--g8)}.g9{background:var(--g9)}
+.verdict{margin:16px 0 4px;padding:14px 16px;border-radius:16px;border:2.5px solid var(--line);box-shadow:3px 3px 0 var(--sh);font-size:15px}
+.verdict b.h{display:block;font-size:19px;margin-bottom:2px}.verdict ul{margin:6px 0 0;padding-left:20px}.verdict li{margin:4px 0}
+.verdict.ok{background:var(--okbg)}.verdict.ok b.h{color:var(--ok)}.verdict.partial{background:var(--midbg)}.verdict.partial b.h{color:var(--mid)}.verdict.wrong{background:var(--badbg)}.verdict.wrong b.h{color:var(--bad)}.verdict.unreadable{background:var(--card)}
+.err{margin-top:14px;padding:12px 14px;border:2.5px solid var(--bad);background:var(--badbg);border-radius:14px;font-size:14.5px}
+.method{border:2.5px dashed var(--line);border-radius:16px;margin:12px 0 0;background:var(--card)}
+.method>summary{cursor:pointer;font-weight:800;color:var(--ink);padding:11px 14px;list-style:none}.method>summary::-webkit-details-marker{display:none}.method>summary:before{content:'▸ ';color:var(--accent)}.method[open]>summary:before{content:'▾ '}
+.method .in{padding:0 16px 14px}.method ol,.method ul{margin:4px 0 8px;padding-left:22px}.method li{margin:4px 0;font-size:14.5px}.method h4{margin:10px 0 2px;font-size:14px;color:var(--ink)}.method .bad li::marker{color:var(--bad)}
+.sol{margin-top:16px}.prob{font-size:20px;padding:12px 14px;background:var(--hl);border:2.5px solid var(--line);border-radius:14px;overflow-x:auto}
+.prog{font-size:12.5px;font-weight:700;color:var(--mute);margin:12px 0 2px}
+.step{display:flex;gap:10px;margin:10px 0;padding:12px;background:var(--card);border:2.5px solid var(--line);border-radius:16px;animation:pop .25s ease-out}
+@keyframes pop{from{transform:scale(.97);opacity:.4}to{transform:none;opacity:1}}@media (prefers-reduced-motion:reduce){.step{animation:none}.btn{transition:none}}
+.step .nb{flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;font-size:14px}
+.step .bd{min-width:0;flex:1}.step .say{font-size:14.5px;font-weight:600;color:var(--ink)}.step .ln{font-size:19px;padding:3px 0;overflow-x:auto;white-space:nowrap;color:var(--text)}
+.final{margin-top:14px;padding:12px 16px;background:var(--okbg);border:2.5px solid var(--line);border-radius:16px;box-shadow:3px 3px 0 var(--sh);font-size:20px;font-weight:700;overflow-x:auto;color:var(--ink)}.final small{display:block;font-size:12.5px;font-weight:700;color:var(--ok);margin-bottom:2px}
+.m{font-family:'Cambria Math','STIX Two Math','Latin Modern Math','Segoe UI',Arial,sans-serif;font-size:1.06em}.m i{font-style:italic}.tx{font-family:'Segoe UI',Arial,sans-serif,sans-serif;font-size:.78em;font-style:normal}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 2px}.fr .nu{border-bottom:1.5px solid currentColor;padding:0 3px}.fr .de{padding:0 3px}
+.sq{display:inline-block;white-space:nowrap}.sq .rd{display:inline-block;line-height:1;vertical-align:baseline}.sq .rc{display:inline-block;border-top:1.5px solid currentColor;padding:0 2px;margin-left:-1px;line-height:1.05;vertical-align:baseline}
+.cs{display:inline-flex;align-items:center}.cs .cb{font-size:3em;font-weight:200;line-height:.7;margin-right:4px}.cs .cr{display:inline-flex;flex-direction:column;text-align:left}sup,sub{font-size:.7em;line-height:0}
+.score{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0}.pill{background:var(--hl);border:2px solid var(--line);border-radius:14px;padding:3px 12px;font-size:13.5px;font-weight:800;color:var(--ink)}
+.formula{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1.5px dashed var(--soft);align-items:center;flex-wrap:wrap}.formula .n{font-size:14px;color:var(--mute)}.formula .m{font-size:18px;color:var(--ink)}
+details.f{margin:10px 0;border:2.5px solid var(--line);border-radius:16px;padding:2px 14px;background:var(--card);box-shadow:3px 3px 0 var(--sh)}details.f summary{cursor:pointer;font-weight:800;color:var(--ink);padding:10px 0}
+.note{margin-top:14px;padding:12px 14px;border:2.5px dashed var(--line);border-radius:14px;font-size:14px}
+.cta{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--ink);color:var(--bg);border-radius:18px;padding:14px 16px;border:2.5px solid var(--line);box-shadow:4px 4px 0 var(--accent)}
+.cta a{background:var(--g7);color:#1b2150;padding:9px 16px;border-radius:20px;font-weight:800;text-decoration:none;font-size:14px}
+table.st{width:100%;border-collapse:collapse;font-size:14px}table.st td,table.st th{padding:7px 8px;border-bottom:1.5px dashed var(--soft);text-align:left}
+.logi{padding:9px 0;border-bottom:1.5px dashed var(--soft);display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;align-items:center}.logi code{font-size:15px;word-break:break-all}
+.tiny{font-size:12.5px;color:var(--mute)}footer{max-width:860px;margin:0 auto;padding:0 14px 20px;font-size:12.5px;color:var(--mute);text-align:center}
+@media print{.top,nav.tabs,.cta,.btn,.keys,.chips{display:none}.page{display:block!important}body:before{display:none}}
+</style>
+<style>
+:root{--bg:#f2f7fb;--card:#fff;--ink:#15243b;--text:#24344a;--mute:#5a6b7d;--line:#15243b;--soft:#dce8f0;--g6:#d9fff1;--g7:#eafc84;--g8:#dce8ff;--g9:#ffe3d5;--ok:#0c825b;--okbg:#d9f5e9;--bad:#ae3041;--badbg:#ffe5e8;--mid:#935200;--midbg:#fff0c9;--accent:#125bd7;--hl:#f4ffd5;--sh:#a9c2d5}
+*{box-sizing:border-box}html{overflow-x:hidden}body{font-family:'Segoe UI',Arial,sans-serif!important;background:var(--bg);color:var(--text);overflow-x:hidden}body:before{background-image:linear-gradient(to right,transparent 29px,#d5e4ee 30px);background-size:30px 30px;opacity:.55}
+.top{background:#14263b;color:#fff;border:0;border-bottom:4px solid #dff454;padding:12px max(18px,calc((100vw - 1100px)/2));position:relative}.top h1{color:#fff;font-size:22px}.top small{color:#b9cee2;font-size:12px}.logo{background:#dff454;color:#12253d;border:0;box-shadow:none;border-radius:12px;width:44px;height:44px}.join{background:#fff;color:#17304e;border:0;box-shadow:none}
+nav.tabs{background:#fff;border:1px solid #cbdceb;box-shadow:0 8px 28px #15385618;border-radius:16px;max-width:1100px}nav.tabs button{font-size:14px}nav.tabs button[aria-selected=true]{background:#dff454;color:#15243b}main{max-width:1100px;padding:22px 16px 36px}.card{border:1px solid #c7d9e8;box-shadow:0 9px 24px #193d5612;border-radius:20px;padding:22px;margin-bottom:18px}.hero{background:linear-gradient(120deg,#143553,#1762c7);border:0;color:#fff;padding:30px}.hero h2,.hero p{color:#fff}.hero:after{content:'⚡  F = ma';color:#dff454;opacity:.2}.btn{border:0;box-shadow:0 4px 0 #0b3676;background:#1660d8;border-radius:12px}.btn.alt{border:1px solid #b5c9dd;box-shadow:none;color:#17304e}.btn.good{box-shadow:0 4px 0 #086048}.chip{border-color:#b7cbdc}.chip.on{background:#e8f785}.prob{border:1px solid #d4e5b2;background:#f7ffe4}.step,.method,details.f,.final{border-width:1px;box-shadow:none}select,input[type=text],textarea{border:1px solid #a9c3d8;border-radius:11px}.score .pill{border:0;background:#e7f3ff}footer{max-width:1100px}
+.backup{max-width:1100px;margin:12px auto 0;padding:0 16px}.backup summary{cursor:pointer;display:inline-block;color:#125bd7;font-weight:700;font-size:13px}.backup-panel{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}.backup-panel button,.backup-panel label{border:1px solid #b9cbdb;background:#fff;color:#15304e;border-radius:9px;padding:8px 12px;font:600 13px 'Segoe UI',Arial,sans-serif;cursor:pointer;margin:0}.backup-panel small{color:#566d80;flex-basis:100%;line-height:1.5}.backup-panel input{display:none}
+.m{font-family:'Cambria Math','Segoe UI',Arial,sans-serif}.tx{font-family:'Segoe UI',Arial,sans-serif}
+@media(max-width:759px){.top{position:relative;padding:10px 14px}.top h1{font-size:18px}main{padding:14px 12px 100px}.card{padding:17px}.hero{padding:22px}.hero h2{font-size:24px}nav.tabs{max-width:none;border-radius:0;box-shadow:none;border-top:1px solid #bfd0dc;padding-bottom:calc(6px + env(safe-area-inset-bottom))}nav.tabs button{font-size:11px}.join{display:none}.backup{margin:10px auto}.hero:after{font-size:40px}}
+@media(max-width:420px){.row>.grow{min-width:100%}.btn{max-width:100%;white-space:normal}.card{min-width:0}.prob,.step .ln{overflow-x:auto}footer{padding-bottom:95px}}
+@media print{body:before,.backup{display:none!important}.top{color:#000;background:#fff;border:0}.top h1{color:#000}main{max-width:100%}.card{break-inside:avoid}}
+
+</style></head>
+<body>
+<header class="top"><div class="logo">⚡</div><div><h1>Giải Lý 6–9</h1><small>AI Mở Studio · Luyện Vật lí offline</small></div><div class="sp"></div></header>
+<nav class="tabs" role="tablist" id="tabs"></nav><details class="backup"><summary>↧ Dữ liệu & sao lưu tiến độ</summary><div class="backup-panel"><button id="export-json" type="button">Tải JSON</button><button id="export-html" type="button">Tải HTML kèm dữ liệu</button><label for="import-json">Nhập JSON</label><input id="import-json" type="file" accept=".json,application/json"><small id="backup-note">Tiến độ lưu trên trình duyệt này. Sao chép file HTML gốc sang máy khác không mang theo tiến độ; dùng HTML kèm dữ liệu hoặc JSON.</small></div></details><script id="embedded-state" type="application/json"></script>
+<main id="main"></main>
+<footer>Bám Chương trình Khoa học tự nhiên 2018 (phần Vật lí) · Ứng dụng học tập offline của AI Mở Studio.</footer>
+<script>/* Hiển thị công thức dạng LaTeX-lite thành HTML (không cần thư viện ngoài) */
+(function (root) {
+'use strict';
+const SYM = { '\\cdot': '·', '\\times': '×', '\\pm': '±', '\\neq': '≠', '\\le': '≤', '\\ge': '≥', '\\approx': '≈', '\\Rightarrow': '⇒', '\\Leftrightarrow': '⇔', '\\Delta': 'Δ', '\\infty': '∞', '\\varnothing': '∅', '\\in': '∈', '\\mid': '|', '\\%': '%', '\\{': '{', '\\}': '}', '\\widehat': '', '\\circ': '°', '\\pi': 'π', '\\ ': ' ', '\\\\': '' };
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function group(s, i) { // đọc {...} bắt đầu tại i, trả [nội dung, vị trí sau]
+  if (s[i] !== '{') return [s[i] || '', i + 1];
+  let d = 0, j = i; for (; j < s.length; j++) { if (s[j] === '{' && s[j - 1] !== '\\') d++; else if (s[j] === '}' && s[j - 1] !== '\\') { d--; if (d === 0) break; } }
+  return [s.slice(i + 1, j), j + 1];
+}
+function r(s) {
+  let out = '', i = 0;
+  while (i < s.length) {
+    const c = s[i];
+    if (c === '\\') {
+      const m = /^\\[a-zA-Z]+/.exec(s.slice(i));
+      if (m) {
+        const cmd = m[0]; i += cmd.length;
+        if (cmd === '\\frac') { const [a, j] = group(s, i); const [b, k] = group(s, j); out += '<span class="fr"><span class="nu">' + r(a) + '</span><span class="de">' + r(b) + '</span></span>'; i = k; }
+        else if (cmd === '\\sqrt') { const [a, j] = group(s, i); out += '<span class="sq"><span class="rd">√</span><span class="rc">' + r(a) + '</span></span>'; i = j; }
+        else if (cmd === '\\text') { const [a, j] = group(s, i); out += '<span class="tx">' + esc(a) + '</span>'; i = j; }
+        else if (cmd === '\\widehat') { const [a, j] = group(s, i); out += '<span class="hat">' + r(a) + '</span>'; i = j; }
+        else if (cmd === '\\begin') { const [a, j] = group(s, i); const e = s.indexOf('\\end{' + a + '}', j); const body = s.slice(j, e); i = e + ('\\end{' + a + '}').length; out += '<span class="cs"><span class="cb">{</span><span class="cr">' + body.split('\\\\').map(x => '<span>' + r(x) + '</span>').join('') + '</span></span>'; }
+        else if (cmd === '\\sin' || cmd === '\\cos' || cmd === '\\tan' || cmd === '\\cot') out += '<span class="tx">' + cmd.slice(1) + '</span>';
+        else out += SYM[cmd] !== undefined ? SYM[cmd] : '';
+        continue;
+      }
+      const two = s.slice(i, i + 2); out += SYM[two] !== undefined ? SYM[two] : esc(s[i + 1] || ''); i += 2; continue;
+    }
+    if (c === '^' || c === '_') { const [a, j] = group(s, i + 1); out += '<' + (c === '^' ? 'sup' : 'sub') + '>' + r(a) + '</' + (c === '^' ? 'sup' : 'sub') + '>'; i = j; continue; }
+    if (c === '{') { const [a, j] = group(s, i); out += r(a); i = j; continue; }
+    if (c === '-') { out += '−'; i++; continue; }
+    if (c === '*') { out += '·'; i++; continue; }
+    if (c === '<') { out += '&lt;'; i++; continue; } if (c === '>') { out += '&gt;'; i++; continue; } if (c === '&') { out += '&amp;'; i++; continue; }
+    if (/[a-zA-Z]/.test(c)) { out += '<i>' + c + '</i>'; i++; continue; }
+    out += c; i++;
+  }
+  return out;
+}
+function plain(s){ s=String(s); const w=x=>/[+\-−]/.test(x.replace(/^[-−]/,''))?'('+x+')':x;
+  s=s.replace(/\^\{([^{}]*)\}/g,'^$1').replace(/_\{([^{}]*)\}/g,'$1').replace(/\\text\{([^{}]*)\}/g,'$1');
+  for(let i=0;i<5;i++) s=s.replace(/\\sqrt\{([^{}]*)\}/g,(m,a)=>'√'+(/^\d+$/.test(a)?a:'('+a+')')).replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g,(m,a,b)=>w(a)+'/'+w(b));
+  return s.replace(/\\[{}]/g,m=>m[1]).replace(/\\ /g,' ').replace(/\\cdot ?/g,'·').replace(/\\pm/g,'±').replace(/\\neq/g,'≠').replace(/\\le\b/g,'≤').replace(/\\ge\b/g,'≥').replace(/\\varnothing/g,'∅').replace(/\\pi/g,'π').replace(/\\Delta/g,'Δ').replace(/\\infty/g,'∞').replace(/\\[a-zA-Z]+/g,''); }
+root.MathRender = { html: s => '<span class="m">' + r(String(s)) + '</span>', esc, plain };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>/* Lõi tính toán Toán 6-9: số hữu tỉ chính xác (BigInt), căn thức, đa thức nhiều biến, phân thức. Chạy offline. */
+(function (root) {
+'use strict';
+const B = BigInt;
+const babs = a => (a < 0n ? -a : a);
+function bgcd(a, b) { a = babs(a); b = babs(b); while (b) { [a, b] = [b, a % b]; } return a; }
+
+/* ---------- Số hữu tỉ ---------- */
+class Q {
+  constructor(n, d) {
+    n = B(n); d = d === undefined ? 1n : B(d);
+    if (d === 0n) throw new MathError('Chia cho 0');
+    if (d < 0n) { n = -n; d = -d; }
+    const g = bgcd(n, d) || 1n;
+    this.n = n / g; this.d = d / g;
+  }
+  static from(x) { return x instanceof Q ? x : new Q(x, 1n); }
+  static parse(s) { // "12", "1.5"
+    s = String(s).trim().replace(',', '.');
+    const m = /^(\d*)(?:\.(\d+))?$/.exec(s); if (!m) throw new MathError('Số không đọc được: ' + s);
+    const ip = m[1] || '0', fp = m[2] || '';
+    return new Q(B(ip + fp), 10n ** B(fp.length));
+  }
+  add(o) { o = Q.from(o); return new Q(this.n * o.d + o.n * this.d, this.d * o.d); }
+  sub(o) { o = Q.from(o); return new Q(this.n * o.d - o.n * this.d, this.d * o.d); }
+  mul(o) { o = Q.from(o); return new Q(this.n * o.n, this.d * o.d); }
+  div(o) { o = Q.from(o); if (o.n === 0n) throw new MathError('Chia cho 0'); return new Q(this.n * o.d, this.d * o.n); }
+  neg() { return new Q(-this.n, this.d); }
+  inv() { return new Q(1n, 1n).div(this); }
+  pow(k) { // k nguyên (có thể âm)
+    k = Number(k); if (k < 0) return this.inv().pow(-k);
+    let r = new Q(1n), b = this; for (let i = 0; i < k; i++) r = r.mul(b); return r;
+  }
+  isZero() { return this.n === 0n; }
+  isInt() { return this.d === 1n; }
+  isOne() { return this.n === 1n && this.d === 1n; }
+  sign() { return this.n === 0n ? 0 : this.n > 0n ? 1 : -1; }
+  cmp(o) { o = Q.from(o); const l = this.n * o.d, r = o.n * this.d; return l < r ? -1 : l > r ? 1 : 0; }
+  eq(o) { o = Q.from(o); return this.n === o.n && this.d === o.d; }
+  abs() { return new Q(babs(this.n), this.d); }
+  num() { return Number(this.n) / Number(this.d); }
+  toString() { return this.d === 1n ? String(this.n) : this.n + '/' + this.d; }
+  /* dạng hiển thị LaTeX-lite */
+  tex() { return this.d === 1n ? String(this.n) : (this.n < 0n ? '-' : '') + '\\frac{' + babs(this.n) + '}{' + this.d + '}'; }
+}
+class MathError extends Error { constructor(m) { super(m); this.name = 'MathError'; } }
+const ZERO = new Q(0n), ONE = new Q(1n);
+
+/* ---------- Căn thức: tổng a_k * sqrt(k), k không chứa bình phương ---------- */
+function sqfree(n) { // n BigInt >0 -> [s, k] với n = s^2 * k, k không chứa bình phương
+  let s = 1n, k = n;
+  for (let p = 2n; p * p <= k; p++) { while (k % (p * p) === 0n) { k /= p * p; s *= p; } }
+  return [s, k];
+}
+function isqrt(n) { if (n < 2n) return n; let x = B(Math.floor(Math.sqrt(Number(n)))); while (x * x > n) x--; while ((x + 1n) * (x + 1n) <= n) x++; return x; }
+class S { // Surd
+  constructor(map) { this.m = new Map(); if (map) for (const [k, v] of map) if (!v.isZero()) this.m.set(String(k), v); }
+  static rat(q) { return new S(new Map([['1', Q.from(q)]])); }
+  static sqrtOf(q) { // căn bậc hai số hữu tỉ không âm
+    q = Q.from(q); if (q.sign() < 0) throw new MathError('Không có căn bậc hai của số âm');
+    if (q.isZero()) return new S();
+    const [s, k] = sqfree(q.n * q.d); // sqrt(n/d) = sqrt(nd)/d
+    return new S(new Map([[String(k), new Q(s, q.d)]]));
+  }
+  clone() { return new S(new Map(this.m)); }
+  isZero() { return this.m.size === 0; }
+  isRat() { return this.m.size === 0 || (this.m.size === 1 && this.m.has('1')); }
+  rat() { return this.m.get('1') || ZERO; }
+  add(o) { const r = new Map(this.m); for (const [k, v] of o.m) r.set(k, (r.get(k) || ZERO).add(v)); return new S(r); }
+  neg() { const r = new Map(); for (const [k, v] of this.m) r.set(k, v.neg()); return new S(r); }
+  sub(o) { return this.add(o.neg()); }
+  mul(o) {
+    const r = new Map();
+    for (const [k1, v1] of this.m) for (const [k2, v2] of o.m) {
+      const prod = B(k1) * B(k2); const [s, k] = sqfree(prod); const key = String(k);
+      r.set(key, (r.get(key) || ZERO).add(v1.mul(v2).mul(new Q(s))));
+    }
+    return new S(r);
+  }
+  scale(q) { return this.mul(S.rat(q)); }
+  conj() { // đổi dấu mọi hạng tử căn hạng cuối (dùng cho 2 hạng tử)
+    const ks = [...this.m.keys()]; const r = new Map(this.m);
+    const last = ks[ks.length - 1]; r.set(last, r.get(last).neg()); return new S(r);
+  }
+  div(o) {
+    if (o.isZero()) throw new MathError('Chia cho 0');
+    if (o.isRat()) return this.scale(o.rat().inv());
+    const ks = [...o.m.keys()];
+    if (ks.length === 1) { // c*sqrt(k): nhân tử và mẫu với sqrt(k)
+      const k = ks[0], c = o.m.get(k); const rk = new S(new Map([[k, ONE]]));
+      return this.mul(rk).scale(c.mul(new Q(B(k))).inv());
+    }
+    if (ks.length === 2) { // a + b sqrt(k) : nhân lượng liên hợp
+      const cj = new S(new Map(o.m)).conj(); const den = o.mul(cj); // hữu tỉ
+      if (!den.isRat()) throw new MathError('Phép chia với căn thức chưa hỗ trợ');
+      return this.mul(cj).scale(den.rat().inv());
+    }
+    throw new MathError('Mẫu có quá nhiều căn, phần mềm chưa hỗ trợ');
+  }
+  pow(k) {
+    k = Number(k); if (k < 0) return S.rat(ONE).div(this.pow(-k));
+    let r = S.rat(ONE); for (let i = 0; i < k; i++) r = r.mul(this); return r;
+  }
+  eq(o) { const d = this.sub(o); return d.isZero(); }
+  num() { let t = 0; for (const [k, v] of this.m) t += v.num() * Math.sqrt(Number(k)); return t; }
+  sign() { if (this.isZero()) return 0; const x = this.num(); return x > 0 ? 1 : -1; }
+  /* so sánh chính xác không cần: dùng số thực với dung sai nhỏ cho căn */
+  /* tex: dạng (a + b√k)/d với d chung */
+  tex() {
+    if (this.isZero()) return '0';
+    const terms = [...this.m.entries()].map(([k, v]) => [B(k), v]).sort((a, b) => (a[0] < b[0] ? -1 : 1));
+    if (this.isRat()) return this.rat().tex();
+    let d = 1n; for (const [, v] of terms) d = d * v.d / bgcd(d, v.d);
+    const parts = terms.map(([k, v]) => ({ k, c: v.mul(new Q(d)).n }));
+    let g = d; for (const p of parts) g = bgcd(g, p.c); // giản ước
+    const dd = d / g; parts.forEach(p => { p.c /= g; });
+    let s = '';
+    parts.forEach((p, i) => {
+      const c = p.c; const mag = babs(c); const sg = c < 0n ? '-' : '+';
+      let body;
+      if (p.k === 1n) body = String(mag); else body = (mag === 1n ? '' : String(mag)) + '\\sqrt{' + p.k + '}';
+      s += (i === 0 ? (c < 0n ? '-' : '') : sg) + body;
+    });
+    return dd === 1n ? s : '\\frac{' + s + '}{' + dd + '}';
+  }
+}
+S.ZERO = new S(); S.ONE = S.rat(ONE);
+
+/* ---------- Chuẩn hóa chuỗi nhập ---------- */
+function normalizeInput(s) {
+  s = String(s == null ? '' : s);
+  s = s.replace(/[−–—]/g, '-').replace(/[×·⋅∙]/g, '*').replace(/÷/g, '/').replace(/\u00A0/g, ' ');
+  s = s.replace(/²/g, '^2').replace(/³/g, '^3').replace(/⁴/g, '^4');
+  s = s.replace(/≤/g, '<=').replace(/≥/g, '>=').replace(/≠/g, '!=').replace(/√/g, 'sqrt');
+  s = s.replace(/[\[\{]/g, '(').replace(/[\]\}]/g, ')');
+  s = s.replace(/(\d),(\d)/g, '$1.$2');
+  return s;
+}
+
+/* ---------- Bộ phân tích cú pháp ---------- */
+function tokenize(src) {
+  const t = []; let i = 0; const s = src;
+  while (i < s.length) {
+    const c = s[i];
+    if (/\s/.test(c)) { i++; continue; }
+    if (/[0-9.]/.test(c)) { let j = i; while (j < s.length && /[0-9.]/.test(s[j])) j++; const lit = s.slice(i, j); if ((lit.match(/\./g) || []).length > 1 || lit === '.') throw new MathError('Số viết chưa đúng: ' + lit); t.push({ k: 'num', v: lit }); i = j; continue; }
+    if (/[a-zA-Z]/.test(c)) {
+      if (s.startsWith('sqrt', i)) { t.push({ k: 'sqrt' }); i += 4; continue; }
+      t.push({ k: 'id', v: c }); i++; continue;
+    }
+    if ((c === '<' || c === '>' || c === '!') && s[i + 1] === '=') { t.push({ k: 'rel', v: c + '=' }); i += 2; continue; }
+    if (c === '<' || c === '>') { t.push({ k: 'rel', v: c }); i++; continue; }
+    if (c === '=') { t.push({ k: 'rel', v: '=' }); i++; continue; }
+    if ('+-*/^()%|;:'.includes(c)) { t.push({ k: c }); i++; continue; }
+    throw new MathError('Ký tự lạ: «' + c + '»');
+  }
+  return t;
+}
+const num = v => ({ t: 'num', v });
+class Parser {
+  constructor(tokens) { this.t = tokens; this.i = 0; }
+  peek() { return this.t[this.i]; }
+  next() { return this.t[this.i++]; }
+  is(k) { const p = this.peek(); return p && p.k === k; }
+  expr() {
+    let a = this.term();
+    while (this.is('+') || this.is('-')) { const op = this.next().k; const b = this.term(); a = { t: 'bin', op, a, b }; }
+    return a;
+  }
+  term() { // nhân «*», chia «:» cùng cấp, từ trái sang phải
+    let a = this.slash();
+    while (this.is('*') || this.is(':')) { const op = this.next().k; const b = this.slash(); a = op === ':' ? { t: 'bin', op: '/', a, b, colon: true } : { t: 'bin', op, a, b }; }
+    return a;
+  }
+  slash() { // «/» là vạch phân số: tử và mẫu viết liền (2x, (a+b)(a-b)) tính trước
+    let a = this.juxt();
+    while (this.is('/')) {
+      this.next(); let neg = false; if (this.is('-')) { this.next(); neg = true; } else if (this.is('+')) this.next();
+      let b = this.power(); if (neg) b = { t: 'neg', a: b };
+      if (this.startsAtom()) throw new MathError('Chưa rõ nghĩa: sau dấu / có hai thừa số viết liền nhau. Hãy thêm ngoặc, ví dụ (1/2)x hoặc 1/(2x)');
+      a = { t: 'bin', op: '/', a, b };
+    }
+    return a;
+  }
+  juxt() { // nhân viết liền: 2x, 3(x+1), (a+b)(a-b)
+    if (this.is('-')) { this.next(); return { t: 'neg', a: this.juxt() }; }
+    if (this.is('+')) { this.next(); return this.juxt(); }
+    let a = this.power();
+    while (this.startsAtom()) { const b = this.power(); a = { t: 'bin', op: '*', a, b, implicit: true }; }
+    return a;
+  }
+  startsAtom() { const p = this.peek(); return p && (p.k === 'id' || p.k === '(' || p.k === 'sqrt'); }
+  unary() {
+    if (this.is('-')) { this.next(); return { t: 'neg', a: this.unary() }; }
+    if (this.is('+')) { this.next(); return this.unary(); }
+    return this.power();
+  }
+  power() {
+    let a = this.postfix();
+    if (this.is('^')) {
+      this.next(); let neg = false;
+      if (this.is('-')) { this.next(); neg = true; } else if (this.is('+')) this.next();
+      const b = this.powerAtom(); a = { t: 'pow', a, b: neg ? { t: 'neg', a: b } : b };
+    }
+    return a;
+  }
+  powerAtom() { return this.power(); }
+  postfix() {
+    let a = this.atom();
+    while (this.is('%')) { this.next(); a = { t: 'bin', op: '/', a, b: num(Q.from(100)), pct: true }; }
+    return a;
+  }
+  atom() {
+    const p = this.next();
+    if (!p) throw new MathError('Biểu thức bị thiếu ở cuối');
+    if (p.k === 'num') { const n0 = num(Q.parse(p.v)); n0.raw = p.v; return n0; }
+    if (p.k === 'id') return { t: 'var', n: p.v };
+    if (p.k === 'sqrt') {
+      if (this.is('(')) { const a = this.atom(); return { t: 'sqrt', a }; }
+      if (this.is('num')) return { t: 'sqrt', a: num(Q.parse(this.next().v)) };
+      if (this.is('id')) return { t: 'sqrt', a: { t: 'var', n: this.next().v } };
+      throw new MathError('Sau dấu căn cần có số hoặc dấu ngoặc');
+    }
+    if (p.k === '(') {
+      const e = this.expr(); if (!this.is(')')) throw new MathError('Thiếu dấu ngoặc đóng ")"'); this.next();
+      return { t: 'paren', a: e };
+    }
+    if (p.k === ')') throw new MathError('Thừa dấu ngoặc đóng ")"');
+    throw new MathError('Không đọc được biểu thức gần «' + (p.v || p.k) + '»');
+  }
+}
+class ParserLTR extends Parser { // chỉ dùng để đoán lỗi: tính từ trái sang phải, không theo thứ tự phép tính
+  expr() {
+    let a = this.unary();
+    for (;;) {
+      if (this.is('+') || this.is('-') || this.is('*') || this.is('/') || this.is(':')) { let op = this.next().k; if (op === ':') op = '/'; const b = this.unary(); a = { t: 'bin', op, a, b }; }
+      else if (this.startsAtom()) { const b = this.power(); a = { t: 'bin', op: '*', a, b }; }
+      else break;
+    }
+    return a;
+  }
+}
+function parseExprLTR(src) { const toks = tokenize(normalizeInput(src)); const p = new ParserLTR(toks); const e = p.expr(); if (p.i < toks.length) throw new MathError('Không đọc được'); return e; }
+function parseExpr(src) {
+  const toks = tokenize(normalizeInput(src));
+  if (!toks.length) throw new MathError('Chưa nhập gì');
+  const p = new Parser(toks); const e = p.expr();
+  if (p.i < toks.length) { const x = toks[p.i]; if (x.k === 'num' && toks[p.i - 1] && toks[p.i - 1].k === 'num') throw new MathError('Hai số đứng cạnh nhau. Hỗn số hãy viết dạng 1+1/2 hoặc (3/2)'); throw new MathError(x.k === ')' ? 'Thừa dấu ngoặc đóng ")"' : x.k === 'rel' ? 'Biểu thức có dấu ' + x.v + ' (đây không phải phương trình)' : 'Không đọc được gần «' + (x.v || x.k) + '»'); }
+  return e;
+}
+/* parse "A rel B" -> {rel, l, r}; không có rel -> null */
+function parseRelation(src) {
+  const toks = tokenize(normalizeInput(src)); const idx = toks.findIndex(t => t.k === 'rel');
+  if (idx < 0) return null;
+  if (toks.some((t, i) => t.k === 'rel' && i !== idx)) throw new MathError('Chỉ nhập một dấu so sánh (=, <, >, ≤, ≥)');
+  const lp = new Parser(toks.slice(0, idx)), rp = new Parser(toks.slice(idx + 1));
+  if (!lp.t.length || !rp.t.length) throw new MathError('Thiếu vế của phương trình');
+  const l = lp.expr(), r = rp.expr();
+  if (lp.i < lp.t.length || rp.i < rp.t.length) throw new MathError('Không đọc được biểu thức');
+  return { rel: toks[idx].v, l, r };
+}
+function hasVar(a) {
+  switch (a.t) { case 'num': return false; case 'var': return true; case 'neg': case 'paren': case 'sqrt': return hasVar(a.a); default: return hasVar(a.a) || hasVar(a.b); }
+}
+function varsOf(a, set) {
+  set = set || new Set();
+  switch (a.t) { case 'var': set.add(a.n); break; case 'num': break; case 'neg': case 'paren': case 'sqrt': varsOf(a.a, set); break; default: varsOf(a.a, set); varsOf(a.b, set); }
+  return set;
+}
+
+/* ---------- Tính giá trị số (có căn) ---------- */
+function evalNum(a, env) {
+  switch (a.t) {
+    case 'num': return S.rat(a.v);
+    case 'val': return a.v;
+    case 'paren': return evalNum(a.a, env);
+    case 'neg': return evalNum(a.a, env).neg();
+    case 'sqrt': { const v = evalNum(a.a, env); if (!v.isRat()) throw new MathError('Căn của biểu thức có căn: phần mềm chưa hỗ trợ'); return S.sqrtOf(v.rat()); }
+    case 'var': if (env && env[a.n]) return env[a.n]; throw new MathError('Biểu thức có chữ «' + a.n + '»');
+    case 'pow': {
+      const e = evalNum(a.b, env); if (!e.isRat() || !e.rat().isInt()) throw new MathError('Số mũ phải là số nguyên');
+      const k = e.rat().n; if (babs(k) > 200n) throw new MathError('Số mũ quá lớn'); const base = evalNum(a.a, env);
+      if (base.isZero() && k < 0n) throw new MathError('Chia cho 0');
+      return base.pow(k);
+    }
+    case 'bin': {
+      const x = evalNum(a.a, env), y = evalNum(a.b, env);
+      if (a.op === '+') return x.add(y); if (a.op === '-') return x.sub(y); if (a.op === '*') return x.mul(y);
+      return x.div(y);
+    }
+  }
+  throw new MathError('Không tính được');
+}
+
+root.MathEngine = { Q, S, MathError, ZERO, ONE, bgcd, babs, sqfree, isqrt, normalizeInput, tokenize, Parser, parseExpr, parseExprLTR, parseRelation, hasVar, varsOf, evalNum, num };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>/* Phần mềm Vật lý: đơn vị, định luật, các dạng bài */
+(function (root) {
+'use strict';
+const M = root.MathEngine, { Q, MathError } = M;
+const T = root.PhyTypes = { list: [], byId: {} };
+const fold = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
+const res = (verdict, headline, msgs) => ({ verdict, headline, msgs: msgs || [] });
+const ok = (h, m) => res('ok', h, m), partial = (h, m) => res('partial', h, m), wrong = (h, m) => res('wrong', h, m), unread = (h, m) => res('unreadable', h, m);
+const friendly = e => (e && e.message) || String(e);
+T.fold = fold; T.friendly = friendly; T.res = { ok, partial, wrong, unread };
+const reg = t => { T.list.push(t); T.byId[t.id] = t; };
+const q = (a, b) => new Q(BigInt(a), BigInt(b === undefined ? 1 : b));
+const Qs = x => Q.parse(String(x));
+
+/* ---------- Đơn vị ---------- */
+const UN = {}; // key -> {dim,f}
+const addU = (dim, f, names) => names.split(' ').forEach(n => { UN[n] = { dim, f }; });
+const P10 = n => (n >= 0 ? new Q(10n ** BigInt(n)) : new Q(1n, 10n ** BigInt(-n)));
+addU('L', P10(-3), 'mm'); addU('L', P10(-2), 'cm'); addU('L', P10(-1), 'dm'); addU('L', P10(0), 'm'); addU('L', P10(3), 'km');
+addU('M', P10(-6), 'mg'); addU('M', P10(-3), 'g'); addU('M', P10(0), 'kg'); addU('M', P10(2), 'ta'); addU('M', P10(3), 'tan');
+addU('T', P10(0), 's'); addU('T', P10(-3), 'ms'); addU('T', q(60), 'ph phut min'); addU('T', q(3600), 'h gio'); addU('T', q(1), 'giay');
+addU('A2', P10(-6), 'mm2'); addU('A2', P10(-4), 'cm2'); addU('A2', P10(-2), 'dm2'); addU('A2', P10(0), 'm2'); addU('A2', P10(6), 'km2'); addU('A2', P10(4), 'ha');
+addU('V3', P10(-9), 'mm3'); addU('V3', P10(-6), 'cm3 ml'); addU('V3', P10(-3), 'dm3 l lit'); addU('V3', P10(0), 'm3');
+addU('vel', q(1), 'm/s'); addU('vel', q(5, 18), 'km/h'); addU('vel', P10(-2), 'cm/s');
+addU('den', q(1), 'kg/m3 g/l'); addU('den', q(1000), 'g/cm3 g/ml kg/dm3 kg/l');
+addU('dw', q(1), 'n/m3'); addU('dw', q(1000), 'kn/m3');
+addU('F', q(1), 'n'); addU('F', q(1000), 'kn'); addU('F', P10(6), 'mn');
+addU('pr', q(1), 'pa n/m2'); addU('pr', q(1000), 'kpa'); addU('pr', P10(6), 'mpa'); addU('pr', P10(5), 'bar'); addU('pr', P10(4), 'n/cm2');
+addU('E', q(1), 'j'); addU('E', q(1000), 'kj'); addU('E', P10(6), 'mj'); addU('E', q(3600), 'wh'); addU('E', q(3600000), 'kwh');
+addU('Pw', q(1), 'w'); addU('Pw', q(1000), 'kw'); addU('Pw', P10(6), 'mw');
+addU('I', q(1), 'a'); addU('I', P10(-3), 'ma');
+addU('U', q(1), 'v'); addU('U', P10(-3), 'mv'); addU('U', q(1000), 'kv');
+addU('R', q(1), 'ohm'); addU('R', q(1000), 'kohm'); addU('R', P10(6), 'mohm');
+addU('cap', q(1), 'j/kg.k j/kg.c j/kgk j/kgc'); addU('cap', q(1000), 'kj/kg.k kj/kg.c');
+addU('qq', q(1), 'j/kg'); addU('qq', q(1000), 'kj/kg'); addU('qq', P10(6), 'mj/kg');
+addU('rho', q(1), 'ohm.m'); addU('rho', P10(-6), 'ohm.mm2/m');
+addU('fq', q(1), 'hz'); addU('fq', q(1000), 'khz'); addU('fq', P10(6), 'mhz');
+addU('dT', q(1), 'c k');
+addU('acc', q(1), 'm/s2'); addU('vnd', q(1), 'dong d vnd'); addU('vnd', q(1000), 'nghindong ngd'); addU('vnd', P10(6), 'trieu'); addU('vndE', new Q(1n, 3600000n), 'dong/kwh d/kwh vnd/kwh'); addU('vndE', q(1), 'dong/j'); addU('ang', q(1), 'deg do'); addU('pct', P10(-2), '%'); addU('none', q(1), '');
+const EXACT = { MW: ['Pw', P10(6)], mW: ['Pw', P10(-3)], MJ: ['E', P10(6)], mJ: ['E', P10(-3)], MPa: ['pr', P10(6)], Mohm: ['R', P10(6)], MHz: ['fq', P10(6)] };
+const UNAME = { L: 'độ dài', M: 'khối lượng', T: 'thời gian', A2: 'diện tích', V3: 'thể tích', vel: 'tốc độ', den: 'khối lượng riêng', dw: 'trọng lượng riêng', F: 'lực', pr: 'áp suất', E: 'công, năng lượng', Pw: 'công suất', I: 'cường độ dòng điện', U: 'hiệu điện thế', R: 'điện trở', cap: 'nhiệt dung riêng', qq: 'năng suất tỏa nhiệt', rho: 'điện trở suất', fq: 'tần số', acc: 'gia tốc', vnd: 'tiền', vndE: 'giá điện', ang: 'góc', dT: 'độ biến thiên nhiệt độ', pct: 'phần trăm', none: 'không đơn vị' };
+const BASE = { L: 'm', M: 'kg', T: 's', A2: 'm²', V3: 'm³', vel: 'm/s', den: 'kg/m³', dw: 'N/m³', F: 'N', pr: 'Pa', E: 'J', Pw: 'W', I: 'A', U: 'V', R: 'Ω', cap: 'J/kg.K', qq: 'J/kg', rho: 'Ω.m', fq: 'Hz', acc: 'm/s²', vnd: 'đồng', vndE: 'đồng/J', ang: '°', dT: '°C', pct: '%', none: '' };
+const ASCII = { 'm²': 'm2', 'm³': 'm3', 'kg/m³': 'kg/m3', 'Ω': 'ohm', 'Ω.m': 'ohm.m', '°C': 'C' };
+function unitKey(raw) {
+  if (/^\s*°\s*$/.test(String(raw || ''))) return { dim: 'ang', f: Q.from(1), key: 'deg' };
+  let u = String(raw || '').trim().replace(/[()\s]/g, '').replace(/[ΩωΩ]/g, 'ohm').replace(/[µμ]/g, 'u').replace(/²/g, '2').replace(/³/g, '3').replace(/[·*]/g, '.').replace(/°/g, '');
+  if (EXACT[u]) return { dim: EXACT[u][0], f: EXACT[u][1], key: u };
+  const l = u.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').toLowerCase().replace(/^do/, 'do');
+  if (UN[l]) return { dim: UN[l].dim, f: UN[l].f, key: l };
+  return null;
+}
+T.unitKey = unitKey;
+/* ---------- Số ---------- */
+function parseNum(s) {
+  s = String(s).trim().replace(/(\d)\s*[x×*]\s*10\s*\^/g, '$1*10^'); if (!s) throw new MathError('Thiếu số');
+  const ast = M.parseExpr(M.normalizeInput(s)); if (M.hasVar(ast)) throw new MathError('«' + s + '» phải là số'); const v = M.evalNum(ast); if (!v.isRat()) throw new MathError('«' + s + '» phải là số hữu tỉ'); return v.rat();
+}
+function decPlaces(s) { const m = /[.,](\d+)/.exec(String(s)); return m ? m[1].length : 0; }
+function parseVal(text, wantDim) { // trả {q (SI), qRaw, unit, unitKey, dim, assumed}
+  const t = String(text).trim(); if (!t) throw new MathError('Thiếu giá trị');
+  const m = /^([0-9.,+\-*^()\s]*[0-9)])\s*(.*)$/.exec(t.replace(/(\d)\s*[x×]\s*10\^/g, '$1*10^').replace(/(\d)[eE]\s*(-?\d+)(?![\d])/g, '$1*10^$2')); if (!m) throw new MathError('Không đọc được «' + t + '»');
+  const qv = parseNum(m[1]); const us = m[2].trim(); let u = null;
+  if (us) { u = unitKey(us); if (!u) throw new MathError('Chưa biết đơn vị «' + us + '»'); } 
+  if (u && wantDim && u.dim !== wantDim && !(wantDim === 'pct' && u.dim === 'none')) throw new MathError('Đơn vị «' + us + '» không phải đơn vị của ' + (UNAME[wantDim] || wantDim) + ' (cần đơn vị như ' + BASE[wantDim] + ')');
+  const f = u ? u.f : Q.from(1); return { q: qv.mul(f), raw: qv, unit: us, uk: u, assumed: !u, dec: decPlaces(m[1]), text: t };
+}
+/* ---------- Định dạng ---------- */
+function fmtQ(x) { // trả {s, approx}
+  if (x.isZero()) return { s: '0', approx: false }; let d = x.d, a = 0, b = 0; while (d % 2n === 0n) { d /= 2n; a++; } while (d % 5n === 0n) { d /= 5n; b++; }
+  const neg = x.n < 0n, n = neg ? -x.n : x.n;
+  if (d === 1n) { const k = Math.max(a, b); let digs = (n * (10n ** BigInt(k)) / x.d).toString(); if (k > 0) { digs = digs.padStart(k + 1, '0'); digs = digs.slice(0, -k) + ',' + digs.slice(-k); digs = digs.replace(/0+$/, '').replace(/,$/, ''); } return { s: (neg ? '-' : '') + digs, approx: false }; }
+  const v = Math.abs(x.num()); const s = (v >= 100 ? v.toFixed(1) : v >= 1 ? v.toFixed(2) : v.toPrecision(2)).replace('.', ',').replace(/,?0+$/, m => (m.startsWith(',') ? '' : m)); return { s: (neg ? '-' : '') + s, approx: true };
+}
+const fs = x => fmtQ(x).s;
+const pretty = u => String(u).replace(/m2(?!\d)/g, 'm²').replace(/m3(?!\d)/g, 'm³').replace(/ohm/g, 'Ω').replace(/kwh/gi, 'kWh').replace(/\bkj\b/g, 'kJ');
+const unitTex = u => '\\ \\text{' + pretty(u) + '}';
+const num = (x, u) => fs(x) + (u ? unitTex(u) : '');
+T.fmt = fs;
+
+/* ---------- Định luật ---------- */
+const SYMTEX = { rho: '\\rho', lam: '\\lambda', dt: '\\Delta t', dp: "d'", hp: "h'", FA: 'F_A', Wd: 'W_d', Wt: 'W_t', Aci: 'A_{ci}', Atp: 'A_{tp}', F1: 'F_1', F2: 'F_2', l1: 'l_1', l2: 'l_2' };
+const symT = k => SYMTEX[k] || k;
+const ALIAS = { 'ρ': 'rho', 'λ': 'lam', 'Δt': 'dt', 'Δ t': 'dt', "d'": 'dp', 'd′': 'dp', "h'": 'hp', 'h′': 'hp', F_A: 'FA', Fa: 'FA', FA: 'FA', Fa_: 'FA', W_d: 'Wd', 'Wđ': 'Wd', W_t: 'Wt', A_ci: 'Aci', A_tp: 'Atp', Ai: 'Aci', rho: 'rho', ro: 'rho', lambda: 'lam', Lam: 'lam', delta_t: 'dt', Dt: 'dt', 'ΔT': 'dt', F_1: 'F1', F_2: 'F2', l_1: 'l1', l_2: 'l2' };
+const LAWS = [];
+/* L(id,nhóm,tên,{sym:[dim,tên]},[unknown→[lhsTex, rhsTemplate, fn, hint?]], tex công thức, gợi ý nhận xét, alt) */
+function law(group, id, title, vars, eq, forms, opt) { LAWS.push(Object.assign({ group, id, title, vars, eq, forms }, opt || {})); }
+const sq = x => x.mul(x);
+// --- Cơ học
+law('mech', 'speed', 'Tốc độ', { v: ['vel', 'tốc độ'], s: ['L', 'quãng đường'], t: ['T', 'thời gian'] }, 'v=\\frac{s}{t}', { v: ['v', '\\frac{[s]}{[t]}', x => x.s.div(x.t)], s: ['s', '[v]\\cdot[t]', x => x.v.mul(x.t)], t: ['t', '\\frac{[s]}{[v]}', x => x.s.div(x.v)] }, { alt: g => (g.s && g.s.uk && g.s.uk.key === 'km') || (g.t && g.t.uk && g.t.uk.key === 'h') ? { v: 'km/h', s: 'km', t: 'h' } : (g.v && g.v.uk && g.v.uk.key === 'km/h' ? { s: 'km', t: 'h' } : null), note: 'Nhớ đổi đơn vị: 1 km/h = 1/3,6 m/s, nên đổi km/h sang m/s thì chia 3,6.' });
+law('mech', 'density', 'Khối lượng riêng', { D: ['den', 'khối lượng riêng'], m: ['M', 'khối lượng'], V: ['V3', 'thể tích'] }, 'D=\\frac{m}{V}', { D: ['D', '\\frac{[m]}{[V]}', x => x.m.div(x.V)], m: ['m', '[D]\\cdot[V]', x => x.D.mul(x.V)], V: ['V', '\\frac{[m]}{[D]}', x => x.m.div(x.D)] }, { alt: g => (g.m && g.m.uk && g.m.uk.key === 'g') || (g.V && g.V.uk && /cm3|ml/.test(g.V.uk.key)) ? { D: 'g/cm3', m: 'g', V: 'cm3' } : null, note: 'Nước có khối lượng riêng 1000 kg/m³ (1 g/cm³). Vật có D lớn hơn nước thì chìm.' });
+law('mech', 'weight', 'Trọng lượng', { P: ['F', 'trọng lượng'], m: ['M', 'khối lượng'] }, 'P=10m', { P: ['P', '10\\cdot[m]', x => x.m.mul(10)], m: ['m', '\\frac{[P]}{10}', x => x.P.div(10)] }, { note: 'Vật có khối lượng 1 kg thì nặng khoảng 10 N.' });
+law('mech', 'wdens', 'Trọng lượng riêng', { d: ['dw', 'trọng lượng riêng'], D: ['den', 'khối lượng riêng'] }, 'd=10D', { d: ['d', '10\\cdot[D]', x => x.D.mul(10)], D: ['D', '\\frac{[d]}{10}', x => x.d.div(10)] }, {});
+law('mech', 'press', 'Áp suất chất rắn', { p: ['pr', 'áp suất'], F: ['F', 'áp lực'], S: ['A2', 'diện tích bị ép'] }, 'p=\\frac{F}{S}', { p: ['p', '\\frac{[F]}{[S]}', x => x.F.div(x.S)], F: ['F', '[p]\\cdot[S]', x => x.p.mul(x.S)], S: ['S', '\\frac{[F]}{[p]}', x => x.F.div(x.p)] }, { note: 'Diện tích bị ép càng nhỏ thì áp suất càng lớn. Nhớ đổi cm² sang m².' });
+law('mech', 'liq', 'Áp suất chất lỏng', { p: ['pr', 'áp suất'], d: ['dw', 'trọng lượng riêng chất lỏng'], h: ['L', 'chiều cao cột chất lỏng'] }, 'p=d\\cdot h', { p: ['p', '[d]\\cdot[h]', x => x.d.mul(x.h)], d: ['d', '\\frac{[p]}{[h]}', x => x.p.div(x.h)], h: ['h', '\\frac{[p]}{[d]}', x => x.p.div(x.d)] }, { note: 'Nước có trọng lượng riêng 10000 N/m³.' });
+law('mech', 'buoy', 'Lực đẩy Ác-si-mét', { FA: ['F', 'lực đẩy Ác-si-mét'], d: ['dw', 'trọng lượng riêng chất lỏng'], V: ['V3', 'thể tích phần vật chìm'] }, 'F_A=d\\cdot V', { FA: ['F_A', '[d]\\cdot[V]', x => x.d.mul(x.V)], d: ['d', '\\frac{[FA]}{[V]}', x => x.FA.div(x.V)], V: ['V', '\\frac{[FA]}{[d]}', x => x.FA.div(x.d)] }, { note: 'Vật nổi khi lực đẩy Ác-si-mét lớn hơn trọng lượng vật.' });
+// --- Năng lượng
+law('energy', 'work', 'Công cơ học', { A: ['E', 'công'], F: ['F', 'lực'], s: ['L', 'quãng đường'] }, 'A=F\\cdot s', { A: ['A', '[F]\\cdot[s]', x => x.F.mul(x.s)], F: ['F', '\\frac{[A]}{[s]}', x => x.A.div(x.s)], s: ['s', '\\frac{[A]}{[F]}', x => x.A.div(x.F)] }, { note: 'Chỉ có công khi lực làm vật chuyển dời theo phương của lực.' });
+law('energy', 'power', 'Công suất (hoặc điện năng A = P·t)', { P: ['Pw', 'công suất'], A: ['E', 'công (năng lượng)'], t: ['T', 'thời gian'] }, 'P=\\frac{A}{t}', { P: ['P', '\\frac{[A]}{[t]}', x => x.A.div(x.t)], A: ['A', '[P]\\cdot[t]', x => x.P.mul(x.t)], t: ['t', '\\frac{[A]}{[P]}', x => x.A.div(x.P)] }, { alt: g => (g.P && g.P.uk && g.P.uk.key === 'kw') && (g.t && g.t.uk && g.t.uk.key === 'h') ? { A: 'kwh' } : null, note: '1 kWh = 3 600 000 J. Điện năng tiêu thụ (kWh) = công suất (kW) × thời gian (h).' });
+law('energy', 'powerv', 'Công suất theo lực và vận tốc', { P: ['Pw', 'công suất'], F: ['F', 'lực kéo'], v: ['vel', 'vận tốc'] }, 'P=F\\cdot v', { P: ['P', '[F]\\cdot[v]', x => x.F.mul(x.v)], F: ['F', '\\frac{[P]}{[v]}', x => x.P.div(x.v)], v: ['v', '\\frac{[P]}{[F]}', x => x.P.div(x.F)] }, {});
+law('energy', 'eff', 'Hiệu suất', { H: ['pct', 'hiệu suất'], Aci: ['E', 'công có ích'], Atp: ['E', 'công toàn phần'] }, 'H=\\frac{A_{ci}}{A_{tp}}\\cdot 100\\%', { H: ['H', '\\frac{[Aci]}{[Atp]}', x => x.Aci.div(x.Atp)], Aci: ['A_{ci}', '[H]\\cdot[Atp]', x => x.H.mul(x.Atp)], Atp: ['A_{tp}', '\\frac{[Aci]}{[H]}', x => x.Aci.div(x.H)] }, { alt: () => ({ H: '%' }), note: 'Hiệu suất luôn nhỏ hơn 100%.' });
+law('energy', 'kin', 'Động năng', { Wd: ['E', 'động năng'], m: ['M', 'khối lượng'], v: ['vel', 'vận tốc'] }, 'W_d=\\frac{1}{2}mv^{2}', { Wd: ['W_d', '\\frac{1}{2}\\cdot[m]\\cdot[v]^{2}', x => x.m.mul(sq(x.v)).div(2)], m: ['m', '\\frac{2\\cdot[Wd]}{[v]^{2}}', x => x.Wd.mul(2).div(sq(x.v))] }, { note: 'Động năng tỉ lệ với bình phương vận tốc: vận tốc gấp đôi thì động năng gấp bốn.' });
+law('energy', 'pot', 'Thế năng trọng trường', { Wt: ['E', 'thế năng'], m: ['M', 'khối lượng'], h: ['L', 'độ cao'] }, 'W_t=10mh', { Wt: ['W_t', '10\\cdot[m]\\cdot[h]', x => x.m.mul(x.h).mul(10)], m: ['m', '\\frac{[Wt]}{10\\cdot[h]}', x => x.Wt.div(x.h.mul(10))], h: ['h', '\\frac{[Wt]}{10\\cdot[m]}', x => x.Wt.div(x.m.mul(10))] }, {});
+law('energy', 'lever', 'Đòn bẩy (cân bằng)', { F1: ['F', 'lực thứ nhất'], l1: ['L', 'cánh tay đòn thứ nhất'], F2: ['F', 'lực thứ hai'], l2: ['L', 'cánh tay đòn thứ hai'] }, 'F_1\\cdot l_1=F_2\\cdot l_2', { F1: ['F_1', '\\frac{[F2]\\cdot[l2]}{[l1]}', x => x.F2.mul(x.l2).div(x.l1)], F2: ['F_2', '\\frac{[F1]\\cdot[l1]}{[l2]}', x => x.F1.mul(x.l1).div(x.l2)], l1: ['l_1', '\\frac{[F2]\\cdot[l2]}{[F1]}', x => x.F2.mul(x.l2).div(x.F1)], l2: ['l_2', '\\frac{[F1]\\cdot[l1]}{[F2]}', x => x.F1.mul(x.l1).div(x.F2)] }, {});
+// --- Nhiệt
+law('heat', 'heatq', 'Nhiệt lượng thu vào hoặc tỏa ra', { Q: ['E', 'nhiệt lượng'], m: ['M', 'khối lượng'], c: ['cap', 'nhiệt dung riêng'], dt: ['dT', 'độ tăng (giảm) nhiệt độ'] }, 'Q=m\\cdot c\\cdot\\Delta t', { Q: ['Q', '[m]\\cdot[c]\\cdot[dt]', x => x.m.mul(x.c).mul(x.dt)], m: ['m', '\\frac{[Q]}{[c]\\cdot[dt]}', x => x.Q.div(x.c.mul(x.dt))], c: ['c', '\\frac{[Q]}{[m]\\cdot[dt]}', x => x.Q.div(x.m.mul(x.dt))], dt: ['\\Delta t', '\\frac{[Q]}{[m]\\cdot[c]}', x => x.Q.div(x.m.mul(x.c))] }, { alt: g => (g.Q ? null : { Q: 'kj' }), note: 'Nước có nhiệt dung riêng 4200 J/kg.K: muốn 1 kg nước nóng thêm 1 °C cần 4200 J.' });
+law('heat', 'fuel', 'Nhiệt lượng do nhiên liệu cháy', { Q: ['E', 'nhiệt lượng tỏa ra'], m: ['M', 'khối lượng nhiên liệu'], q: ['qq', 'năng suất tỏa nhiệt'] }, 'Q=q\\cdot m', { Q: ['Q', '[q]\\cdot[m]', x => x.q.mul(x.m)], m: ['m', '\\frac{[Q]}{[q]}', x => x.Q.div(x.q)], q: ['q', '\\frac{[Q]}{[m]}', x => x.Q.div(x.m)] }, {});
+// --- Điện
+law('elec', 'ohm', 'Định luật Ôm', { I: ['I', 'cường độ dòng điện'], U: ['U', 'hiệu điện thế'], R: ['R', 'điện trở'] }, 'I=\\frac{U}{R}', { I: ['I', '\\frac{[U]}{[R]}', x => x.U.div(x.R)], U: ['U', '[I]\\cdot[R]', x => x.I.mul(x.R)], R: ['R', '\\frac{[U]}{[I]}', x => x.U.div(x.I)] }, { note: 'Cường độ dòng điện tỉ lệ thuận với hiệu điện thế và tỉ lệ nghịch với điện trở.' });
+law('elec', 'pel', 'Công suất điện (P = U·I)', { P: ['Pw', 'công suất điện'], U: ['U', 'hiệu điện thế'], I: ['I', 'cường độ dòng điện'] }, 'P=U\\cdot I', { P: ['P', '[U]\\cdot[I]', x => x.U.mul(x.I)], U: ['U', '\\frac{[P]}{[I]}', x => x.P.div(x.I)], I: ['I', '\\frac{[P]}{[U]}', x => x.P.div(x.U)] }, {});
+law('elec', 'pelr', 'Công suất điện (P = I²·R)', { P: ['Pw', 'công suất điện'], I: ['I', 'cường độ dòng điện'], R: ['R', 'điện trở'] }, 'P=I^{2}\\cdot R', { P: ['P', '[I]^{2}\\cdot[R]', x => sq(x.I).mul(x.R)], R: ['R', '\\frac{[P]}{[I]^{2}}', x => x.P.div(sq(x.I))] }, {});
+law('elec', 'pelu', 'Công suất điện (P = U²/R)', { P: ['Pw', 'công suất điện'], U: ['U', 'hiệu điện thế'], R: ['R', 'điện trở'] }, 'P=\\frac{U^{2}}{R}', { P: ['P', '\\frac{[U]^{2}}{[R]}', x => sq(x.U).div(x.R)], R: ['R', '\\frac{[U]^{2}}{[P]}', x => sq(x.U).div(x.P)] }, {});
+law('elec', 'wire', 'Điện trở của dây dẫn', { R: ['R', 'điện trở'], rho: ['rho', 'điện trở suất'], l: ['L', 'chiều dài dây'], S: ['A2', 'tiết diện dây'] }, 'R=\\rho\\cdot\\frac{l}{S}', { R: ['R', '\\rho\\cdot\\frac{[l]}{[S]}'.replace('\\rho', '[rho]'), x => x.rho.mul(x.l).div(x.S)], l: ['l', '\\frac{[R]\\cdot[S]}{[rho]}', x => x.R.mul(x.S).div(x.rho)], S: ['S', '\\frac{[rho]\\cdot[l]}{[R]}', x => x.rho.mul(x.l).div(x.R)], rho: ['\\rho', '\\frac{[R]\\cdot[S]}{[l]}', x => x.R.mul(x.S).div(x.l)] }, { note: 'Dây dài gấp đôi thì điện trở gấp đôi; tiết diện gấp đôi thì điện trở giảm một nửa. Nhớ đổi mm² sang m².' });
+law('elec', 'joule', 'Định luật Jun – Len-xơ', { Q: ['E', 'nhiệt lượng tỏa ra'], I: ['I', 'cường độ dòng điện'], R: ['R', 'điện trở'], t: ['T', 'thời gian'] }, 'Q=I^{2}\\cdot R\\cdot t', { Q: ['Q', '[I]^{2}\\cdot[R]\\cdot[t]', x => sq(x.I).mul(x.R).mul(x.t)], t: ['t', '\\frac{[Q]}{[I]^{2}\\cdot[R]}', x => x.Q.div(sq(x.I).mul(x.R))], R: ['R', '\\frac{[Q]}{[I]^{2}\\cdot[t]}', x => x.Q.div(sq(x.I).mul(x.t))] }, { note: 'Thời gian phải đổi ra giây.' });
+// --- Sóng, ánh sáng
+law('optic', 'wave', 'Sóng: tốc độ, bước sóng, tần số', { v: ['vel', 'tốc độ truyền sóng'], lam: ['L', 'bước sóng'], f: ['fq', 'tần số'] }, 'v=\\lambda\\cdot f', { v: ['v', '[lam]\\cdot[f]', x => x.lam.mul(x.f)], lam: ['\\lambda', '\\frac{[v]}{[f]}', x => x.v.div(x.f)], f: ['f', '\\frac{[v]}{[lam]}', x => x.v.div(x.lam)] }, { note: 'Âm truyền trong không khí khoảng 340 m/s; ánh sáng trong chân không 300 000 km/s.' });
+law('optic', 'period', 'Chu kì và tần số', { T: ['T', 'chu kì'], f: ['fq', 'tần số'] }, 'T=\\frac{1}{f}', { T: ['T', '\\frac{1}{[f]}', x => x.f.inv()], f: ['f', '\\frac{1}{[T]}', x => x.T.inv()] }, {});
+law('optic', 'lens', 'Thấu kính (công thức vị trí)', { f: ['L', 'tiêu cự'], d: ['L', 'khoảng cách từ vật đến thấu kính'], dp: ['L', 'khoảng cách từ ảnh đến thấu kính'] }, '\\frac{1}{f}=\\frac{1}{d}+\\frac{1}{d\'}', { f: ['f', '\\frac{[d]\\cdot[dp]}{[d]+[dp]}', x => x.d.mul(x.dp).div(x.d.add(x.dp))], d: ['d', '\\frac{[f]\\cdot[dp]}{[dp]-[f]}', x => x.f.mul(x.dp).div(x.dp.sub(x.f))], dp: ['d\'', '\\frac{[f]\\cdot[d]}{[d]-[f]}', x => x.f.mul(x.d).div(x.d.sub(x.f))] }, { note: 'Thấu kính hội tụ: f > 0; ảnh thật thì d′ > 0, ảnh ảo thì d′ < 0 (quy ước dùng trong phần mềm).' });
+law('optic', 'lensh', 'Thấu kính (độ lớn của ảnh)', { h: ['L', 'chiều cao vật'], hp: ['L', 'chiều cao ảnh'], d: ['L', 'khoảng cách vật'], dp: ['L', 'khoảng cách ảnh'] }, '\\frac{h\'}{h}=\\frac{d\'}{d}', { hp: ["h'", '\\frac{[h]\\cdot[dp]}{[d]}', x => x.h.mul(x.dp.abs()).div(x.d)], h: ['h', '\\frac{[hp]\\cdot[d]}{[dp]}', x => x.hp.mul(x.d).div(x.dp.abs())], dp: ["d'", '\\frac{[hp]\\cdot[d]}{[h]}', x => x.hp.mul(x.d).div(x.h)], d: ['d', '\\frac{[h]\\cdot[dp]}{[hp]}', x => x.h.mul(x.dp.abs()).div(x.hp)] }, { note: 'Ảnh lớn hơn vật khi d′ > d.' });
+Object.assign(SYMTEX, { v0: 'v_0', S1: 'S_1', S2: 'S_2', U1: 'U_1', U2: 'U_2', n1: 'n_1', n2: 'n_2', Vc: 'V_c', Dv: 'D_v', Dl: 'D_l', ip: "i'", alpha: '\\alpha', Tien: '\\text{Tiền}', gia: '\\text{giá}', Ud: 'U_{đm}', Pd: 'P_{đm}', Php: 'P_{hp}' });
+// --- Cơ học (thêm)
+law('mech', 'hydro', 'Máy nén thủy lực', { F1: ['F', 'lực tác dụng lên pit-tông nhỏ'], S1: ['A2', 'diện tích pit-tông nhỏ'], F2: ['F', 'lực ở pit-tông lớn'], S2: ['A2', 'diện tích pit-tông lớn'] }, '\\frac{F_1}{S_1}=\\frac{F_2}{S_2}', { F1: ['F_1', '\\frac{[F2]\\cdot[S1]}{[S2]}', x => x.F2.mul(x.S1).div(x.S2)], F2: ['F_2', '\\frac{[F1]\\cdot[S2]}{[S1]}', x => x.F1.mul(x.S2).div(x.S1)], S1: ['S_1', '\\frac{[F1]\\cdot[S2]}{[F2]}', x => x.F1.mul(x.S2).div(x.F2)], S2: ['S_2', '\\frac{[F2]\\cdot[S1]}{[F1]}', x => x.F2.mul(x.S1).div(x.F1)] }, { note: 'Chất lỏng truyền nguyên vẹn áp suất: pit-tông lớn gấp bao nhiêu lần thì lực gấp bấy nhiêu lần.' });
+law('mech', 'float', 'Vật nổi trên chất lỏng (phần chìm)', { Vc: ['V3', 'thể tích phần chìm'], V: ['V3', 'thể tích cả vật'], Dv: ['den', 'khối lượng riêng của vật'], Dl: ['den', 'khối lượng riêng chất lỏng'] }, '\\frac{V_c}{V}=\\frac{D_v}{D_l}', { Vc: ['V_c', '\\frac{[V]\\cdot[Dv]}{[Dl]}', x => x.V.mul(x.Dv).div(x.Dl)], V: ['V', '\\frac{[Vc]\\cdot[Dl]}{[Dv]}', x => x.Vc.mul(x.Dl).div(x.Dv)], Dv: ['D_v', '\\frac{[Vc]\\cdot[Dl]}{[V]}', x => x.Vc.mul(x.Dl).div(x.V)], Dl: ['D_l', '\\frac{[V]\\cdot[Dv]}{[Vc]}', x => x.V.mul(x.Dv).div(x.Vc)] }, { note: 'Vật nổi nằm yên thì lực đẩy Ác-si-mét bằng trọng lượng vật. Vật nổi khi D vật nhỏ hơn D chất lỏng.' });
+law('mech', 'accv', 'Chuyển động biến đổi đều: vận tốc', { v: ['vel', 'vận tốc lúc sau'], v0: ['vel', 'vận tốc ban đầu'], a: ['acc', 'gia tốc'], t: ['T', 'thời gian'] }, 'v=v_0+a\\cdot t', { v: ['v', '[v0]+[a]\\cdot[t]', x => x.v0.add(x.a.mul(x.t))], v0: ['v_0', '[v]-[a]\\cdot[t]', x => x.v.sub(x.a.mul(x.t))], a: ['a', '\\frac{[v]-[v0]}{[t]}', x => x.v.sub(x.v0).div(x.t)], t: ['t', '\\frac{[v]-[v0]}{[a]}', x => x.v.sub(x.v0).div(x.a)] }, { note: 'Gia tốc dương khi vật nhanh dần, âm khi chậm dần.' });
+law('mech', 'accs', 'Chuyển động biến đổi đều: quãng đường', { s: ['L', 'quãng đường'], v0: ['vel', 'vận tốc ban đầu'], a: ['acc', 'gia tốc'], t: ['T', 'thời gian'] }, 's=v_0t+\\frac{1}{2}at^{2}', { s: ['s', '[v0]\\cdot[t]+\\frac{1}{2}\\cdot[a]\\cdot[t]^{2}', x => x.v0.mul(x.t).add(x.a.mul(sq(x.t)).div(2))], a: ['a', '\\frac{2\\cdot([s]-[v0]\\cdot[t])}{[t]^{2}}', x => x.s.sub(x.v0.mul(x.t)).mul(2).div(sq(x.t))], v0: ['v_0', '\\frac{[s]-\\frac{1}{2}\\cdot[a]\\cdot[t]^{2}}{[t]}', x => x.s.sub(x.a.mul(sq(x.t)).div(2)).div(x.t)] }, { note: 'Xuất phát từ nghỉ thì v₀ = 0 (ghi v0=0m/s).' });
+law('mech', 'accvs', 'Chuyển động biến đổi đều: không có thời gian', { v: ['vel', 'vận tốc lúc sau'], v0: ['vel', 'vận tốc ban đầu'], a: ['acc', 'gia tốc'], s: ['L', 'quãng đường'] }, 'v^{2}-v_0^{2}=2as', { a: ['a', '\\frac{[v]^{2}-[v0]^{2}}{2\\cdot[s]}', x => sq(x.v).sub(sq(x.v0)).div(x.s.mul(2))], s: ['s', '\\frac{[v]^{2}-[v0]^{2}}{2\\cdot[a]}', x => sq(x.v).sub(sq(x.v0)).div(x.a.mul(2))] }, {});
+// --- Năng lượng (thêm)
+law('energy', 'incline', 'Mặt phẳng nghiêng (bỏ qua ma sát)', { F: ['F', 'lực kéo vật lên'], l: ['L', 'chiều dài mặt phẳng nghiêng'], P: ['F', 'trọng lượng vật'], h: ['L', 'độ cao'] }, 'F\\cdot l=P\\cdot h', { F: ['F', '\\frac{[P]\\cdot[h]}{[l]}', x => x.P.mul(x.h).div(x.l)], l: ['l', '\\frac{[P]\\cdot[h]}{[F]}', x => x.P.mul(x.h).div(x.F)], P: ['P', '\\frac{[F]\\cdot[l]}{[h]}', x => x.F.mul(x.l).div(x.h)], h: ['h', '\\frac{[F]\\cdot[l]}{[P]}', x => x.F.mul(x.l).div(x.P)] }, { note: 'Mặt phẳng nghiêng càng dài (ít dốc) thì lực kéo càng nhỏ, nhưng không được lợi về công.' });
+law('energy', 'pulley', 'Ròng rọc, pa lăng (bỏ qua ma sát)', { F: ['F', 'lực kéo'], P: ['F', 'trọng lượng vật'], n: ['none', 'số đoạn dây đỡ vật'] }, 'F=\\frac{P}{n}', { F: ['F', '\\frac{[P]}{[n]}', x => x.P.div(x.n)], P: ['P', '[F]\\cdot[n]', x => x.F.mul(x.n)], n: ['n', '\\frac{[P]}{[F]}', x => x.P.div(x.F)] }, { note: 'Lợi bao nhiêu lần về lực thì thiệt bấy nhiêu lần về đường đi (dây kéo dài gấp n lần).' });
+// --- Nhiệt (thêm)
+law('heat', 'melt', 'Nhiệt nóng chảy', { Q: ['E', 'nhiệt lượng'], lam: ['qq', 'nhiệt nóng chảy riêng'], m: ['M', 'khối lượng'] }, 'Q=\\lambda\\cdot m', { Q: ['Q', '[lam]\\cdot[m]', x => x.lam.mul(x.m)], m: ['m', '\\frac{[Q]}{[lam]}', x => x.Q.div(x.lam)], lam: ['\\lambda', '\\frac{[Q]}{[m]}', x => x.Q.div(x.m)] }, { note: 'Trong lúc nóng chảy nhiệt độ không đổi. Nước đá: λ = 3,4·10⁵ J/kg.' });
+law('heat', 'vap', 'Nhiệt hóa hơi', { Q: ['E', 'nhiệt lượng'], L: ['qq', 'nhiệt hóa hơi riêng'], m: ['M', 'khối lượng'] }, 'Q=L\\cdot m', { Q: ['Q', '[L]\\cdot[m]', x => x.L.mul(x.m)], m: ['m', '\\frac{[Q]}{[L]}', x => x.Q.div(x.L)], L: ['L', '\\frac{[Q]}{[m]}', x => x.Q.div(x.m)] }, { note: 'Nước: L = 2,3·10⁶ J/kg. Trong lúc sôi nhiệt độ không đổi.' });
+law('heat', 'heatloss', 'Hiệu suất đun nóng', { H: ['pct', 'hiệu suất'], m: ['M', 'khối lượng chất cần đun'], c: ['cap', 'nhiệt dung riêng'], dt: ['dT', 'độ tăng nhiệt độ'], Q: ['E', 'nhiệt lượng nguồn cung cấp'] }, 'H=\\frac{m\\cdot c\\cdot\\Delta t}{Q}\\cdot100\\%', { H: ['H', '\\frac{[m]\\cdot[c]\\cdot[dt]}{[Q]}', x => x.m.mul(x.c).mul(x.dt).div(x.Q)], Q: ['Q', '\\frac{[m]\\cdot[c]\\cdot[dt]}{[H]}', x => x.m.mul(x.c).mul(x.dt).div(x.H)], m: ['m', '\\frac{[H]\\cdot[Q]}{[c]\\cdot[dt]}', x => x.H.mul(x.Q).div(x.c.mul(x.dt))], dt: ['\\Delta t', '\\frac{[H]\\cdot[Q]}{[m]\\cdot[c]}', x => x.H.mul(x.Q).div(x.m.mul(x.c))], c: ['c', '\\frac{[H]\\cdot[Q]}{[m]\\cdot[dt]}', x => x.H.mul(x.Q).div(x.m.mul(x.dt))] }, { alt: g => ({ H: '%' }), note: 'Nhiệt lượng có ích (làm nóng nước) luôn nhỏ hơn nhiệt lượng nguồn cung cấp.' });
+// --- Điện (thêm)
+law('elec', 'bulb', 'Đèn dùng sai hiệu điện thế định mức', { P: ['Pw', 'công suất thực tế'], Pd: ['Pw', 'công suất định mức'], U: ['U', 'hiệu điện thế thực tế'], Ud: ['U', 'hiệu điện thế định mức'] }, 'P=P_{đm}\\cdot\\left(\\frac{U}{U_{đm}}\\right)^{2}', { P: ['P', '[Pd]\\cdot\\frac{[U]^{2}}{[Ud]^{2}}', x => x.Pd.mul(sq(x.U)).div(sq(x.Ud))], Pd: ['P_{đm}', '\\frac{[P]\\cdot[Ud]^{2}}{[U]^{2}}', x => x.P.mul(sq(x.Ud)).div(sq(x.U))] }, { note: 'Coi điện trở của đèn không đổi. Đèn sáng yếu hơn bình thường khi U nhỏ hơn định mức.' });
+law('elec', 'cost', 'Tiền điện', { Tien: ['vnd', 'tiền điện'], A: ['E', 'điện năng tiêu thụ'], gia: ['vndE', 'giá mỗi kWh'] }, '\\text{Tiền}=A\\cdot\\text{giá}', { Tien: ['\\text{Tiền}', '[A]\\cdot[gia]', x => x.A.mul(x.gia)], A: ['A', '\\frac{[Tien]}{[gia]}', x => x.Tien.div(x.gia)], gia: ['\\text{giá}', '\\frac{[Tien]}{[A]}', x => x.Tien.div(x.A)] }, { alt: g => ({ A: 'kwh' }), note: 'Điện năng (kWh) = công suất (kW) × thời gian (h). Hãy ghi giá dạng 2000dong/kWh.' });
+law('elec', 'trans', 'Máy biến áp', { U1: ['U', 'hiệu điện thế cuộn sơ cấp'], U2: ['U', 'hiệu điện thế cuộn thứ cấp'], n1: ['none', 'số vòng cuộn sơ cấp'], n2: ['none', 'số vòng cuộn thứ cấp'] }, '\\frac{U_1}{U_2}=\\frac{n_1}{n_2}', { U1: ['U_1', '\\frac{[U2]\\cdot[n1]}{[n2]}', x => x.U2.mul(x.n1).div(x.n2)], U2: ['U_2', '\\frac{[U1]\\cdot[n2]}{[n1]}', x => x.U1.mul(x.n2).div(x.n1)], n1: ['n_1', '\\frac{[U1]\\cdot[n2]}{[U2]}', x => x.U1.mul(x.n2).div(x.U2)], n2: ['n_2', '\\frac{[U2]\\cdot[n1]}{[U1]}', x => x.U2.mul(x.n1).div(x.U1)] }, { note: 'Số vòng dây nhiều hơn thì hiệu điện thế lớn hơn. Máy tăng áp có n2 > n1.' });
+law('elec', 'loss', 'Hao phí điện năng trên đường dây', { Php: ['Pw', 'công suất hao phí'], P: ['Pw', 'công suất truyền đi'], R: ['R', 'điện trở đường dây'], U: ['U', 'hiệu điện thế truyền đi'] }, 'P_{hp}=\\frac{P^{2}\\cdot R}{U^{2}}', { Php: ['P_{hp}', '\\frac{[P]^{2}\\cdot[R]}{[U]^{2}}', x => sq(x.P).mul(x.R).div(sq(x.U))], R: ['R', '\\frac{[Php]\\cdot[U]^{2}}{[P]^{2}}', x => x.Php.mul(sq(x.U)).div(sq(x.P))] }, { note: 'Tăng hiệu điện thế lên gấp đôi thì hao phí giảm 4 lần. Đó là lí do truyền tải điện bằng điện áp cao.' });
+// --- Quang (thêm)
+law('optic', 'reflect', 'Định luật phản xạ ánh sáng', { i: ['ang', 'góc tới'], ip: ['ang', 'góc phản xạ'] }, "i'=i", { ip: ["i'", '[i]', x => x.i], i: ['i', "[ip]", x => x.ip] }, { note: 'Góc phản xạ bằng góc tới (đo từ pháp tuyến). Tia tới, tia phản xạ và pháp tuyến cùng nằm trong một mặt phẳng.' });
+law('optic', 'refl2', 'Góc giữa tia tới và tia phản xạ', { alpha: ['ang', 'góc giữa tia tới và tia phản xạ'], i: ['ang', 'góc tới'] }, '\\alpha=2i', { alpha: ['\\alpha', '2\\cdot[i]', x => x.i.mul(2)], i: ['i', '\\frac{[alpha]}{2}', x => x.alpha.div(2)] }, { note: 'Góc giữa tia tới và mặt gương bằng 90° trừ góc tới.' });
+law('optic', 'mirror', 'Ảnh qua gương phẳng', { d: ['L', 'khoảng cách từ vật đến gương'], dp: ['L', 'khoảng cách từ ảnh đến gương'] }, "d'=d", { dp: ["d'", '[d]', x => x.d], d: ['d', "[dp]", x => x.dp] }, { note: 'Ảnh ảo, cùng kích thước với vật, đối xứng với vật qua gương. Khoảng cách giữa vật và ảnh là 2d.' });
+
+const bySet = {};
+LAWS.forEach(l => { l.keys = Object.keys(l.vars); });
+const KEYNORM = s => { s = String(s).trim().replace(/\s+/g, ''); return ALIAS[s] || ALIAS[s.replace(/_/g, '')] || s.replace(/_/g, ''); };
+
+function parseLawInput(input, group) {
+  const parts = String(input).split(/;|\n/).map(s => s.trim()).filter(Boolean); if (!parts.length) throw new MathError('Chưa nhập đề');
+  const raw = {}; let unk = null;
+  for (const p of parts) { const mm = /^([^=]+?)\s*=\s*(.+)$/.exec(p); if (!mm) throw new MathError('«' + p + '» chưa có dấu =. Viết dạng m=500g'); const k = KEYNORM(mm[1]); if (/^\?+$/.test(mm[2].trim())) { if (unk) throw new MathError('Chỉ nên có một đại lượng cần tìm (đánh dấu ?)'); unk = k; } else raw[k] = mm[2].trim(); }
+  const given = Object.keys(raw); const cand = LAWS.filter(l => (!group || l.group === group));
+  let lw = null, target = null;
+  if (unk) { lw = cand.find(l => l.keys.includes(unk) && l.keys.length === given.length + 1 && given.every(k => l.keys.includes(k)) && l.forms[unk]); if (!lw) throw new MathError('Không có công thức nào ghép được các đại lượng ' + given.concat(['?' + unk]).join(', ') + '. Kiểm tra lại ký hiệu (xem ví dụ).'); target = unk; }
+  else { const list = cand.filter(l => given.every(k => l.keys.includes(k)) && l.keys.length === given.length + 1); lw = list[0]; if (lw) target = lw.keys.find(k => !given.includes(k)); if (!lw || !lw.forms[target]) throw new MathError('Chưa tìm thấy công thức phù hợp. Hãy ghi rõ đại lượng cần tìm bằng dấu ?, ví dụ D=?'); }
+  const g = {}; for (const k of lw.keys) if (k !== target) { const v = parseVal(raw[k], lw.vars[k][0]); if (v.q.isZero() && !(lw.id === 'lever')) { /* cho phép 0 */ } g[k] = v; }
+  return { lw, target, g, input };
+}
+function solveLaw(m) {
+  const { lw, target, g } = m; const steps = []; const vars = lw.vars; const unitOf = k => (vars[k][0] === 'pct' ? '' : BASE[vars[k][0]]);
+  const givenTex = lw.keys.filter(k => k !== target).map(k => symT(k) + '=' + num(g[k].raw, g[k].assumed ? unitOf(k) : g[k].unit.replace(/\s/g, '')));
+  steps.push({ say: 'Đọc đề: gạch chân các đại lượng đã cho và đại lượng cần tìm (' + vars[target][1] + ')', lines: [givenTex.join(',\\ ') + ',\\ \\ ' + symT(target) + '=\\ ?'] });
+  const conv = lw.keys.filter(k => k !== target && !g[k].assumed && g[k].uk.f && !g[k].uk.f.isOne());
+  const assumedKs = lw.keys.filter(k => k !== target && g[k].assumed && vars[k][0] !== 'none' && vars[k][0] !== 'ang');
+  if (conv.length || assumedKs.length) steps.push({ say: 'Đổi tất cả về đơn vị chuẩn (hệ SI) trước khi tính' + (assumedKs.length ? '. Đề không ghi đơn vị của ' + assumedKs.map(symT).join(', ') + ', phần mềm hiểu là đơn vị chuẩn' : ''), lines: conv.map(k => num(g[k].raw, g[k].unit.replace(/\s/g, '')) + '=' + num(g[k].q, unitOf(k))) });
+  const f = lw.forms[target]; const rep = (tpl, fn) => tpl.replace(/\[(\w+)\]/g, (mm, k) => fn(k));
+  steps.push({ say: 'Công thức: ' + lw.title, lines: [lw.eq] });
+  const symLine = f[0] + '=' + rep(f[1], k => symT(k));
+  if (f[1] !== lw.eq.split('=')[1]) steps.push({ say: 'Biến đổi để tính ' + vars[target][1], lines: [symLine] });
+  const vq = {}; lw.keys.forEach(k => { if (k !== target) vq[k] = g[k].q; });
+  const withUnit = k => { const x = fmtQ(vq[k]); const s = x.s; return (vq[k].sign() < 0 ? '(' + s + ')' : s); };
+  const subLine = f[0] + '=' + rep(f[1], k => withUnit(k));
+  let val; try { val = f[2](vq); } catch (e) { throw new MathError('Phép tính chia cho 0, kiểm tra lại số liệu'); }
+  const fm = fmtQ(val);
+  steps.push({ say: 'Thay số (đã ở đơn vị chuẩn) và tính', lines: [subLine, '=' + (fm.approx ? '\\approx ' : '') + fm.s + unitTex(unitOf(target))] });
+  let ansUnit = unitOf(target), ansVal = val; const alt = lw.alt ? lw.alt(g) : null; let altU = alt && alt[target] ? alt[target] : null;
+  if (altU) { const u = unitKey(altU); const av = val.div(u.f); const ff = fmtQ(av); steps.push({ say: 'Đổi sang đơn vị thường dùng cho dễ đọc', lines: [num(val, unitOf(target)) + '=' + (ff.approx ? '\\approx ' : '') + ff.s + unitTex(altU.replace('cm3', 'cm³').replace('kwh', 'kWh').replace('kj', 'kJ'))] }); }
+  if (lw.id === 'lens' && target === 'dp') steps.push({ say: 'Tính chất ảnh: ' + (val.sign() > 0 ? 'd′ > 0 nên là ảnh thật (hứng được trên màn, ngược chiều vật)' : 'd′ < 0 nên là ảnh ảo (cùng chiều, lớn hơn vật)'), lines: [] });
+  if (lw.note) steps.push({ say: 'Nhận xét và kiểm tra: ' + lw.note, lines: [] });
+  m._val = val; m._altU = altU; const ansTexUnit = altU ? altU.replace('cm3', 'cm³').replace('kwh', 'kWh').replace('kj', 'kJ') : unitOf(target);
+  const shown = altU ? val.div(unitKey(altU).f) : val; const sf = fmtQ(shown);
+  const lhs = f[0];
+  return { problemTex: givenTex.join(',\\ ') + ',\\ \\ ' + symT(target) + '=\\ ?', steps, answerTex: lhs + '=' + (sf.approx ? '\\approx ' : '') + sf.s + unitTex(ansTexUnit) + (altU ? '\\ \\ (=' + fs(val) + unitTex(unitOf(target)) + ')' : ''), answerLine: target + ' = ' + sf.s + ' ' + (ASCII[ansTexUnit] || ansTexUnit) };
+}
+function ratioHint(sv, ev, law) { // sv, ev: Q (SI), trả lời gợi ý
+  if (ev.isZero() || sv.isZero()) return null; const r = sv.div(ev); const rn = r.num(); const near = (a, b) => Math.abs(a - b) / b < 1e-9;
+  if (near(rn, 1000) || near(rn, 0.001)) return 'Đáp án lệch 1000 lần: kiểm tra đổi đơn vị (kilô, gam, mi-li…).';
+  if (near(rn, 100) || near(rn, 0.01)) return 'Đáp án lệch 100 lần: kiểm tra đổi cm, m hoặc phần trăm.';
+  if (near(rn, 10) || near(rn, 0.1)) return 'Đáp án lệch 10 lần: kiểm tra đổi đơn vị hoặc hệ số 10 (P = 10m).';
+  if (near(rn, 1e6) || near(rn, 1e-6)) return 'Đáp án lệch 1 triệu lần: có thể quên đổi mm², cm³ hoặc mm.';
+  if (near(rn, 1e4) || near(rn, 1e-4)) return 'Đáp án lệch 10 000 lần: có thể quên đổi cm² sang m².';
+  if (near(rn, 60) || near(rn, 1 / 60) || near(rn, 3600) || near(rn, 1 / 3600)) return 'Đáp án lệch 60 hoặc 3600 lần: kiểm tra đổi phút, giờ ra giây.';
+  if (near(rn, 3.6) || near(rn, 1 / 3.6)) return 'Đáp án lệch 3,6 lần: đổi km/h sang m/s thì chia 3,6; ngược lại thì nhân 3,6.';
+  if (near(rn, 2) || near(rn, 0.5)) return 'Đáp án gấp đôi hoặc một nửa: kiểm tra hệ số (ví dụ động năng có hệ số ½, công suất P = U·I).';
+  if (near(rn, 1 / 1) ) return null; const inv = ev.inv().div(sv); if (inv.eq(Q.from(1))) return 'Con bị ngược: nhân thay vì chia (hoặc chia thay vì nhân). Xem lại công thức.'; return null;
+}
+function checkNumUnit(text, wantDim, ev, defUnits) { // ev: expected SI value (Q); trả {verdict,...}
+  let t = String(text || '').trim(); if (!t) return unread('Chưa nhập đáp án', []);
+  t = t.replace(/^\s*[A-Za-zΔρλ'′_0-9\\{}]+\s*=\s*/, '').replace(/^\s*[≈~]\s*/, '');
+  let v; try { v = parseVal(t, wantDim); } catch (e) { return unread('Chưa đọc được đáp án', [{ say: friendly(e) + '. Viết dạng 2,5 kg hoặc 36 km/h.' }]); }
+  const sv = v.q; const msgs = [];
+  const tol = x => { const d = v.dec; const unitF = v.uk ? v.uk.f : Q.from(1); const half = new Q(1n, 2n * (10n ** BigInt(d))).mul(unitF); return half; };
+  const diff = sv.sub(ev); const exact = diff.isZero(); const rounded = !exact && v.dec > 0 && (diff.sign() < 0 ? diff.neg() : diff).cmp(tol(v)) <= 0 && true;
+  const closeRound = !exact && v.dec === 0 && ev.d !== 1n && false;
+  if (v.assumed && wantDim !== 'none' && wantDim !== 'pct' && wantDim !== 'ang') {
+    // thiếu đơn vị: so với đơn vị chuẩn và các đơn vị thay thế
+    const cands = [Q.from(1)].concat((defUnits || []).map(u => unitKey(u).f)); for (const f of cands) { const s2 = v.raw.mul(f); const df = s2.sub(ev); if (df.isZero() || (v.dec > 0 && (df.sign() < 0 ? df.neg() : df).cmp(new Q(1n, 2n * (10n ** BigInt(v.dec))).mul(f)) <= 0)) return partial('Đúng số, nhưng thiếu đơn vị', [{ say: 'Giá trị đúng. Bài vật lí phải ghi đơn vị, ví dụ ' + (f.isOne() ? BASE[wantDim] : (defUnits || []).find(u => unitKey(u).f.eq(f))) + '.' }]); }
+    const h = ratioHint(v.raw, ev); return wrong('Chưa đúng', [{ say: 'Chưa ghi đơn vị nên phần mềm so sánh theo đơn vị chuẩn ' + BASE[wantDim] + '.' + (h ? ' ' + h : '') }]);
+  }
+  if (wantDim === 'pct' && v.assumed) { const s2 = sv; if (s2.eq(ev)) return ok('Đúng rồi!', [{ say: 'Hiệu suất = ' + fs(ev.mul(100)) + '%.' }]); const s3 = v.raw.div(100); if (s3.eq(ev)) return ok('Đúng rồi!', [{ say: 'Hiệu suất = ' + fs(ev.mul(100)) + '%. Nên viết kèm dấu %.' }]); }
+  if (exact) return ok('Đúng rồi!', [{ say: 'Kết quả ' + fs(ev.div(UN[BASE[wantDim] === 'm²' ? 'm2' : BASE[wantDim] === 'm³' ? 'm3' : 'm'] ? Q.from(1) : Q.from(1))) + ' ' + BASE[wantDim] + (v.unit ? ' (bạn ghi ' + v.text + ', quy ra cùng một giá trị)' : '') + '.' }].slice(0, 1).map(x => ({ say: 'Đúng cả giá trị và đơn vị' + (v.unit ? ' (' + v.text + ')' : '') + '.' })));
+  if (rounded) return ok('Đúng rồi! (đã làm tròn)', [{ say: 'Giá trị chính xác là ' + fs(ev) + ' ' + BASE[wantDim] + (fmtQ(ev).approx ? ' (xấp xỉ)' : '') + ', con làm tròn hợp lí.' }]);
+  // giá trị đúng nhưng sai đơn vị?
+  const h = ratioHint(sv, ev); const rawOk = ev.div(Q.from(1)).sub(v.raw).isZero();
+  if (rawOk && v.unit) return wrong('Đúng số nhưng sai đơn vị', [{ say: 'Số ' + v.raw.tex().replace(/\\frac\{(\d+)\}\{(\d+)\}/, '$1/$2') + ' là giá trị theo ' + BASE[wantDim] + ', còn con ghi ' + v.unit + '. Hãy đổi đơn vị cho khớp.' }]);
+  return wrong('Chưa đúng', h ? [{ say: h }] : []);
+}
+T.checkNumUnit = checkNumUnit; T.parseVal = parseVal; T.fmtQ = fmtQ; T.unitTex = unitTex; T.num = num; T.BASE = BASE; T.UNAME = UNAME; T.parseNum = parseNum; T.LAWS = LAWS; T.symT = symT; T.unitKey = unitKey;
+
+/* ---------- đăng ký các dạng theo nhóm ---------- */
+function groupType(id, group, title, grades, icon, help, examples, gen) {
+  reg({ id, title, grades, icon, help, examples, ph: 'Ví dụ: ' + examples[0],
+    parse(input) { return parseLawInput(input, group); },
+    solve(m) { return solveLaw(m); },
+    check(m, text) {
+      if (!m._val) solveLaw(m); const dim = m.lw.vars[m.target][0]; const defU = []; const alt = m.lw.alt ? m.lw.alt(m.g) : null; if (alt && alt[m.target]) defU.push(alt[m.target]);
+      if (/^[A-Za-z]+\s*=\s*\?/.test(text)) return unread('Chưa đọc được đáp án', [{ say: 'Hãy gõ kết quả, ví dụ 2,5 kg' }]);
+      return checkNumUnit(text, dim === 'pct' ? 'pct' : dim, m._val, defU);
+    }, generate: gen });
+}
+const pk = a => r => r.pick(a);
+function genLaw(group, spec) { // spec: [{id, ask:[...], pick:{sym:[[num,unit],...]}}]
+  return function (r) { const s = r.pick(spec); const lw = LAWS.find(l => l.id === s.id); const unk = r.pick(s.ask); const given = lw.keys.filter(k => k !== unk); const vals = {}; given.forEach(k => { const c = r.pick(s.pick[k]); vals[k] = c; });
+    return given.map(k => k + '=' + vals[k][0] + vals[k][1]).join('; ') + '; ' + unk + '=?'; };
+}
+groupType('mech', 'mech', 'Cơ học: tốc độ, khối lượng riêng, áp suất', [7, 8], 'v=s/t', 'Ghi các đại lượng đã cho (có đơn vị), cách nhau dấu chấm phẩy, và đại lượng cần tìm bằng dấu ?. Ký hiệu: v, s, t; D, m, V; P, m; p, F, S; p, d, h; FA, d, V. Ví dụ: s=120km; t=2h; v=?', ['s=120km; t=2h; v=?', 'm=500g; V=200cm3; D=?', 'v=15m/s; t=2ph; s=?', 'm=3kg; P=?', 'F=600N; S=200cm2; p=?', 'd=10000N/m3; h=1,2m; p=?', 'd=10000N/m3; V=0,002m3; FA=?', 'D=7800kg/m3; V=2dm3; m=?'],
+  genLaw('mech', [{ id: 'speed', ask: ['v', 's', 't'], pick: { v: [['36', 'km/h'], ['54', 'km/h'], ['15', 'm/s'], ['72', 'km/h']], s: [['120', 'km'], ['90', 'km'], ['300', 'm'], ['2,4', 'km']], t: [['2', 'h'], ['30', 'ph'], ['45', 's'], ['1,5', 'h']] } },
+    { id: 'density', ask: ['D', 'm', 'V'], pick: { D: [['2700', 'kg/m3'], ['7,8', 'g/cm3'], ['1000', 'kg/m3'], ['800', 'kg/m3']], m: [['500', 'g'], ['2', 'kg'], ['780', 'g'], ['150', 'g']], V: [['200', 'cm3'], ['0,002', 'm3'], ['3', 'dm3'], ['100', 'ml']] } },
+    { id: 'weight', ask: ['P', 'm'], pick: { P: [['50', 'N'], ['250', 'N'], ['1,2', 'kN']], m: [['3', 'kg'], ['450', 'g'], ['60', 'kg']] } },
+    { id: 'press', ask: ['p', 'F', 'S'], pick: { p: [['20000', 'Pa'], ['50', 'kPa']], F: [['600', 'N'], ['2', 'kN'], ['45', 'N']], S: [['200', 'cm2'], ['0,05', 'm2'], ['150', 'cm2']] } },
+    { id: 'liq', ask: ['p', 'h'], pick: { p: [['25000', 'Pa'], ['40', 'kPa']], d: [['10000', 'N/m3'], ['8000', 'N/m3']], h: [['1,2', 'm'], ['50', 'cm'], ['2', 'm']] } },
+    { id: 'buoy', ask: ['FA', 'V'], pick: { FA: [['20', 'N'], ['50', 'N']], d: [['10000', 'N/m3']], V: [['0,002', 'm3'], ['500', 'cm3'], ['3', 'dm3']] } }]));
+groupType('energy', 'energy', 'Công, công suất, năng lượng', [8, 9], 'A=Fs', 'Ký hiệu: A, F, s; P, A, t; P, F, v; H, Aci, Atp; Wd, m, v; Wt, m, h; F1, l1, F2, l2. Ví dụ: F=50N; s=4m; A=?', ['F=50N; s=4m; A=?', 'A=3000J; t=1ph; P=?', 'P=1,5kW; t=2h; A=?', 'Aci=800J; Atp=1000J; H=?', 'm=2kg; v=10m/s; Wd=?', 'm=5kg; h=3m; Wt=?', 'F1=20N; l1=30cm; l2=10cm; F2=?', 'P=500W; v=2m/s; F=?'],
+  genLaw('energy', [{ id: 'work', ask: ['A', 'F', 's'], pick: { A: [['200', 'J'], ['1,5', 'kJ']], F: [['50', 'N'], ['120', 'N'], ['2', 'kN']], s: [['4', 'm'], ['300', 'cm'], ['10', 'm']] } },
+    { id: 'power', ask: ['P', 'A', 't'], pick: { P: [['500', 'W'], ['1,5', 'kW'], ['0,2', 'kW']], A: [['3000', 'J'], ['6', 'kJ']], t: [['1', 'ph'], ['30', 's'], ['2', 'h']] } },
+    { id: 'eff', ask: ['H'], pick: { Aci: [['800', 'J'], ['600', 'J'], ['450', 'J']], Atp: [['1000', 'J'], ['1500', 'J'], ['900', 'J']] } },
+    { id: 'kin', ask: ['Wd'], pick: { m: [['2', 'kg'], ['500', 'g'], ['1200', 'kg']], v: [['10', 'm/s'], ['36', 'km/h'], ['5', 'm/s']] } },
+    { id: 'pot', ask: ['Wt', 'h'], pick: { Wt: [['150', 'J'], ['300', 'J']], m: [['5', 'kg'], ['2', 'kg']], h: [['3', 'm'], ['50', 'cm']] } },
+    { id: 'lever', ask: ['F2', 'l2'], pick: { F1: [['20', 'N'], ['60', 'N']], l1: [['30', 'cm'], ['0,5', 'm']], F2: [['60', 'N'], ['15', 'N']], l2: [['10', 'cm'], ['20', 'cm']] } }]));
+groupType('heat', 'heat', 'Nhiệt lượng', [8], 'Q=mcΔt', 'Ký hiệu: Q, m, c, dt (là Δt); Q, m, q (nhiên liệu). Ví dụ: m=2kg; c=4200J/kg.K; dt=30; Q=?', ['m=2kg; c=4200J/kg.K; dt=30C; Q=?', 'Q=84kJ; m=1kg; c=4200J/kg.K; dt=?', 'm=0,5kg; c=880J/kg.K; dt=60C; Q=?', 'Q=3MJ; q=46MJ/kg; m=?'],
+  genLaw('heat', [{ id: 'heatq', ask: ['Q', 'dt', 'm'], pick: { Q: [['84', 'kJ'], ['168', 'kJ'], ['42', 'kJ']], m: [['2', 'kg'], ['500', 'g'], ['1', 'kg']], c: [['4200', 'J/kg.K'], ['880', 'J/kg.K'], ['380', 'J/kg.K']], dt: [['30', 'C'], ['20', 'C'], ['50', 'C']] } }]));
+groupType('elec', 'elec', 'Điện: định luật Ôm, công suất, điện trở dây', [8, 9], 'I=U/R', 'Ký hiệu: I, U, R; P, U, I; P, I, R; P, U, R; R, rho, l, S; Q, I, R, t. Ví dụ: U=12V; R=40ohm; I=?', ['U=12V; R=40ohm; I=?', 'U=220V; I=0,5A; P=?', 'P=75W; U=220V; I=?', 'R=2kohm; I=5mA; U=?', 'rho=1,7e-8ohm.m; l=100m; S=2mm2; R=?', 'I=2A; R=20ohm; t=5ph; Q=?', 'U=220V; R=484ohm; P=?'],
+  genLaw('elec', [{ id: 'ohm', ask: ['I', 'U', 'R'], pick: { I: [['0,3', 'A'], ['500', 'mA'], ['2', 'A']], U: [['12', 'V'], ['220', 'V'], ['6', 'V']], R: [['40', 'ohm'], ['20', 'ohm'], ['1', 'kohm']] } },
+    { id: 'pel', ask: ['P', 'I', 'U'], pick: { P: [['75', 'W'], ['1,1', 'kW']], U: [['220', 'V'], ['12', 'V']], I: [['0,5', 'A'], ['2', 'A'], ['300', 'mA']] } },
+    { id: 'pelu', ask: ['P', 'R'], pick: { P: [['100', 'W'], ['1', 'kW']], U: [['220', 'V']], R: [['484', 'ohm'], ['48,4', 'ohm'], ['100', 'ohm']] } },
+    { id: 'joule', ask: ['Q', 't'], pick: { Q: [['24', 'kJ'], ['6000', 'J']], I: [['2', 'A'], ['0,5', 'A']], R: [['20', 'ohm'], ['40', 'ohm']], t: [['5', 'ph'], ['2', 'ph'], ['30', 's']] } }]));
+groupType('optic', 'optic', 'Sóng, âm, thấu kính', [7, 9], 'v=λf', 'Ký hiệu: v, lam (λ), f; T, f; f, d, dp (d′); h, hp (h′), d, dp. Ví dụ: v=340m/s; f=170Hz; lam=?', ['v=340m/s; f=170Hz; lam=?', 'f=50Hz; T=?', 'd=30cm; dp=60cm; f=?', 'f=20cm; d=30cm; dp=?', 'h=2cm; d=30cm; dp=60cm; hp=?', 'lam=2m; f=0,5kHz; v=?'],
+  genLaw('optic', [{ id: 'wave', ask: ['lam', 'v', 'f'], pick: { v: [['340', 'm/s'], ['1500', 'm/s']], lam: [['2', 'm'], ['50', 'cm'], ['0,5', 'm']], f: [['170', 'Hz'], ['0,5', 'kHz'], ['680', 'Hz']] } },
+    { id: 'lens', ask: ['f', 'dp'], pick: { f: [['20', 'cm'], ['15', 'cm']], d: [['30', 'cm'], ['40', 'cm']], dp: [['60', 'cm'], ['24', 'cm']] } },
+    { id: 'period', ask: ['T', 'f'], pick: { T: [['0,02', 's'], ['0,5', 's']], f: [['50', 'Hz'], ['4', 'Hz']] } }]));
+T.genLaw = genLaw; T.groupType = groupType; T.addU = addU; T.SYMTEX = SYMTEX; T.P10 = P10; T.parseLawInput = parseLawInput; T.solveLaw = solveLaw;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>/* Phần mềm Vật lý: các dạng bài ghép */
+(function (root) {
+'use strict';
+const M = root.MathEngine, { Q, MathError } = M, T = root.PhyTypes;
+const { parseVal, fmtQ, checkNumUnit, unitKey, BASE, unitTex, num, symT } = T; const fs = x => fmtQ(x).s;
+const res = T.res, friendly = T.friendly;
+const reg = t => { T.list.push(t); T.byId[t.id] = t; };
+const fold = T.fold;
+const tl = (k, x, u) => k + '=' + num(x, u);
+const A = (tex, plain) => ({ answerTex: tex, answerLine: plain });
+const checkSI = (m, text, dim, defU) => checkNumUnit(text, dim, m._val, defU || []);
+
+/* ===== 1. Đổi đơn vị ===== */
+const TEMP = { C: 'C', F: 'F', K: 'K' };
+function parseConvert(input) {
+  const s = String(input).trim().replace(/^đổi\s+/i, '');
+  const mt = /^(-?[\d.,]+)\s*°?\s*([CFK])\s*(?:->|→|=|sang|ra|đổi\s*ra)\s*\??\s*°?\s*([CFK])\s*\??$/i.exec(s);
+  if (mt) { const a = mt[2].toUpperCase(), b = mt[3].toUpperCase(); if (a === b) throw new MathError('Hai thang nhiệt độ giống nhau'); return { temp: true, v: T.parseNum(mt[1]), a, b, input }; }
+  const m = /^(.+?)\s*(?:->|→|=|sang|ra|đổi\s*ra)\s*\??\s*([^\s?=]+)\s*\??$/i.exec(s); if (!m) throw new MathError('Viết dạng: 36 km/h sang m/s');
+  const v = parseVal(m[1].trim()); if (!v.uk) throw new MathError('Thiếu đơn vị ở số cần đổi'); const to = unitKey(m[2]); if (!to) throw new MathError('Chưa biết đơn vị «' + m[2] + '»');
+  if (to.dim !== v.uk.dim) throw new MathError('Hai đơn vị không cùng loại: «' + v.unit + '» là ' + T.UNAME[v.uk.dim] + ', còn «' + m[2] + '» là ' + T.UNAME[to.dim]);
+  return { temp: false, v, to, toTxt: m[2], input };
+}
+const UT = u => u.replace(/m2$/, 'm²').replace(/m3$/, 'm³').replace(/^ohm/, 'Ω').replace(/kohm/, 'kΩ').replace(/kwh/i, 'kWh').replace(/^kj$/, 'kJ');
+function convEval(m) {
+  if (m.temp) { const v = m.v, k = m.a === 'C' ? v.add(Q.parse('273')) : m.a === 'F' ? v.sub(Q.from(32)).mul(Q.from(5)).div(Q.from(9)).add(Q.parse('273')) : v; // Kelvin (273)
+    const c = k.sub(Q.parse('273')); return m.b === 'K' ? k : m.b === 'C' ? c : c.mul(Q.from(9)).div(Q.from(5)).add(Q.from(32)); }
+  return m.v.q.div(m.to.f);
+}
+reg({ id: 'convert', title: 'Đổi đơn vị', grades: [6, 7, 8], icon: 'km→m', help: 'Viết số kèm đơn vị cần đổi, rồi «sang» đơn vị mới. Làm được: độ dài, khối lượng, thời gian, diện tích, thể tích, tốc độ, áp suất, công suất, nhiệt độ (C, F, K).',
+  examples: ['36 km/h sang m/s', '15 m/s sang km/h', '2500 cm2 sang m2', '0,5 kg sang g', '3 giờ sang giây', '750 mmHg'.replace('750 mmHg', '2,5 kW sang W'), '4 lit sang cm3', '25 ml sang cm3', '2,5 N sang kN', '0,6 m sang cm', '45 ph sang h', '1,2 kg sang g', '20 C sang F', '30 C sang K', '212 F sang C', '10 kg/m3 sang g/cm3'], ph: 'Ví dụ: 36 km/h sang m/s',
+  parse: parseConvert,
+  solve(m) {
+    const val = convEval(m); m._val = val; const f = fmtQ(val);
+    if (m.temp) { const steps = [{ say: 'Nhớ công thức đổi thang nhiệt độ', lines: ['T(K)=t(^\\circ C)+273', 't(^\\circ F)=\\frac{9}{5}\\cdot t(^\\circ C)+32'] }];
+      const v = m.v; const c = m.a === 'C' ? v : m.a === 'F' ? v.sub(Q.from(32)).mul(Q.from(5)).div(Q.from(9)) : v.sub(Q.parse('273'));
+      if (m.a !== 'C') steps.push({ say: 'Đổi về độ C trước', lines: [m.a === 'F' ? 't(^\\circ C)=\\frac{5}{9}(' + fs(v) + '-32)=' + fs(c) : 't(^\\circ C)=' + fs(v) + '-273=' + fs(c)] });
+      if (m.b !== 'C') steps.push({ say: 'Từ độ C đổi sang thang cần tìm', lines: [m.b === 'K' ? 'T=' + fs(c) + '+273=' + f.s : 't(^\\circ F)=\\frac{9}{5}\\cdot' + fs(c) + '+32=' + f.s] });
+      const un = m.b === 'K' ? 'K' : m.b === 'C' ? '°C' : '°F'; return Object.assign({ problemTex: fs(m.v) + '\\ ^\\circ ' + m.a + '\\ \\to\\ ?\\ ' + m.b, steps }, A(f.s + '\\ \\text{' + un + '}', f.s + ' ' + m.b)); }
+    const u = m.v.uk, to = m.to; const fac = u.f.div(to.f); const ff = fmtQ(fac);
+    const steps = [{ say: 'Xác định loại đơn vị: ' + T.UNAME[u.dim] + '. Đơn vị chuẩn là ' + BASE[u.dim], lines: [] },
+      { say: 'Đổi 1 đơn vị cũ ra đơn vị chuẩn, rồi ra đơn vị mới', lines: ['1\\ \\text{' + UT(m.v.unit) + '}=' + fs(u.f) + '\\ \\text{' + BASE[u.dim] + '}', '1\\ \\text{' + UT(m.toTxt) + '}=' + fs(to.f) + '\\ \\text{' + BASE[u.dim] + '}'] },
+      { say: 'Suy ra 1 ' + m.v.unit + ' bằng bao nhiêu ' + m.toTxt, lines: ['1\\ \\text{' + UT(m.v.unit) + '}=\\frac{' + fs(u.f) + '}{' + fs(to.f) + '}=' + ff.s + '\\ \\text{' + UT(m.toTxt) + '}'] },
+      { say: 'Nhân với số đã cho', lines: [num(m.v.raw, UT(m.v.unit)) + '=' + fs(m.v.raw) + '\\cdot' + ff.s + '=' + f.s + '\\ \\text{' + UT(m.toTxt) + '}'] }];
+    if (/km\/h|m\/s/.test(m.v.unit + m.toTxt)) steps.push({ say: 'Mẹo: đổi km/h sang m/s thì chia 3,6; đổi m/s sang km/h thì nhân 3,6.', lines: [] });
+    return Object.assign({ problemTex: num(m.v.raw, UT(m.v.unit)) + '\\ \\to\\ ?\\ \\text{' + UT(m.toTxt) + '}', steps }, A(fs(m.v.raw) + '\\ \\text{' + UT(m.v.unit) + '}=' + f.s + '\\ \\text{' + UT(m.toTxt) + '}', f.s + ' ' + m.toTxt));
+  },
+  check(m, text) {
+    if (m._val === undefined) this.solve(m);
+    if (m.temp) { let t = String(text).trim().replace(/^[^=]*=/, '').replace(/[°\s]/g, '').replace(/[CFKckf]$/, ''); let v; try { v = T.parseNum(t); } catch (e) { return res.unread('Chưa đọc được đáp án', [{ say: 'Gõ một số, ví dụ 303' }]); } const d = v.sub(m._val); if (d.isZero()) return res.ok('Đúng rồi!', [{ say: 'Kết quả ' + fs(m._val) + '.' }]); if ((d.sign() < 0 ? d.neg() : d).cmp(new Q(1n, 2n)) < 0) return res.ok('Đúng rồi! (đã làm tròn)', [{ say: 'Giá trị chính xác là ' + fmtQ(m._val).s + '.' }]); return res.wrong('Chưa đúng', [{ say: 'Xem lại công thức: T(K) = t(°C) + 273 và t(°F) = 9/5 · t(°C) + 32.' }]); }
+    const dim = m.v.uk.dim; const r = checkNumUnit(text, dim, m.v.q, [m.toTxt]);
+    return r;
+  },
+  generate(r, g) { const p = r.pick([['km/h', 'm/s', [18, 36, 54, 72, 90, 108]], ['m/s', 'km/h', [5, 10, 15, 20, 25]], ['cm2', 'm2', [2500, 400, 12000, 800]], ['kg', 'g', [0.5, 2, 1.5, 0.25]], ['gio', 'giay', [1, 2, 0.5]], ['lit', 'cm3', [2, 0.5, 3, 1.5]], ['g/cm3', 'kg/m3', [0.8, 2.7, 7.8, 1]], ['kW', 'W', [1.5, 2.2, 0.75]], ['ph', 's', [3, 5, 12]], ['kwh', 'j', [1, 0.5]]]); const v = r.pick(p[2]); const vs = String(v).replace('.', ','); return vs + ' ' + p[0] + ' sang ' + p[1]; } });
+
+/* ===== 2. Mạch điện ===== */
+function parseCircuit(input) {
+  const parts = String(input).split(/;|\n/).map(s => s.trim()).filter(Boolean); let mode = null, unk = null; const raw = {};
+  for (const p of parts) { const f = fold(p).replace(/\s+/g, ''); if (/^(mach=)?(noitiep|nt|noi-tiep)$/.test(f)) { mode = 'nt'; continue; } if (/^(mach=)?(songsong|ss|song-song)$/.test(f)) { mode = 'ss'; continue; }
+    const mm = /^([^=]+?)\s*=\s*(.+)$/.exec(p); if (!mm) throw new MathError('«' + p + '» chưa đúng dạng. Viết R1=10ohm hoặc ghi «nối tiếp» / «song song»'); let k = mm[1].replace(/\s+/g, '').replace(/_/g, ''); k = k.replace(/^rtd$|^r$/i, 'Rtd'); if (/^[uirp]\d?$/i.test(k)) k = k[0].toUpperCase() + k.slice(1); if (/^\?+$/.test(mm[2].trim())) { if (unk) throw new MathError('Chỉ nên có một đại lượng cần tìm'); unk = k; } else raw[k] = mm[2].trim(); }
+  if (!mode) throw new MathError('Cho biết mạch «nối tiếp» hay «song song» (viết thành một phần riêng, ví dụ: nối tiếp; R1=10ohm; R2=20ohm; U=30V; I=?)');
+  if (!unk) throw new MathError('Đánh dấu đại lượng cần tìm bằng dấu ?, ví dụ Rtd=? hoặc I=? hoặc U1=?');
+  const rs = Object.keys(raw).filter(k => /^R\d$/.test(k)).sort(); if (rs.length < 2) throw new MathError('Cần ít nhất hai điện trở R1, R2'); const g = {}; rs.forEach(k => { g[k] = parseVal(raw[k], 'R'); if (g[k].q.sign() <= 0) throw new MathError('Điện trở phải lớn hơn 0'); });
+  if (raw.U) g.U = parseVal(raw.U, 'U'); if (raw.I) g.I = parseVal(raw.I, 'I'); if (raw.Rtd) g.Rtd = parseVal(raw.Rtd, 'R');
+  const okUnk = ['Rtd', 'I', 'U', 'P'].concat(rs.map(k => 'U' + k[1]), rs.map(k => 'I' + k[1]), rs.map(k => 'P' + k[1])); if (!okUnk.includes(unk)) throw new MathError('Chưa hỗ trợ tìm «' + unk + '». Chọn Rtd, I, U, P, U1, U2, I1, I2…');
+  if (unk !== 'Rtd' && !g.U && !g.I) throw new MathError('Cần cho hiệu điện thế U hoặc cường độ dòng điện I của cả mạch');
+  return { mode, rs, g, unk, input };
+}
+function circuitSolve(m) {
+  const { mode, rs, g, unk } = m; const steps = []; const n = rs.length; const Rk = rs.map(k => g[k].q);
+  const givenTex = rs.map(k => tl(k.replace(/(\d)/, '_$1'), g[k].raw, 'Ω')); if (g.U) givenTex.push(tl('U', g.U.raw, g.U.unit || 'V')); if (g.I) givenTex.push(tl('I', g.I.raw, g.I.unit || 'A'));
+  const mt = x => x.replace(/^([UIPR])(\d)$/, '$1_$2').replace('Rtd', 'R_{td}');
+  steps.push({ say: 'Đọc đề: mạch ' + (mode === 'nt' ? 'nối tiếp' : 'song song') + ' gồm ' + n + ' điện trở. Cần tìm ' + unk, lines: [givenTex.join(',\\ ') + ',\\ \\ ' + mt(unk) + '=\\ ?'] });
+  const conv = rs.concat(['U', 'I']).filter(k => g[k] && g[k].uk && !g[k].uk.f.isOne());
+  if (conv.length) steps.push({ say: 'Đổi về đơn vị chuẩn (Ω, V, A)', lines: conv.map(k => num(g[k].raw, g[k].unit.replace('ohm', 'Ω')) + '=' + num(g[k].q, BASE[g[k].uk.dim])) });
+  let Rtd; if (mode === 'nt') { Rtd = Rk.reduce((a, b) => a.add(b)); steps.push({ say: 'Mạch nối tiếp: điện trở tương đương bằng tổng các điện trở', lines: ['R_{td}=' + rs.map(k => 'R_' + k[1]).join('+'), 'R_{td}=' + Rk.map(fs).join('+') + '=' + fs(Rtd) + '\\ \\Omega'] }); }
+  else { const inv = Rk.map(x => x.inv()).reduce((a, b) => a.add(b)); Rtd = inv.inv(); steps.push({ say: 'Mạch song song: nghịch đảo điện trở tương đương bằng tổng các nghịch đảo', lines: ['\\frac{1}{R_{td}}=' + rs.map(k => '\\frac{1}{R_' + k[1] + '}').join('+'), '\\frac{1}{R_{td}}=' + Rk.map(x => '\\frac{1}{' + fs(x) + '}').join('+') + '=' + fs(inv), 'R_{td}=' + (fmtQ(Rtd).approx ? '\\approx ' : '') + fs(Rtd) + '\\ \\Omega'] }); if (n === 2) steps.push({ say: 'Với hai điện trở có thể dùng nhanh công thức tích chia tổng', lines: ['R_{td}=\\frac{R_1\\cdot R_2}{R_1+R_2}=\\frac{' + fs(Rk[0]) + '\\cdot' + fs(Rk[1]) + '}{' + fs(Rk[0].add(Rk[1])) + '}'] }); }
+  let val, unit;
+  if (unk === 'Rtd') { val = Rtd; unit = 'Ω'; }
+  else {
+    let U = g.U ? g.U.q : null, I = g.I ? g.I.q : null;
+    if (U === null) { U = I.mul(Rtd); steps.push({ say: 'Tính hiệu điện thế cả mạch bằng định luật Ôm', lines: ['U=I\\cdot R_{td}=' + fs(I) + '\\cdot' + fs(Rtd) + '=' + fs(U) + '\\ V'] }); }
+    if (I === null) { I = U.div(Rtd); steps.push({ say: 'Tính cường độ dòng điện của cả mạch bằng định luật Ôm', lines: ['I=\\frac{U}{R_{td}}=\\frac{' + fs(U) + '}{' + fs(Rtd) + '}=' + (fmtQ(I).approx ? '\\approx ' : '') + fs(I) + '\\ A'] }); }
+    const idx = /^[UIP](\d)$/.exec(unk);
+    if (unk === 'U') { val = U; unit = 'V'; } else if (unk === 'I') { val = I; unit = 'A'; } else if (unk === 'P') { val = U.mul(I); unit = 'W'; steps.push({ say: 'Công suất của cả mạch', lines: ['P=U\\cdot I=' + fs(U) + '\\cdot' + fs(I) + '=' + fs(val) + '\\ W'] }); }
+    else { const i = +idx[1] - 1; const Ri = Rk[i]; let Ui, Ii; if (mode === 'nt') { Ii = I; Ui = I.mul(Ri); steps.push({ say: 'Nối tiếp: cường độ dòng điện chạy qua mọi điện trở như nhau, I' + (i + 1) + ' = I. Hiệu điện thế trên R' + (i + 1) + ':', lines: ['U_' + (i + 1) + '=I\\cdot R_' + (i + 1) + '=' + fs(I) + '\\cdot' + fs(Ri) + '=' + fs(Ui) + '\\ V'] }); } else { Ui = U; Ii = U.div(Ri); steps.push({ say: 'Song song: hiệu điện thế hai đầu mỗi điện trở bằng U của cả mạch. Dòng qua R' + (i + 1) + ':', lines: ['I_' + (i + 1) + '=\\frac{U}{R_' + (i + 1) + '}=\\frac{' + fs(U) + '}{' + fs(Ri) + '}=' + (fmtQ(Ii).approx ? '\\approx ' : '') + fs(Ii) + '\\ A'] }); }
+      if (unk[0] === 'U') { val = Ui; unit = 'V'; } else if (unk[0] === 'I') { val = Ii; unit = 'A'; } else { val = Ui.mul(Ii); unit = 'W'; steps.push({ say: 'Công suất của R' + (i + 1), lines: ['P_' + (i + 1) + '=U_' + (i + 1) + '\\cdot I_' + (i + 1) + '=' + fs(Ui) + '\\cdot' + fs(Ii) + '=' + fs(val) + '\\ W'] }); } }
+  }
+  steps.push({ say: 'Kiểm tra: ' + (mode === 'nt' ? 'nối tiếp thì điện trở tương đương lớn hơn mỗi điện trở thành phần và U = U1 + U2.' : 'song song thì điện trở tương đương nhỏ hơn mỗi điện trở thành phần và I = I1 + I2.'), lines: [] });
+  m._val = val; m._dim = unit === 'Ω' ? 'R' : unit === 'V' ? 'U' : unit === 'A' ? 'I' : 'Pw'; const f = fmtQ(val);
+  return Object.assign({ problemTex: (mode === 'nt' ? '\\text{Nối tiếp: }' : '\\text{Song song: }') + givenTex.join(',\\ ') + ',\\ \\ ' + mt(unk) + '=\\ ?', steps }, A(mt(unk) + '=' + (f.approx ? '\\approx ' : '') + f.s + '\\ \\text{' + unit + '}', unk + ' = ' + f.s + ' ' + unit.replace('Ω', 'ohm')));
+}
+reg({ id: 'circuit', title: 'Mạch điện nối tiếp, song song', grades: [9], icon: 'R1+R2', help: 'Ghi «nối tiếp» hoặc «song song», các điện trở R1, R2…, hiệu điện thế U hoặc dòng điện I của cả mạch, và đại lượng cần tìm (Rtd, I, U, P, U1, U2, I1, I2, P1…) kèm dấu ?. Các phần cách nhau dấu chấm phẩy.',
+  examples: ['nối tiếp; R1=10ohm; R2=20ohm; Rtd=?', 'nối tiếp; R1=10ohm; R2=20ohm; U=30V; I=?', 'nối tiếp; R1=10ohm; R2=20ohm; U=30V; U2=?', 'song song; R1=30ohm; R2=60ohm; Rtd=?', 'song song; R1=30ohm; R2=60ohm; U=12V; I=?', 'song song; R1=20ohm; R2=30ohm; I=1A; I1=?'.replace('I=1A; I1', 'U=12V; I1'), 'nối tiếp; R1=4ohm; R2=6ohm; I=2A; P=?'], ph: 'Ví dụ: nối tiếp; R1=10ohm; R2=20ohm; U=30V; I=?',
+  parse: parseCircuit, solve: circuitSolve, check(m, text) { if (m._val === undefined) circuitSolve(m); return checkNumUnit(text, m._dim, m._val, []); },
+  generate(r) { const mode = r.pick(['nối tiếp', 'song song']); const R1 = r.pick([10, 20, 30, 40, 60, 12, 15]); const R2 = r.pick([20, 30, 60, 40, 15, 12]); const U = r.pick([12, 24, 30, 6, 60]); const ask = r.pick(['Rtd', 'I', mode === 'nối tiếp' ? 'U2' : 'I1', 'P']); return mode + '; R1=' + R1 + 'ohm; R2=' + R2 + 'ohm' + (ask === 'Rtd' ? '' : '; U=' + U + 'V') + '; ' + ask + '=?'; } });
+
+/* ===== 3. Chuyển động gặp nhau, tốc độ trung bình ===== */
+function parseMeet(input) {
+  const parts = String(input).split(/;|\n/).map(s => s.trim()).filter(Boolean); let mode = null, unk = null; const raw = {};
+  for (const p of parts) { const f = fold(p).replace(/\s+/g, ''); if (/^(nguocchieu|nc|gapnhau)$/.test(f)) { mode = 'nc'; continue; } if (/^(cungchieu|cc|duoikip)$/.test(f)) { mode = 'cc'; continue; } if (/^(vtb|trungbinh|tocdotrungbinh|tb)$/.test(f)) { mode = 'tb'; continue; }
+    const mm = /^([^=]+?)\s*=\s*(.+)$/.exec(p); if (!mm) throw new MathError('«' + p + '» chưa đúng dạng'); const k = mm[1].replace(/\s+/g, '').replace(/_/g, '').replace(/^vtb$/i, 'vtb'); if (/^\?+$/.test(mm[2].trim())) { if (unk) throw new MathError('Chỉ nên có một đại lượng cần tìm'); unk = k; } else raw[k] = mm[2].trim(); }
+  if (!mode) throw new MathError('Ghi rõ loại: «ngược chiều», «cùng chiều» hoặc «tốc độ trung bình»'); if (!unk) throw new MathError('Đánh dấu đại lượng cần tìm bằng ?');
+  const g = {};
+  if (mode === 'tb') { if (unk !== 'vtb') throw new MathError('Với tốc độ trung bình hãy tìm vtb=?'); const dims = { s1: 'L', s2: 'L', s3: 'L', t1: 'T', t2: 'T', t3: 'T', v1: 'vel', v2: 'vel', v3: 'vel' }; Object.keys(raw).forEach(k => { if (!dims[k]) throw new MathError('Không hiểu «' + k + '»'); g[k] = parseVal(raw[k], dims[k]); });
+    const segs = [1, 2, 3].filter(i => g['s' + i] || g['t' + i] || g['v' + i]); if (segs.length < 2) throw new MathError('Cần ít nhất hai đoạn đường (s1, t1 hoặc v1, và s2, t2 hoặc v2)'); segs.forEach(i => { const c = ['s', 't', 'v'].filter(x => g[x + i]).length; if (c < 2) throw new MathError('Đoạn ' + i + ' cần biết đủ hai trong ba đại lượng s, t, v'); }); return { mode, g, segs, unk, input }; }
+  const dims = { s: 'L', v1: 'vel', v2: 'vel', t: 'T' }; Object.keys(raw).forEach(k => { if (!dims[k]) throw new MathError('Không hiểu «' + k + '». Dùng s, v1, v2, t'); g[k] = parseVal(raw[k], dims[k]); });
+  if (!dims[unk]) throw new MathError('Chưa hỗ trợ tìm «' + unk + '»'); if (Object.keys(g).length !== 3) throw new MathError('Cần cho đúng ba đại lượng trong s, v1, v2, t'); if (g[unk]) throw new MathError('Đại lượng cần tìm không được cho sẵn'); return { mode, g, unk, input };
+}
+function meetSolve(m) {
+  const { mode, g, unk } = m; const steps = [];
+  if (mode === 'tb') {
+    const segs = m.segs; const S = [], Tt = []; steps.push({ say: 'Đọc đề: tốc độ trung bình = tổng quãng đường chia tổng thời gian (không phải trung bình cộng các tốc độ)', lines: ['v_{tb}=\\frac{s_1+s_2+\\dots}{t_1+t_2+\\dots}'] });
+    const conv = []; segs.forEach(i => { let s = g['s' + i] && g['s' + i].q, t = g['t' + i] && g['t' + i].q, v = g['v' + i] && g['v' + i].q;
+      if (!s) { s = v.mul(t); conv.push({ say: 'Đoạn ' + i + ': tính quãng đường', lines: ['s_' + i + '=v_' + i + '\\cdot t_' + i + '=' + fs(v) + '\\cdot' + fs(t) + '=' + fs(s) + '\\ m'] }); } else if (!t) { t = s.div(v); conv.push({ say: 'Đoạn ' + i + ': tính thời gian', lines: ['t_' + i + '=\\frac{s_' + i + '}{v_' + i + '}=\\frac{' + fs(s) + '}{' + fs(v) + '}=' + (fmtQ(t).approx ? '\\approx ' : '') + fs(t) + '\\ s'] }); } S.push(s); Tt.push(t); });
+    steps.push({ say: 'Đổi về mét, giây. Rồi tìm quãng đường và thời gian còn thiếu của từng đoạn', lines: [] }); conv.forEach(c => steps.push(c));
+    const s = S.reduce((a, b) => a.add(b)), t = Tt.reduce((a, b) => a.add(b)); const v = s.div(t); steps.push({ say: 'Tính tổng quãng đường, tổng thời gian', lines: ['s=' + S.map(fs).join('+') + '=' + fs(s) + '\\ m', 't=' + Tt.map(x => fs(x)).join('+') + '=' + (fmtQ(t).approx ? '\\approx ' : '') + fs(t) + '\\ s'] });
+    steps.push({ say: 'Tính tốc độ trung bình', lines: ['v_{tb}=\\frac{' + fs(s) + '}{' + fs(t) + '}=' + (fmtQ(v).approx ? '\\approx ' : '') + fs(v) + '\\ m/s'] }); const kmh = v.mul(Q.parse('3.6')); steps.push({ say: 'Đổi sang km/h cho dễ hình dung', lines: [fs(v) + '\\ m/s\\times3{,}6=' + (fmtQ(kmh).approx ? '\\approx ' : '') + fs(kmh) + '\\ km/h'] });
+    m._val = v; m._dim = 'vel'; return Object.assign({ problemTex: '\\text{Tốc độ trung bình }v_{tb}=\\ ?', steps }, A('v_{tb}=' + (fmtQ(v).approx ? '\\approx ' : '') + fs(v) + '\\ m/s\\ (' + (fmtQ(kmh).approx ? '\\approx ' : '') + fs(kmh) + '\\ km/h)', 'vtb = ' + fs(v) + ' m/s'));
+  }
+  const keys = ['s', 'v1', 'v2', 't']; const gt = keys.filter(k => g[k]).map(k => tl(k.replace(/(\d)/, '_$1'), g[k].raw, g[k].unit || BASE[({ s: 'L', v1: 'vel', v2: 'vel', t: 'T' })[k]]));
+  steps.push({ say: 'Đọc đề: hai vật chuyển động ' + (mode === 'nc' ? 'ngược chiều, đi lại gặp nhau' : 'cùng chiều, vật nhanh đuổi theo vật chậm') + '. Cần tìm ' + unk, lines: [gt.join(',\\ ') + ',\\ \\ ' + unk.replace(/(\d)/, '_$1') + '=\\ ?'] });
+  const conv = keys.filter(k => g[k] && g[k].uk && !g[k].uk.f.isOne()); if (conv.length) steps.push({ say: 'Đổi về mét, giây, m/s', lines: conv.map(k => num(g[k].raw, g[k].unit) + '=' + num(g[k].q, BASE[g[k].uk.dim])) });
+  const sign = mode === 'nc' ? '+' : '-'; steps.push({ say: mode === 'nc' ? 'Ngược chiều: khoảng cách giữa hai vật thu hẹp với tốc độ bằng tổng hai tốc độ' : 'Cùng chiều: khoảng cách thu hẹp với tốc độ bằng hiệu hai tốc độ (vật nhanh trừ vật chậm)', lines: ['s=(v_1' + sign + 'v_2)\\cdot t'] });
+  const v = { s: g.s && g.s.q, v1: g.v1 && g.v1.q, v2: g.v2 && g.v2.q, t: g.t && g.t.q }; const sg = x => mode === 'nc' ? x.v1.add(x.v2) : x.v1.sub(x.v2); let val, unit, dim;
+  if (unk === 's') { val = v.t.mul(sg(v)); unit = 'm'; dim = 'L'; steps.push({ say: 'Thay số', lines: ['s=(' + fs(v.v1) + sign + fs(v.v2) + ')\\cdot' + fs(v.t) + '=' + fs(val) + '\\ m'] }); }
+  else if (unk === 't') { const sp = sg(v); if (sp.sign() <= 0) throw new MathError('Với chuyển động cùng chiều, vật đuổi (v1) phải nhanh hơn vật bị đuổi (v2)'); val = v.s.div(sp); unit = 's'; dim = 'T'; steps.push({ say: 'Tính tốc độ thu hẹp khoảng cách rồi chia', lines: ['v_1' + sign + 'v_2=' + fs(v.v1) + sign + fs(v.v2) + '=' + fs(sp) + '\\ m/s', 't=\\frac{s}{v_1' + sign + 'v_2}=\\frac{' + fs(v.s) + '}{' + fs(sp) + '}=' + (fmtQ(val).approx ? '\\approx ' : '') + fs(val) + '\\ s'] }); }
+  else { const sp = v.s.div(v.t); const other = unk === 'v1' ? v.v2 : v.v1; steps.push({ say: 'Tốc độ thu hẹp khoảng cách là s : t', lines: ['v_1' + sign + 'v_2=\\frac{s}{t}=\\frac{' + fs(v.s) + '}{' + fs(v.t) + '}=' + fs(sp) + '\\ m/s'] }); if (mode === 'nc') val = sp.sub(other); else val = unk === 'v1' ? sp.add(other) : other.sub(sp); unit = 'm/s'; dim = 'vel'; steps.push({ say: 'Suy ra ' + unk, lines: [unk.replace(/(\d)/, '_$1') + '=' + fs(val) + '\\ m/s'] }); if (val.sign() <= 0) throw new MathError('Kết quả không hợp lí (tốc độ ≤ 0), kiểm tra lại số liệu'); }
+  const alt = unit === 's' ? ['h', Q.from(3600)] : unit === 'm' ? ['km', Q.from(1000)] : ['km/h', Q.parse('5').div(Q.from(18))]; const av = val.div(alt[1]); steps.push({ say: 'Đổi sang đơn vị thường dùng', lines: [fs(val) + '\\ \\text{' + unit + '}=' + (fmtQ(av).approx ? '\\approx ' : '') + fs(av) + '\\ \\text{' + alt[0] + '}'] });
+  m._val = val; m._dim = dim; const f = fmtQ(val), fa = fmtQ(av); return Object.assign({ problemTex: '\\text{' + (mode === 'nc' ? 'Ngược chiều: ' : 'Cùng chiều: ') + '}' + gt.join(',\\ ') + ',\\ \\ ' + unk.replace(/(\d)/, '_$1') + '=\\ ?', steps }, A(unk.replace(/(\d)/, '_$1') + '=' + (f.approx ? '\\approx ' : '') + f.s + '\\ \\text{' + unit + '}\\ (' + (fa.approx ? '\\approx ' : '') + fa.s + '\\ \\text{' + alt[0] + '})', unk + ' = ' + f.s + ' ' + unit));
+}
+reg({ id: 'meet', title: 'Chuyển động gặp nhau, tốc độ trung bình', grades: [8], icon: 'v1+v2', help: 'Ghi loại chuyển động («ngược chiều», «cùng chiều» hoặc «tốc độ trung bình») và các số liệu. Gặp nhau: cho ba trong bốn đại lượng s (khoảng cách), v1, v2, t. Tốc độ trung bình: cho s1, t1 (hoặc v1) và s2, t2 (hoặc v2), tìm vtb=?.',
+  examples: ['ngược chiều; s=150km; v1=40km/h; v2=60km/h; t=?', 'ngược chiều; v1=15m/s; v2=10m/s; t=20s; s=?', 'cùng chiều; s=30km; v1=50km/h; v2=20km/h; t=?', 'ngược chiều; s=90km; t=1,5h; v1=25km/h; v2=?', 'tốc độ trung bình; s1=60km; t1=1h; s2=40km; t2=1h; vtb=?', 'tốc độ trung bình; s1=3km; v1=6km/h; s2=3km; v2=3km/h; vtb=?'], ph: 'Ví dụ: ngược chiều; s=150km; v1=40km/h; v2=60km/h; t=?',
+  parse: parseMeet, solve: meetSolve, check(m, text) { if (m._val === undefined) meetSolve(m); const df = m._dim === 'vel' ? ['km/h'] : m._dim === 'T' ? ['h'] : ['km']; return checkNumUnit(text, m._dim, m._val, df); },
+  generate(r) { const t = r.pick([1, 2, 0.5, 1.5, 3]); const v1 = r.pick([30, 40, 50, 20, 25]), v2 = r.pick([10, 15, 20, 30, 12]); if (r.pick([0, 1, 2]) === 0) return 'tốc độ trung bình; s1=' + r.pick([30, 60, 40]) + 'km; t1=' + r.pick([1, 2]) + 'h; s2=' + r.pick([20, 40, 30]) + 'km; t2=' + r.pick([1, 0.5]).toString().replace('.', ',') + 'h; vtb=?'; const nc = r.pick([true, false]); const s = nc ? (v1 + v2) * t : (v1 + Math.abs(v1 - v2) > 0 ? Math.abs(v1 - v2) * t : 10); const a = nc ? v1 : Math.max(v1, v2 + 5), b = v2; const S = nc ? (a + b) * t : (a - b) * t; return (nc ? 'ngược chiều' : 'cùng chiều') + '; s=' + String(S).replace('.', ',') + 'km; v1=' + a + 'km/h; v2=' + b + 'km/h; t=?'; } });
+
+/* ===== 4. Phương trình cân bằng nhiệt ===== */
+function parseHeat(input) {
+  const parts = String(input).split(/;|\n/).map(s => s.trim()).filter(Boolean); const raw = {}; let unk = null; const dims = { m1: 'M', m2: 'M', c1: 'cap', c2: 'cap', t1: 'dT', t2: 'dT', t: 'dT' };
+  for (const p of parts) { const mm = /^([^=]+?)\s*=\s*(.+)$/.exec(p); if (!mm) throw new MathError('«' + p + '» chưa có dấu ='); const k = mm[1].replace(/\s+/g, '').replace(/_/g, ''); if (!dims[k]) throw new MathError('Không hiểu «' + k + '». Dùng m1, c1, t1, m2, c2, t2, t'); if (/^\?+$/.test(mm[2].trim())) { if (unk) throw new MathError('Chỉ nên có một đại lượng cần tìm'); unk = k; } else raw[k] = mm[2].trim(); }
+  if (!unk) throw new MathError('Đánh dấu đại lượng cần tìm bằng ?, ví dụ t=?'); const keys = Object.keys(dims); if (Object.keys(raw).length !== 6) throw new MathError('Cần cho đủ sáu trong bảy đại lượng m1, c1, t1, m2, c2, t2, t');
+  if (!['t', 'm2', 'm1', 't1', 't2'].includes(unk)) throw new MathError('Chỉ hỗ trợ tìm t, t1, t2, m1 hoặc m2'); const g = {}; Object.keys(raw).forEach(k => { g[k] = parseVal(raw[k], dims[k]); if (dims[k] === 'dT' && g[k].uk && g[k].uk.key === 'k') g[k].q = g[k].q.sub(Q.parse('273')); }); return { g, unk, input };
+}
+function heatSolve(m) {
+  const { g, unk } = m; const steps = []; const v = {}; Object.keys(g).forEach(k => { v[k] = g[k].q; });
+  const gt = Object.keys(g).map(k => tl(k.replace(/(\d)/, '_$1'), g[k].raw, g[k].unit || ({ m: 'kg', c: 'J/kg.K', t: '°C' })[k[0]]));
+  steps.push({ say: 'Đọc đề: vật 1 toả nhiệt (nóng hơn), vật 2 thu nhiệt (lạnh hơn) cho đến khi cùng nhiệt độ t', lines: [gt.join(',\\ ') + ',\\ \\ ' + unk.replace(/(\d)/, '_$1') + '=\\ ?'] });
+  const conv = Object.keys(g).filter(k => g[k].uk && !g[k].uk.f.isOne() && g[k].uk.dim !== 'dT'); if (conv.length) steps.push({ say: 'Đổi về đơn vị chuẩn (kg, J/kg.K)', lines: conv.map(k => num(g[k].raw, g[k].unit) + '=' + num(g[k].q, BASE[g[k].uk.dim])) });
+  steps.push({ say: 'Phương trình cân bằng nhiệt: nhiệt lượng toả ra bằng nhiệt lượng thu vào (bỏ qua hao phí)', lines: ['Q_{toa}=Q_{thu}', 'm_1c_1(t_1-t)=m_2c_2(t-t_2)'] });
+  let val, unit = '°C'; const f = x => fs(x);
+  if (unk === 't') { const a = v.m1.mul(v.c1), b = v.m2.mul(v.c2); const num_ = a.mul(v.t1).add(b.mul(v.t2)), den = a.add(b); val = num_.div(den); steps.push({ say: 'Giải phương trình tìm t: chuyển các hạng tử chứa t sang một vế', lines: ['m_1c_1t_1+m_2c_2t_2=(m_1c_1+m_2c_2)\\cdot t', 't=\\frac{m_1c_1t_1+m_2c_2t_2}{m_1c_1+m_2c_2}'] }); steps.push({ say: 'Thay số', lines: ['t=\\frac{' + f(a) + '\\cdot' + f(v.t1) + '+' + f(b) + '\\cdot' + f(v.t2) + '}{' + f(a) + '+' + f(b) + '}=\\frac{' + f(num_) + '}{' + f(den) + '}=' + (fmtQ(val).approx ? '\\approx ' : '') + f(val) + '\\ ^\\circ C'] }); if (val.cmp(v.t1) >= 0 || val.cmp(v.t2) <= 0) throw new MathError('Nhiệt độ cân bằng phải nằm giữa t2 và t1, kiểm tra lại số liệu (vật 1 phải nóng hơn vật 2)'); steps.push({ say: 'Kiểm tra: nhiệt độ cân bằng phải nằm giữa t2 và t1', lines: [f(v.t2) + '<' + (fmtQ(val).approx ? '\\approx ' : '') + f(val) + '<' + f(v.t1)] }); }
+  else if (unk === 'm2' || unk === 'm1') { const [i, j] = unk === 'm2' ? [2, 1] : [1, 2]; const tt = v.t; const lhs = v['m' + j].mul(v['c' + j]).mul(unk === 'm2' ? v.t1.sub(tt) : tt.sub(v.t2)); const den = unk === 'm2' ? v.c2.mul(tt.sub(v.t2)) : v.c1.mul(v.t1.sub(tt)); val = lhs.div(den); unit = 'kg'; steps.push({ say: 'Tính hiệu nhiệt độ rồi giải ' + unk, lines: [unk === 'm2' ? 'm_2=\\frac{m_1c_1(t_1-t)}{c_2(t-t_2)}' : 'm_1=\\frac{m_2c_2(t-t_2)}{c_1(t_1-t)}', unk.replace(/(\d)/, '_$1') + '=\\frac{' + f(lhs) + '}{' + f(den) + '}=' + (fmtQ(val).approx ? '\\approx ' : '') + f(val) + '\\ kg'] }); }
+  else { // t1 hoặc t2
+    const tt = v.t; if (unk === 't1') { const L = v.m2.mul(v.c2).mul(tt.sub(v.t2)); val = tt.add(L.div(v.m1.mul(v.c1))); steps.push({ say: 'Tính nhiệt lượng thu vào của vật 2 rồi suy ra t1', lines: ['Q_{thu}=m_2c_2(t-t_2)=' + f(L) + '\\ J', 't_1=t+\\frac{Q_{thu}}{m_1c_1}=' + (fmtQ(val).approx ? '\\approx ' : '') + f(val) + '\\ ^\\circ C'] }); } else { const L = v.m1.mul(v.c1).mul(v.t1.sub(tt)); val = tt.sub(L.div(v.m2.mul(v.c2))); steps.push({ say: 'Tính nhiệt lượng toả ra của vật 1 rồi suy ra t2', lines: ['Q_{toa}=m_1c_1(t_1-t)=' + f(L) + '\\ J', 't_2=t-\\frac{Q_{toa}}{m_2c_2}=' + (fmtQ(val).approx ? '\\approx ' : '') + f(val) + '\\ ^\\circ C'] }); } }
+  m._val = val; m._dim = unit === 'kg' ? 'M' : 'dT'; const ff = fmtQ(val); return Object.assign({ problemTex: gt.join(',\\ ') + ',\\ \\ ' + unk.replace(/(\d)/, '_$1') + '=\\ ?', steps }, A(unk.replace(/(\d)/, '_$1') + '=' + (ff.approx ? '\\approx ' : '') + ff.s + '\\ \\text{' + unit + '}', unk + ' = ' + ff.s + ' ' + (unit === '°C' ? 'C' : 'kg')));
+}
+reg({ id: 'heatbal', title: 'Phương trình cân bằng nhiệt', grades: [8], icon: 'Q=Q', help: 'Vật 1 nóng (m1, c1, t1) thả vào vật 2 lạnh (m2, c2, t2), nhiệt độ cân bằng t. Cho sáu đại lượng, tìm một đại lượng còn lại (t, m1, m2, t1 hoặc t2). Nhiệt dung riêng viết dạng 4200J/kg.K, nhiệt độ dạng 100C.',
+  examples: ['m1=0,5kg; c1=380J/kg.K; t1=100C; m2=2kg; c2=4200J/kg.K; t2=20C; t=?', 'm1=0,2kg; c1=880J/kg.K; t1=120C; m2=1kg; c2=4200J/kg.K; t2=25C; t=?', 'm1=0,4kg; c1=380J/kg.K; t1=100C; c2=4200J/kg.K; t2=20C; t=25C; m2=?'.replace('; c2', '; c2'), ], ph: 'Ví dụ: m1=0,5kg; c1=380J/kg.K; t1=100C; m2=2kg; c2=4200J/kg.K; t2=20C; t=?',
+  parse: parseHeat, solve: heatSolve, check(m, text) { if (m._val === undefined) heatSolve(m); if (m._dim === 'dT') { let t = String(text).trim().replace(/^[^=]*=/, '').replace(/[°\s]/g, '').replace(/[Cc]$/, ''); let v; try { v = T.parseNum(t); } catch (e) { return res.unread('Chưa đọc được đáp án', [{ say: 'Gõ một số, ví dụ 23,6 hoặc 23,6 C' }]); } const d = v.sub(m._val); const dec = (/[.,](\d+)/.exec(t) || [0, ''])[1].length; if (d.isZero()) return res.ok('Đúng rồi!', [{ say: 'Kết quả ' + fs(m._val) + ' °C.' }]); if ((d.sign() < 0 ? d.neg() : d).cmp(new Q(1n, 2n * (10n ** BigInt(dec)))) <= 0) return res.ok('Đúng rồi! (đã làm tròn)', [{ say: 'Giá trị chính xác là ' + fmtQ(m._val).s + ' °C.' }]); return res.wrong('Chưa đúng', [{ say: 'Kiểm tra lại: nhiệt lượng toả ra bằng nhiệt lượng thu vào; t phải nằm giữa t2 và t1.' }]); } return checkNumUnit(text, 'M', m._val, []); },
+  generate(r) { const m1 = r.pick(['0,5', '0,2', '0,4', '0,3']), c1 = r.pick([380, 880, 460]), t1 = r.pick([100, 120, 90, 80]), m2 = r.pick([1, 2, '0,5']), t2 = r.pick([20, 25, 30, 15]); return 'm1=' + m1 + 'kg; c1=' + c1 + 'J/kg.K; t1=' + t1 + 'C; m2=' + m2 + 'kg; c2=4200J/kg.K; t2=' + t2 + 'C; t=?'; } });
+/* ===== Mở rộng các nhóm ===== */
+function extend(id, help, examples, spec) { const t = T.byId[id]; t.help = help; examples.forEach(e => t.examples.push(e)); const old = t.generate, g2 = T.genLaw(id, spec); t.generate = (r, g) => (r.f() < 0.5 ? old(r, g) : g2(r)); }
+extend('mech', 'Ghi các đại lượng đã cho (có đơn vị), cách nhau dấu chấm phẩy, và đại lượng cần tìm bằng dấu ?. Ký hiệu: v, s, t; D, m, V; P, m; p, F, S; p, d, h; FA, d, V; máy nén thủy lực F1, S1, F2, S2; vật nổi Vc, V, Dv, Dl; biến đổi đều v, v0, a, t và s, v0, a, t. Ví dụ: s=120km; t=2h; v=?',
+ ['F1=50N; S1=4cm2; S2=200cm2; F2=?', 'Vc=300cm3; V=500cm3; Dl=1000kg/m3; Dv=?', 'v0=0m/s; a=2m/s2; t=5s; v=?', 'v0=10m/s; a=0,5m/s2; t=20s; s=?', 'v=20m/s; v0=0m/s; s=100m; a=?'],
+ [{ id: 'hydro', ask: ['F2', 'S2'], pick: { F1: [['50', 'N'], ['100', 'N']], S1: [['4', 'cm2'], ['2', 'cm2']], F2: [['2500', 'N'], ['5000', 'N']], S2: [['200', 'cm2'], ['100', 'cm2']] } },
+  { id: 'float', ask: ['Vc', 'Dv'], pick: { V: [['500', 'cm3'], ['2', 'dm3']], Vc: [['300', 'cm3'], ['1', 'dm3']], Dv: [['800', 'kg/m3'], ['600', 'kg/m3']], Dl: [['1000', 'kg/m3']] } },
+  { id: 'accv', ask: ['v', 'a'], pick: { v: [['20', 'm/s'], ['30', 'm/s']], v0: [['0', 'm/s'], ['5', 'm/s'], ['10', 'm/s']], a: [['2', 'm/s2'], ['1,5', 'm/s2']], t: [['5', 's'], ['10', 's']] } },
+  { id: 'accs', ask: ['s'], pick: { v0: [['0', 'm/s'], ['10', 'm/s']], a: [['2', 'm/s2'], ['0,5', 'm/s2']], t: [['5', 's'], ['10', 's'], ['20', 's']] } },
+  { id: 'accvs', ask: ['a'], pick: { v: [['20', 'm/s'], ['10', 'm/s']], v0: [['0', 'm/s'], ['6', 'm/s']], s: [['100', 'm'], ['50', 'm']] } }]);
+extend('energy', 'Ký hiệu: A, F, s; P, A, t; P, F, v; H, Aci, Atp; Wd, m, v; Wt, m, h; F1, l1, F2, l2; mặt phẳng nghiêng F, l, P, h; ròng rọc F, P, n (n là số đoạn dây đỡ vật). Ví dụ: F=50N; s=4m; A=?',
+ ['F=120N; P=600N; h=1m; l=?', 'P=500N; n=2; F=?', 'F=250N; l=4m; h=1,5m; P=?'],
+ [{ id: 'incline', ask: ['F', 'l'], pick: { P: [['600', 'N'], ['1000', 'N']], h: [['1', 'm'], ['2', 'm']], l: [['5', 'm'], ['4', 'm']], F: [['120', 'N'], ['250', 'N']] } },
+  { id: 'pulley', ask: ['F', 'P'], pick: { P: [['500', 'N'], ['800', 'N']], F: [['250', 'N'], ['200', 'N']], n: [['2', ''], ['4', '']] } }]);
+extend('heat', 'Ký hiệu: Q, m, c, dt (Δt); Q, m, q (nhiên liệu); nóng chảy Q, lam (λ), m; hóa hơi Q, L, m; hiệu suất đun H, m, c, dt, Q. Ví dụ: m=2kg; c=4200J/kg.K; dt=30C; Q=?',
+ ['Q=680kJ; lam=3,4e5J/kg; m=?', 'm=0,5kg; L=2,3e6J/kg; Q=?', 'm=2kg; c=4200J/kg.K; dt=50C; Q=600kJ; H=?'],
+ [{ id: 'melt', ask: ['Q', 'm'], pick: { Q: [['680', 'kJ'], ['340', 'kJ']], lam: [['3,4e5', 'J/kg']], m: [['2', 'kg'], ['0,5', 'kg'], ['1', 'kg']] } },
+  { id: 'vap', ask: ['Q'], pick: { m: [['0,5', 'kg'], ['2', 'kg'], ['200', 'g']], L: [['2,3e6', 'J/kg']] } },
+  { id: 'heatloss', ask: ['H', 'Q'], pick: { H: [['70', '%'], ['80', '%'], ['60', '%']], m: [['2', 'kg'], ['1', 'kg']], c: [['4200', 'J/kg.K']], dt: [['50', 'C'], ['80', 'C']], Q: [['600', 'kJ'], ['1000', 'kJ']] } }]);
+extend('elec', 'Ký hiệu: I, U, R; P, U, I; P, I, R; P, U, R; R, rho, l, S; Q, I, R, t; đèn Pd, Ud, P, U; tiền điện Tien, A, gia; máy biến áp U1, U2, n1, n2; hao phí Php, P, R, U. Ví dụ: U=12V; R=40ohm; I=?',
+ ['Pd=100W; Ud=220V; U=110V; P=?', 'A=100kWh; gia=2000dong/kWh; Tien=?', 'U1=220V; n1=1100; n2=60; U2=?', 'P=1MW; R=10ohm; U=100kV; Php=?'.replace('1MW', '1000kW')],
+ [{ id: 'bulb', ask: ['P'], pick: { Pd: [['100', 'W'], ['75', 'W'], ['40', 'W']], Ud: [['220', 'V']], U: [['110', 'V'], ['200', 'V'], ['180', 'V']] } },
+  { id: 'cost', ask: ['Tien'], pick: { A: [['100', 'kWh'], ['150', 'kWh'], ['75', 'kWh']], gia: [['2000', 'dong/kWh'], ['1800', 'dong/kWh'], ['2500', 'dong/kWh']] } },
+  { id: 'trans', ask: ['U2', 'n2'], pick: { U1: [['220', 'V']], n1: [['1100', ''], ['2200', '']], n2: [['60', ''], ['110', ''], ['220', '']], U2: [['12', 'V'], ['24', 'V'], ['110', 'V']] } },
+  { id: 'loss', ask: ['Php'], pick: { P: [['1000', 'kW'], ['500', 'kW']], R: [['10', 'ohm'], ['20', 'ohm']], U: [['100', 'kV'], ['50', 'kV'], ['25', 'kV']] } }]);
+extend('optic', 'Ký hiệu: v, lam (λ), f; T, f; f, d, dp (d′); h, hp (h′), d, dp; phản xạ i, ip (i′); góc giữa tia tới và tia phản xạ alpha, i; gương phẳng d, dp. Góc ghi kèm ° (ví dụ 30°). Ví dụ: v=340m/s; f=170Hz; lam=?',
+ ['i=30°; ip=?', 'i=35°; alpha=?', 'd=40cm; dp=?'],
+ [{ id: 'reflect', ask: ['ip', 'i'], pick: { i: [['30', '°'], ['45', '°'], ['60', '°']], ip: [['30', '°'], ['45', '°'], ['60', '°']] } },
+  { id: 'refl2', ask: ['alpha', 'i'], pick: { i: [['30', '°'], ['40', '°'], ['25', '°']], alpha: [['60', '°'], ['80', '°'], ['90', '°']] } },
+  { id: 'mirror', ask: ['dp', 'd'], pick: { d: [['40', 'cm'], ['1,5', 'm']], dp: [['40', 'cm'], ['1,5', 'm']] } }]);
+
+/* ===== 5. Mạch hỗn hợp ===== */
+function parseMixed(input) {
+  const parts = String(input).split(/;|\n/).map(s => s.trim()).filter(Boolean); let mode = null, unk = null; const raw = {};
+  for (const p of parts) { const f = fold(p).replace(/\s+/g, '').replace(/\/\//g, 'songsong').replace(/\+/g, 'noitiep').replace(/[()]/g, '').replace(/^mach=/, ''); if (/^r1noitieper2songsongr3$|^r1noitiep\(?r2songsongr3\)?$/.test(f) || f === 'r1noitieper2songsongr3') { mode = 'A'; continue; } if (f === 'r1noitiepr2songsongr3') { mode = 'A'; continue; } if (f === 'r1songsongr2noitiepr3') { mode = 'B'; continue; }
+    const mm = /^([^=]+?)\s*=\s*(.+)$/.exec(p); if (!mm) throw new MathError('«' + p + '» chưa đúng dạng. Ghi kiểu mạch: «R1 nối tiếp (R2 song song R3)» hoặc «R1 song song (R2 nối tiếp R3)»'); let k = mm[1].replace(/\s+/g, '').replace(/_/g, ''); k = k.replace(/^rtd$/i, 'Rtd').replace(/^r23$/i, 'R23'); if (/^[uip]\d?$/i.test(k)) k = k[0].toUpperCase() + k.slice(1); if (/^\?+$/.test(mm[2].trim())) { if (unk) throw new MathError('Chỉ nên có một đại lượng cần tìm'); unk = k; } else raw[k] = mm[2].trim(); }
+  if (!mode) throw new MathError('Ghi kiểu mạch: «R1 nối tiếp (R2 song song R3)» hoặc «R1 song song (R2 nối tiếp R3)»'); if (!unk) throw new MathError('Đánh dấu đại lượng cần tìm bằng dấu ?');
+  const g = {}; ['R1', 'R2', 'R3'].forEach(k => { if (!raw[k]) throw new MathError('Thiếu ' + k); g[k] = parseVal(raw[k], 'R'); if (g[k].q.sign() <= 0) throw new MathError('Điện trở phải lớn hơn 0'); }); if (raw.U) g.U = parseVal(raw.U, 'U'); if (raw.I) g.I = parseVal(raw.I, 'I');
+  const ok = ['Rtd', 'R23', 'I', 'U', 'P', 'U1', 'U2', 'U3', 'I1', 'I2', 'I3', 'P1', 'P2', 'P3']; if (!ok.includes(unk)) throw new MathError('Chưa hỗ trợ tìm «' + unk + '»'); if (!['Rtd', 'R23'].includes(unk) && !g.U && !g.I) throw new MathError('Cần cho U hoặc I của cả mạch'); return { mode, g, unk, input };
+}
+function mixedSolve(m) {
+  const { mode, g, unk } = m; const steps = []; const [R1, R2, R3] = ['R1', 'R2', 'R3'].map(k => g[k].q); const mt = x => x.replace(/^([UIPR])(\d+)$/, '$1_{$2}').replace('Rtd', 'R_{td}');
+  const gt = ['R1', 'R2', 'R3'].map(k => tl('R_' + k[1], g[k].raw, 'Ω')); if (g.U) gt.push(tl('U', g.U.raw, g.U.unit || 'V')); if (g.I) gt.push(tl('I', g.I.raw, g.I.unit || 'A'));
+  steps.push({ say: 'Đọc đề: ' + (mode === 'A' ? 'R1 nối tiếp với cụm (R2 song song R3)' : 'R1 song song với cụm (R2 nối tiếp R3)') + '. Cần tìm ' + unk, lines: [gt.join(',\\ ') + ',\\ \\ ' + mt(unk) + '=\\ ?'] });
+  const V = {}; const fin = () => { const f = fmtQ(V[unk]); return f; }; const push = (say, lines) => steps.push({ say, lines });
+  let R23, Rtd;
+  if (mode === 'A') { R23 = R2.mul(R3).div(R2.add(R3)); push('Trước hết gộp cụm song song R2 // R3', ['R_{23}=\\frac{R_2\\cdot R_3}{R_2+R_3}=\\frac{' + fs(R2) + '\\cdot' + fs(R3) + '}{' + fs(R2.add(R3)) + '}=' + (fmtQ(R23).approx ? '\\approx ' : '') + fs(R23) + '\\ \\Omega']); Rtd = R1.add(R23); push('Cụm đó nối tiếp với R1', ['R_{td}=R_1+R_{23}=' + fs(R1) + '+' + fs(R23) + '=' + (fmtQ(Rtd).approx ? '\\approx ' : '') + fs(Rtd) + '\\ \\Omega']); }
+  else { R23 = R2.add(R3); push('Trước hết gộp cụm nối tiếp R2 nt R3', ['R_{23}=R_2+R_3=' + fs(R2) + '+' + fs(R3) + '=' + fs(R23) + '\\ \\Omega']); Rtd = R1.mul(R23).div(R1.add(R23)); push('Cụm đó song song với R1', ['R_{td}=\\frac{R_1\\cdot R_{23}}{R_1+R_{23}}=\\frac{' + fs(R1) + '\\cdot' + fs(R23) + '}{' + fs(R1.add(R23)) + '}=' + (fmtQ(Rtd).approx ? '\\approx ' : '') + fs(Rtd) + '\\ \\Omega']); }
+  V.R23 = R23; V.Rtd = Rtd; let unit = 'Ω', dim = 'R';
+  if (!['Rtd', 'R23'].includes(unk)) {
+    let U = g.U ? g.U.q : null, I = g.I ? g.I.q : null; if (U === null) { U = I.mul(Rtd); push('Hiệu điện thế cả mạch (định luật Ôm)', ['U=I\\cdot R_{td}=' + fs(I) + '\\cdot' + fs(Rtd) + '=' + fs(U) + '\\ V']); } if (I === null) { I = U.div(Rtd); push('Cường độ dòng điện cả mạch (định luật Ôm)', ['I=\\frac{U}{R_{td}}=\\frac{' + fs(U) + '}{' + fs(Rtd) + '}=' + (fmtQ(I).approx ? '\\approx ' : '') + fs(I) + '\\ A']); }
+    V.U = U; V.I = I; let U1, I1, U2, U3, I2, I3;
+    if (mode === 'A') { I1 = I; U1 = I.mul(R1); U2 = U3 = U.sub(U1); I2 = U2.div(R2); I3 = U3.div(R3); push('Cụm nối tiếp với R1 nên dòng qua R1 bằng dòng cả mạch: I1 = I. Hiệu điện thế trên R1:', ['U_1=I\\cdot R_1=' + fs(I) + '\\cdot' + fs(R1) + '=' + fs(U1) + '\\ V']); push('Hiệu điện thế trên cụm song song bằng U trừ U1, và bằng U2, U3', ['U_2=U_3=U-U_1=' + fs(U) + '-' + fs(U1) + '=' + fs(U2) + '\\ V']); push('Dòng qua từng nhánh của cụm song song', ['I_2=\\frac{U_2}{R_2}=' + fs(I2) + '\\ A', 'I_3=\\frac{U_3}{R_3}=' + fs(I3) + '\\ A']); }
+    else { U1 = U; I1 = U.div(R1); I2 = I3 = U.div(R23); U2 = I2.mul(R2); U3 = I3.mul(R3); push('R1 song song với cả cụm nên hiệu điện thế hai đầu R1 bằng U', ['U_1=U=' + fs(U) + '\\ V', 'I_1=\\frac{U}{R_1}=' + fs(I1) + '\\ A']); push('Dòng qua cụm R2 nt R3 là dòng chung của R2 và R3', ['I_2=I_3=\\frac{U}{R_{23}}=' + fs(I2) + '\\ A']); push('Hiệu điện thế từng điện trở trong cụm nối tiếp', ['U_2=I_2\\cdot R_2=' + fs(U2) + '\\ V', 'U_3=I_3\\cdot R_3=' + fs(U3) + '\\ V']); }
+    Object.assign(V, { U1, I1, U2, U3, I2, I3, P: U.mul(I), P1: U1.mul(I1), P2: U2.mul(I2), P3: U3.mul(I3) });
+    if (unk[0] === 'U') { unit = 'V'; dim = 'U'; } else if (unk[0] === 'I') { unit = 'A'; dim = 'I'; } else { unit = 'W'; dim = 'Pw'; push('Công suất = hiệu điện thế nhân cường độ dòng điện', [mt(unk) + '=' + fs(V[unk]) + '\\ W']); }
+  }
+  push('Kiểm tra bằng cách cộng: ' + (mode === 'A' ? 'U = U1 + U2 và I1 = I2 + I3' : 'I = I1 + I2 và U2 + U3 = U'), []);
+  m._val = V[unk]; m._dim = dim; const f = fmtQ(V[unk]); return Object.assign({ problemTex: gt.join(',\\ ') + ',\\ \\ ' + mt(unk) + '=\\ ?', steps }, A(mt(unk) + '=' + (f.approx ? '\\approx ' : '') + f.s + '\\ \\text{' + unit + '}', unk + ' = ' + f.s + ' ' + unit.replace('Ω', 'ohm')));
+}
+reg({ id: 'circuit2', title: 'Mạch hỗn hợp (3 điện trở)', grades: [9], icon: 'R1+R2//R3', help: 'Ghi kiểu mạch «R1 nối tiếp (R2 song song R3)» hoặc «R1 song song (R2 nối tiếp R3)», các điện trở R1, R2, R3, U hoặc I của cả mạch, và đại lượng cần tìm (Rtd, R23, I, U, P, U1, U2, U3, I1, I2, I3, P1…) kèm dấu ?. Có thể viết tắt: R1+(R2//R3).',
+  examples: ['R1 nối tiếp (R2 song song R3); R1=10ohm; R2=30ohm; R3=60ohm; Rtd=?', 'R1+(R2//R3); R1=10ohm; R2=30ohm; R3=60ohm; U=60V; I=?', 'R1+(R2//R3); R1=10ohm; R2=30ohm; R3=60ohm; U=60V; I2=?', 'R1 song song (R2 nối tiếp R3); R1=30ohm; R2=10ohm; R3=20ohm; U=12V; I=?'], ph: 'Ví dụ: R1+(R2//R3); R1=10ohm; R2=30ohm; R3=60ohm; U=60V; I=?',
+  parse: parseMixed, solve: mixedSolve, check(m, text) { if (m._val === undefined) mixedSolve(m); return checkNumUnit(text, m._dim, m._val, []); },
+  generate(r) { const mode = r.pick(['R1+(R2//R3)', 'R1 song song (R2 nối tiếp R3)']); const R = () => r.pick([10, 20, 30, 40, 60, 12, 15, 6]); const ask = r.pick(['Rtd', 'I', 'U2', 'I3', 'P']); return mode + '; R1=' + R() + 'ohm; R2=' + R() + 'ohm; R3=' + R() + 'ohm' + (ask === 'Rtd' ? '' : '; U=' + r.pick([12, 24, 36, 60]) + 'V') + '; ' + ask + '=?'; } });
+
+/* ===== Bổ sung theo sách giáo khoa lớp 6–9 ===== */
+const { addU, SYMTEX, P10 } = T; const sqq = x => x.mul(x);
+addU('kspr', Q.from(1), 'n/m'); addU('kspr', Q.from(100), 'n/cm'); addU('Mo', Q.from(1), 'n.m nm'); addU('Mo', P10(-2), 'n.cm');
+Object.assign(T.BASE, { kspr: 'N/m', Mo: 'N.m' }); Object.assign(T.UNAME, { kspr: 'độ cứng lò xo', Mo: 'mô-men lực' });
+Object.assign(SYMTEX, { dl: '\\Delta l', dl1: '\\Delta l_1', dl2: '\\Delta l_2', l0: 'l_0', s1: 's_1', s2: 's_2', t1: 't_1', t2: 't_2', V1: 'V_1', V2: 'V_2', p0: 'p_0', Wd: 'W_d', Wt: 'W_t' });
+const law2 = (group, id, title, vars, eq, forms, opt) => { const l = Object.assign({ group, id, title, vars, eq, forms }, opt || {}); l.keys = Object.keys(vars); T.LAWS.push(l); };
+// Lớp 6
+law2('g6', 'spring', 'Lực đàn hồi của lò xo', { F: ['F', 'lực kéo (hoặc trọng lượng quả nặng)'], k: ['kspr', 'độ cứng của lò xo'], dl: ['L', 'độ giãn của lò xo'] }, 'F=k\\cdot\\Delta l', { F: ['F', '[k]\\cdot[dl]', x => x.k.mul(x.dl)], k: ['k', '\\frac{[F]}{[dl]}', x => x.F.div(x.dl)], dl: ['\\Delta l', '\\frac{[F]}{[k]}', x => x.F.div(x.k)] }, { note: 'Trong giới hạn đàn hồi, độ giãn tỉ lệ thuận với lực kéo. Quả nặng 100 g có trọng lượng 1 N.' });
+law2('g6', 'springl', 'Chiều dài lò xo khi bị kéo', { F: ['F', 'lực kéo'], k: ['kspr', 'độ cứng lò xo'], l: ['L', 'chiều dài lò xo lúc sau'], l0: ['L', 'chiều dài tự nhiên'] }, 'F=k\\cdot(l-l_0)', { F: ['F', '[k]\\cdot([l]-[l0])', x => x.k.mul(x.l.sub(x.l0))], k: ['k', '\\frac{[F]}{[l]-[l0]}', x => x.F.div(x.l.sub(x.l0))], l: ['l', '[l0]+\\frac{[F]}{[k]}', x => x.l0.add(x.F.div(x.k))], l0: ['l_0', '[l]-\\frac{[F]}{[k]}', x => x.l.sub(x.F.div(x.k))] }, { note: 'Chiều dài lúc sau bằng chiều dài tự nhiên cộng độ giãn.' });
+law2('g6', 'springratio', 'Độ giãn lò xo tỉ lệ với lực', { F1: ['F', 'lực lần 1'], dl1: ['L', 'độ giãn lần 1'], F2: ['F', 'lực lần 2'], dl2: ['L', 'độ giãn lần 2'] }, '\\frac{F_1}{\\Delta l_1}=\\frac{F_2}{\\Delta l_2}', { F1: ['F_1', '\\frac{[F2]\\cdot[dl1]}{[dl2]}', x => x.F2.mul(x.dl1).div(x.dl2)], F2: ['F_2', '\\frac{[F1]\\cdot[dl2]}{[dl1]}', x => x.F1.mul(x.dl2).div(x.dl1)], dl1: ['\\Delta l_1', '\\frac{[F1]\\cdot[dl2]}{[F2]}', x => x.F1.mul(x.dl2).div(x.F2)], dl2: ['\\Delta l_2', '\\frac{[F2]\\cdot[dl1]}{[F1]}', x => x.F2.mul(x.dl1).div(x.F1)] }, { note: 'Lực gấp đôi thì độ giãn gấp đôi (trong giới hạn đàn hồi).' });
+law2('g6', 'volume', 'Đo thể tích vật rắn bằng bình tràn hoặc bình chia độ', { V: ['V3', 'thể tích vật'], V1: ['V3', 'thể tích nước lúc đầu'], V2: ['V3', 'thể tích nước lúc sau (có vật)'] }, 'V=V_2-V_1', { V: ['V', '[V2]-[V1]', x => x.V2.sub(x.V1)], V1: ['V_1', '[V2]-[V]', x => x.V2.sub(x.V)], V2: ['V_2', '[V1]+[V]', x => x.V1.add(x.V)] }, { alt: g => ({ V: 'cm3' }), note: '1 ml = 1 cm³.' });
+law2('g6', 'weight6', 'Trọng lượng và khối lượng', { P: ['F', 'trọng lượng'], m: ['M', 'khối lượng'] }, 'P=10m', { P: ['P', '10\\cdot[m]', x => x.m.mul(10)], m: ['m', '\\frac{[P]}{10}', x => x.P.div(10)] }, { note: 'Khối lượng 1 kg thì nặng khoảng 10 N.' });
+// Lớp 7
+law2('g7', 'echo', 'Tiếng vang (phản xạ âm)', { s: ['L', 'khoảng cách tới vật phản xạ'], v: ['vel', 'tốc độ truyền âm'], t: ['T', 'thời gian từ lúc phát đến lúc nghe tiếng vang'] }, 's=\\frac{v\\cdot t}{2}', { s: ['s', '\\frac{[v]\\cdot[t]}{2}', x => x.v.mul(x.t).div(2)], t: ['t', '\\frac{2\\cdot[s]}{[v]}', x => x.s.mul(2).div(x.v)], v: ['v', '\\frac{2\\cdot[s]}{[t]}', x => x.s.mul(2).div(x.t)] }, { note: 'Âm đi tới vật rồi dội lại nên quãng đường âm đi bằng 2s. Âm trong không khí khoảng 340 m/s. Nghe được tiếng vang khi âm phản xạ cách âm gốc ít nhất khoảng 1/15 s.' });
+law2('g7', 'freq', 'Tần số dao động', { f: ['fq', 'tần số'], N: ['none', 'số dao động'], t: ['T', 'thời gian'] }, 'f=\\frac{N}{t}', { f: ['f', '\\frac{[N]}{[t]}', x => x.N.div(x.t)], N: ['N', '[f]\\cdot[t]', x => x.f.mul(x.t)], t: ['t', '\\frac{[N]}{[f]}', x => x.N.div(x.f)] }, { note: 'Tần số càng lớn thì âm càng cao (càng bổng).' });
+law2('g7', 'slope', 'Tốc độ từ đồ thị quãng đường – thời gian', { v: ['vel', 'tốc độ'], s1: ['L', 'quãng đường tại điểm 1'], t1: ['T', 'thời điểm 1'], s2: ['L', 'quãng đường tại điểm 2'], t2: ['T', 'thời điểm 2'] }, 'v=\\frac{s_2-s_1}{t_2-t_1}', { v: ['v', '\\frac{[s2]-[s1]}{[t2]-[t1]}', x => x.s2.sub(x.s1).div(x.t2.sub(x.t1))], s2: ['s_2', '[s1]+[v]\\cdot([t2]-[t1])', x => x.s1.add(x.v.mul(x.t2.sub(x.t1)))], t2: ['t_2', '[t1]+\\frac{[s2]-[s1]}{[v]}', x => x.t1.add(x.s2.sub(x.s1).div(x.v))], s1: ['s_1', '[s2]-[v]\\cdot([t2]-[t1])', x => x.s2.sub(x.v.mul(x.t2.sub(x.t1)))], t1: ['t_1', '[t2]-\\frac{[s2]-[s1]}{[v]}', x => x.t2.sub(x.s2.sub(x.s1).div(x.v))] }, { note: 'Đồ thị là đường thẳng thì chuyển động đều; đường dốc hơn là tốc độ lớn hơn. Đọc hai điểm trên đồ thị rồi lấy độ tăng quãng đường chia độ tăng thời gian.' });
+// Lớp 8
+law2('g8', 'moment', 'Mô-men lực', { M: ['Mo', 'mô-men lực'], F: ['F', 'lực'], d: ['L', 'cánh tay đòn (khoảng cách từ trục quay đến giá của lực)'] }, 'M=F\\cdot d', { M: ['M', '[F]\\cdot[d]', x => x.F.mul(x.d)], F: ['F', '\\frac{[M]}{[d]}', x => x.M.div(x.d)], d: ['d', '\\frac{[M]}{[F]}', x => x.M.div(x.F)] }, { note: 'Vật cân bằng khi tổng mô-men làm quay thuận chiều kim đồng hồ bằng tổng mô-men làm quay ngược chiều.' });
+law2('g8', 'liqtotal', 'Áp suất tại điểm trong chất lỏng (kể cả áp suất khí quyển)', { p: ['pr', 'áp suất tại điểm đó'], p0: ['pr', 'áp suất khí quyển'], d: ['dw', 'trọng lượng riêng chất lỏng'], h: ['L', 'độ sâu'] }, 'p=p_0+d\\cdot h', { p: ['p', '[p0]+[d]\\cdot[h]', x => x.p0.add(x.d.mul(x.h))], h: ['h', '\\frac{[p]-[p0]}{[d]}', x => x.p.sub(x.p0).div(x.d)], d: ['d', '\\frac{[p]-[p0]}{[h]}', x => x.p.sub(x.p0).div(x.h)], p0: ['p_0', '[p]-[d]\\cdot[h]', x => x.p.sub(x.d.mul(x.h))] }, { note: 'Áp suất khí quyển ở mực nước biển khoảng 101 300 Pa. Càng xuống sâu áp suất càng lớn.' });
+// Lớp 9
+law2('g9', 'cn', 'Cơ năng', { W: ['E', 'cơ năng'], Wd: ['E', 'động năng'], Wt: ['E', 'thế năng'] }, 'W=W_d+W_t', { W: ['W', '[Wd]+[Wt]', x => x.Wd.add(x.Wt)], Wd: ['W_d', '[W]-[Wt]', x => x.W.sub(x.Wt)], Wt: ['W_t', '[W]-[Wd]', x => x.W.sub(x.Wd)] }, { note: 'Khi chỉ có trọng lực tác dụng thì cơ năng được bảo toàn: động năng tăng bao nhiêu thì thế năng giảm bấy nhiêu.' });
+law2('g9', 'elecenergy', 'Năng lượng (điện năng) của dòng điện', { A: ['E', 'điện năng tiêu thụ'], U: ['U', 'hiệu điện thế'], I: ['I', 'cường độ dòng điện'], t: ['T', 'thời gian'] }, 'A=U\\cdot I\\cdot t', { A: ['A', '[U]\\cdot[I]\\cdot[t]', x => x.U.mul(x.I).mul(x.t)], t: ['t', '\\frac{[A]}{[U]\\cdot[I]}', x => x.A.div(x.U.mul(x.I))], I: ['I', '\\frac{[A]}{[U]\\cdot[t]}', x => x.A.div(x.U.mul(x.t))], U: ['U', '\\frac{[A]}{[I]\\cdot[t]}', x => x.A.div(x.I.mul(x.t))] }, { alt: g => ({ A: 'kj' }), note: 'Thời gian đổi ra giây thì A tính bằng jun. Công suất P = A/t = U·I.' });
+law2('g9', 'refidx', 'Chiết suất của môi trường', { n: ['none', 'chiết suất'], v: ['vel', 'tốc độ ánh sáng trong môi trường'] }, 'n=\\frac{c}{v}', { n: ['n', '\\frac{300000000}{[v]}', x => Q.from(300000000).div(x.v)], v: ['v', '\\frac{300000000}{[n]}', x => Q.from(300000000).div(x.n)] }, { note: 'c = 3·10⁸ m/s là tốc độ ánh sáng trong chân không. Chiết suất luôn lớn hơn hoặc bằng 1.' });
+law2('g9', 'magn', 'Kính lúp: số bội giác', { G: ['none', 'số bội giác'], f: ['L', 'tiêu cự của kính lúp'] }, 'G=\\frac{25}{f}\\quad(f\\ \\text{tính bằng cm})', { G: ['G', '\\frac{0{,}25}{[f]}', x => Q.parse('0.25').div(x.f)], f: ['f', '\\frac{0{,}25}{[G]}', x => Q.parse('0.25').div(x.G)] }, { note: 'Khoảng nhìn rõ ngắn nhất của mắt thường là 25 cm. Tiêu cự càng nhỏ thì số bội giác càng lớn.' });
+const G = T.groupType, pkR = T.genLaw;
+G('g6', 'g6', 'Lớp 6: lò xo, thể tích, trọng lượng', [6], 'F=kΔl', 'Ký hiệu: lò xo F, k, dl (Δl); F, k, l, l0; F1, dl1, F2, dl2; thể tích V, V1, V2; trọng lượng P, m. Ví dụ: F=2N; k=50N/m; dl=?',
+ ['F=2N; k=50N/m; dl=?', 'F=3N; k=100N/m; l0=10cm; l=?', 'F1=1N; dl1=2cm; F2=3N; dl2=?', 'V1=50ml; V2=72ml; V=?', 'm=450g; P=?'],
+ pkR('g6', [{ id: 'spring', ask: ['F', 'dl', 'k'], pick: { F: [['2', 'N'], ['5', 'N'], ['0,5', 'N']], k: [['50', 'N/m'], ['100', 'N/m'], ['20', 'N/m']], dl: [['4', 'cm'], ['2', 'cm'], ['10', 'cm']] } },
+  { id: 'springl', ask: ['l', 'F'], pick: { F: [['3', 'N'], ['1', 'N'], ['4', 'N']], k: [['100', 'N/m'], ['50', 'N/m']], l: [['13', 'cm'], ['12', 'cm'], ['18', 'cm']], l0: [['10', 'cm'], ['8', 'cm']] } },
+  { id: 'springratio', ask: ['dl2', 'F2'], pick: { F1: [['1', 'N'], ['2', 'N']], dl1: [['2', 'cm'], ['3', 'cm']], F2: [['3', 'N'], ['4', 'N'], ['5', 'N']], dl2: [['6', 'cm'], ['8', 'cm'], ['4', 'cm']] } },
+  { id: 'volume', ask: ['V', 'V2'], pick: { V: [['20', 'cm3'], ['35', 'cm3']], V1: [['50', 'ml'], ['100', 'ml'], ['80', 'ml']], V2: [['72', 'ml'], ['135', 'ml'], ['120', 'ml']] } },
+  { id: 'weight6', ask: ['P', 'm'], pick: { P: [['50', 'N'], ['250', 'N']], m: [['3', 'kg'], ['450', 'g'], ['60', 'kg']] } }]));
+G('g7', 'g7', 'Lớp 7: âm thanh, đồ thị quãng đường – thời gian', [7], 'f=N/t', 'Ký hiệu: tiếng vang s, v, t; tần số f, N, t (N là số dao động); đồ thị v, s1, t1, s2, t2. Ví dụ: v=340m/s; t=2s; s=?',
+ ['v=340m/s; t=2s; s=?', 'N=600; t=10s; f=?', 'f=50Hz; t=2ph; N=?', 's1=10m; t1=2s; s2=40m; t2=8s; v=?'],
+ pkR('g7', [{ id: 'echo', ask: ['s', 't'], pick: { v: [['340', 'm/s']], t: [['2', 's'], ['0,5', 's'], ['3', 's']], s: [['340', 'm'], ['85', 'm'], ['510', 'm']] } },
+  { id: 'freq', ask: ['f', 'N'], pick: { N: [['600', ''], ['120', ''], ['3000', '']], t: [['10', 's'], ['1', 'ph'], ['5', 's']], f: [['60', 'Hz'], ['2', 'Hz']] } },
+  { id: 'slope', ask: ['v', 's2'], pick: { v: [['5', 'm/s'], ['2', 'm/s'], ['10', 'm/s']], s1: [['10', 'm'], ['0', 'm'], ['20', 'm']], t1: [['2', 's'], ['0', 's'], ['4', 's']], s2: [['40', 'm'], ['100', 'm'], ['60', 'm']], t2: [['8', 's'], ['10', 's'], ['12', 's']] } }]));
+G('g8', 'g8', 'Lớp 8: mô-men lực, áp suất dưới nước', [8], 'M=Fd', 'Ký hiệu: mô-men M, F, d; áp suất tại điểm trong chất lỏng p, p0, d, h. Ví dụ: F=20N; d=30cm; M=?',
+ ['F=20N; d=30cm; M=?', 'M=12N.m; F=40N; d=?', 'p0=101300Pa; d=10000N/m3; h=5m; p=?'],
+ pkR('g8', [{ id: 'moment', ask: ['M', 'F', 'd'], pick: { M: [['6', 'N.m'], ['12', 'N.m']], F: [['20', 'N'], ['40', 'N'], ['60', 'N']], d: [['30', 'cm'], ['0,5', 'm'], ['20', 'cm']] } },
+  { id: 'liqtotal', ask: ['p', 'h'], pick: { p: [['151300', 'Pa'], ['201300', 'Pa']], p0: [['101300', 'Pa']], d: [['10000', 'N/m3']], h: [['5', 'm'], ['10', 'm'], ['3', 'm']] } }]));
+G('g9', 'g9', 'Lớp 9: cơ năng, điện năng, chiết suất, kính lúp', [9], 'W=Wd+Wt', 'Ký hiệu: cơ năng W, Wd, Wt; điện năng A, U, I, t; chiết suất n, v; kính lúp G, f. Ví dụ: Wd=30J; Wt=50J; W=?',
+ ['Wd=30J; Wt=50J; W=?', 'U=220V; I=0,5A; t=2h; A=?', 'v=200000km/s; n=?', 'f=5cm; G=?'],
+ pkR('g9', [{ id: 'cn', ask: ['W', 'Wd', 'Wt'], pick: { W: [['100', 'J'], ['80', 'J']], Wd: [['30', 'J'], ['45', 'J']], Wt: [['50', 'J'], ['35', 'J']] } },
+  { id: 'elecenergy', ask: ['A', 't'], pick: { A: [['792', 'kJ'], ['66', 'kJ']], U: [['220', 'V'], ['12', 'V']], I: [['0,5', 'A'], ['2', 'A']], t: [['2', 'h'], ['10', 'ph'], ['30', 'ph']] } },
+  { id: 'refidx', ask: ['n', 'v'], pick: { n: [['1,5', ''], ['1,33', ''], ['2', '']], v: [['200000', 'km/s'], ['225000', 'km/s'], ['150000', 'km/s']] } },
+  { id: 'magn', ask: ['G', 'f'], pick: { G: [['5', ''], ['10', '']], f: [['5', 'cm'], ['2,5', 'cm'], ['10', 'cm']] } }]));
+// units km/s
+addU('vel', Q.from(1000), 'km/s');
+
+/* ===== Khúc xạ ánh sáng ===== */
+const rad = d => d * Math.PI / 180, deg = r => r * 180 / Math.PI, r4 = x => (Math.round(x * 10000) / 10000).toString().replace('.', ',');
+function parseRefract(input) {
+  const parts = String(input).split(/;|\n/).map(s => s.trim()).filter(Boolean); const raw = {}; let unk = null;
+  for (const p of parts) { const mm = /^([^=]+?)\s*=\s*(.+)$/.exec(p); if (!mm) throw new MathError('«' + p + '» chưa có dấu ='); let k = mm[1].replace(/\s+/g, '').replace(/_/g, ''); k = k.replace(/^ic$/i, 'ic').replace(/^igh$/i, 'ic'); if (!['n1', 'n2', 'i', 'r', 'ic'].includes(k)) throw new MathError('Không hiểu «' + k + '». Dùng n1, n2, i, r hoặc ic'); if (/^\?+$/.test(mm[2].trim())) { if (unk) throw new MathError('Chỉ nên có một đại lượng cần tìm'); unk = k; } else raw[k] = mm[2].trim(); }
+  if (!unk) throw new MathError('Đánh dấu đại lượng cần tìm bằng ?'); const g = {}; Object.keys(raw).forEach(k => { g[k] = parseVal(raw[k], k === 'n1' || k === 'n2' ? 'none' : 'ang'); });
+  const need = { r: ['n1', 'n2', 'i'], ic: ['n1', 'n2'], n2: ['n1', 'i', 'r'], i: ['n1', 'n2', 'r'] }[unk]; if (!need) throw new MathError('Chỉ hỗ trợ tìm r, ic, n2 hoặc i'); need.forEach(k => { if (!g[k]) throw new MathError('Thiếu ' + k + ' để tìm ' + unk); });
+  ['n1', 'n2'].forEach(k => { if (g[k] && g[k].q.num() < 1) throw new MathError('Chiết suất phải lớn hơn hoặc bằng 1'); }); return { g, unk, input };
+}
+function refractSolve(m) {
+  const { g, unk } = m; const steps = []; const v = {}; Object.keys(g).forEach(k => { v[k] = g[k].q.num(); }); const f1 = x => r4(x);
+  steps.push({ say: 'Đọc đề và nhớ định luật khúc xạ ánh sáng: tia sáng đi từ môi trường 1 sang môi trường 2', lines: ['n_1\\sin i=n_2\\sin r'] });
+  let val, txt, tir = false;
+  if (unk === 'r') { const s = v.n1 * Math.sin(rad(v.i)) / v.n2; steps.push({ say: 'Tính sin của góc khúc xạ', lines: ['\\sin r=\\frac{n_1\\sin i}{n_2}=\\frac{' + f1(v.n1) + '\\cdot\\sin ' + f1(v.i) + '^\\circ}{' + f1(v.n2) + '}=' + f1(s)] });
+    if (s > 1 + 1e-12) { tir = true; steps.push({ say: 'sin r lớn hơn 1 nên không có góc khúc xạ: xảy ra phản xạ toàn phần', lines: [] }); } else { val = deg(Math.asin(Math.min(1, s))); steps.push({ say: 'Dùng máy tính (shift sin) tìm góc r', lines: ['r=\\arcsin(' + f1(s) + ')\\approx ' + val.toFixed(1).replace('.', ',') + '^\\circ'] }); steps.push({ say: v.n2 > v.n1 ? 'Kiểm tra: ánh sáng đi vào môi trường chiết quang hơn nên tia khúc xạ lại gần pháp tuyến, r < i' : 'Kiểm tra: ánh sáng đi vào môi trường chiết quang kém hơn nên tia khúc xạ ra xa pháp tuyến, r > i', lines: [] }); } }
+  else if (unk === 'ic') { if (v.n1 <= v.n2) { tir = true; steps.push({ say: 'Chỉ có góc giới hạn khi ánh sáng đi từ môi trường chiết quang hơn sang môi trường chiết quang kém hơn (n1 > n2). Đề này không có', lines: [] }); } else { const s = v.n2 / v.n1; val = deg(Math.asin(s)); steps.push({ say: 'Khi góc khúc xạ bằng 90° thì góc tới là góc giới hạn', lines: ['\\sin i_{gh}=\\frac{n_2}{n_1}=\\frac{' + f1(v.n2) + '}{' + f1(v.n1) + '}=' + f1(s), 'i_{gh}\\approx ' + val.toFixed(1).replace('.', ',') + '^\\circ'] }); steps.push({ say: 'Nếu góc tới lớn hơn góc giới hạn thì xảy ra phản xạ toàn phần', lines: [] }); } }
+  else if (unk === 'n2') { val = v.n1 * Math.sin(rad(v.i)) / Math.sin(rad(v.r)); steps.push({ say: 'Rút n2 từ định luật khúc xạ', lines: ['n_2=\\frac{n_1\\sin i}{\\sin r}=\\frac{' + f1(v.n1) + '\\cdot\\sin ' + f1(v.i) + '^\\circ}{\\sin ' + f1(v.r) + '^\\circ}\\approx ' + val.toFixed(2).replace('.', ',')] }); }
+  else { const s = v.n2 * Math.sin(rad(v.r)) / v.n1; if (s > 1) throw new MathError('Số liệu không hợp lí (sin i lớn hơn 1)'); val = deg(Math.asin(s)); steps.push({ say: 'Rút sin i từ định luật khúc xạ', lines: ['\\sin i=\\frac{n_2\\sin r}{n_1}=' + f1(s), 'i\\approx ' + val.toFixed(1).replace('.', ',') + '^\\circ'] }); }
+  m._val = val; m._tir = tir; const vs = val === undefined ? '' : (unk === 'n2' ? val.toFixed(2) : val.toFixed(1)).replace('.', ',');
+  const sym = { r: 'r', ic: 'i_{gh}', n2: 'n_2', i: 'i' }[unk];
+  return { problemTex: Object.keys(g).map(k => k.replace(/(\d)/, '_$1') + '=' + fs(g[k].raw) + (g[k].dim === 'ang' || ['i', 'r'].includes(k) ? '^\\circ' : '')).join(',\\ ') + ',\\ \\ ' + sym + '=\\ ?', steps, answerTex: tir ? '\\text{Phản xạ toàn phần (không có tia khúc xạ)}' : sym + '\\approx ' + vs + (unk === 'n2' ? '' : '^\\circ'), answerLine: tir ? 'phản xạ toàn phần' : unk + ' = ' + vs + (unk === 'n2' ? '' : ' °') };
+}
+reg({ id: 'refract', title: 'Khúc xạ ánh sáng, góc giới hạn', grades: [9], icon: 'sin i', help: 'Ghi chiết suất n1, n2 và góc ở dạng 30° (kèm dấu °). Tìm r (góc khúc xạ), ic (góc giới hạn phản xạ toàn phần), n2 hoặc i. Kết quả là số gần đúng nên con làm tròn đến 0,1° là được.',
+  examples: ['n1=1; n2=1,5; i=30°; r=?', 'n1=1,5; n2=1; ic=?', 'n1=1,5; n2=1; i=60°; r=?', 'n1=1; i=45°; r=30°; n2=?'.replace('n1=1; i=45°; r=30°; n2', 'n1=1; i=45°; r=28°; n2')], ph: 'Ví dụ: n1=1; n2=1,5; i=30°; r=?',
+  parse: parseRefract, solve: refractSolve, check(m, text) { if (m._val === undefined && m._tir === undefined) refractSolve(m); const t = fold(text); if (m._tir) return /toan phan|khong co|khong khuc/.test(t) ? res.ok('Đúng rồi!', [{ say: 'Có phản xạ toàn phần, không có tia khúc xạ.' }]) : res.wrong('Chưa đúng', [{ say: 'Hãy tính sin r: nếu lớn hơn 1 thì xảy ra phản xạ toàn phần.' }]); let v; try { v = parseVal(String(text).replace(/^[^=]*=/, ''), m.unk === 'n2' ? 'none' : 'ang'); } catch (e) { return res.unread('Chưa đọc được đáp án', [{ say: friendly(e) }]); } const d = v.raw.num() - m._val; const dec = v.dec; const tol = 0.5 * Math.pow(10, -dec) + 0.02; if (Math.abs(d) <= tol) return res.ok('Đúng rồi!', [{ say: 'Kết quả chính xác khoảng ' + (m.unk === 'n2' ? m._val.toFixed(2) : m._val.toFixed(1)).replace('.', ',') + (m.unk === 'n2' ? '' : '°') + '.' }]); return res.wrong('Chưa đúng', [{ say: 'Kiểm tra lại: máy tính phải đặt chế độ độ (DEG), và dùng đúng n1, n2 theo chiều đi của tia sáng.' }]); },
+  generate(r) { const k = r.pick(['r', 'ic', 'r', 'n2']); if (k === 'ic') return 'n1=' + r.pick(['1,5', '1,33', '2']) + '; n2=1; ic=?'; if (k === 'n2') return 'n1=1; i=' + r.pick([30, 45, 60]) + '°; r=' + r.pick([20, 25, 35]) + '°; n2=?'; return 'n1=1; n2=' + r.pick(['1,5', '1,33', '1,6']) + '; i=' + r.pick([30, 40, 45, 60]) + '°; r=?'; } });
+
+/* ===== Đo nhiều lần, giá trị trung bình ===== */
+function parseMeasure(input) {
+  const parts = String(input).split(/;|\n/).map(s => s.trim()).filter(Boolean); const vals = []; let unk = null;
+  for (const p of parts) { const mm = /^([^=]+?)\s*=\s*(.+)$/.exec(p); if (!mm) throw new MathError('«' + p + '» chưa có dấu ='); const k = mm[1].replace(/\s+/g, ''); if (/^\?+$/.test(mm[2].trim())) { if (unk) throw new MathError('Chỉ nên có một đại lượng cần tìm'); unk = fold(k); continue; } vals.push({ k, v: parseVal(mm[2].trim()) }); }
+  if (vals.length < 2) throw new MathError('Cần ít nhất hai lần đo, ví dụ l1=20,1cm; l2=20,3cm'); if (!['tb', 'dtb', 'sai so'.replace(' ', '')].includes(unk)) throw new MathError('Ghi tb=? (giá trị trung bình) hoặc dtb=? (sai số tuyệt đối trung bình)'); const dim = vals[0].v.uk ? vals[0].v.uk.dim : 'none'; vals.forEach(x => { const d = x.v.uk ? x.v.uk.dim : 'none'; if (d !== dim) throw new MathError('Các lần đo phải cùng loại đơn vị'); }); return { vals, unk, dim, input };
+}
+function measureSolve(m) {
+  const { vals, unk } = m; const n = vals.length; const unit = vals[0].v.unit || ''; const f = vals[0].v.uk ? vals[0].v.uk.f : Q.from(1); const xs = vals.map(x => x.v.q.div(f)); const sum = xs.reduce((a, b) => a.add(b)); const mean = sum.div(Q.from(n)); const steps = [];
+  steps.push({ say: 'Đọc đề: ' + n + ' lần đo cùng một đại lượng. Giá trị trung bình = tổng các lần đo chia số lần đo', lines: ['\\bar{x}=\\frac{x_1+x_2+\\dots+x_n}{n}'] });
+  steps.push({ say: 'Tính giá trị trung bình', lines: ['\\bar{x}=\\frac{' + xs.map(fs).join('+') + '}{' + n + '}=\\frac{' + fs(sum) + '}{' + n + '}=' + (fmtQ(mean).approx ? '\\approx ' : '') + fs(mean) + (unit ? '\\ \\text{' + unit + '}' : '')] });
+  let val = mean; if (unk === 'dtb') { const dev = xs.map(x => { const d = x.sub(mean); return d.sign() < 0 ? d.neg() : d; }); const ds = dev.reduce((a, b) => a.add(b)); val = ds.div(Q.from(n)); steps.push({ say: 'Tính sai số tuyệt đối của từng lần đo: lấy |x − giá trị trung bình|', lines: dev.map((d, i) => '\\Delta x_' + (i + 1) + '=|' + fs(xs[i]) + '-' + fs(mean) + '|=' + fs(d)) }); steps.push({ say: 'Sai số tuyệt đối trung bình là trung bình cộng các sai số đó', lines: ['\\overline{\\Delta x}=\\frac{' + dev.map(fs).join('+') + '}{' + n + '}=' + (fmtQ(val).approx ? '\\approx ' : '') + fs(val) + (unit ? '\\ \\text{' + unit + '}' : '')] }); steps.push({ say: 'Kết quả đo viết dạng x = giá trị trung bình ± sai số trung bình', lines: ['x=' + fs(mean) + '\\pm' + fs(val) + (unit ? '\\ \\text{' + unit + '}' : '')] }); }
+  m._val = val.mul(f); const ff = fmtQ(val); return { problemTex: vals.map(x => x.k + '=' + fs(x.v.raw) + (unit ? '\\ \\text{' + unit + '}' : '')).join(',\\ ') + ',\\ \\ ' + (unk === 'tb' ? '\\bar{x}' : '\\overline{\\Delta x}') + '=\\ ?', steps, answerTex: (unk === 'tb' ? '\\bar{x}' : '\\overline{\\Delta x}') + '=' + (ff.approx ? '\\approx ' : '') + ff.s + (unit ? '\\ \\text{' + unit + '}' : ''), answerLine: unk + ' = ' + ff.s + (unit ? ' ' + unit : '') };
+}
+reg({ id: 'measure', title: 'Đo nhiều lần: trung bình, sai số', grades: [6], icon: 'x̄', help: 'Ghi các lần đo l1, l2, l3… (cùng đơn vị) và tb=? (giá trị trung bình) hoặc dtb=? (sai số tuyệt đối trung bình).',
+  examples: ['l1=20,1cm; l2=20,3cm; l3=20,2cm; tb=?', 't1=2,1s; t2=2,0s; t3=2,2s; t4=2,1s; tb=?', 'l1=20,1cm; l2=20,3cm; l3=20,2cm; dtb=?'], ph: 'Ví dụ: l1=20,1cm; l2=20,3cm; l3=20,2cm; tb=?',
+  parse: parseMeasure, solve: measureSolve, check(m, text) { if (m._val === undefined) measureSolve(m); const u = m.vals[0].v.unit; return checkNumUnit(text, m.dim, m._val, u ? [u] : []); },
+  generate(r) { const n = r.pick([3, 4]); const b = r.pick([20, 15, 12]); const vs = []; for (let i = 0; i < n; i++) vs.push((b + r.int(0, 9) / 10).toFixed(1).replace('.', ',')); return vs.map((x, i) => 'l' + (i + 1) + '=' + x + 'cm').join('; ') + '; ' + r.pick(['tb', 'dtb']) + '=?'; } });
+
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>(function(root){
+const law=(name,vars,extra)=>({intro:'Dạng này dùng công thức '+name+'. Đề cho vài đại lượng, con tìm đại lượng còn lại.',steps:['Gạch chân các đại lượng đã cho và đại lượng cần tìm, ghi ký hiệu và đơn vị: '+vars+'.','Đổi tất cả về đơn vị chuẩn (m, kg, s, N, J, W, Pa, A, V, Ω) trước khi tính.','Viết công thức, biến đổi để rút ra đại lượng cần tìm (chuyển vế, đổi chỗ).','Thay số vào công thức đã biến đổi, bấm máy.','Ghi kết quả kèm đơn vị. Đổi sang đơn vị thường dùng nếu đề yêu cầu.','Nhìn lại: kết quả có hợp lí không (người đi bộ không thể 300 km/h).'],mistakes:['Quên đổi đơn vị (g sang kg, cm² sang m², phút sang giây, km/h sang m/s).','Viết đáp án không có đơn vị, hoặc sai đơn vị.','Thay số vào công thức chưa biến đổi rồi chuyển vế sai.'].concat(extra||[])});
+root.PhyMethods={
+ mech:law('v = s/t, D = m/V, P = 10m, p = F/S, p = d·h, FA = d·V','v, s, t; D, m, V; P, m; p, F, S; d, h',['Nhầm khối lượng (kg) với trọng lượng (N): P = 10m.','Đổi km/h sang m/s: phải chia 3,6, không phải nhân.','Đổi cm³ sang m³: nhân 10⁻⁶ (không phải 10⁻³).']),
+ energy:law('A = F·s, P = A/t, H = Aci/Atp, Wđ = ½mv², Wt = 10mh, đòn bẩy','A, F, s; P, t; H; m, v, h',['Hiệu suất luôn nhỏ hơn 100%; nếu ra lớn hơn thì đã lấy ngược Aci và Atp.','Động năng có hệ số ½ và v bình phương: đổi v ra m/s trước.','Đòn bẩy: lực lớn thì cánh tay đòn nhỏ (F₁·l₁ = F₂·l₂).']),
+ heat:law('Q = m·c·Δt và Q = q·m','Q, m, c, Δt (Δt = nhiệt độ cuối − nhiệt độ đầu)',['Đổi gam sang kilôgam trước khi nhân với c.','Δt là hiệu hai nhiệt độ, không phải một nhiệt độ.','Nhầm đơn vị: kJ và J lệch nhau 1000 lần.']),
+ elec:law('I = U/R, P = U·I, R = ρ·l/S, Q = I²·R·t','I, U, R, P, ρ, l, S, t',['Đổi mA sang A, kΩ sang Ω, mm² sang m² trước khi tính.','Công thức Jun – Len-xơ: thời gian phải tính bằng giây.','Điện trở suất ρ có đơn vị Ω.m; tiết diện S đổi ra m².']),
+ optic:law('v = λ·f, T = 1/f, 1/f = 1/d + 1/d′','v, λ, f; T; f, d, d′',['Thấu kính: dùng cùng một đơn vị (cm hoặc m) cho f, d, d′.','Ảnh ảo có d′ âm theo quy ước của phần mềm.','Chu kì và tần số là nghịch đảo của nhau, không bằng nhau.']),
+ convert:{intro:'Đổi đơn vị là nhân (hoặc chia) với hệ số đổi. Cùng loại đơn vị mới đổi được.',steps:['Xác định loại đại lượng (độ dài, khối lượng, thời gian, diện tích, thể tích, tốc độ…).','Viết 1 đơn vị cũ bằng bao nhiêu đơn vị chuẩn, và 1 đơn vị mới bằng bao nhiêu đơn vị chuẩn.','Lấy tỉ số hai hệ số đó để có hệ số đổi.','Nhân số đã cho với hệ số, ghi đơn vị mới.','Kiểm tra: đơn vị mới nhỏ hơn thì số phải lớn hơn, và ngược lại.'],mistakes:['Diện tích đổi bậc hai: 1 m² = 10 000 cm² (không phải 100).','Thể tích đổi bậc ba: 1 m³ = 1 000 000 cm³ (không phải 1000).','km/h sang m/s: chia 3,6. m/s sang km/h: nhân 3,6.','Nhiệt độ: T(K) = t(°C) + 273; t(°F) = 9/5·t(°C) + 32.']},
+ circuit:{intro:'Mạch gồm vài điện trở: hãy tính điện trở tương đương trước, rồi dùng định luật Ôm.',steps:['Xác định mạch nối tiếp hay song song.','Nối tiếp: Rtđ = R₁ + R₂ + … ; song song: 1/Rtđ = 1/R₁ + 1/R₂ + … (hai điện trở: Rtđ = R₁R₂/(R₁+R₂)).','Tính I hoặc U của cả mạch bằng định luật Ôm: I = U/Rtđ.','Nối tiếp: I như nhau, U = U₁ + U₂. Song song: U như nhau, I = I₁ + I₂.','Tính đại lượng của từng điện trở, rồi công suất P = U·I nếu cần.','Kiểm tra: nối tiếp thì Rtđ lớn hơn từng điện trở; song song thì nhỏ hơn.'],mistakes:['Mạch song song: quên lấy nghịch đảo ở bước cuối (ra 1/Rtđ thay vì Rtđ).','Cộng điện trở song song như nối tiếp.','Dùng U của cả mạch cho điện trở nối tiếp (phải dùng U₁ = I·R₁).']},
+  circuit2:{intro:'Mạch có ba điện trở, một cụm nối tiếp và một cụm song song. Làm từ trong ra ngoài: gộp cụm nhỏ trước.',steps:['Xác định cụm nào song song, cụm nào nối tiếp.','Gộp cụm trong ngoặc thành một điện trở R23.','Gộp R23 với R1 để có Rtd.','Dùng định luật Ôm tính U hoặc I của cả mạch.','Đi ngược lại: tìm dòng và hiệu điện thế của R1, rồi của cụm, rồi từng điện trở trong cụm.','Kiểm tra bằng cách cộng U hoặc I.'],mistakes:['Gộp sai thứ tự: phải gộp cụm trong ngoặc trước.','Dùng U cả mạch cho điện trở nằm nối tiếp với cụm khác.','Nhầm dòng chung (nối tiếp) với hiệu điện thế chung (song song).']},
+ g6:law('F = k·Δl, V = V₂ − V₁, P = 10m','F, k, Δl; V₁, V₂; P, m',['Lò xo: đổi cm sang m khi dùng k tính bằng N/m.','Quả nặng 100 g nặng 1 N (đổi gam ra kg rồi nhân 10).','Chiều dài lò xo khác độ giãn: chiều dài = chiều dài tự nhiên + độ giãn.']),
+ g7:law('s = v·t/2 (tiếng vang), f = N/t, v = Δs/Δt','s, v, t; f, N, t; s1, t1, s2, t2',['Tiếng vang: âm đi và về nên quãng đường là 2s, phải chia đôi.','Đổi phút ra giây khi tính tần số.','Đồ thị: lấy hiệu hai điểm, không lấy một điểm chia một điểm (trừ khi đồ thị đi qua gốc).']),
+ g8:law('M = F·d, p = p₀ + d·h','M, F, d; p, p₀, d, h',['Cánh tay đòn là khoảng cách vuông góc từ trục quay đến giá của lực, không phải khoảng cách tới điểm đặt.','Quên cộng áp suất khí quyển p₀ khi hỏi áp suất tại điểm trong chất lỏng ngoài trời.','Đổi cm sang m trước khi nhân.']),
+ g9:law('W = Wđ + Wt, A = U·I·t, n = c/v, G = 25/f','W, Wđ, Wt; A, U, I, t; n, v; G, f',['Điện năng: đổi giờ, phút ra giây thì A ra jun; muốn ra kWh thì dùng kW và giờ.','Chiết suất không có đơn vị và luôn ≥ 1.','Kính lúp: f tính bằng cm khi dùng G = 25/f.']),
+ refract:{intro:'Ánh sáng đổi môi trường thì bị gãy khúc theo định luật khúc xạ.',steps:['Xác định môi trường 1 (nơi tia tới) và môi trường 2, ghi n1, n2.','Viết n1·sin i = n2·sin r.','Rút sin r (hoặc sin i), bấm máy tính.','Dùng shift sin (sin⁻¹) để tìm góc, nhớ đặt máy ở chế độ độ.','Nếu sin r lớn hơn 1 thì không có tia khúc xạ: phản xạ toàn phần.','Góc giới hạn: sin igh = n2/n1 (chỉ khi n1 > n2).'],mistakes:['Để máy tính ở chế độ radian (RAD) thay vì độ (DEG).','Nhầm n1 và n2 (đảo chiều tia sáng).','Quên rằng góc đo từ pháp tuyến, không phải từ mặt phân cách.']},
+ measure:{intro:'Đo nhiều lần rồi lấy trung bình để giảm sai số.',steps:['Ghi các kết quả đo cùng một đơn vị.','Giá trị trung bình = tổng các lần đo chia số lần đo.','Sai số tuyệt đối mỗi lần = |giá trị đo − giá trị trung bình|.','Sai số tuyệt đối trung bình = trung bình cộng các sai số đó.','Viết kết quả: x = trung bình ± sai số trung bình.'],mistakes:['Lấy hiệu không lấy giá trị tuyệt đối (sai số bị bù trừ thành 0).','Chia cho số sai (phải chia cho số lần đo).','Làm tròn sai số quá sớm.']},
+ meet:{intro:'Hai vật chuyển động gặp nhau, hoặc tính tốc độ trung bình trên cả quãng đường.',steps:['Đổi tất cả về cùng đơn vị (km và h, hoặc m và s).','Ngược chiều gặp nhau: quãng đường = (v₁ + v₂)·t.','Cùng chiều đuổi nhau: quãng đường = (v₁ − v₂)·t, vật nhanh là v₁.','Tốc độ trung bình = tổng quãng đường : tổng thời gian.','Kiểm tra kết quả bằng cách tính lại quãng đường mỗi vật đi được.'],mistakes:['Tốc độ trung bình không phải trung bình cộng của các tốc độ.','Quên đổi phút sang giờ khi tính.','Cùng chiều mà lại cộng hai tốc độ.']},
+ heatbal:{intro:'Vật nóng toả nhiệt, vật lạnh thu nhiệt cho tới khi cùng nhiệt độ.',steps:['Xác định vật toả nhiệt (nhiệt độ đầu cao hơn) và vật thu nhiệt.','Viết phương trình: m₁c₁(t₁ − t) = m₂c₂(t − t₂).','Chuyển các hạng tử chứa t sang một vế, giải t.','Thay số, đổi gam sang kg, giữ nhiệt dung riêng đúng đơn vị J/kg.K.','Kiểm tra: t phải nằm giữa t₂ và t₁.'],mistakes:['Viết hiệu nhiệt độ ngược dấu: vật toả nhiệt là t₁ − t, vật thu là t − t₂.','Quên đổi gam sang kilôgam.','Nhiệt độ cân bằng ra lớn hơn nhiệt độ vật nóng hoặc nhỏ hơn vật lạnh là sai.']}
+};
+root.PhyFormulas=[
+{g:6,t:'Lực, lò xo, đo lường',items:[['Lò xo','F=k\\cdot\\Delta l'],['Tỉ lệ độ giãn','\\frac{F_1}{\\Delta l_1}=\\frac{F_2}{\\Delta l_2}'],['Thể tích vật rắn','V=V_2-V_1'],['Trọng lượng','P=10m'],['Giá trị trung bình','\\bar{x}=\\frac{x_1+x_2+\\dots+x_n}{n}']]},
+{g:7,t:'Âm thanh, đồ thị',items:[['Tiếng vang','s=\\frac{v\\cdot t}{2}'],['Tần số','f=\\frac{N}{t}'],['Tốc độ từ đồ thị','v=\\frac{s_2-s_1}{t_2-t_1}']]},
+{g:8,t:'Mô-men, áp suất',items:[['Mô-men lực','M=F\\cdot d'],['Áp suất trong chất lỏng','p=p_0+d\\cdot h']]},
+{g:9,t:'Cơ năng, điện năng, khúc xạ',items:[['Cơ năng','W=W_d+W_t'],['Điện năng','A=U\\cdot I\\cdot t'],['Chiết suất','n=\\frac{c}{v}'],['Khúc xạ','n_1\\sin i=n_2\\sin r'],['Góc giới hạn','\\sin i_{gh}=\\frac{n_2}{n_1}'],['Kính lúp','G=\\frac{25}{f}']]},
+{g:6,t:'Đổi đơn vị',items:[['Độ dài','1\\ km=1000\\ m;\\ 1\\ m=100\\ cm'],['Khối lượng','1\\ kg=1000\\ g;\\ 1\\ tấn=1000\\ kg'],['Thời gian','1\\ h=60\\ ph=3600\\ s'],['Diện tích','1\\ m^{2}=10000\\ cm^{2}'],['Thể tích','1\\ m^{3}=1000\\ lít;\\ 1\\ lít=1000\\ cm^{3}']]},
+{g:7,t:'Tốc độ, khối lượng riêng, âm',items:[['Tốc độ','v=\\frac{s}{t}'],['Đổi km/h sang m/s','1\\ km/h=\\frac{1}{3{,}6}\\ m/s'],['Khối lượng riêng','D=\\frac{m}{V}'],['Tần số','f=\\frac{1}{T}'],['Sóng','v=\\lambda\\cdot f']]},
+{g:8,t:'Cơ học, nhiệt',items:[['Trọng lượng','P=10m'],['Áp suất chất rắn','p=\\frac{F}{S}'],['Áp suất chất lỏng','p=d\\cdot h'],['Lực đẩy Ác-si-mét','FA=d\\cdot V'],['Công cơ học','A=F\\cdot s'],['Công suất','P=\\frac{A}{t}'],['Hiệu suất','H=\\frac{A_{ci}}{A_{tp}}\\cdot100\\%'],['Động năng','W_d=\\frac{1}{2}mv^{2}'],['Thế năng','Wt=10mh'],['Nhiệt lượng','Q=m\\cdot c\\cdot\\Delta t'],['Cân bằng nhiệt','Q_{toa}=Q_{thu}'],['Nhiên liệu','Q=q\\cdot m'],['Nóng chảy','Q=\\lambda\\cdot m'],['Hóa hơi','Q=L\\cdot m'],['Máy nén thủy lực','\\frac{F_1}{S_1}=\\frac{F_2}{S_2}'],['Mặt phẳng nghiêng','F\\cdot l=P\\cdot h'],['Vận tốc biến đổi đều','v=v_0+at'],['Quãng đường','s=v_0t+\\frac{1}{2}at^{2}']]},
+{g:9,t:'Điện, quang',items:[['Định luật Ôm','I=\\frac{U}{R}'],['Nối tiếp','R_{td}=R_1+R_2;\\ I_1=I_2;\\ U=U_1+U_2'],['Song song','\\frac{1}{R_{td}}=\\frac{1}{R_1}+\\frac{1}{R_2};\\ U_1=U_2'],['Điện trở dây','R=\\rho\\frac{l}{S}'],['Công suất điện','P=U\\cdot I=I^{2}R=\\frac{U^{2}}{R}'],['Điện năng','A=P\\cdot t'],['Jun – Len-xơ','Q=I^{2}\\cdot R\\cdot t'],['Thấu kính','\\frac{1}{f}=\\frac{1}{d}+\\frac{1}{d\'}'],['Phản xạ ánh sáng','i\'=i'],['Ảnh qua gương phẳng','d\'=d'],['Máy biến áp','\\frac{U_1}{U_2}=\\frac{n_1}{n_2}'],['Hao phí truyền tải','P_{hp}=\\frac{P^{2}R}{U^{2}}'],['Đèn sai định mức','P=P_{đm}\\frac{U^{2}}{U_{đm}^{2}}']]}
+];
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+
+<script>(function(){
+'use strict';
+const T=PhyTypes, R=MathRender, esc=R.esc, pl_=R.plain, tex=R.html, MET=PhyMethods;
+const $=(s,r)=>(r||document).querySelector(s);
+const KEY='ai_mo_giai_ly_69_v1';
+let store={log:[],name:''};
+try{ const e=document.querySelector('#embedded-state').textContent.trim(); const raw=e?new TextDecoder().decode(Uint8Array.from(atob(e),c=>c.charCodeAt(0))):localStorage.getItem(KEY); const j=JSON.parse(raw||'null'); if(j&&typeof j.name==='string'&&Array.isArray(j.log)&&j.log.length<=50000) store=j; }catch(e){}
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){} };
+function rng(seed){ let a=seed>>>0; const n=()=>{ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; return {int:(lo,hi)=>lo+Math.floor(n()*(hi-lo+1)),pick:arr=>arr[Math.floor(n()*arr.length)],f:n}; }
+const gradeOf=t=>Math.min(...t.grades), gcls=t=>'g'+gradeOf(t);
+const dayKey=d=>{ d=d||new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); };
+function guess(s){ const f=T.fold(s); if(/(noi tiep|song song)/.test(f)&&/r1/.test(f)) return 'circuit'; if(/(nguoc chieu|cung chieu|trung binh)/.test(f)) return 'meet'; if(/\bm1\s*=/.test(f)&&/\bc1\s*=/.test(f)) return 'heatbal'; if(/(->|→|\bsang\b)/.test(f)&&!/=/.test(f.replace(/->/,''))) return 'convert'; if(/(->|→|\bsang\b)/.test(f)) return 'convert'; try{ const m=T.parseLawInput(s,null); return m.lw.group; }catch(e){ return null; } }
+
+/* ===== khung ===== */
+const TABS=[['hm','⌂','Trang chủ'],['kt','✓','Kiểm tra'],['lt','★','Luyện tập'],['ct','ƒ','Công thức'],['so','✎','Sổ lỗi sai']];
+$('#tabs').innerHTML=TABS.map(([id,ic,n],i)=>`<button role="tab" data-t="${id}" aria-selected="${i===0}"><i>${ic}</i>${n}</button>`).join('');
+$('#main').innerHTML=TABS.map(([id],i)=>`<section class="page${i===0?' on':''}" id="p-${id}" role="tabpanel"></section>`).join('');
+function show(id){ document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id)); document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+id)); if(id==='so') renderSo(); if(id==='hm') renderHome(); window.scrollTo({top:0}); }
+$('#tabs').addEventListener('click',e=>{ const b=e.target.closest('button'); if(b) show(b.dataset.t); });
+
+/* ===== bàn phím ký hiệu ===== */
+let lastInput=null;
+document.addEventListener('focusin',e=>{ if(e.target.matches('input.math,textarea.math')) lastInput=e.target; });
+const KEYS=[['=','='],[';','; '],['?','?'],[',',','],['/','/'],['Ω','ohm'],['°C','C'],['m²','m2'],['m³','m3'],['km/h','km/h'],['m/s','m/s'],['kg','kg'],['%','%'],['^','^']];
+const keysHtml=()=>`<div class="keys" aria-label="Bàn phím ký hiệu">${KEYS.map(([l,v])=>`<button type="button" data-k="${esc(v)}">${l}</button>`).join('')}</div>`;
+document.addEventListener('click',e=>{ const b=e.target.closest('.keys button'); if(!b) return; const el=lastInput||$('#kAns'); if(!el) return; const v=b.dataset.k, s=el.selectionStart??el.value.length, t=el.selectionEnd??s; el.value=el.value.slice(0,s)+v+el.value.slice(t); const p=s+v.length; el.focus(); try{ el.setSelectionRange(p,p); }catch(x){} el.dispatchEvent(new Event('input')); });
+
+/* ===== lời giải & phương pháp ===== */
+function methodHtml(id){ const m=MET[id]; if(!m) return ''; return `<details class="method" open><summary>Cách làm dạng này</summary><div class="in"><p style="margin:0 0 4px">${esc(m.intro)}</p><h4>Các bước</h4><ol>${m.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><h4>Lỗi hay gặp</h4><ul class="bad">${m.mistakes.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></div></details>`; }
+function solHtml(sol,id){
+  const n=sol.steps.length;
+  return `<div class="sol" id="${id}"><div class="prob">${tex(sol.problemTex||'')}</div><div class="prog"></div>`+
+    sol.steps.map((s,i)=>`<div class="step" data-i="${i}" hidden><div class="nb">${i+1}</div><div class="bd"><div class="say">${esc(pl_(s.say))}</div>${(s.lines||[]).map(l=>`<div class="ln">${tex(l)}</div>`).join('')}</div></div>`).join('')+
+    `<div class="final" hidden><small>ĐÁP SỐ</small>${tex(sol.answerTex||'')}</div>`+
+    (sol.incomplete?`<div class="help">Lưu ý: phần mềm chỉ tìm được nghiệm hữu tỉ và nghiệm dạng căn bậc hai.</div>`:'')+
+    `<div class="row" style="margin-top:12px"><button class="btn sm nx">Gợi ý bước tiếp theo</button><button class="btn alt sm all">Hiện hết lời giải</button></div></div>`;
+}
+function wireSol(root){
+  const steps=[...root.querySelectorAll('.step')], fin=root.querySelector('.final'), nx=root.querySelector('.nx'), all=root.querySelector('.all'), pg=root.querySelector('.prog');
+  let k=1; const upd=()=>{ steps.forEach((s,i)=>{ s.hidden=i>=k; }); const done=k>=steps.length; fin.hidden=!done; nx.hidden=done; all.hidden=done; pg.textContent='Bước '+Math.min(k,steps.length)+' / '+steps.length; };
+  nx.onclick=()=>{k++;upd();}; all.onclick=()=>{k=steps.length;upd();}; upd();
+}
+function verdictHtml(r){ const icon={ok:'✓',partial:'◐',wrong:'✗',unreadable:'?'}[r.verdict]; return `<div class="verdict ${r.verdict}" role="status"><b class="h">${icon} ${esc(r.headline)}</b>${r.msgs&&r.msgs.length?'<ul>'+r.msgs.map(m=>`<li>${esc(pl_(m.say))}</li>`).join('')+'</ul>':''}</div>`; }
+function logIt(id,prob,ans,verdict,src){ store.log.push({t:Date.now(),id,prob,ans,v:verdict,src}); if(store.log.length>500) store.log=store.log.slice(-500); save(); }
+function showSol(m,t,host){ let sol; try{ sol=t.solve(m); }catch(e){ $('#'+host).innerHTML='<div class="err">Phần mềm chưa giải được bài này: '+esc(T.friendly(e))+'</div>'; return; } const h=$('#'+host); h.innerHTML=solHtml(sol,host+'x'); wireSol(h); h.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+
+/* ===== Trang chủ ===== */
+let homeGrade=0;
+function stats(){ const log=store.log, ok=log.filter(x=>x.v==='ok').length; const days=new Set(log.map(x=>dayKey(new Date(x.t)))); let s=0,d=new Date(); if(!days.has(dayKey(d))) d.setDate(d.getDate()-1); while(days.has(dayKey(d))){ s++; d.setDate(d.getDate()-1); } return {n:log.length,pct:log.length?Math.round(ok*100/log.length):0,streak:s}; }
+function renderHome(){
+  const st=stats(); const ts=T.list.filter(t=>!homeGrade||t.grades.includes(homeGrade));
+  $('#p-hm').innerHTML=`<div class="card hero"><h2>Con làm bài đúng chưa?</h2><p>Gõ đề và đáp án của con, phần mềm tính lại và chỉ ra chỗ sai. Có hướng dẫn từng bước cho từng dạng bài.</p><div class="row"><button class="btn" data-go="kt">Kiểm tra bài của con</button><button class="btn alt" data-go="lt">Luyện tập ngay</button></div></div>
+  <div class="stats"><div class="stat"><b>${st.n}</b><span>bài đã làm</span></div><div class="stat"><b>${st.pct}%</b><span>làm đúng</span></div><div class="stat"><b>${st.streak}</b><span>ngày liên tiếp</span></div></div>
+  <div class="card" style="background:var(--g8)"><div class="row"><div class="grow"><b style="font-size:17px;color:var(--ink)">Thử thách hôm nay</b><div class="help" style="color:var(--ink);opacity:.8">Mỗi ngày một bài khác nhau, cả nhà cùng làm.</div></div><button class="btn" id="hDaily">Làm ngay</button></div></div>
+  <h3>Chọn dạng bài</h3><div class="chips" id="hG">${[0,6,7,8,9].map(g=>`<button class="chip${g===homeGrade?' on':''}" data-g="${g}">${g?'Lớp '+g:'Tất cả'}</button>`).join('')}</div>
+  <div class="grid" style="margin-top:12px">${ts.map(t=>`<button class="tc ${gcls(t)}" data-t="${t.id}"><span class="ic">${esc(t.icon||'∑')}</span><b>${esc(t.title)}</b><small>Lớp ${t.grades.join(', ')}</small></button>`).join('')}</div>
+  <h3>Về phần mềm</h3><div class="card"><p style="margin:0 0 8px">Đáp án được <b>tính chính xác bằng thuật toán</b> (công thức Vật lí và phép đổi đơn vị đúng từng chữ số), không phải đoán, nên cùng một bài luôn ra cùng kết quả.</p><div class="note" style="margin:0 0 12px"><b>Cần biết:</b><ul style="margin:6px 0 0;padding-left:20px"><li>Phần mềm kiểm tra <b>kết quả số và đơn vị</b>, gợi ý lỗi hay gặp (quên đổi đơn vị, lệch 10, 100, 1000 lần…); không chấm cách trình bày.</li><li>Lấy g = 10 N/kg (P = 10m), nước có D = 1000 kg/m³, c = 4200 J/kg.K.</li><li>Chưa hỗ trợ bài vẽ hình, đồ thị, bài nhiều giai đoạn, và các bài phải đọc đề dạng lời văn: con cần ghi lại số liệu theo mẫu trong phần ví dụ.</li><li>Việc xếp lớp và chương theo Chương trình KHTN 2018 chỉ là gợi ý, có thể lệch sách. Chỗ nào chưa khớp, báo cho AI Mở Studio để cập nhật.</li><li>Không thay thầy cô: hãy để con tự làm trước rồi mới kiểm tra.</li></ul></div><div class="cta"><div><b>AI Mở Studio · Ứng dụng học tập offline</b><br><span class="tiny" style="color:inherit;opacity:.85">AI Mở Studio</span></div><a href="${ZALO}" target="_blank" rel="noopener">AI Mở Studio</a></div><p class="tiny" style="margin:12px 0 0">Sắp tới: Hóa học. Dữ liệu chỉ lưu trên máy bạn.</p></div>`;
+}
+$('#p-hm').addEventListener('click',e=>{ const g=e.target.closest('[data-go]'); if(g){ show(g.dataset.go); return; } const c=e.target.closest('#hG .chip'); if(c){ homeGrade=+c.dataset.g; renderHome(); return; } const t=e.target.closest('.tc'); if(t){ openType(t.dataset.t); return; } if(e.target.id==='hDaily') daily(); });
+function openType(id){ $('#kType').value=id; $('#kProb').value=''; $('#kAns').value=''; $('#kOut').innerHTML=''; refreshK(); show('kt'); $('#kProb').focus(); }
+
+/* ===== Kiểm tra ===== */
+const typeOpts=()=>[6,7,8,9].map(g=>`<optgroup label="Lớp ${g}">${T.list.filter(t=>gradeOf(t)===g).map(t=>`<option value="${t.id}">${esc(t.title)}</option>`).join('')}</optgroup>`).join('');
+$('#p-kt').innerHTML=`<div class="card"><h2>Kiểm tra bài làm</h2><p class="sub">Gõ đề bài và đáp án của con. Dùng hàng phím ký hiệu bên dưới nếu điện thoại khó gõ.</p>
+<label for="kType">Dạng bài</label><select id="kType"><option value="auto">Tự nhận dạng theo đề bài</option>${typeOpts()}</select>
+<label for="kProb">Đề bài</label><textarea id="kProb" class="math" rows="2" placeholder="Ví dụ: s=120km; t=2h; v=?" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+<div class="help" id="kHelp"></div><div class="chips" id="kEx"></div>
+<label for="kAns">Đáp án của con <span style="font-weight:400;color:var(--mute)">(để trống nếu chỉ muốn xem lời giải)</span></label><input type="text" id="kAns" class="math" placeholder="Ví dụ: 60 km/h" autocomplete="off" spellcheck="false" autocapitalize="off">
+${keysHtml()}
+<div class="row" style="margin-top:12px"><button class="btn" id="kCheck">Kiểm tra đáp án</button><button class="btn alt" id="kSolve">Xem lời giải từng bước</button></div></div><div id="kMeth"></div><div id="kOut"></div>`;
+function curType(){ const v=$('#kType').value; return v!=='auto'?v:(guess($('#kProb').value||'')||null); }
+function refreshK(){ const id=curType(); const t=id&&T.byId[id]; $('#kHelp').textContent=t?t.help:'Ghi các đại lượng đã cho kèm đơn vị, cách nhau dấu chấm phẩy, và đại lượng cần tìm bằng dấu ?. Ví dụ: s=120km; t=2h; v=? Nếu phần mềm chưa nhận ra, hãy chọn «Dạng bài».'; $('#kProb').placeholder=t?t.ph:'Ví dụ: s=120km; t=2h; v=?'; $('#kEx').innerHTML=(t?t.examples:[]).slice(0,7).map(e=>`<button class="chip" data-e="${esc(e)}">${esc(e)}</button>`).join(''); $('#kMeth').innerHTML=t?methodHtml(id):''; }
+$('#kType').onchange=refreshK; $('#kProb').oninput=()=>{ if($('#kType').value==='auto') refreshK(); };
+$('#kEx').onclick=e=>{ const b=e.target.closest('.chip'); if(b){ $('#kProb').value=b.dataset.e; if($('#kType').value==='auto') refreshK(); } };
+function runK(mode){
+  const out=$('#kOut'); const prob=$('#kProb').value.trim(); const id=curType();
+  if(!prob){ out.innerHTML='<div class="err">Hãy gõ đề bài trước.</div>'; return; }
+  if(!id){ out.innerHTML='<div class="err">Phần mềm chưa biết đây là dạng bài nào. Hãy chọn «Dạng bài» ở trên (ví dụ: Cơ học, Điện, Nhiệt).</div>'; return; }
+  const t=T.byId[id]; let m; try{ m=t.parse(prob); }catch(e){ out.innerHTML='<div class="err"><b>Chưa đọc được đề bài.</b> '+esc(T.friendly(e))+'</div>'; return; }
+  if(mode==='check'){
+    const ans=$('#kAns').value.trim(); if(!ans){ out.innerHTML='<div class="err">Hãy gõ đáp án của con ở ô «Đáp án của con», hoặc bấm «Xem lời giải từng bước».</div>'; return; }
+    let r; try{ r=t.check(m,ans); }catch(e){ r={verdict:'unreadable',headline:'Chưa đọc được đáp án',msgs:[{say:T.friendly(e)}]}; }
+    if(r.verdict!=='unreadable') logIt(id,prob,ans,r.verdict,'kt');
+    out.innerHTML=verdictHtml(r)+`<div class="row" style="margin-top:10px"><button class="btn alt sm" id="kShow">Xem lời giải để đối chiếu</button></div><div id="kSol"></div>`; $('#kShow').onclick=()=>{ showSol(m,t,'kSol'); $('#kShow').hidden=true; };
+    out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  } else { out.innerHTML='<div id="kSol"></div>'; showSol(m,t,'kSol'); }
+}
+$('#kCheck').onclick=()=>runK('check'); $('#kSolve').onclick=()=>runK('solve'); $('#kAns').addEventListener('keydown',e=>{ if(e.key==='Enter') runK('check'); });
+refreshK();
+
+/* ===== Luyện tập ===== */
+$('#p-lt').innerHTML=`<div class="card"><h2>Luyện tập</h2><p class="sub">Phần mềm ra đề, con làm rồi bấm kiểm tra. Bài sai được ghi vào Sổ lỗi sai để ôn lại.</p>
+<div class="row"><div class="grow"><label for="lG" style="margin-top:0">Lớp</label><select id="lG"><option>6</option><option>7</option><option selected>8</option><option>9</option></select></div><div class="grow"><label for="lT" style="margin-top:0">Dạng bài</label><select id="lT"></select></div></div>
+<div class="score"><span class="pill" id="lScore">Đúng 0 / 0</span><button class="btn alt sm" id="lNew">Đề mới</button></div></div><div id="lMeth"></div><div id="lBox"></div>`;
+let lq=null, sc={ok:0,n:0}, seed=Date.now()%100000;
+function fillLT(){ const g=+$('#lG').value; const cur=$('#lT').value; const ts=T.list.filter(t=>t.grades.includes(g)&&t.generate); $('#lT').innerHTML=ts.map(t=>`<option value="${t.id}">${esc(t.title)}</option>`).join(''); if(ts.some(t=>t.id===cur)) $('#lT').value=cur; }
+function newQ(fixedSeed){
+  const id=$('#lT').value, t=T.byId[id], g=+$('#lG').value; if(!t){ $('#lBox').innerHTML=''; return; }
+  let prob,m,tries=0,sd=typeof fixedSeed==='number'?fixedSeed:seed++; do{ prob=t.generate(rng(sd+tries*977),g); try{ m=t.parse(prob); t.solve(m); break; }catch(e){ m=null; } }while(++tries<30);
+  if(!m){ $('#lBox').innerHTML='<div class="err">Chưa tạo được đề. Bấm «Đề mới» để thử lại.</div>'; return; }
+  lq={id,prob,m,t,done:false}; let pt=''; try{ pt=t.solve(m).problemTex; }catch(e){}
+  $('#lMeth').innerHTML=methodHtml(id).replace('<details class="method" open>','<details class="method">');
+  $('#lBox').innerHTML=`<div class="card"><div class="prob">${pt?tex(pt):esc(prob)}</div><div class="help">${esc(t.help.split('. ')[0])}.</div><label for="lAns">Đáp án của con</label><input type="text" id="lAns" class="math" autocomplete="off" spellcheck="false" autocapitalize="off">${keysHtml()}<div class="row" style="margin-top:10px"><button class="btn" id="lCheck">Kiểm tra</button><button class="btn alt" id="lSol">Xem lời giải</button></div><div id="lOut"></div><div id="lSolBox"></div></div>`;
+  $('#lCheck').onclick=checkL; $('#lSol').onclick=()=>{ if(!lq.done){ lq.done=true; sc.n++; logIt(lq.id,lq.prob,'(xem lời giải)','wrong','lt'); updSc(); } showSol(lq.m,lq.t,'lSolBox'); $('#lSol').hidden=true; }; $('#lAns').addEventListener('keydown',e=>{ if(e.key==='Enter') checkL(); });
+}
+const updSc=()=>{ $('#lScore').textContent='Đúng '+sc.ok+' / '+sc.n; };
+function checkL(){
+  const a=$('#lAns').value.trim(); if(!a) return; let r; try{ r=lq.t.check(lq.m,a); }catch(e){ r={verdict:'unreadable',headline:'Chưa đọc được đáp án',msgs:[{say:T.friendly(e)}]}; }
+  $('#lOut').innerHTML=verdictHtml(r)+(r.verdict==='ok'?'<div class="row" style="margin-top:10px"><button class="btn good" id="lNext">Bài tiếp theo</button></div>':'');
+  if(r.verdict==='unreadable') return;
+  if(!lq.done){ lq.done=true; sc.n++; if(r.verdict==='ok') sc.ok++; logIt(lq.id,lq.prob,a,r.verdict,'lt'); updSc(); }
+  if($('#lNext')) $('#lNext').onclick=()=>newQ();
+}
+$('#lG').onchange=()=>{ fillLT(); sc={ok:0,n:0}; updSc(); newQ(); }; $('#lT').onchange=()=>{ sc={ok:0,n:0}; updSc(); newQ(); }; $('#lNew').onclick=()=>newQ();
+function daily(){ const d=new Date(); const sd=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate(); const g=[6,7,8,9][sd%4]; $('#lG').value=g; fillLT(); const ts=[...$('#lT').options]; $('#lT').selectedIndex=(sd>>2)%ts.length; sc={ok:0,n:0}; updSc(); newQ(sd); show('lt'); }
+fillLT(); newQ();
+
+/* ===== Công thức ===== */
+$('#p-ct').innerHTML=`<div class="card"><h2>Công thức cần nhớ</h2><p class="sub">Chọn lớp để xem. Bấm vào tiêu đề để mở hoặc đóng.</p><div class="chips" id="fG"></div></div><div id="fBox"></div>`;
+let fg=0; function renderF(){ $('#fG').innerHTML=[0,6,7,8,9].map(g=>`<button class="chip${g===fg?' on':''}" data-g="${g}">${g?'Lớp '+g:'Tất cả'}</button>`).join(''); $('#fBox').innerHTML=PhyFormulas.filter(x=>!fg||x.g===fg).map(x=>`<details class="f" ${fg?'open':''}><summary>Lớp ${x.g}: ${esc(x.t)}</summary>${x.items.map(([n,f])=>`<div class="formula"><span class="n">${esc(n)}</span>${tex(f)}</div>`).join('')}</details>`).join(''); }
+$('#fG').onclick=e=>{ const b=e.target.closest('.chip'); if(b){ fg=+b.dataset.g; renderF(); } }; renderF();
+
+/* ===== Sổ lỗi sai ===== */
+function renderSo(){
+  const p=$('#p-so'); const log=store.log; const wk=log.filter(x=>Date.now()-x.t<7*864e5);
+  const by={}; wk.forEach(x=>{ const b=by[x.id]||(by[x.id]={n:0,ok:0}); b.n++; if(x.v==='ok') b.ok++; });
+  const wrongs=log.filter(x=>x.v!=='ok').slice(-30).reverse();
+  p.innerHTML=`<div class="card"><h2>Báo cáo tuần</h2><p class="sub">Dữ liệu chỉ lưu trên điện thoại này, không gửi đi đâu.</p>
+  <label for="soName" style="margin-top:0">Tên con (ghi vào báo cáo)</label><input type="text" id="soName" value="${esc(store.name||'')}" placeholder="Ví dụ: Bé Minh, lớp 8A" autocomplete="off">
+  <h3>7 ngày qua</h3>${wk.length?`<table class="st"><tr><th>Dạng bài</th><th>Số bài</th><th>Đúng</th></tr>${Object.keys(by).map(id=>`<tr><td>${esc(T.byId[id]?T.byId[id].title:id)}</td><td>${by[id].n}</td><td>${by[id].ok}</td></tr>`).join('')}</table>`:'<p class="help">Chưa có bài nào trong 7 ngày qua. Hãy làm vài bài ở tab Luyện tập.</p>'}
+  <div class="row" style="margin-top:12px"><button class="btn" id="soRep">Tạo báo cáo gửi Zalo</button></div><textarea id="soTxt" rows="7" style="margin-top:10px" hidden readonly></textarea><div class="row" style="margin-top:8px"><button class="btn alt sm" id="soCopy" hidden>Sao chép</button></div></div>
+  <div class="card"><h2>Bài làm sai gần đây (${wrongs.length})</h2>${wrongs.length?wrongs.map(x=>`<div class="logi"><div><code>${esc(x.prob.replace(/\n/g,' ; '))}</code><div class="tiny">${esc(T.byId[x.id]?T.byId[x.id].title:x.id)} · con ghi: ${esc(x.ans)}</div></div><button class="btn alt sm redo" data-i="${log.indexOf(x)}">Làm lại</button></div>`).join(''):'<p class="help">Chưa có bài sai nào. Giỏi quá!</p>'}
+  <div class="row" style="margin-top:14px"><button class="btn alt sm" id="soClr">Xóa toàn bộ sổ</button></div></div>`;
+  $('#soName').oninput=e=>{ store.name=e.target.value; save(); };
+  $('#soRep').onclick=()=>{ const tot=wk.length, ok=wk.filter(x=>x.v==='ok').length, nm=store.name||'Con'; const weak=Object.keys(by).filter(id=>by[id].n>=2&&by[id].ok/by[id].n<0.6).map(id=>T.byId[id]?T.byId[id].title:id);
+    const txt=`BÁO CÁO VẬT LÝ TUẦN QUA – ${nm}\nSố bài đã làm: ${tot}, đúng: ${ok}`+(tot?` (${Math.round(ok*100/tot)}%)`:'')+'\n'+Object.keys(by).map(id=>`- ${T.byId[id]?T.byId[id].title:id}: ${by[id].ok}/${by[id].n} đúng`).join('\n')+(weak.length?'\nCần ôn thêm: '+weak.join('; '):'\nChưa thấy dạng nào quá yếu.')+'\n(Tạo bằng ứng dụng Giải Lý 6–9 · AI Mở Studio)';
+    $('#soTxt').value=txt; $('#soTxt').hidden=false; $('#soCopy').hidden=false; };
+  $('#soCopy').onclick=()=>{ const t=$('#soTxt'); t.select(); try{ navigator.clipboard.writeText(t.value); }catch(e){ document.execCommand('copy'); } $('#soCopy').textContent='Đã sao chép'; };
+  p.querySelectorAll('.redo').forEach(b=>b.onclick=()=>{ const x=store.log[+b.dataset.i]; $('#kType').value=x.id; $('#kProb').value=x.prob; $('#kAns').value=''; $('#kOut').innerHTML=''; refreshK(); show('kt'); });
+  $('#soClr').onclick=()=>{ if(confirm('Xóa toàn bộ sổ lỗi sai và thống kê?')){ store.log=[]; save(); renderSo(); } };
+}
+renderHome();
+})();
+</script>
+<script>
+(()=>{'use strict';const KEY='ai_mo_giai_ly_69_v1';const $=s=>document.querySelector(s);const stamp=()=>new Date().toISOString().slice(0,10);const valid=x=>x&&typeof x==='object'&&typeof x.name==='string'&&x.name.length<=120&&Array.isArray(x.log)&&x.log.length<=50000&&x.log.every(r=>r&&typeof r==='object'&&typeof r.id==='string'&&r.id.length<80&&typeof r.prob==='string'&&r.prob.length<5000&&typeof r.ans==='string'&&r.ans.length<2000&&['ok','partial','wrong','unreadable'].includes(r.v)&&Number.isFinite(r.t));const get=()=>{try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return valid(x)?x:{log:[],name:''}}catch{return{log:[],name:''}}};const dl=(name,content,type)=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),60000)};const bytes=s=>new TextEncoder().encode(s);const b64=s=>{let out='',u=bytes(s);for(let i=0;i<u.length;i+=0x8000)out+=String.fromCharCode(...u.slice(i,i+0x8000));return btoa(out)};const note=$('#backup-note');$('#export-json').onclick=()=>dl(`giai-ly-6-9-${stamp()}.json`,JSON.stringify({app:'ai-mo-giai-ly-69',version:1,data:get()},null,2),'application/json');$('#export-html').onclick=()=>{const doc=document.documentElement.cloneNode(true);doc.querySelector('#embedded-state').textContent=b64(JSON.stringify(get()));doc.querySelectorAll('.page').forEach((p,i)=>{p.classList.toggle('on',i===0)});dl(`giai-ly-6-9-co-du-lieu-${stamp()}.html`,'<!doctype html>\n'+doc.outerHTML,'text/html')};$('#import-json').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{const obj=JSON.parse(await file.text()),data=obj?.data??obj;if(!valid(data))throw Error('Tệp không đúng cấu trúc hoặc vượt giới hạn.');if(!confirm('Khôi phục sẽ thay tiến độ đang lưu trên thiết bị này. Tiếp tục?'))return;localStorage.setItem(KEY,JSON.stringify(data));location.reload()}catch(err){note.textContent='Không nhập được: '+err.message}finally{e.target.value=''}});})();
+
+</script></body>
+</html>

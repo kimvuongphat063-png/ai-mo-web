@@ -20,7 +20,7 @@ const actions = [
     img: "/images/home/action-apps-free.jpg",
     alt: "Điện thoại nằm ngang với các ô ứng dụng 3D đầy màu sắc bay lên trên nền trắng",
     title: "Dùng app miễn phí",
-    desc: "14+ app HTML chạy ngay trên trình duyệt: tính lãi, định giá, lập kế hoạch… không cần cài đặt, không cần tài khoản.",
+    desc: "95+ app HTML chạy ngay trên trình duyệt: kế toán, dòng tiền, sản xuất, tính lãi… không cần cài đặt, không cần tài khoản.",
     link: "/apps",
     linkLabel: "Xem kho app",
   },

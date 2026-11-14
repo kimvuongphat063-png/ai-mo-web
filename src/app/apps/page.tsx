@@ -6,9 +6,9 @@ import { getSession } from "@/lib/auth";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "19+ App Miễn Phí Chạy Offline — AI MỞ Studio",
+  title: "95+ App Miễn Phí Chạy Offline — AI MỞ Studio",
   description:
-    "Bộ sưu tập công cụ số và động cơ giải toán offline độc lập. Bảo mật dữ liệu 100% trên thiết bị cá nhân, chạy mượt mà không cần internet.",
+    "Bộ sưu tập 95+ công cụ số, kế toán quản trị, dòng tiền, sản xuất, kho bãi và động cơ giải toán offline độc lập. Bảo mật dữ liệu 100% trên thiết bị cá nhân, chạy mượt mà không cần internet.",
   alternates: {
     canonical: "https://www.heyaimo.com/apps",
   },
@@ -25,16 +25,16 @@ export default async function AppsPage() {
         <div className="relative z-10 max-w-3xl space-y-5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EAF2FF] border border-[#155EEF]/20 text-[#155EEF] text-xs font-bold tracking-wide">
             <Cpu className="w-3.5 h-3.5" />
-            <span>Workspace Công cụ Thuật toán & Giáo dục số</span>
+            <span>Kho 95+ App Doanh nghiệp, Giáo dục & Công cụ số</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 leading-[1.15]">
-            19+ Ứng dụng độc lập{" "}
+            95+ Ứng dụng độc lập{" "}
             <span className="text-[#155EEF]">chạy 100% offline</span>
           </h1>
 
           <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-2xl">
-            Các công cụ giải quyết bài toán thật: máy ra đề Toán cấp 1 & 2 chuẩn GDPT 2018, tính lãi đơn sàn TMĐT, định giá khuyến mãi, bảng báo giá B2B và luyện gõ 10 ngón. Chạy trực tiếp trên trình duyệt, không gửi dữ liệu ra ngoài.
+            Các công cụ giải quyết bài toán thật: kế toán quản trị, dự báo dòng tiền 13 tuần, định mức sản xuất BOM, kho bãi FEFO, tính lãi TMĐT, máy ra đề Toán GDPT 2018 và luyện gõ 10 ngón. Chạy trực tiếp trên trình duyệt, không gửi dữ liệu ra ngoài.
           </p>
 
           <div className="flex flex-wrap gap-3 pt-2 text-xs font-semibold">

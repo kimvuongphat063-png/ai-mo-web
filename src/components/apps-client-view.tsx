@@ -25,6 +25,9 @@ import {
   List,
   Flame,
   Zap,
+  Receipt,
+  Factory,
+  Megaphone,
 } from "lucide-react";
 import type { HtmlAppWithManifest } from "@/lib/apps-manifest";
 import type { AppSuiteKey } from "@/lib/apps-data";
@@ -157,14 +160,32 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
       count: apps.filter((a) => a.suite === "commercial").length,
     },
     {
-      key: "operations",
-      label: "Vận hành & Quản trị",
+      key: "finance",
+      label: "Tài chính & Thuế",
+      icon: Receipt,
+      count: apps.filter((a) => a.suite === "finance").length,
+    },
+    {
+      key: "production",
+      label: "Sản xuất & Kho",
+      icon: Factory,
+      count: apps.filter((a) => a.suite === "production").length,
+    },
+    {
+      key: "marketing",
+      label: "Marketing",
+      icon: Megaphone,
+      count: apps.filter((a) => a.suite === "marketing").length,
+    },
+    {
+      key: "governance",
+      label: "Hợp đồng & Quản trị",
       icon: Briefcase,
-      count: apps.filter((a) => a.suite === "operations").length,
+      count: apps.filter((a) => a.suite === "governance").length,
     },
     {
       key: "education",
-      label: "Giáo dục & Toán học",
+      label: "Giáo dục & Học tập",
       icon: GraduationCap,
       count: apps.filter((a) => a.suite === "education").length,
     },
@@ -178,8 +199,12 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
 
   const quickTags = [
     { label: "🛒 Tính lãi Shopee / TikTok", query: "lãi thật", suite: "commercial" },
-    { label: "🏷️ Định giá & Khuyến mãi", query: "khuyến mãi", suite: "commercial" },
-    { label: "📋 Báo giá A4", query: "báo giá", suite: "commercial" },
+    { label: "💰 Dòng tiền 13 tuần", query: "dòng tiền", suite: "finance" },
+    { label: "🧾 Bảng kê hóa đơn", query: "hóa đơn", suite: "finance" },
+    { label: "🏭 Định mức BOM", query: "định mức", suite: "production" },
+    { label: "📦 Vị trí kho", query: "vị trí hàng", suite: "production" },
+    { label: "📢 Hiệu quả quảng cáo", query: "quảng cáo", suite: "marketing" },
+    { label: "📑 Theo dõi hợp đồng", query: "hợp đồng", suite: "governance" },
     { label: "📐 Máy ra đề Toán Cấp 1", query: "toán cấp 1", suite: "education" },
     { label: "⚡ Giải Toán Cấp 2 BigInt", query: "toán cấp 2", suite: "education" },
     { label: "⌨️ Luyện gõ 10 ngón", query: "gõ 10 ngón", suite: "cognitive" },
@@ -219,22 +244,43 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
     }[] = [
       {
         suite: "commercial",
-        title: "Kinh doanh & Bán lẻ (E-Commerce & B2B)",
-        desc: "Bộ công cụ tính lãi ròng, chống bán lỗ trên sàn TMĐT, lập báo giá xuất Excel/PDF tức thì.",
+        title: "Kinh doanh & Bán lẻ (E-Commerce, F&B & B2B)",
+        desc: "Bộ công cụ tính lãi ròng, chống bán lỗ trên sàn TMĐT, quản lý đơn hàng, F&B, spa và lập báo giá xuất Excel/PDF tức thì.",
         icon: Calculator,
         apps: filteredApps.filter((a) => a.suite === "commercial"),
       },
       {
-        suite: "operations",
-        title: "Vận hành & Quản trị Doanh nghiệp",
-        desc: "Hệ thống quản lý dòng tiền, chăm sóc khách hàng và quy trình chuẩn hóa SOP lưu trữ an toàn 100% trên thiết bị.",
+        suite: "finance",
+        title: "Tài chính, Kế toán & Nghĩa vụ Thuế",
+        desc: "Hệ thống dự báo dòng tiền 13 tuần, quản lý công nợ, đối chiếu sao kê ngân hàng, bảng kê hóa đơn và quyết toán thuế.",
+        icon: Receipt,
+        apps: filteredApps.filter((a) => a.suite === "finance"),
+      },
+      {
+        suite: "production",
+        title: "Sản xuất, Mua hàng & Quản trị Kho vận",
+        desc: "Định mức vật tư BOM, lệnh sản xuất phân xưởng, kế hoạch nguyên liệu, KCS chất lượng theo lô và quản trị kho FEFO.",
+        icon: Factory,
+        apps: filteredApps.filter((a) => a.suite === "production"),
+      },
+      {
+        suite: "marketing",
+        title: "Tiếp thị & Tăng trưởng (Marketing & Growth)",
+        desc: "Đo lường hiệu quả quảng cáo ROAS đa kênh, lịch nội dung content, phễu tuyển sinh và quản trị mục tiêu OKR.",
+        icon: Megaphone,
+        apps: filteredApps.filter((a) => a.suite === "marketing"),
+      },
+      {
+        suite: "governance",
+        title: "Hợp đồng, Vận hành & Quản trị Doanh nghiệp",
+        desc: "Theo dõi hợp đồng kinh tế, ngân sách năm, báo cáo quản trị CEO, quản lý tài sản cho thuê và nhật ký nhắc việc.",
         icon: Briefcase,
-        apps: filteredApps.filter((a) => a.suite === "operations"),
+        apps: filteredApps.filter((a) => a.suite === "governance"),
       },
       {
         suite: "education",
         title: "Giáo dục & Thuật toán Toán học",
-        desc: "Máy sinh đề thi và động cơ giải toán tự động chuẩn GDPT 2018 dành cho giáo viên, phụ huynh và học sinh.",
+        desc: "Máy sinh đề thi A4 GDPT 2018, giải toán THCS BigInt, ôn tập ngoại ngữ và bộ công cụ quản lý trường học, trung tâm đào tạo.",
         icon: GraduationCap,
         apps: filteredApps.filter((a) => a.suite === "education"),
       },
@@ -258,7 +304,13 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
     switch (suite) {
       case "commercial":
         return Calculator;
-      case "operations":
+      case "finance":
+        return Receipt;
+      case "production":
+        return Factory;
+      case "marketing":
+        return Megaphone;
+      case "governance":
         return Briefcase;
       case "education":
         return GraduationCap;

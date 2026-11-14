@@ -19,7 +19,7 @@ const cards = [
     id: "explore-2",
     img: "/images/home/article-apps-offline.jpg",
     alt: "Nhiều điện thoại hiển thị biểu tượng ứng dụng đầy màu sắc",
-    title: "14+ App HTML miễn phí",
+    title: "95+ App HTML miễn phí",
     desc: "Kho ứng dụng nhỏ chạy ngay trên trình duyệt.",
     link: "/apps",
     linkLabel: "Mở kho app",
