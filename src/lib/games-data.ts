@@ -9,7 +9,7 @@ export interface GameItem {
   voice: boolean;
   android8?: boolean;
   template?: boolean;
-  icon: string;
+  icon?: string | null;
   zip?: string;
   zipBytes?: number;
 }
@@ -774,7 +774,7 @@ export const GAMES_DATA: GameItem[] = [
     "voice": false,
     "android8": false,
     "template": false,
-    "icon": null,
+    "icon": "",
     "zip": "downloads/games/cun-san-so-7.zip",
     "zipBytes": 4354
   },
