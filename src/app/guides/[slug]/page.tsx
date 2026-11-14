@@ -25,9 +25,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await findCmsArticle(slug);
   if (!article) notFound();
 
-  const articles = (await readCms()).articles.filter(isPublic).sort((a, b) => a.sortOrder - b.sortOrder);
+  let articles: any[] = [];
+  try {
+    const cms = await readCms();
+    articles = (cms.articles || []).filter(isPublic).sort((a, b) => a.sortOrder - b.sortOrder);
+  } catch (err) {
+    console.error("[guides/slug] Failed to read articles:", err);
+  }
   const currentIndex = articles.findIndex((item) => item.id === article.id);
-  const nextArticle = articles[(currentIndex + 1) % articles.length];
+  const nextArticle = articles.length > 1 && currentIndex >= 0 ? articles[(currentIndex + 1) % articles.length] : null;
 
   return (
     <main id="main-content" className="article-page">

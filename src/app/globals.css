@@ -678,30 +678,10 @@ body::before {
   -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 0%, transparent 75%);
 }
 
-/* --- Header: LED underline that breathes ------------------------- */
+/* --- Header: Clean sticky navigation ---------------------------- */
 .site-header {
-  position: relative;
-}
-
-.site-header::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--electric-blue) 20%,
-    var(--electric-cyan) 40%,
-    var(--electric-purple) 60%,
-    var(--electric-blue) 80%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: led-marquee 6s linear infinite;
-  opacity: 0.75;
+  position: sticky;
+  top: 0;
 }
 
 /* --- Hero headline: gradient ink with a soft neon bloom ---------- */

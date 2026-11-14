@@ -18,7 +18,7 @@ const shortText = requiredText.max(180);
 const slugSchema = z.string().trim().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug chỉ gồm chữ thường, số và dấu gạch ngang").max(100);
 const urlSchema = z.string().trim().url().max(500);
 const stringList = z.array(z.string().trim().min(1).max(500)).max(100).default([]);
-const seoSchema = z.object({ title: z.string().trim().max(70).default(""), description: z.string().trim().max(170).default("") }).default({ title: "", description: "" });
+const seoSchema = z.object({ title: z.string().trim().max(300).default(""), description: z.string().trim().max(1000).default("") }).default({ title: "", description: "" });
 
 const commonSchema = z.object({
   id: z.string().trim().min(1).max(100), slug: slugSchema, title: shortText,

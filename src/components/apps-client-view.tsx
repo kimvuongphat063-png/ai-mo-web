@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Search,
   X,
@@ -20,6 +21,10 @@ import {
   ArrowRight,
   FileCode2,
   ExternalLink,
+  LayoutGrid,
+  List,
+  Flame,
+  Zap,
 } from "lucide-react";
 import type { HtmlAppWithManifest } from "@/lib/apps-manifest";
 import type { AppSuiteKey } from "@/lib/apps-data";
@@ -30,9 +35,105 @@ interface Props {
   isLoggedIn?: boolean;
 }
 
+// Map specialized visual imagery or mockup styles to apps for maximum visual punch
+const APP_MOCKUP_METAS: Record<
+  string,
+  {
+    image?: string;
+    gradient: string;
+    pillBg: string;
+    pillText: string;
+    tagline: string;
+  }
+> = {
+  "lai-that-tung-don": {
+    image: "/images/home/bento-profit-calc.jpg",
+    gradient: "from-blue-600 to-indigo-700",
+    pillBg: "bg-blue-50 text-blue-700 border-blue-200/80",
+    pillText: "Phổ biến nhất",
+    tagline: "Khấu trừ phí sàn Shopee/TikTok · Lợi nhuận ròng",
+  },
+  "gia-ban-khuyen-mai": {
+    image: "/images/home/bento-pricing-tool.jpg",
+    gradient: "from-indigo-600 to-purple-700",
+    pillBg: "bg-indigo-50 text-indigo-700 border-indigo-200/80",
+    pillText: "Điểm hòa vốn",
+    tagline: "Mô phỏng 3 kịch bản Flash Sale không lỗ",
+  },
+  "bang-bao-gia-a4": {
+    image: "/images/home/article-apps-offline.jpg",
+    gradient: "from-sky-600 to-blue-700",
+    pillBg: "bg-sky-50 text-sky-700 border-sky-200/80",
+    pillText: "B2B Pro",
+    tagline: "Xuất file PDF & Excel báo giá khách hàng 2 phút",
+  },
+  "ctv-affiliate": {
+    gradient: "from-blue-500 via-indigo-600 to-blue-700",
+    pillBg: "bg-blue-50 text-blue-700 border-blue-200/80",
+    pillText: "Sổ hoa hồng",
+    tagline: "Đối soát hoa hồng CTV và thanh toán minh bạch",
+  },
+  "quan-ly-dai-ly": {
+    gradient: "from-indigo-600 via-blue-600 to-slate-800",
+    pillBg: "bg-indigo-50 text-indigo-700 border-indigo-200/80",
+    pillText: "Chiết khấu",
+    tagline: "Quản lý công nợ, hạn mức và volume thưởng quý",
+  },
+  "ngan-sach-gia-dinh": {
+    gradient: "from-emerald-600 to-teal-700",
+    pillBg: "bg-emerald-50 text-emerald-700 border-emerald-200/80",
+    pillText: "6 phong bì",
+    tagline: "Theo dõi thu chi 12 tháng, bảo mật cục bộ",
+  },
+  "cham-soc-khach-hang": {
+    gradient: "from-teal-600 to-emerald-700",
+    pillBg: "bg-teal-50 text-teal-700 border-teal-200/80",
+    pillText: "Tái mua hàng",
+    tagline: "Nhắc lịch bảo dưỡng, nhật ký tương tác khách",
+  },
+  "sop-checklist": {
+    gradient: "from-green-600 to-teal-700",
+    pillBg: "bg-green-50 text-green-700 border-green-200/80",
+    pillText: "Quy trình SOP",
+    tagline: "Checklist kiểm soát chất lượng không bỏ sót bước",
+  },
+  "ke-hoach-tuan": {
+    gradient: "from-teal-500 to-cyan-700",
+    pillBg: "bg-teal-50 text-teal-700 border-teal-200/80",
+    pillText: "Timeboxing",
+    tagline: "Phân bổ ưu tiên và đo lường tỷ lệ hoàn thành",
+  },
+  "may-ra-de-toan-cap-1": {
+    image: "/images/home/action-apps-free.jpg",
+    gradient: "from-purple-600 to-pink-600",
+    pillBg: "bg-purple-50 text-purple-700 border-purple-200/80",
+    pillText: "GDPT 2018",
+    tagline: "Sinh đề thi Toán Lớp 1 - 5 kèm ma trận đáp án A4",
+  },
+  "giai-toan-cap-2": {
+    gradient: "from-violet-600 to-purple-800",
+    pillBg: "bg-violet-50 text-violet-700 border-violet-200/80",
+    pillText: "Động cơ BigInt",
+    tagline: "Giải chi tiết từng bước, chấm điểm tương tác",
+  },
+  "toan-lop-4-hk1": {
+    gradient: "from-fuchsia-600 to-purple-700",
+    pillBg: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200/80",
+    pillText: "Ôn tập HK1",
+    tagline: "Bộ đề ôn tập phân số, 4 phép tính có lời văn",
+  },
+  "luyen-go-10-ngon": {
+    gradient: "from-cyan-600 to-blue-700",
+    pillBg: "bg-cyan-50 text-cyan-700 border-cyan-200/80",
+    pillText: "Đo WPM chuẩn",
+    tagline: "Luyện công thái học bàn phím, phản xạ gõ nhanh",
+  },
+};
+
 export function AppsClientView({ apps, isLoggedIn = false }: Props) {
   const [query, setQuery] = useState("");
   const [selectedSuite, setSelectedSuite] = useState<string>("all");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // ⌘K / Ctrl+K keyboard shortcut to focus search input
@@ -76,11 +177,11 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
   ];
 
   const quickTags = [
-    { label: "📐 Toán Cấp 1", query: "toán cấp 1", suite: "education" },
-    { label: "⚡ Toán Cấp 2 BigInt", query: "toán cấp 2", suite: "education" },
-    { label: "🎒 Ôn tập HK1 Lớp 4", query: "lớp 4", suite: "education" },
-    { label: "🛒 Tính lãi sàn TMĐT", query: "lãi thật", suite: "commercial" },
+    { label: "🛒 Tính lãi Shopee / TikTok", query: "lãi thật", suite: "commercial" },
+    { label: "🏷️ Định giá & Khuyến mãi", query: "khuyến mãi", suite: "commercial" },
     { label: "📋 Báo giá A4", query: "báo giá", suite: "commercial" },
+    { label: "📐 Máy ra đề Toán Cấp 1", query: "toán cấp 1", suite: "education" },
+    { label: "⚡ Giải Toán Cấp 2 BigInt", query: "toán cấp 2", suite: "education" },
     { label: "⌨️ Luyện gõ 10 ngón", query: "gõ 10 ngón", suite: "cognitive" },
   ];
 
@@ -107,6 +208,52 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
     });
   }, [apps, query, selectedSuite]);
 
+  // Group apps by category for thematic presentation
+  const groupedApps = useMemo(() => {
+    const groups: {
+      suite: AppSuiteKey;
+      title: string;
+      desc: string;
+      icon: typeof Calculator;
+      apps: HtmlAppWithManifest[];
+    }[] = [
+      {
+        suite: "commercial",
+        title: "Kinh doanh & Bán lẻ (E-Commerce & B2B)",
+        desc: "Bộ công cụ tính lãi ròng, chống bán lỗ trên sàn TMĐT, lập báo giá xuất Excel/PDF tức thì.",
+        icon: Calculator,
+        apps: filteredApps.filter((a) => a.suite === "commercial"),
+      },
+      {
+        suite: "operations",
+        title: "Vận hành & Quản trị Doanh nghiệp",
+        desc: "Hệ thống quản lý dòng tiền, chăm sóc khách hàng và quy trình chuẩn hóa SOP lưu trữ an toàn 100% trên thiết bị.",
+        icon: Briefcase,
+        apps: filteredApps.filter((a) => a.suite === "operations"),
+      },
+      {
+        suite: "education",
+        title: "Giáo dục & Thuật toán Toán học",
+        desc: "Máy sinh đề thi và động cơ giải toán tự động chuẩn GDPT 2018 dành cho giáo viên, phụ huynh và học sinh.",
+        icon: GraduationCap,
+        apps: filteredApps.filter((a) => a.suite === "education"),
+      },
+      {
+        suite: "cognitive",
+        title: "Kỹ năng & Tốc độ làm việc",
+        desc: "Ứng dụng rèn luyện công thái học bàn phím 10 ngón và gia tăng tốc độ gõ phím đạt chuẩn WPM.",
+        icon: Keyboard,
+        apps: filteredApps.filter((a) => a.suite === "cognitive"),
+      },
+    ];
+
+    // If a specific suite is selected, only keep that group
+    if (selectedSuite !== "all") {
+      return groups.filter((g) => g.suite === selectedSuite && g.apps.length > 0);
+    }
+    return groups.filter((g) => g.apps.length > 0);
+  }, [filteredApps, selectedSuite]);
+
   function getSuiteIcon(suite: AppSuiteKey) {
     switch (suite) {
       case "commercial":
@@ -125,7 +272,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
   return (
     <div className="space-y-12">
       {/* ── TẦNG 1: COMMAND CENTER (BỘ ĐIỀU HƯỚNG & TÌM KIẾM TRỰC QUAN) ────────── */}
-      <div className="bg-white/80 backdrop-blur-md rounded-3xl border border-neutral-200/90 p-5 sm:p-6 shadow-xs space-y-4">
+      <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-neutral-200/90 p-5 sm:p-6 shadow-xs space-y-4">
         {/* Hàng 1: Bộ chọn Suite dạng Segmented Control nổi bật */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-neutral-100/80 border border-neutral-200/60 overflow-x-auto no-scrollbar">
@@ -190,7 +337,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Tìm kiếm công cụ theo tên, chức năng hoặc môn học (vd: Toán cấp 1, BigInt, Lớp 4, Tính lãi đơn...)..."
+            placeholder="Tìm kiếm công cụ theo tên, chức năng hoặc môn học (vd: Tính lãi đơn, Shopee, Báo giá, Toán cấp 1, BigInt...)..."
             className="w-full pl-11 pr-32 sm:pr-36 py-3 rounded-2xl border border-neutral-200/90 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:border-[#155EEF] focus:ring-3 focus:ring-[#155EEF]/10 transition-all bg-white shadow-2xs"
           />
           <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-2">
@@ -245,99 +392,109 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
         </div>
       </div>
 
-      {/* ── TẦNG 2: SPOTLIGHT SHOWCASE (CHỈ HIỂN THỊ KHI KHÔNG SEARCH HOẶC Ở TAB ALL) ── */}
+      {/* ── TẦNG 2: SPOTLIGHT SHOWCASE (KHI Ở TAB ALL VÀ CHƯA TÌM KIẾM) ── */}
       {!query && selectedSuite === "all" && (
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-[#155EEF]" />
-              <h2 className="text-sm font-bold tracking-wider text-neutral-900 uppercase">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-[#155EEF] animate-pulse" />
+              <h2 className="text-sm font-extrabold tracking-wider text-neutral-900 uppercase">
                 Spotlight · Công cụ trọng điểm nổi bật
               </h2>
             </div>
             <span className="text-xs text-neutral-500 font-mono">
-              Offline Zero-Telemetry
+              Offline 100% · Không Server
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredApps.slice(0, 6).map((app) => {
+            {featuredApps.slice(0, 3).map((app) => {
               const SuiteIcon = getSuiteIcon(app.suite);
+              const meta = APP_MOCKUP_METAS[app.slug];
               return (
                 <div
                   key={app.slug}
-                  className="group relative bg-white rounded-3xl border border-neutral-200/90 p-6 flex flex-col justify-between hover:shadow-xl hover:border-[#155EEF]/40 hover:-translate-y-0.5 transition-all duration-300"
+                  className="group relative bg-white rounded-3xl border border-neutral-200/90 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-[#155EEF]/50 hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="space-y-4">
-                    {/* Header Strip */}
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-10 h-10 rounded-2xl bg-[#EAF2FF] text-[#155EEF] flex items-center justify-center shrink-0 border border-[#155EEF]/10 group-hover:bg-[#155EEF] group-hover:text-white transition-colors">
-                          <SuiteIcon className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <span className="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">
-                            {app.suiteLabel}
-                          </span>
-                          <span className="text-xs font-mono font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60 inline-block mt-0.5">
-                            ⚡ {app.fileSizeFormatted} · Offline
-                          </span>
+                  {/* Thumbnail Banner */}
+                  <div className="relative h-44 w-full bg-gradient-to-tr from-neutral-900 via-neutral-800 to-blue-950 overflow-hidden">
+                    {meta?.image ? (
+                      <Image
+                        src={meta.image}
+                        alt={app.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+                      />
+                    ) : (
+                      <div className={`absolute inset-0 bg-gradient-to-tr ${meta?.gradient || "from-blue-600 to-indigo-700"} flex items-center justify-center p-6 text-white`}>
+                        <div className="text-center space-y-1">
+                          <SuiteIcon className="w-12 h-12 mx-auto text-white/90 drop-shadow-md" />
+                          <span className="text-xs font-bold text-white/80 block uppercase tracking-wider">{app.suiteLabel}</span>
                         </div>
                       </div>
-
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    
+                    <div className="absolute top-3 left-3 flex items-center gap-2">
+                      <span className="bg-white/95 text-neutral-900 font-mono text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs">
+                        ⚡ {app.fileSizeFormatted}
+                      </span>
                       {app.badge && (
-                        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-50 text-[#155EEF] border border-[#155EEF]/20 uppercase tracking-wide">
+                        <span className="bg-[#155EEF] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-xs uppercase tracking-wide">
                           {app.badge}
                         </span>
                       )}
                     </div>
 
-                    {/* Title & Summary */}
+                    <div className="absolute bottom-3 left-3 right-3 text-white">
+                      <span className="text-[11px] font-medium text-blue-200 block truncate">
+                        {meta?.tagline || app.suiteLabel}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-base font-extrabold text-neutral-900 group-hover:text-[#155EEF] transition-colors line-clamp-1">
+                      <h3 className="text-base sm:text-lg font-extrabold text-neutral-900 group-hover:text-[#155EEF] transition-colors leading-snug">
                         <Link href={`/apps/${app.slug}`}>{app.title}</Link>
                       </h3>
                       <p className="mt-1.5 text-xs text-neutral-600 line-clamp-2 leading-relaxed">
                         {app.summary}
                       </p>
+
+                      <div className="space-y-1.5 pt-3 border-t border-neutral-100 mt-3">
+                        {app.highlights.slice(0, 2).map((item, idx) => (
+                          <div key={idx} className="flex items-center gap-2 text-xs text-neutral-600">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#155EEF] shrink-0" />
+                            <span className="truncate">{item}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
-                    {/* Highlights bullet chips */}
-                    <div className="space-y-1.5 pt-1">
-                      {app.highlights.slice(0, 2).map((item, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center gap-2 text-xs text-neutral-600"
-                        >
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#155EEF] shrink-0" />
-                          <span className="truncate">{item}</span>
-                        </div>
-                      ))}
+                    {/* Action Strip */}
+                    <div className="pt-4 mt-2 border-t border-neutral-100 flex items-center gap-2">
+                      <Link
+                        href={`/apps/${app.slug}`}
+                        className="flex-1 py-2.5 px-3.5 rounded-xl bg-[#155EEF] hover:bg-blue-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm shadow-[#155EEF]/20 cursor-pointer"
+                      >
+                        <Play className="w-3.5 h-3.5 fill-current" />
+                        <span>Khởi chạy app</span>
+                      </Link>
+
+                      <a
+                        href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                        className="py-2.5 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-700 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
+                      >
+                        {isLoggedIn ? (
+                          <Download className="w-3.5 h-3.5 text-neutral-600" />
+                        ) : (
+                          <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                        )}
+                        <span>Tải file</span>
+                      </a>
                     </div>
-                  </div>
-
-                  {/* Dual Action Strip */}
-                  <div className="pt-5 mt-5 border-t border-neutral-100 flex items-center gap-2">
-                    <Link
-                      href={`/apps/${app.slug}`}
-                      className="flex-1 py-2 px-3 rounded-xl bg-[#155EEF] hover:bg-blue-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm shadow-[#155EEF]/20 cursor-pointer"
-                    >
-                      <Play className="w-3.5 h-3.5 fill-current" />
-                      <span>Khởi chạy</span>
-                    </Link>
-
-                    <a
-                      href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
-                      className="py-2 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-700 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                      title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
-                    >
-                      {isLoggedIn ? (
-                        <Download className="w-3.5 h-3.5 text-neutral-600" />
-                      ) : (
-                        <Lock className="w-3.5 h-3.5 text-neutral-400" />
-                      )}
-                      <span>Tải file</span>
-                    </a>
                   </div>
                 </div>
               );
@@ -346,98 +503,265 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
         </section>
       )}
 
-      {/* ── TẦNG 3: SUITE MATRIX (DANH SÁCH TOÀN BỘ CÔNG CỤ HOẶC KẾT QUẢ TÌM KIẾM) ── */}
-      <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
-            <h2 className="text-sm font-bold tracking-wider text-neutral-900 uppercase">
-              {query
-                ? `Kết quả tìm kiếm ("${query}")`
-                : selectedSuite === "all"
-                ? "Ma trận công cụ chi tiết (All Algorithmic Tools)"
-                : `Danh mục: ${SUITE_DEFINITIONS[selectedSuite as AppSuiteKey]?.label ?? selectedSuite}`}
-            </h2>
+      {/* ── TẦNG 3: BỘ SƯU TẬP THEO CHỦ ĐỀ & CHẾ ĐỘ HIỂN THỊ (GRID / LIST) ── */}
+      <section className="space-y-8">
+        {/* Header bar with View Mode Toggle */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-neutral-200/80">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+              <h2 className="text-base sm:text-lg font-black tracking-tight text-neutral-900">
+                {query
+                  ? `Kết quả tìm kiếm cho: "${query}"`
+                  : selectedSuite === "all"
+                  ? "Danh mục toàn bộ 19 ứng dụng theo chủ đề"
+                  : `Chủ đề: ${SUITE_DEFINITIONS[selectedSuite as AppSuiteKey]?.label ?? selectedSuite}`}
+              </h2>
+            </div>
+            <p className="text-xs text-neutral-500 mt-0.5">
+              Tất cả đều chạy độc lập 100% trong trình duyệt, không cài đặt, không gửi dữ liệu ra máy chủ ngoài.
+            </p>
           </div>
-          <span className="text-xs text-neutral-500">
-            {filteredApps.length} công cụ sẵn sàng
-          </span>
+
+          {/* View Mode Toggle: Grid vs List */}
+          <div className="flex items-center gap-1 bg-neutral-100 p-1 rounded-xl border border-neutral-200/70 self-start sm:self-auto">
+            <button
+              type="button"
+              onClick={() => setViewMode("grid")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                viewMode === "grid"
+                  ? "bg-white text-[#155EEF] shadow-xs"
+                  : "text-neutral-500 hover:text-neutral-800"
+              }`}
+            >
+              <LayoutGrid className="w-3.5 h-3.5" />
+              <span>Lưới thẻ</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("list")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                viewMode === "list"
+                  ? "bg-white text-[#155EEF] shadow-xs"
+                  : "text-neutral-500 hover:text-neutral-800"
+              }`}
+            >
+              <List className="w-3.5 h-3.5" />
+              <span>Danh sách</span>
+            </button>
+          </div>
         </div>
 
-        {filteredApps.length > 0 ? (
-          <div className="bg-white rounded-3xl border border-neutral-200/90 divide-y divide-neutral-100 overflow-hidden shadow-sm">
-            {filteredApps.map((app) => {
-              const SuiteIcon = getSuiteIcon(app.suite);
+        {/* THEMATIC GROUPS RENDERING */}
+        {groupedApps.length > 0 ? (
+          <div className="space-y-12">
+            {groupedApps.map((group) => {
+              const GroupIcon = group.icon;
               return (
-                <div
-                  key={app.slug}
-                  className="group p-4 sm:p-5 hover:bg-neutral-50/70 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  {/* Left: Icon & Info */}
-                  <div className="flex items-start gap-4 flex-1 min-w-0">
-                    <div className="w-11 h-11 rounded-2xl bg-neutral-100 text-neutral-700 flex items-center justify-center shrink-0 border border-neutral-200/70 group-hover:bg-[#EAF2FF] group-hover:text-[#155EEF] group-hover:border-[#155EEF]/20 transition-all">
-                      <SuiteIcon className="w-5 h-5" />
+                <div key={group.suite} className="space-y-5">
+                  {/* Category Section Header Banner */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-neutral-50 via-blue-50/30 to-white border border-neutral-200/80">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-white border border-neutral-200 shadow-2xs flex items-center justify-center text-[#155EEF] shrink-0">
+                        <GroupIcon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm sm:text-base font-extrabold text-neutral-900">
+                          {group.title}
+                        </h3>
+                        <p className="text-xs text-neutral-500 line-clamp-1">
+                          {group.desc}
+                        </p>
+                      </div>
                     </div>
+                    <span className="text-xs font-bold text-neutral-500 bg-white px-3 py-1 rounded-full border border-neutral-200 shrink-0 self-start sm:self-auto">
+                      {group.apps.length} ứng dụng
+                    </span>
+                  </div>
 
-                    <div className="space-y-1 min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Link
-                          href={`/apps/${app.slug}`}
-                          className="text-sm sm:text-base font-extrabold text-neutral-900 hover:text-[#155EEF] transition-colors truncate"
+                  {/* DISPLAY MODE: GRID VIEW */}
+                  {viewMode === "grid" ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {group.apps.map((app) => {
+                        const meta = APP_MOCKUP_METAS[app.slug];
+                        return (
+                          <div
+                            key={app.slug}
+                            className="group bg-white rounded-3xl border border-neutral-200/90 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-[#155EEF]/50 hover:-translate-y-1 transition-all duration-300"
+                          >
+                            {/* Card Visual Header */}
+                            <div className="relative h-36 w-full bg-gradient-to-tr from-neutral-900 to-slate-800 overflow-hidden">
+                              {meta?.image ? (
+                                <Image
+                                  src={meta.image}
+                                  alt={app.title}
+                                  fill
+                                  className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
+                                />
+                              ) : (
+                                <div className={`absolute inset-0 bg-gradient-to-br ${meta?.gradient || "from-blue-600 to-indigo-700"} p-5 flex flex-col justify-between text-white`}>
+                                  <div className="flex items-center justify-between">
+                                    <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center">
+                                      <GroupIcon className="w-4 h-4 text-white" />
+                                    </div>
+                                    <span className="font-mono text-[11px] font-semibold bg-black/30 backdrop-blur-sm px-2 py-0.5 rounded-md text-white/90">
+                                      ⚡ {app.fileSizeFormatted}
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <span className="text-[11px] font-bold text-white/80 uppercase tracking-wider block">
+                                      {app.engineSpec || "Thuật toán Cục bộ"}
+                                    </span>
+                                    <span className="text-xs font-extrabold text-white block truncate drop-shadow-sm">
+                                      {meta?.tagline || app.title}
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                              <div className="absolute top-3 left-3 flex items-center gap-2">
+                                {app.badge && (
+                                  <span className="bg-[#155EEF] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow-xs uppercase tracking-wide">
+                                    {app.badge}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Card Body */}
+                            <div className="p-5 sm:p-6 space-y-3.5 flex-1 flex flex-col justify-between">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between text-xs text-neutral-400">
+                                  <span className="font-semibold text-neutral-500">{app.suiteLabel}</span>
+                                  <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md font-mono text-[10.5px]">
+                                    ✓ Offline
+                                  </span>
+                                </div>
+
+                                <h4 className="text-base font-extrabold text-neutral-900 group-hover:text-[#155EEF] transition-colors leading-snug">
+                                  <Link href={`/apps/${app.slug}`}>{app.title}</Link>
+                                </h4>
+
+                                <p className="text-xs text-neutral-600 line-clamp-2 leading-relaxed">
+                                  {app.summary}
+                                </p>
+
+                                <div className="space-y-1.5 pt-2 border-t border-neutral-100">
+                                  {app.highlights.slice(0, 2).map((item, idx) => (
+                                    <div key={idx} className="flex items-center gap-2 text-[11.5px] text-neutral-600">
+                                      <CheckCircle2 className="w-3.5 h-3.5 text-[#155EEF] shrink-0" />
+                                      <span className="truncate">{item}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Card Actions */}
+                              <div className="pt-4 border-t border-neutral-100 flex items-center gap-2">
+                                <Link
+                                  href={`/apps/${app.slug}`}
+                                  className="flex-1 py-2 px-3 rounded-xl bg-[#155EEF] hover:bg-blue-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm shadow-[#155EEF]/20 cursor-pointer"
+                                >
+                                  <Play className="w-3.5 h-3.5 fill-current" />
+                                  <span>Khởi chạy</span>
+                                </Link>
+
+                                <a
+                                  href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                                  className="py-2 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-700 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                                  title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
+                                >
+                                  {isLoggedIn ? (
+                                    <Download className="w-3.5 h-3.5 text-neutral-600" />
+                                  ) : (
+                                    <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                                  )}
+                                  <span>Tải file</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    /* DISPLAY MODE: MATRIX LIST VIEW */
+                    <div className="bg-white rounded-3xl border border-neutral-200/90 divide-y divide-neutral-100 overflow-hidden shadow-sm">
+                      {group.apps.map((app) => (
+                        <div
+                          key={app.slug}
+                          className="group p-4 sm:p-5 hover:bg-neutral-50/70 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                         >
-                          {app.title}
-                        </Link>
+                          {/* Left: Icon & Info */}
+                          <div className="flex items-start gap-4 flex-1 min-w-0">
+                            <div className="w-11 h-11 rounded-2xl bg-neutral-100 text-neutral-700 flex items-center justify-center shrink-0 border border-neutral-200/70 group-hover:bg-[#EAF2FF] group-hover:text-[#155EEF] group-hover:border-[#155EEF]/20 transition-all">
+                              <GroupIcon className="w-5 h-5" />
+                            </div>
 
-                        {app.badge && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#155EEF] border border-[#155EEF]/20">
-                            {app.badge}
-                          </span>
-                        )}
+                            <div className="space-y-1 min-w-0 flex-1">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <Link
+                                  href={`/apps/${app.slug}`}
+                                  className="text-sm sm:text-base font-extrabold text-neutral-900 hover:text-[#155EEF] transition-colors truncate"
+                                >
+                                  {app.title}
+                                </Link>
 
-                        <span className="text-[11px] font-mono font-medium text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-md">
-                          ⚡ {app.fileSizeFormatted}
-                        </span>
-                      </div>
+                                {app.badge && (
+                                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#155EEF] border border-[#155EEF]/20">
+                                    {app.badge}
+                                  </span>
+                                )}
 
-                      <p className="text-xs text-neutral-600 line-clamp-1">
-                        {app.summary}
-                      </p>
+                                <span className="text-[11px] font-mono font-medium text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-md">
+                                  ⚡ {app.fileSizeFormatted}
+                                </span>
+                              </div>
 
-                      <div className="flex flex-wrap items-center gap-3 text-[11px] text-neutral-400 pt-0.5">
-                        <span className="text-neutral-500 font-medium">
-                          {app.suiteLabel}
-                        </span>
-                        <span>•</span>
-                        <span>{app.engineSpec || "Thuật toán offline độc lập"}</span>
-                        <span>•</span>
-                        <span className="text-emerald-700 font-medium">Bảo mật thiết bị</span>
-                      </div>
+                              <p className="text-xs text-neutral-600 line-clamp-1">
+                                {app.summary}
+                              </p>
+
+                              <div className="flex flex-wrap items-center gap-3 text-[11px] text-neutral-400 pt-0.5">
+                                <span className="text-neutral-500 font-medium">
+                                  {app.suiteLabel}
+                                </span>
+                                <span>•</span>
+                                <span>{app.engineSpec || "Thuật toán offline độc lập"}</span>
+                                <span>•</span>
+                                <span className="text-emerald-700 font-medium">Bảo mật thiết bị</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Right: Actions */}
+                          <div className="flex items-center gap-2 shrink-0 sm:self-center pl-15 sm:pl-0">
+                            <Link
+                              href={`/apps/${app.slug}`}
+                              className="py-2 px-3.5 rounded-xl bg-neutral-100 hover:bg-[#EAF2FF] hover:text-[#155EEF] text-neutral-700 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+                            >
+                              <Play className="w-3.5 h-3.5 fill-current" />
+                              <span>Mở app</span>
+                            </Link>
+
+                            <a
+                              href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                              className="py-2 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-600 text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer"
+                              title={isLoggedIn ? `Tải file ${app.fileName}` : "Đăng nhập để tải file"}
+                            >
+                              {isLoggedIn ? (
+                                <Download className="w-3.5 h-3.5" />
+                              ) : (
+                                <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                              )}
+                              <span className="hidden sm:inline">Tải về</span>
+                            </a>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  </div>
-
-                  {/* Right: Actions */}
-                  <div className="flex items-center gap-2 shrink-0 sm:self-center pl-15 sm:pl-0">
-                    <Link
-                      href={`/apps/${app.slug}`}
-                      className="py-2 px-3.5 rounded-xl bg-neutral-100 hover:bg-[#EAF2FF] hover:text-[#155EEF] text-neutral-700 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
-                    >
-                      <Play className="w-3.5 h-3.5 fill-current" />
-                      <span>Mở app</span>
-                    </Link>
-
-                    <a
-                      href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
-                      className="py-2 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-600 text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer"
-                      title={isLoggedIn ? `Tải file ${app.fileName}` : "Đăng nhập để tải file"}
-                    >
-                      {isLoggedIn ? (
-                        <Download className="w-3.5 h-3.5" />
-                      ) : (
-                        <Lock className="w-3.5 h-3.5 text-neutral-400" />
-                      )}
-                      <span className="hidden sm:inline">Tải về</span>
-                    </a>
-                  </div>
+                  )}
                 </div>
               );
             })}

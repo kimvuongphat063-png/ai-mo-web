@@ -8,7 +8,7 @@ import { getSession } from "@/lib/auth";
 type GuideCardStyle = CSSProperties & { "--guide-accent": string };
 
 function ArticleCard({ article, featured = false }: { article: CmsArticle; featured?: boolean }) {
-  const style: GuideCardStyle = { "--guide-accent": article.accent };
+  const style: GuideCardStyle = { "--guide-accent": article.accent || "#155EEF" };
 
   return (
     <Link
@@ -17,9 +17,19 @@ function ArticleCard({ article, featured = false }: { article: CmsArticle; featu
       className={featured ? "guide-card guide-card-featured" : "guide-card"}
       style={style}
     >
-      <div className="guide-card-art" aria-hidden="true">
-        <span>{article.category}</span>
-        <b>{featured ? "01" : "AI"}</b>
+      <div className="guide-card-art relative overflow-hidden" aria-hidden="true">
+        {article.image ? (
+          <img
+            src={article.image}
+            alt={article.title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          />
+        ) : (
+          <>
+            <span>{article.category}</span>
+            <b>{featured ? "01" : "AI"}</b>
+          </>
+        )}
       </div>
       <div className="guide-card-body">
         <div className="guide-meta">
@@ -37,11 +47,17 @@ function ArticleCard({ article, featured = false }: { article: CmsArticle; featu
 export default async function Page() {
   const session = await getSession();
   const isAdmin = session?.role === "admin";
-  const articles = (await readCms()).articles
-    .filter(isPublic)
-    .sort((a, b) => a.sortOrder - b.sortOrder);
+  let articles: CmsArticle[] = [];
+  try {
+    const cms = await readCms();
+    articles = (cms.articles || [])
+      .filter(isPublic)
+      .sort((a, b) => a.sortOrder - b.sortOrder);
+  } catch (err) {
+    console.error("[guides] Failed to read articles from CMS:", err);
+  }
   const featured = articles.find((article) => article.featured) || articles[0];
-  const rest = articles.filter((article) => article.id !== featured?.id);
+  const rest = featured ? articles.filter((article) => article.id !== featured.id) : [];
   const categories = [...new Set(articles.map((article) => article.category))];
 
   return (
