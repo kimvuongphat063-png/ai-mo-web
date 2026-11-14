@@ -181,7 +181,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="hero container max-w-[1240px] mx-auto px-4 sm:px-5 pt-5 sm:pt-7" id="top">
+    <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-5 pt-5 sm:pt-7" id="top">
       {/* Hero Panel */}
       <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-r from-[#0b4de8] via-[#2f6bff] to-[#c9d8ff] p-6 sm:p-10 lg:p-14 text-white">
         {/* Grid overlay */}

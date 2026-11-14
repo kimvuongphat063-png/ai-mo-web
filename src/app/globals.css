@@ -246,7 +246,7 @@ button, input {
   cursor: pointer;
 }
 
-.hero {
+.legacy-hero {
   min-height: 760px;
   display: grid;
   grid-template-columns: 110px 1.05fr 0.95fr;
@@ -351,7 +351,7 @@ button, input {
   color: var(--ink);
 }
 
-.hero h1 {
+.legacy-hero h1 {
   font-size: clamp(40px, 6vw, 56px);
   line-height: 0.95;
   letter-spacing: -0.04em;
@@ -705,7 +705,7 @@ body::before {
 
 /* --- Hero headline: gradient ink with a soft neon bloom ---------- */
 .cms-hero h1,
-.hero h1 {
+.legacy-hero h1 {
   background: linear-gradient(
     100deg,
     var(--ink) 0%,

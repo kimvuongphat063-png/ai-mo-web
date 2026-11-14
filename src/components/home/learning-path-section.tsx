@@ -9,7 +9,7 @@ export function LearningPath() {
   const { getImage } = useHomeImages();
 
   return (
-    <section className="block container max-w-[1240px] mx-auto px-4 sm:px-5 pt-14 sm:pt-16" id="lo-trinh">
+    <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-5 pt-14 sm:pt-16" id="lo-trinh">
       <div className="max-w-[640px] mb-7">
         <span className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0057ff] mb-3">
           <Sparkles className="w-3.5 h-3.5 text-[#7c4dff]" />
