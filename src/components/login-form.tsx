@@ -50,12 +50,6 @@ export function LoginForm() {
     }
   }
 
-  function fillDemo(e: string, p: string) {
-    setEmail(e);
-    setPassword(p);
-    setError("");
-  }
-
   return (
     <div className="bg-white/90 backdrop-blur-xl border border-neutral-200/90 rounded-3xl p-6 sm:p-8 shadow-xl shadow-blue-500/5 space-y-6">
       <div className="space-y-2 text-center">
@@ -181,32 +175,6 @@ export function LoginForm() {
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
         </button>
       </form>
-
-      {/* ── TÀI KHOẢN DÙNG THỬ (DEMO CLICK-TO-FILL) ───────────────────── */}
-      <div className="rounded-2xl bg-neutral-50 border border-neutral-200/80 p-3.5 space-y-2">
-        <span className="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">
-          ⚡ Bấm để điền nhanh tài khoản mẫu:
-        </span>
-        <div className="grid grid-cols-2 gap-2 text-xs">
-          <button
-            type="button"
-            onClick={() => fillDemo("hocvien@aimo.vn", "Hocvien@2026!")}
-            className="p-2 rounded-xl bg-white border border-neutral-200 hover:border-[#155EEF] hover:bg-[#EAF2FF]/50 text-left transition-all cursor-pointer"
-          >
-            <span className="font-bold text-neutral-900 block text-xs">🎓 Học viên Demo</span>
-            <span className="text-[10px] text-neutral-500 font-mono block truncate">hocvien@aimo.vn</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => fillDemo("admin@aimo.vn", "Admin@2026!")}
-            className="p-2 rounded-xl bg-white border border-neutral-200 hover:border-[#155EEF] hover:bg-[#EAF2FF]/50 text-left transition-all cursor-pointer"
-          >
-            <span className="font-bold text-neutral-900 block text-xs">👑 Admin Demo</span>
-            <span className="text-[10px] text-neutral-500 font-mono block truncate">admin@aimo.vn</span>
-          </button>
-        </div>
-      </div>
 
       {/* ── FOOTER LINK TO REGISTER ──────────────────────────────────── */}
       <div className="pt-2 border-t border-neutral-100 text-center text-xs text-neutral-600 space-y-2">

@@ -75,11 +75,11 @@ export function ArticleMarkdown({ content }: ArticleMarkdownProps) {
             if (!src) return null;
             return (
               <figure className="my-7">
-                <div className="overflow-hidden rounded-2xl border border-neutral-200/90 shadow-sm bg-neutral-50">
+                <div className="overflow-hidden rounded-2xl border border-neutral-200/90 shadow-xs bg-slate-50/60 p-1 sm:p-2">
                   <img
                     src={src}
                     alt={alt || "Hình minh họa bài viết"}
-                    className="w-full h-auto object-cover max-h-[560px] mx-auto"
+                    className="w-full h-auto object-contain max-h-[580px] rounded-xl mx-auto"
                     loading="lazy"
                     {...props}
                   />

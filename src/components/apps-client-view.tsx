@@ -413,35 +413,65 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
           </div>
         </div>
 
-        {/* Hàng 3: Gợi ý tìm nhanh (Quick Filter Tags) trực quan */}
-        <div className="flex flex-wrap items-center gap-2 pt-0.5 text-xs">
-          <span className="font-semibold text-neutral-400 text-[11px] shrink-0">
-            Gợi ý tìm nhanh:
-          </span>
-          {quickTags.map((tag) => {
-            const isCurrent = query.toLowerCase() === tag.query.toLowerCase();
-            return (
-              <button
-                key={tag.label}
-                type="button"
-                onClick={() => {
-                  if (isCurrent) {
+        {/* Danh mục tất cả công cụ để người dùng thấy ngay & nhấn vô */}
+        <div className="pt-2 border-t border-neutral-100 space-y-2">
+          <div className="flex items-center justify-between text-xs">
+            <span className="font-extrabold text-neutral-700 text-xs flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-[#155EEF]" />
+              <span>Khám phá trọn bộ {apps.length} công cụ theo chuyên ngành:</span>
+            </span>
+            <span className="text-[11px] text-neutral-400 font-medium hidden sm:inline">
+              Bấm vào chuyên ngành để xem chi tiết
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedSuite("all");
+                setQuery("");
+              }}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                selectedSuite === "all" && !query
+                  ? "bg-[#155EEF] text-white shadow-xs"
+                  : "bg-neutral-100 hover:bg-neutral-200/80 text-neutral-700 border border-neutral-200/70"
+              }`}
+            >
+              <span>⚡ Tất cả công cụ</span>
+              <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${selectedSuite === "all" && !query ? "bg-white/20 text-white" : "bg-neutral-200 text-neutral-700"}`}>
+                {apps.length}
+              </span>
+            </button>
+
+            {suiteFilters.filter((t) => t.key !== "all").map((tab) => {
+              const count = tab.count;
+              if (count === 0) return null;
+              const isSelected = selectedSuite === tab.key && !query;
+              const SuiteIcon = tab.icon;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => {
+                    setSelectedSuite(tab.key);
                     setQuery("");
-                  } else {
-                    setQuery(tag.query);
-                    if (tag.suite) setSelectedSuite(tag.suite);
-                  }
-                }}
-                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                  isCurrent
-                    ? "bg-[#155EEF] text-white shadow-2xs"
-                    : "bg-neutral-100/90 hover:bg-neutral-200/80 text-neutral-700 border border-neutral-200/60"
-                }`}
-              >
-                {tag.label}
-              </button>
-            );
-          })}
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                    isSelected
+                      ? "bg-[#155EEF] text-white shadow-xs"
+                      : "bg-neutral-100/90 hover:bg-neutral-200/80 text-neutral-700 border border-neutral-200/70 hover:border-neutral-300"
+                  }`}
+                >
+                  <SuiteIcon className="w-3.5 h-3.5" />
+                  <span>{tab.label}</span>
+                  <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isSelected ? "bg-white/20 text-white" : "bg-neutral-200 text-neutral-700"}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -542,15 +572,19 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                             triggerCoffeePopup("download");
                           }
                         }}
-                        className="py-2.5 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-700 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        className={`py-2.5 px-3.5 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
+                          isLoggedIn
+                            ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300"
+                            : "bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300"
+                        }`}
                         title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
                       >
                         {isLoggedIn ? (
-                          <Download className="w-3.5 h-3.5 text-neutral-600" />
+                          <Download className="w-3.5 h-3.5 text-emerald-600" />
                         ) : (
-                          <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                          <Lock className="w-3.5 h-3.5 text-amber-600" />
                         )}
-                        <span>Tải file</span>
+                        <span>{isLoggedIn ? "Tải file" : "Đăng nhập tải"}</span>
                       </a>
                     </div>
                   </div>
@@ -572,7 +606,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                 {query
                   ? `Kết quả tìm kiếm cho: "${query}"`
                   : selectedSuite === "all"
-                  ? "Danh mục toàn bộ 19 ứng dụng theo chủ đề"
+                  ? `Danh mục toàn bộ ${apps.length} công cụ & ứng dụng theo chủ đề`
                   : `Chủ đề: ${SUITE_DEFINITIONS[selectedSuite as AppSuiteKey]?.label ?? selectedSuite}`}
               </h2>
             </div>
@@ -732,13 +766,17 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                                       triggerCoffeePopup("download");
                                     }
                                   }}
-                                  className="py-2 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-700 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                                  className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
+                                    isLoggedIn
+                                      ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300"
+                                      : "bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300"
+                                  }`}
                                   title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
                                 >
                                   {isLoggedIn ? (
-                                    <Download className="w-3.5 h-3.5 text-neutral-600" />
+                                    <Download className="w-3.5 h-3.5 text-emerald-600" />
                                   ) : (
-                                    <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                                    <Lock className="w-3.5 h-3.5 text-amber-600" />
                                   )}
                                   <span>Tải file</span>
                                 </a>
@@ -815,15 +853,19 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                                   triggerCoffeePopup("download");
                                 }
                               }}
-                              className="py-2 px-3 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-600 text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer"
+                              className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs ${
+                                isLoggedIn
+                                  ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300"
+                                  : "bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300"
+                              }`}
                               title={isLoggedIn ? `Tải file ${app.fileName}` : "Đăng nhập để tải file"}
                             >
                               {isLoggedIn ? (
-                                <Download className="w-3.5 h-3.5" />
+                                <Download className="w-3.5 h-3.5 text-emerald-600" />
                               ) : (
-                                <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                                <Lock className="w-3.5 h-3.5 text-amber-600" />
                               )}
-                              <span className="hidden sm:inline">Tải về</span>
+                              <span className="hidden sm:inline">{isLoggedIn ? "Tải về" : "Đăng nhập"}</span>
                             </a>
                           </div>
                         </div>

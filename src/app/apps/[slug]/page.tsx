@@ -96,22 +96,32 @@ export default async function AppDetailPage({
           </div>
 
           <div className="flex items-center gap-3">
-            <a
-              href={downloadUrl}
-              download={session ? app.fileName : undefined}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all shadow-sm ${
-                session
-                  ? "bg-[#155EEF] text-white hover:bg-blue-700 shadow-[#155EEF]/20"
-                  : "bg-neutral-900 text-white hover:bg-neutral-800"
-              }`}
-            >
-              {session ? (
-                <Download className="w-3.5 h-3.5" />
-              ) : (
-                <Lock className="w-3.5 h-3.5 text-amber-400" />
-              )}
-              <span>{session ? "Tải file về máy (.html)" : "Đăng nhập để tải file"}</span>
-            </a>
+            {session ? (
+              <a
+                href={downloadUrl}
+                download={app.fileName}
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-600 !text-white font-black text-xs sm:text-sm shadow-md shadow-emerald-600/25 hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
+                title={`Tải file ${app.fileName} về máy`}
+              >
+                <Download className="w-4 h-4 !text-white" />
+                <span className="!text-white">Tải file về máy (.html)</span>
+                <span className="px-1.5 py-0.5 rounded-md bg-white/20 !text-white text-[10px] font-mono font-normal">
+                  {manifest.fileSizeFormatted}
+                </span>
+              </a>
+            ) : (
+              <a
+                href={downloadUrl}
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#155EEF] via-blue-600 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 !text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/25 hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
+                title="Đăng nhập tài khoản miễn phí để tải file"
+              >
+                <Lock className="w-4 h-4 text-amber-300 shrink-0" />
+                <span className="!text-white">Đăng nhập để tải file (.html)</span>
+                <span className="px-1.5 py-0.5 rounded-md bg-white/20 !text-white text-[10px] font-semibold">
+                  Miễn phí
+                </span>
+              </a>
+            )}
           </div>
         </div>
 

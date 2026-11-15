@@ -1,7 +1,48 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, ArrowRight, Search, Sparkles, ChevronDown } from "lucide-react";
+import {
+  Menu,
+  X,
+  ArrowRight,
+  Search,
+  Sparkles,
+  ChevronDown,
+  Cpu,
+  Layers,
+  Gamepad2,
+  GraduationCap,
+  Package,
+  Zap,
+  BookOpen,
+  Flame,
+  ShoppingBag,
+  Calculator,
+  DollarSign,
+  BarChart3,
+  Database,
+  Target,
+  Trophy,
+} from "lucide-react";
+
+const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Sparkles,
+  Cpu,
+  Calculator,
+  DollarSign,
+  ShoppingBag,
+  BarChart3,
+  Database,
+  Target,
+  Zap,
+  Layers,
+  Trophy,
+  BookOpen,
+  Gamepad2,
+  Flame,
+  GraduationCap,
+  Package,
+};
 import { useState, useRef, useEffect } from "react";
 import { AuthNav } from "./auth-nav";
 import { useSearch } from "./home-search-context";

@@ -222,25 +222,27 @@ export function GamesClientView({ games, collections, isLoggedIn }: Props) {
                 </div>
 
                 {/* Bottom Actions */}
-                <div className="pt-4 mt-2 border-t border-neutral-100 flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setActiveModalGame(game)}
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0057ff] hover:bg-[#0043c7] text-white text-xs font-bold transition-all shadow-sm shadow-[#0057ff]/20 active:scale-95 cursor-pointer"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-current" />
-                    <span>Chơi ngay</span>
-                  </button>
+                <div className="pt-3.5 mt-2 border-t border-neutral-100 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setActiveModalGame(game)}
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#0057ff] hover:bg-[#0043c7] text-white text-xs font-bold transition-all shadow-sm shadow-[#0057ff]/20 active:scale-95 cursor-pointer"
+                    >
+                      <Play className="w-3.5 h-3.5 fill-current" />
+                      <span>Chơi ngay</span>
+                    </button>
 
-                  <a
-                    href={playUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Mở toàn màn hình trong tab mới"
-                    className="p-2 rounded-xl bg-neutral-100 hover:bg-neutral-200/80 text-neutral-700 transition-colors"
-                  >
-                    <Maximize2 className="w-3.5 h-3.5" />
-                  </a>
+                    <a
+                      href={playUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Mở toàn màn hình trong tab mới"
+                      className="p-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
 
                   <a
                     href={isLoggedIn ? `/api/games/${game.slug}/download` : `/login?next=${encodeURIComponent("/games")}`}
@@ -250,12 +252,24 @@ export function GamesClientView({ games, collections, isLoggedIn }: Props) {
                       }
                     }}
                     title={isLoggedIn ? `Tải game offline ${game.slug}.zip về máy` : "Đăng nhập để tải game"}
-                    className="p-2 rounded-xl bg-neutral-100 hover:bg-neutral-200/80 text-neutral-700 transition-colors hover:text-[#0057ff] cursor-pointer"
+                    className={`w-full py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
+                      isLoggedIn
+                        ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300 shadow-2xs"
+                        : "bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300 shadow-2xs"
+                    }`}
                   >
                     {isLoggedIn ? (
-                      <Download className="w-3.5 h-3.5" />
+                      <>
+                        <Download className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span>Tải game offline (.zip)</span>
+                        <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-200/70 text-emerald-900 font-mono">ZIP</span>
+                      </>
                     ) : (
-                      <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                      <>
+                        <Lock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                        <span>Đăng nhập để tải game (.zip)</span>
+                        <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-200/70 text-amber-900">Free</span>
+                      </>
                     )}
                   </a>
                 </div>
@@ -294,15 +308,19 @@ export function GamesClientView({ games, collections, isLoggedIn }: Props) {
                       triggerCoffeePopup("download");
                     }
                   }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs font-semibold text-neutral-200 transition-colors"
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xs ${
+                    isLoggedIn
+                      ? "bg-emerald-600 hover:bg-emerald-500 !text-white"
+                      : "bg-amber-500 hover:bg-amber-400 !text-white"
+                  }`}
                   title={isLoggedIn ? "Tải trọn bộ game offline (.zip)" : "Đăng nhập để tải game"}
                 >
                   {isLoggedIn ? (
-                    <Download className="w-3.5 h-3.5 text-neutral-200" />
+                    <Download className="w-3.5 h-3.5 !text-white" />
                   ) : (
-                    <Lock className="w-3.5 h-3.5 text-amber-400" />
+                    <Lock className="w-3.5 h-3.5 !text-white" />
                   )}
-                  <span className="hidden sm:inline">Tải về (.zip)</span>
+                  <span className="hidden sm:inline !text-white">Tải về (.zip)</span>
                 </a>
 
                 <a
