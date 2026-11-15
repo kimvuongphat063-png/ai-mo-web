@@ -326,63 +326,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
     <div className="space-y-12">
       {/* ── TẦNG 1: COMMAND CENTER (BỘ ĐIỀU HƯỚNG & TÌM KIẾM TRỰC QUAN) ────────── */}
       <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-neutral-200/90 p-5 sm:p-6 shadow-xs space-y-4">
-        {/* Hàng 1: Bộ chọn Suite dạng Segmented Control nổi bật */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-neutral-100/80 border border-neutral-200/60 overflow-x-auto no-scrollbar">
-            {suiteFilters.map((tab) => {
-              const Icon = tab.icon;
-              const isActive = selectedSuite === tab.key;
-              return (
-                <button
-                  key={tab.key}
-                  type="button"
-                  aria-pressed={isActive}
-                  onClick={() => {
-                    setSelectedSuite(tab.key);
-                    setQuery("");
-                  }}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    isActive
-                      ? "bg-white text-[#155EEF] shadow-sm border border-neutral-200/90 font-bold"
-                      : "text-neutral-600 hover:text-neutral-900 hover:bg-white/60"
-                  }`}
-                >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? "text-[#155EEF]" : "text-neutral-500"}`} />
-                  <span>{tab.label}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                      isActive
-                        ? "bg-[#EAF2FF] text-[#155EEF] font-bold"
-                        : "bg-neutral-200/70 text-neutral-500"
-                    }`}
-                  >
-                    {tab.count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Quick Counter & Reset */}
-          <div className="flex items-center justify-between lg:justify-end gap-3 text-xs text-neutral-500 px-1">
-            <span>
-              Tìm thấy <strong className="text-neutral-900 font-bold">{filteredApps.length}</strong> / {apps.length} công cụ
-            </span>
-            {(query || selectedSuite !== "all") && (
-              <button
-                onClick={() => {
-                  setQuery("");
-                  setSelectedSuite("all");
-                }}
-                className="text-[#155EEF] hover:underline font-bold cursor-pointer"
-              >
-                Đặt lại
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Hàng 2: Thanh tìm kiếm toàn diện với ⌘K và Live Count */}
+        {/* Thanh tìm kiếm toàn diện với ⌘K và Live Count */}
         <div className="relative">
           <Search className="w-4 h-4 text-[#155EEF] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
@@ -414,15 +358,29 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
         </div>
 
         {/* Danh mục tất cả công cụ để người dùng thấy ngay & nhấn vô */}
-        <div className="pt-2 border-t border-neutral-100 space-y-2">
-          <div className="flex items-center justify-between text-xs">
-            <span className="font-extrabold text-neutral-700 text-xs flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-[#155EEF]" />
+        <div className="pt-2 border-t border-neutral-100 space-y-2.5">
+          <div className="flex items-center justify-between text-xs flex-wrap gap-2">
+            <span className="font-extrabold text-neutral-800 text-xs sm:text-sm flex items-center gap-1.5">
+              <Layers className="w-4 h-4 text-[#155EEF]" />
               <span>Khám phá trọn bộ {apps.length} công cụ theo chuyên ngành:</span>
             </span>
-            <span className="text-[11px] text-neutral-400 font-medium hidden sm:inline">
-              Bấm vào chuyên ngành để xem chi tiết
-            </span>
+            <div className="flex items-center gap-2.5 text-xs text-neutral-500">
+              <span>
+                Tìm thấy <strong className="text-neutral-900 font-bold">{filteredApps.length}</strong> / {apps.length} công cụ
+              </span>
+              {(query || selectedSuite !== "all") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery("");
+                    setSelectedSuite("all");
+                  }}
+                  className="text-[#155EEF] hover:underline font-bold cursor-pointer"
+                >
+                  Đặt lại
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">

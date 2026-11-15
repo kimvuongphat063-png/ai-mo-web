@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Edit3, RotateCcw, X, Check, Camera, ExternalLink } from "lucide-react";
 import { useHomeImages } from "./home-images-context";
@@ -21,10 +21,44 @@ const TINTS = [
 ];
 
 export function CustomizerFab() {
+  const [isAdmin, setIsAdmin] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeAccent, setActiveAccent] = useState("goc");
   const [activeTint, setActiveTint] = useState("xanh");
   const { isEditMode, toggleEditMode, resetImages } = useHomeImages();
+
+  useEffect(() => {
+    let mounted = true;
+    const checkAdmin = async () => {
+      try {
+        const res = await fetch("/api/auth/session", { cache: "no-store" });
+        if (res.ok) {
+          const data = await res.json();
+          if (mounted) {
+            setIsAdmin(data?.user?.role === "admin");
+          }
+        } else {
+          if (mounted) setIsAdmin(false);
+        }
+      } catch {
+        if (mounted) setIsAdmin(false);
+      }
+    };
+
+    checkAdmin();
+    window.addEventListener("focus", checkAdmin);
+    window.addEventListener("auth-change", checkAdmin);
+    return () => {
+      mounted = false;
+      window.removeEventListener("focus", checkAdmin);
+      window.removeEventListener("auth-change", checkAdmin);
+    };
+  }, []);
+
+  // Chỉ hiển thị nút Tùy chỉnh khi người dùng đã đăng nhập với vai trò Admin
+  if (!isAdmin) {
+    return null;
+  }
 
   const applyAccent = (accId: string) => {
     setActiveAccent(accId);
