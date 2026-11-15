@@ -552,6 +552,26 @@
       "status": "published",
       "featured": true,
       "sortOrder": 0,
+      "image": "/images/blog/free-claude-code.webp",
+      "accent": "#76b900",
+      "seo": {
+        "title": "Dùng Claude Code Miễn Phí Với API NVIDIA NIM (Không Cần Claude Pro/Max) | AI MỞ",
+        "description": "Hướng dẫn chi tiết cách cài đặt và sử dụng Free Claude Code kết nối API NVIDIA NIM, OpenRouter, Groq và Ollama để viết code, sửa lỗi và Vibe Coding 100% miễn phí."
+      },
+      "id": "article-free-claude-code-nvidia",
+      "slug": "claude-code-mien-phi-api-nvidia",
+      "title": "Dùng Claude Code miễn phí với API NVIDIA – Không cần mua Claude Pro hay Max!",
+      "description": "Dự án mã nguồn mở Free Claude Code cho phép bạn sử dụng toàn bộ giao diện và phong cách làm việc của Claude Code thông qua API NVIDIA NIM miễn phí, tiết kiệm 100% chi phí mua Claude Pro/Max.",
+      "excerpt": "Cách dùng Claude Code miễn phí thông qua API NVIDIA NIM thay vì tài khoản trả phí Anthropic. Tiết kiệm chi phí, hỗ trợ đa mô hình và model local!",
+      "content": "Phong trào **Vibe Coding** — lập trình bằng ngôn ngữ tự nhiên thông qua các AI Agent — đang trở thành làn sóng mạnh mẽ nhất năm 2026. Trong số các công cụ coding agent dòng lệnh hiện nay, **Claude Code** của Anthropic được xem là cái tên hàng đầu nhờ khả năng tự động đọc hiểu toàn bộ codebase, chạy lệnh kiểm thử trong terminal và trực tiếp sửa lỗi mã nguồn.\n\nTuy nhiên, rào cản lớn nhất với đông đảo anh em lập trình viên và người mới học code chính là **chi phí**:\n* Gói **Claude Pro** có giá khoảng **$20/tháng** nhưng thường xuyên bị giới hạn số lượng tin nhắn khi chạy các tác vụ agent phức tạp.\n* Gói **Claude Max** có giá lên tới **$100 – $200/tháng**, một con số quá cao đối với sinh viên hoặc người bắt đầu học lập trình.\n* Sử dụng trực tiếp API Anthropic thì tiền token tiêu hao rất nhanh khi Claude Code liên tục đọc lại ngữ cảnh dự án.\n\nChính vì lý do đó, dự án mã nguồn mở **Free Claude Code (FCC)** đã ra đời và tạo nên cơn sốt lớn trong cộng đồng lập trình mã nguồn mở, giúp anh em trải nghiệm đầy đủ quy trình làm việc của Claude Code thông qua **API NVIDIA NIM hoàn toàn miễn phí**!\n\n---\n\n## 1. Free Claude Code Là Gì Và Hoạt Động Như Thế Nào?\n\nVề bản chất, **Free Claude Code** đóng vai trò là một **Local Proxy (Trình trung gian cục bộ)** chạy ngay trên máy tính của bạn ở cổng `localhost`.\n\n### Cơ chế hoạt động:\n1. **Đón bắt yêu cầu (Intercept):** Khi bạn gõ lệnh trong Claude Code CLI, công cụ sẽ gửi yêu cầu đến máy chủ cục bộ của Free Claude Code thay vì gửi thẳng đến Anthropic.\n2. **Chuyển đổi giao thức (Protocol Translation):** Free Claude Code tự động chuyển đổi định dạng tin nhắn chuẩn Anthropic Messages API sang định dạng tương thích với **NVIDIA NIM**, **OpenRouter**, hoặc **OpenAI format**.\n3. **Gọi API miễn phí:** Yêu cầu được chuyển tiếp đến các mô hình AI chất lượng cao được lưu trữ trên nền tảng **NVIDIA NIM** (nơi cung cấp hàng nghìn credits API miễn phí cho nhà phát triển).\n4. **Phản hồi mượt mà:** Kết quả trả về được định dạng lại để Claude Code hiểu và thực thi các thao tác lập trình, tạo file, sửa code như bình thường.\n\n> **Điểm đặc biệt:** Ngoài NVIDIA NIM, Free Claude Code còn hỗ trợ kết nối với **OpenRouter**, **Groq**, **DeepSeek**, và các mô hình AI chạy offline 100% ngay trên máy tính của bạn thông qua **Ollama**, **LM Studio** hoặc **llama.cpp**.\n\n---\n\n## 2. Bảng So Sánh: Claude Code Trả Phí vs. Free Claude Code (NVIDIA)\n\nDưới đây là bảng so sánh chi tiết để bạn dễ dàng đánh giá:\n\n| Tiêu Chí | Claude Code Chính Thức (Anthropic) | Free Claude Code (NVIDIA NIM API) |\n| :--- | :--- | :--- |\n| **Chi phí hàng tháng** | $20 – $200/tháng hoặc nạp API trả phí | **0đ (Hoàn toàn miễn phí)** |\n| **Giao diện làm việc** | Terminal Claude Code CLI chính hãng | Giữ nguyên 100% trải nghiệm Claude Code CLI |\n| **Nhà cung cấp AI** | Độc quyền các model Anthropic Claude | **NVIDIA NIM**, OpenRouter, Groq, Ollama... |\n| **Lựa chọn mô hình** | Claude 3.5 Sonnet / Claude 3.7 Sonnet | Llama 3.3 70B, Nemotron, DeepSeek R1, Qwen... |\n| **Chạy Offline nội bộ** | Không hỗ trợ (phải có internet) | **Hỗ trợ chạy Offline** qua Ollama / LM Studio |\n| **Phù hợp cho** | Doanh nghiệp lớn, dự án ngân sách cao | Sinh viên IT, Vibe Coder, người mới học lập trình |\n\n---\n\n## 3. Hướng Dẫn Từng Bước Cài Đặt Và Sử Dụng\n\nQuy trình cài đặt rất nhanh gọn, hỗ trợ đầy đủ cho cả **Windows**, **macOS** và **Linux**.\n\n### Bước 1: Tải mã nguồn Free Claude Code từ GitHub\nBạn có thể truy cập kho mã nguồn GitHub chính thức của dự án hoặc clone trực tiếp về máy tính bằng terminal:\n\n```bash\ngit clone https://github.com/Alishahryar1/free-claude-code.git\ncd free-claude-code\n```\n*Link tham khảo repository:* [Alishahryar1/free-claude-code trên GitHub](https://github.com/Alishahryar1/free-claude-code) hoặc tại [Kho Repo Phan Đông Giang](https://phandonggiang.com/kho-repo/free-claude-code).\n\n### Bước 2: Cài đặt công cụ và chọn Claude Code làm AI Coding Agent\nCài đặt các gói phụ thuộc và chạy trình cài đặt:\n```bash\nnpm install\nnpm run setup\n```\nTrong giao diện cài đặt tương tác, bạn chọn **Claude Code** làm AI Coding Agent chính.\n\n*(Lưu ý: Đảm bảo bạn đã cài đặt sẵn Node.js 18+ và Claude Code chính thức bằng lệnh `npm install -g @anthropic-ai/claude-code`)*.\n\n### Bước 3: Đăng ký và tạo API Key miễn phí từ NVIDIA NIM\n1. Truy cập vào cổng phát triển **[NVIDIA Build / NIM Catalog](https://build.nvidia.com)**.\n2. Đăng ký một tài khoản NVIDIA Developer miễn phí (hoặc đăng nhập bằng Google/GitHub).\n3. Sau khi đăng nhập, NVIDIA sẽ tặng bạn hạn mức credits trải nghiệm miễn phí (thường là 1,000 requests / credits).\n4. Chọn bất kỳ mô hình nào (ví dụ: `meta/llama-3.3-70b-instruct`) và bấm nút **Get API Key** để sao chép khóa bí mật có dạng `nvapi-...`.\n\n### Bước 4: Nhập API Key vào giao diện quản trị Free Claude Code\n1. Mở giao diện Dashboard của Free Claude Code (truy cập `http://localhost:port` trên trình duyệt theo hướng dẫn trong terminal).\n2. Vào mục **Providers**, chọn **NVIDIA NIM**.\n3. Dán **NVIDIA API Key** vừa tạo vào ô cấu hình.\n4. Lựa chọn mô hình AI lập trình bạn muốn sử dụng (khuyên dùng các mô hình 70B chuyên code).\n\n### Bước 5: Khởi chạy Claude Code và bắt đầu Vibe Coding!\nSau khi cấu hình xong, mở terminal tại bất kỳ thư mục dự án nào bạn muốn viết code và chạy lệnh:\n\n```bash\nfcc-claude\n```\n\nNgay lập tức, giao diện dòng lệnh quen thuộc của Claude Code sẽ xuất hiện, sẵn sàng tiếp nhận các câu lệnh lập trình, phân tích file, refactor code và chạy test — tất cả đều chạy thông qua hạn mức API miễn phí của NVIDIA!\n\n---\n\n## 4. Những Mô Hình AI Tốt Nhất Nên Chọn Trên NVIDIA NIM\n\nĐể đạt hiệu quả viết code cao nhất tương đương với Claude 3.5 Sonnet, bạn nên ưu tiên các mô hình sau trên thư viện NVIDIA:\n\n1. **Meta Llama-3.3-70B-Instruct:** Mô hình mã nguồn mở đa năng và thông minh nhất hiện nay, khả năng sinh code Python, TypeScript, React cực kỳ chuẩn xác.\n2. **NVIDIA Llama-3.1-Nemotron-70B-Instruct:** Bản tinh chỉnh chuyên biệt của NVIDIA tối ưu hóa cho tác vụ suy luận logic và gọi hàm (Function Calling).\n3. **DeepSeek-R1 / DeepSeek-V3:** Dòng mô hình suy luận sâu (Reasoning) xuất sắc nhất hiện nay, đặc biệt mạnh trong việc tìm lỗi logic ngầm và giải thuật phức tạp.\n4. **Qwen-2.5-Coder-32B:** Chuyên gia viết mã nguồn toàn diện, hiểu sâu cú pháp và các framework web hiện đại.\n\n---\n\n## 5. Một Vài Điều Cần Lưu Ý Khi Sử Dụng\n\n* **Hạn mức miễn phí:** Miễn phí không đồng nghĩa với vô hạn vĩnh viễn. NVIDIA cấp hạn mức credits cho nhà phát triển trải nghiệm. Khi hết credits, bạn có thể tạo tài khoản phụ hoặc chuyển sang các provider miễn phí khác được hỗ trợ sẵn trong công cụ như **OpenRouter (Free tier)** hoặc **Groq**.\n* **Giới hạn tốc độ (Rate Limit):** Vào các khung giờ cao điểm, NVIDIA có thể giới hạn số request/phút (RPM). Nếu gặp thông báo chờ, chỉ cần đợi vài giây trước khi gửi tiếp prompt.\n* **Chất lượng phụ thuộc vào Model:** Claude Code chỉ đóng vai trò khung agent (Agent Harness), còn khả năng viết code thông minh đến đâu sẽ phụ thuộc trực tiếp vào mô hình AI bạn đã chọn cấu hình ở Bước 4.\n\n---\n\n## 6. Ai Nên Thử Dự Án Này Ngay Hôm Nay?\n\n* **Sinh viên CNTT & Học sinh:** Tiết kiệm tối đa chi phí học tập mà vẫn tiếp cận được công nghệ AI Coding tiên tiến nhất thế giới.\n* **Người mới bắt đầu học Vibe Coding:** Muốn làm quen với phong cách lập trình Agentic (giao việc cho AI làm từ A-Z) trước khi quyết định có nên đầu tư gói trả phí hay không.\n* **Lập trình viên muốn bảo mật dữ liệu:** Bạn có thể kết nối Free Claude Code với **Ollama** để chạy mô hình AI trực tiếp trên GPU máy tính cục bộ — mã nguồn công ty của bạn sẽ không bao giờ bị gửi lên đám mây của bên thứ ba!\n\n---\n\n## 7. Khám Phá Thêm Tại Hệ Sinh Thái AI MỞ\n\nĐể tối ưu hóa trải nghiệm lập trình AI, hãy kết hợp Free Claude Code cùng các tài nguyên thực chiến tại **AI MỞ Studio**:\n* **[Cẩm nang 12 Skill Claude Code xịn nhất cho dân Vibe Coding](/guides/cam-nang-12-skill-claude-code):** Tích hợp thêm các bộ kỹ năng như Superpowers, Matt Pocock, UI/UX Pro Max vào dự án của bạn.\n* **[Kho 95+ Ứng Dụng HTML Chạy Offline Miễn Phí](/apps):** Xem các dự án mẫu hoàn toàn bằng web offline để lấy cảm hứng xây dựng sản phẩm.\n* **[PromptKichBan Studio](/studio/prompt-kich-ban):** Không gian sáng tạo kịch bản video AI chuyên nghiệp.\n\n---\n\n## 8. Nguồn Tham Khảo & Tải Về\n\n* **Mã nguồn dự án:** [GitHub - Alishahryar1/free-claude-code](https://github.com/Alishahryar1/free-claude-code)\n* **Kho Repo tham khảo:** [Phan Đông Giang - Free Claude Code](https://phandonggiang.com/kho-repo/free-claude-code)\n* **Cổng API NVIDIA:** [NVIDIA Build NIM Catalog](https://build.nvidia.com)\n",
+      "category": "Kỹ năng AI",
+      "readTime": 6,
+      "author": "AI MỞ Studio"
+    },
+    {
+      "status": "published",
+      "featured": true,
+      "sortOrder": 1,
       "image": "/images/blog/12-skill-claude-code.jpg",
       "accent": "#155EEF",
       "seo": {
@@ -571,7 +591,7 @@
     {
       "status": "published",
       "featured": true,
-      "sortOrder": 1,
+      "sortOrder": 2,
       "image": "",
       "accent": "#b9e769",
       "seo": {
@@ -591,7 +611,7 @@
     {
       "status": "published",
       "featured": false,
-      "sortOrder": 2,
+      "sortOrder": 3,
       "image": "",
       "accent": "#ff7a59",
       "seo": {
@@ -611,7 +631,7 @@
     {
       "status": "published",
       "featured": false,
-      "sortOrder": 3,
+      "sortOrder": 4,
       "image": "",
       "accent": "#8d78ff",
       "seo": {
@@ -631,7 +651,7 @@
     {
       "status": "published",
       "featured": false,
-      "sortOrder": 4,
+      "sortOrder": 5,
       "image": "",
       "accent": "#f3c94f",
       "seo": {
