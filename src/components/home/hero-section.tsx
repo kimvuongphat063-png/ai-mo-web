@@ -175,7 +175,7 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 2xl:gap-10 items-stretch">
           
           {/* ── LEFT CARD ── */}
-          <div className="bg-white rounded-[32px] sm:rounded-[36px] 2xl:rounded-[40px] p-6 sm:p-9 lg:p-10 xl:p-11 2xl:p-12 border border-[#dde7f6] shadow-[0_24px_60px_-20px_rgba(16,52,138,0.08),0_4px_16px_-4px_rgba(16,52,138,0.03)] flex flex-col justify-between relative transition-all">
+          <div className="bg-white rounded-[28px] sm:rounded-[36px] 2xl:rounded-[40px] p-4.5 sm:p-8 lg:p-10 xl:p-11 2xl:p-12 border border-[#dde7f6] shadow-[0_24px_60px_-20px_rgba(16,52,138,0.08),0_4px_16px_-4px_rgba(16,52,138,0.03)] flex flex-col justify-between relative transition-all">
             <div>
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#eef5ff] border border-[#cce0ff] text-[#0057ff] text-[13px] xl:text-[13.5px] font-extrabold mb-5 sm:mb-6 shadow-sm">

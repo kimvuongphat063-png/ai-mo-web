@@ -374,7 +374,7 @@ export function Header() {
 
           <Link
             href="/#prompt"
-            className="hidden xs:inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white bg-[#0057ff] hover:bg-[#0043c7] rounded-full shadow-md shadow-blue-500/20 hover:shadow-blue-500/35 transition-all whitespace-nowrap"
+            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white bg-[#0057ff] hover:bg-[#0043c7] rounded-full shadow-md shadow-blue-500/20 hover:shadow-blue-500/35 transition-all whitespace-nowrap"
           >
             <span>Bắt đầu miễn phí</span>
           </Link>
