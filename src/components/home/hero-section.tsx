@@ -175,7 +175,7 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 2xl:gap-10 items-stretch">
           
           {/* ── LEFT CARD ── */}
-          <div className="bg-white rounded-[28px] sm:rounded-[36px] 2xl:rounded-[40px] p-4.5 sm:p-8 lg:p-10 xl:p-11 2xl:p-12 border border-[#dde7f6] shadow-[0_24px_60px_-20px_rgba(16,52,138,0.08),0_4px_16px_-4px_rgba(16,52,138,0.03)] flex flex-col justify-between relative transition-all">
+          <div className="bg-white rounded-[28px] sm:rounded-[36px] 2xl:rounded-[40px] p-5 sm:p-8 lg:p-10 xl:p-11 2xl:p-12 border border-[#dde7f6] shadow-[0_24px_60px_-20px_rgba(16,52,138,0.08),0_4px_16px_-4px_rgba(16,52,138,0.03)] flex flex-col justify-between relative overflow-hidden transition-all">
             <div>
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#eef5ff] border border-[#cce0ff] text-[#0057ff] text-[13px] xl:text-[13.5px] font-extrabold mb-5 sm:mb-6 shadow-sm">
@@ -264,26 +264,26 @@ export function HeroSection() {
             </div>
 
             {/* Left CTA Buttons */}
-            <div className="flex items-center gap-3 sm:gap-4 flex-wrap pt-3 sm:pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 pt-3 sm:pt-4">
               <Link
                 href="/tools"
-                className="inline-flex items-center gap-2 bg-[#0057ff] text-white text-[14.5px] xl:text-[15px] font-extrabold px-6 xl:px-7 py-3.5 rounded-full shadow-[0_10px_24px_-6px_rgba(0,87,255,0.45)] hover:bg-[#0046d5] hover:shadow-[0_14px_30px_-6px_rgba(0,87,255,0.55)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 bg-[#0057ff] text-white text-[14px] sm:text-[14.5px] xl:text-[15px] font-extrabold px-5 sm:px-6 xl:px-7 py-3 sm:py-3.5 rounded-full shadow-[0_10px_24px_-6px_rgba(0,87,255,0.45)] hover:bg-[#0046d5] hover:shadow-[0_14px_30px_-6px_rgba(0,87,255,0.55)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center"
               >
-                <Sparkles className="w-4 h-4 fill-current" />
-                Dùng thử công cụ miễn phí
+                <Sparkles className="w-4 h-4 fill-current shrink-0" />
+                <span>Dùng thử công cụ miễn phí</span>
               </Link>
               <Link
                 href="/guides"
-                className="inline-flex items-center gap-2 bg-white text-[#1a253c] text-[14.5px] xl:text-[15px] font-extrabold px-5 sm:px-6 xl:px-7 py-3.5 rounded-full border border-[#dde6f8] hover:bg-[#f6f9fe] hover:border-[#b9cdf5] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 bg-white text-[#1a253c] text-[14px] sm:text-[14.5px] xl:text-[15px] font-extrabold px-5 sm:px-6 xl:px-7 py-3 sm:py-3.5 rounded-full border border-[#dde6f8] hover:bg-[#f6f9fe] hover:border-[#b9cdf5] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center"
               >
-                <Play className="w-3.5 h-3.5 fill-current text-[#0057ff]" />
-                Xem lộ trình học
+                <Play className="w-3.5 h-3.5 fill-current text-[#0057ff] shrink-0" />
+                <span>Xem lộ trình học</span>
               </Link>
             </div>
           </div>
 
           {/* ── RIGHT CARD (PromptKichBan Studio) ── */}
-          <div className="bg-white rounded-[32px] sm:rounded-[36px] 2xl:rounded-[40px] p-5 sm:p-6 xl:p-7 2xl:p-8 border border-[#dde7f6] shadow-[0_24px_60px_-20px_rgba(16,52,138,0.08),0_4px_16px_-4px_rgba(16,52,138,0.03)] flex flex-col justify-between relative transition-all">
+          <div className="bg-white rounded-[28px] sm:rounded-[36px] 2xl:rounded-[40px] p-4.5 sm:p-6 xl:p-7 2xl:p-8 border border-[#dde7f6] shadow-[0_24px_60px_-20px_rgba(16,52,138,0.08),0_4px_16px_-4px_rgba(16,52,138,0.03)] flex flex-col justify-between relative overflow-hidden transition-all">
             
             <div>
               {/* Studio Header */}
@@ -471,8 +471,8 @@ export function HeroSection() {
             ))}
           </div>
 
-          <div className="flex items-center gap-2 text-[13.5px] xl:text-[14px] font-semibold text-[#556987]">
-            <Check className="w-4 h-4 text-[#0da678] stroke-[2.5]" />
+          <div className="flex items-center justify-center text-center gap-2 text-[12.5px] sm:text-[13.5px] xl:text-[14px] font-semibold text-[#556987] px-2 flex-wrap">
+            <Check className="w-4 h-4 text-[#0da678] stroke-[2.5] shrink-0" />
             <span>Công cụ thực hành · Hướng dẫn tiếng Việt · Không cần cài đặt</span>
           </div>
         </div>
