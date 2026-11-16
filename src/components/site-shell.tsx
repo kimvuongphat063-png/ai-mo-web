@@ -223,7 +223,7 @@ export function Header() {
 
   return (
     <header className="site-header sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-neutral-200/80 transition-all">
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between py-3 gap-3">
+      <div className="w-full max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8 flex items-center justify-between py-3 gap-3">
         {/* Left: Brand Logo */}
         <Logo />
 
@@ -527,7 +527,7 @@ export function Header() {
 export function Footer() {
   return (
     <footer className="footer bg-neutral-950 text-neutral-400 text-sm border-t border-neutral-800">
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div className="w-full max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           <div className="space-y-3">
             <span className="font-black text-white text-xl tracking-tight">
