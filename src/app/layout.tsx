@@ -1,9 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import "./refinement.css";
 import { CartProvider } from "@/components/cart-provider";
 import { SiteChrome } from "@/components/site-chrome";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 const sans = Inter({
   subsets: ["vietnamese", "latin"],
