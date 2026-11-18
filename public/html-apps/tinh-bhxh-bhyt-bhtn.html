@@ -1380,7 +1380,7 @@ const minWageOf = (ym, vung) => (DB.settings.minOverride > 0 ? DB.settings.minOv
 const baseOf = ym => (DB.settings.baseOverride > 0 ? DB.settings.baseOverride : (BASE_SAL.find(x => ym >= x.from) || BASE_SAL[BASE_SAL.length - 1]).v);
 
 function defaultSettings() {
-  return { company: companyBase('Công ty TNHH An Phát', '88 Nguyễn Trãi, Thanh Xuân, Hà Nội', '0912 345 678'), vung: 'Vùng I', minOverride: 0, baseOverride: 0,
+  return { company: companyBase('AI Mở Studio', '1013 Cách Mạng Tháng 8, Phường Thủ Dầu Một, Thành phố Hồ Chí Minh', '0988 366 917'), vung: 'Vùng I', minOverride: 0, baseOverride: 0,
     nldXh: 8, nldYt: 1.5, nldTn: 1, dnXh: 17.5, dnYt: 3, dnTn: 1, kpcd: 2 };
 }
 function emptyDB() { return { settings: defaultSettings(), emps: [], mstatus: {} }; }
@@ -1486,7 +1486,7 @@ const vSet = settingsView('Vùng, mức lương, tỷ lệ đóng', () =>
   + card('Bảng lương tối thiểu vùng đã cài sẵn', kvRows([['Từ 01/01/2026 (Vùng I → IV)', MIN_WAGE[0].v.map(F.short).join(' · ')], ['01/07/2024 đến 31/12/2025', MIN_WAGE[1].v.map(F.short).join(' · ')], ['Lương cơ sở từ 01/07/2026', F.vnd(2530000)], ['Lương cơ sở từ 01/07/2024', F.vnd(2340000)]]) + NOTE_LAW('đây là thông số mẫu từ file tham chiếu. Hãy đối chiếu mức lương, trần và tỷ lệ thực tế trước khi sử dụng.')));
 
 App.init({
-  id: 'ai-mo-studio-baohiem', title: 'Bảng Tính BHXH · BHYT · BHTN', tagline: 'BHXH · BHYT · BHTN', icon: 'shield', fileName: 'DatTinHoc_PhanMem_TinhBHXH_BHYT_BHTN.html', theme: THEME,
+  id: 'ai-mo-studio-baohiem', title: 'Bảng Tính BHXH · BHYT · BHTN', tagline: 'BHXH · BHYT · BHTN', icon: 'shield', fileName: 'AI_Mo_TinhBHXH_BHYT_BHTN.html', theme: THEME,
   palette: ['#059669', '#8b5cf6', '#f59e0b', '#2563eb', '#ef4444', '#06b6d4', '#64748b'],
   sample: sampleDB, empty: emptyDB, migrate, home: 'dashboard',
   counts: () => [['Người lao động', DB.emps.length], ['Tháng có đổi trạng thái', Object.keys(DB.mstatus).length]],

@@ -25,7 +25,7 @@ return {workbook,read};
 })();
 
 /* AI Mở · quản lý nhà trọ, ghi điện nước, thu tiền nhiều đợt. */
-const SOURCE={"source":"DatTinHoc_PhanMem_QuanLy_NhaTro.html","settings":{"ePrice":3800,"wMode":"Theo khối","wPrice":25000,"trash":30000,"wifi":100000,"dueDay":5},"rooms":[["P101","Nguyễn Văn Hùng",2500000,2,"Có",1250,290],["P102","Trần Thị Mai",2500000,1,"Có",860,120],["P103","Lê Quang Huy",2800000,2,"Không",2105,380],["P104","Phạm Thu Trang",3000000,3,"Có",412,80],["P201","Hoàng Minh Đức",2300000,1,"Có",3320,500],["P202","Vũ Thị Hạnh",2300000,2,"Có",120,20],["P203","Đỗ Văn Nam",2600000,2,"Không",1876,250],["P204","Bùi Ngọc Ánh",3200000,2,"Có",655,130]]},KEY='ai-mo-lodging-v1';
+const SOURCE={"source":"AI_Mo_PhanMem_QuanLy_NhaTro.html","settings":{"ePrice":3800,"wMode":"Theo khối","wPrice":25000,"trash":30000,"wifi":100000,"dueDay":5},"rooms":[["P101","Nguyễn Văn Hùng",2500000,2,"Có",1250,290],["P102","Trần Thị Mai",2500000,1,"Có",860,120],["P103","Lê Quang Huy",2800000,2,"Không",2105,380],["P104","Phạm Thu Trang",3000000,3,"Có",412,80],["P201","Hoàng Minh Đức",2300000,1,"Có",3320,500],["P202","Vũ Thị Hạnh",2300000,2,"Có",120,20],["P203","Đỗ Văn Nam",2600000,2,"Không",1876,250],["P204","Bùi Ngọc Ánh",3200000,2,"Có",655,130]]},KEY='ai-mo-lodging-v1';
 const $=s=>document.querySelector(s),$$=(s,p=document)=>[...p.querySelectorAll(s)];
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid=()=>globalThis.crypto?.randomUUID?.()||'id-'+Date.now().toString(36)+Math.random().toString(36).slice(2);

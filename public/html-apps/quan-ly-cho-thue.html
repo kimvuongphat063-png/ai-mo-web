@@ -25,7 +25,7 @@ return {workbook,read};
 })();
 
 /* AI Mở · tài sản cho thuê, hợp đồng, tiền thuê và tiền cọc. */
-const SOURCE={"source":"DatTinHoc_PhanMem_ChoThue.html","contracts":[["HD01","Ki-ốt A1 chợ Tân Phú","Cô Lan - bán quần áo",6000000,"@-330","@35",12000000,66000000],["HD02","Mặt bằng tầng trệt số 12","Công ty Minh Long",25000000,"@-200","@165",50000000,125000000],["HD03","Xe tải 2 tấn","Anh Đạt - vận tải",14000000,"@-90","@90",10000000,56000000],["HD04","Phòng làm việc số 3","Văn phòng Hải Nam",9000000,"@-40","@325",9000000,18000000],["HD05","Máy phát điện 20kVA","Công ty Xây dựng An Phát",7500000,"@-400","@-20",7500000,82500000]]},KEY='ai-mo-rental-v1';
+const SOURCE={"source":"AI_Mo_PhanMem_ChoThue.html","contracts":[["HD01","Ki-ốt A1 chợ Tân Phú","Cô Lan - bán quần áo",6000000,"@-330","@35",12000000,66000000],["HD02","Mặt bằng tầng trệt số 12","Công ty Minh Long",25000000,"@-200","@165",50000000,125000000],["HD03","Xe tải 2 tấn","Anh Đạt - vận tải",14000000,"@-90","@90",10000000,56000000],["HD04","Phòng làm việc số 3","Văn phòng Hải Nam",9000000,"@-40","@325",9000000,18000000],["HD05","Máy phát điện 20kVA","Công ty Xây dựng An Phát",7500000,"@-400","@-20",7500000,82500000]]},KEY='ai-mo-rental-v1';
 const TYPES=['Mặt bằng','Xe','Thiết bị','Khác'],KINDS=['rent','depositIn','depositOut','openingRent','openingDeposit'];
 const KIND_LABEL={rent:'Thu tiền thuê',depositIn:'Nhận tiền cọc',depositOut:'Trả tiền cọc',openingRent:'Đã thu trước khi dùng app',openingDeposit:'Cọc đang giữ từ dữ liệu gốc'};
 const $=s=>document.querySelector(s),$$=(s,p=document)=>[...p.querySelectorAll(s)];
