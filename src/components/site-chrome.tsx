@@ -29,10 +29,12 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <SearchProvider>
-      <Header />
-      {children}
-      <Footer />
-      <DonateCoffeeWidget />
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <div className="flex-1 flex flex-col">{children}</div>
+        <Footer />
+        <DonateCoffeeWidget />
+      </div>
     </SearchProvider>
   );
 }

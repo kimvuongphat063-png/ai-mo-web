@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/affiliate-disclosure",
     "/privacy",
     "/terms",
+    "/lien-he",
   ];
 
   let articles: { slug: string }[] = [];

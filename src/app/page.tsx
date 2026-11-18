@@ -8,10 +8,15 @@ import {
   CustomizerFab,
   HomeImagesProvider,
 } from "@/components/home";
+import { organizationJsonLd } from "@/lib/organization";
 
 export default function Home() {
   return (
     <HomeImagesProvider>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       <main id="main-content" className="bg-[#f4f7ff] text-[#0c1526] pb-16 overflow-x-hidden transition-colors duration-300">
         {/* 1. Hero: prompt box + demo card */}
         <HeroSection />

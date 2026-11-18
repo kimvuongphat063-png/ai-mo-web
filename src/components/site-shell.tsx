@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { CONTACT_INFO } from "@/lib/organization";
 import {
   Menu,
   X,
@@ -526,21 +527,123 @@ export function Header() {
 
 export function Footer() {
   return (
-    <footer className="footer bg-neutral-950 text-neutral-400 text-sm border-t border-neutral-800">
+    <footer className="footer bg-neutral-950 text-neutral-300 text-sm border-t border-neutral-800 mt-auto">
       <div className="w-full max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-          <div className="space-y-3">
-            <span className="font-black text-white text-xl tracking-tight">
-              AI <span className="text-blue-500">MỞ</span>
-            </span>
-            <p className="text-xs text-neutral-400 leading-relaxed">
-              Nền tảng thực hành sản phẩm số & công cụ AI tiếng Việt. Học AI bằng cách tạo ra thứ dùng được vào công việc hàng ngày.
-            </p>
-            <div className="text-xs text-neutral-500">
-              Dự án sản phẩm số độc lập · AI Mở Studio
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 mb-10">
+          {/* Cột 1: Thông tin tổ chức & Liên hệ chính thức (theo đúng thứ tự chuẩn SEO) */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="space-y-2">
+              <span className="font-black text-white text-2xl tracking-tight block">
+                AI <span className="text-blue-500">MỞ</span>
+              </span>
+              <p className="text-xs text-neutral-400 leading-relaxed max-w-md">
+                Nền tảng thực hành sản phẩm số & công cụ AI tiếng Việt. Học AI bằng cách tạo ra thứ dùng được vào công việc hàng ngày.
+              </p>
+            </div>
+
+            {/* Khối thông tin liên hệ chuẩn SEO theo thứ tự bắt buộc */}
+            <div className="p-4 rounded-2xl bg-neutral-900/80 border border-neutral-800 space-y-2.5 text-xs text-neutral-300">
+              {/* 1. Tên tổ chức */}
+              <div className="flex items-start gap-2">
+                <span className="text-neutral-400 shrink-0 font-medium">Tên tổ chức:</span>
+                <strong className="text-white font-bold">{CONTACT_INFO.organizationName}</strong>
+              </div>
+
+              {/* 2. Hotline/Zalo */}
+              <div className="flex items-start gap-2 flex-wrap">
+                <span className="text-neutral-400 shrink-0 font-medium">Hotline/Zalo:</span>
+                <span className="text-white font-semibold">
+                  {CONTACT_INFO.hotline.display} ({CONTACT_INFO.hotline.name})
+                </span>
+                <span className="text-neutral-600">—</span>
+                <a
+                  href={CONTACT_INFO.hotline.telLink}
+                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium transition-colors"
+                  title="Bấm để gọi hotline"
+                >
+                  Bấm để gọi
+                </a>
+                <span className="text-neutral-600">·</span>
+                <a
+                  href={CONTACT_INFO.hotline.zaloLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium transition-colors"
+                  title="Bấm để mở Zalo"
+                >
+                  Mở Zalo
+                </a>
+              </div>
+
+              {/* 3. Email liên hệ chính */}
+              <div className="flex items-start gap-2 flex-wrap">
+                <span className="text-neutral-400 shrink-0 font-medium">Email liên hệ:</span>
+                <a
+                  href={CONTACT_INFO.emailPrimary.link}
+                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium break-all transition-colors"
+                  title="Gửi email liên hệ"
+                >
+                  {CONTACT_INFO.emailPrimary.address}
+                </a>
+              </div>
+
+              {/* 3b. Email hỗ trợ kèm ghi chú phản hồi trong một ngày làm việc */}
+              <div className="flex items-start gap-2 flex-wrap">
+                <span className="text-neutral-400 shrink-0 font-medium">Email hỗ trợ:</span>
+                <a
+                  href={CONTACT_INFO.emailSupport.link}
+                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium break-all transition-colors"
+                  title="Gửi email hỗ trợ"
+                >
+                  {CONTACT_INFO.emailSupport.address}
+                </a>
+                <span className="text-neutral-400 italic">
+                  ({CONTACT_INFO.emailSupport.note})
+                </span>
+              </div>
+
+              {/* 4. Facebook */}
+              <div className="flex items-start gap-2 flex-wrap">
+                <span className="text-neutral-400 shrink-0 font-medium">Facebook:</span>
+                <a
+                  href={CONTACT_INFO.facebook.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium break-all transition-colors"
+                  title="Ghé thăm Facebook AI Mở"
+                >
+                  {CONTACT_INFO.facebook.url}
+                </a>
+              </div>
+
+              {/* 5. Địa chỉ (mở Google Maps) */}
+              <div className="flex items-start gap-2 flex-wrap">
+                <span className="text-neutral-400 shrink-0 font-medium">Địa chỉ:</span>
+                <a
+                  href={CONTACT_INFO.address.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-200 hover:text-white underline underline-offset-2 transition-colors leading-relaxed"
+                  title="Mở địa chỉ trên Google Maps"
+                >
+                  {CONTACT_INFO.address.full}
+                </a>
+              </div>
+
+              {/* 6. Link tới trang /lien-he */}
+              <div className="pt-2 border-t border-neutral-800/90 flex items-center justify-between">
+                <Link
+                  href="/lien-he"
+                  className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-bold transition-colors"
+                >
+                  <span>→ Xem trang Liên hệ chi tiết (/lien-he)</span>
+                </Link>
+              </div>
             </div>
           </div>
-          <div>
+
+          {/* Cột 2: Công cụ & Ứng dụng */}
+          <div className="lg:col-span-2 md:col-span-1">
             <h3 className="font-semibold text-white text-xs uppercase tracking-wider mb-3">Công cụ & Ứng dụng</h3>
             <ul className="space-y-2 text-xs">
               <li>
@@ -566,7 +669,9 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          <div>
+
+          {/* Cột 3: Học tập & Kiến thức */}
+          <div className="lg:col-span-2 md:col-span-1">
             <h3 className="font-semibold text-white text-xs uppercase tracking-wider mb-3">Học tập & Kiến thức</h3>
             <ul className="space-y-2 text-xs">
               <li>
@@ -591,9 +696,16 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          <div>
+
+          {/* Cột 4: Tài khoản & Hỗ trợ */}
+          <div className="lg:col-span-3 md:col-span-1">
             <h3 className="font-semibold text-white text-xs uppercase tracking-wider mb-3">Tài khoản & Hỗ trợ</h3>
             <ul className="space-y-2 text-xs">
+              <li>
+                <Link href="/lien-he" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors flex items-center gap-1">
+                  <span>Trang liên hệ & Gửi yêu cầu</span>
+                </Link>
+              </li>
               <li>
                 <Link href="/login" className="hover:text-white transition-colors">
                   Đăng nhập tài khoản
@@ -611,15 +723,18 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/help" className="hover:text-white transition-colors">
-                  Trung tâm trợ giúp & Liên hệ
+                  Trung tâm trợ giúp
                 </Link>
               </li>
             </ul>
           </div>
         </div>
+
+        {/* Dòng bản quyền chân trang */}
         <div className="pt-6 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-3">
           <span>© 2026 AI MỞ. Bản quyền thuộc về AI Mở Studio. Không bán tài khoản lậu.</span>
           <div className="flex gap-4">
+            <Link href="/lien-he" className="text-neutral-400 hover:text-white transition-colors font-medium">Liên hệ</Link>
             <Link href="/terms" className="hover:text-neutral-300 transition-colors">Điều khoản</Link>
             <Link href="/privacy" className="hover:text-neutral-300 transition-colors">Quyền riêng tư</Link>
             <Link href="/help" className="hover:text-neutral-300 transition-colors">Hỗ trợ</Link>
