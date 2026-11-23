@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, Copy, Download, Play, Pause, Check } from "lucide-react";
+import { Sparkles, Copy, Download, Play, Pause, Check, ArrowRight, Bot, Smartphone, Gamepad2, BookOpen, Package, Layers } from "lucide-react";
 import { useHomeImages, CardImageEditor } from "./home-images-context";
 
 /* ── Template generator (client-side, no API) ── */
@@ -27,7 +27,7 @@ function buildMd(titleCap: string, scenes: { tc: string; name: string; text: str
   return `# Kịch bản video — ${titleCap}\n\n- Model: ${model}\n- Khổ: dọc 9:16\n- Thời lượng: 30 giây\n\n## Các cảnh\n\n${scenes.map((s, i) => `${i + 1}. **${s.tc} · ${s.name}:** ${s.text}`).join("\n")}\n\n## Prompt (${model})\n\n${prompt}\n`;
 }
 
-/* ── Chips ── */
+/* ── Quick Chips ── */
 const CHIPS = [
   { label: "Video quảng cáo sản phẩm", idea: "Video quảng cáo sản phẩm cho shop online, quay cận cảnh sản phẩm" },
   { label: "Kịch bản TikTok 30s", idea: "Kịch bản TikTok 30 giây giới thiệu sản phẩm, nhịp nhanh thu hút" },
@@ -35,14 +35,15 @@ const CHIPS = [
   { label: "Post UGC", idea: "Video UGC người dùng thật chia sẻ trải nghiệm sản phẩm" },
 ];
 
-const MODELS = ["Veo 3", "Grok", "Seedance 2.5"];
+const MODELS = ["Veo 3", "Kling 1.5", "Sora", "Grok"];
 
-const STICKERS = [
-  { label: "Công cụ AI", href: "/tools", src: "/stickers/sticker-cong-cu-ai.png", width: 207, height: 221 },
-  { label: "App miễn phí", href: "/apps", src: "/stickers/sticker-app-mien-phi.png", width: 184, height: 222 },
-  { label: "Game", href: "/games", src: "/stickers/sticker-game.png", width: 204, height: 224 },
-  { label: "Học AI", href: "/guides", src: "/stickers/sticker-hoc-ai.png", width: 202, height: 228 },
-  { label: "Sản phẩm số", href: "/products", src: "/stickers/sticker-san-pham-so.png", width: 213, height: 217 },
+/* ── 5 Core Ecosystem Modules ── */
+const MODULES = [
+  { label: "Công cụ AI", desc: "Tạo video & prompt", href: "/tools", icon: Bot, tag: "Studio" },
+  { label: "App Quản Trị", desc: "Kế toán, bán hàng", href: "/apps", icon: Smartphone, tag: "Free" },
+  { label: "Games 65+", desc: "Trí tuệ, phản xạ", href: "/games", icon: Gamepad2, tag: "Hot" },
+  { label: "Học AI", desc: "Lộ trình thực chiến", href: "/guides", icon: BookOpen, tag: "Guide" },
+  { label: "Sản Phẩm Số", desc: "Template, kịch bản", href: "/products", icon: Package, tag: "Asset" },
 ];
 
 /* ── Toast helper ── */
@@ -57,7 +58,7 @@ function useToast() {
   }, []);
 
   const Toast = msg ? (
-    <div className="fixed left-1/2 bottom-6 -translate-x-1/2 z-[80] bg-[#0c1526] text-white px-5 py-3 rounded-full text-sm font-semibold shadow-xl animate-fade-in max-w-[calc(100vw-32px)] text-center pointer-events-none">
+    <div className="fixed left-1/2 bottom-6 -translate-x-1/2 z-[80] bg-[#121826] text-white px-5 py-3 rounded-full text-sm font-semibold border border-white/15 shadow-2xl animate-fade-in max-w-[calc(100vw-32px)] text-center pointer-events-none">
       {msg}
     </div>
   ) : null;
@@ -110,15 +111,15 @@ export function HeroSection() {
   const handleGenerate = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!idea.trim()) {
-      showToast("Hãy nhập một ý tưởng video trước nhé — hoặc bấm một chip gợi ý bên dưới.");
+      showToast("Hãy nhập một ý tưởng video trước nhé — hoặc chọn một gợi ý bên dưới.");
       return;
     }
     setGenerating(true);
     setTimeout(() => {
       setResult(generateScript(idea, model));
       setGenerating(false);
-      showToast("✨ Đã tạo kịch bản & prompt thành công!");
-    }, 600);
+      showToast("Đã tạo kịch bản & prompt thành công ✓");
+    }, 500);
   };
 
   const handleCopy = (text: string, msg: string) => {
@@ -144,167 +145,132 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden pt-4 pb-10 sm:pt-7 sm:pb-14" id="top">
-      {/* ── FULL-WIDTH ATMOSPHERIC MESH GRADIENT & GRID ── */}
+    <section className="relative w-full overflow-hidden bg-[#090c14] text-slate-100 pt-5 pb-12 sm:pt-8 sm:pb-16 border-b border-white/10" id="top">
+      {/* ── ATMOSPHERIC DARK TECH BACKGROUND ── */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-        {/* Center Sky Radial Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[140vw] max-w-[1920px] h-[780px] bg-[radial-gradient(ellipse_75%_60%_at_50%_0%,rgba(195,228,255,0.7),transparent_75%)]" />
-        
-        {/* Left Peripheral Glow (Subtle Cyan for Ultra-wide screens) */}
-        <div className="hidden xl:block absolute top-[12%] left-[-6%] w-[580px] h-[580px] rounded-full bg-[radial-gradient(circle,rgba(56,225,255,0.2),transparent_70%)] blur-[95px]" />
-        
-        {/* Right Peripheral Glow (Subtle Indigo/Purple for Ultra-wide screens) */}
-        <div className="hidden xl:block absolute top-[22%] right-[-6%] w-[580px] h-[580px] rounded-full bg-[radial-gradient(circle,rgba(124,77,255,0.16),transparent_70%)] blur-[95px]" />
-
-        {/* Ambient Subtle Grid */}
+        {/* Subtle Tech Grid */}
         <div 
-          className="absolute inset-0 opacity-45"
+          className="absolute inset-0 opacity-[0.14]"
           style={{
-            backgroundImage: "linear-gradient(rgba(0,87,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(0,87,255,0.045) 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(rgba(212,255,0,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(212,255,0,0.12) 1px, transparent 1px)",
             backgroundSize: "36px 36px",
-            maskImage: "radial-gradient(ellipse 90% 75% at 50% 30%, black 35%, transparent 88%)",
-            WebkitMaskImage: "radial-gradient(ellipse 90% 75% at 50% 30%, black 35%, transparent 88%)"
+            maskImage: "radial-gradient(ellipse 85% 65% at 50% 25%, black 40%, transparent 90%)",
+            WebkitMaskImage: "radial-gradient(ellipse 85% 65% at 50% 25%, black 40%, transparent 90%)"
           }}
         />
+
+        {/* Top Center Ambient Glow (Acid Lime Accent) */}
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[480px] rounded-full bg-[radial-gradient(circle,rgba(212,255,0,0.14),transparent_70%)] blur-[120px]" />
+        
+        {/* Subtle Cyber Blue Secondary Glow */}
+        <div className="absolute top-[20%] right-[-10%] w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08),transparent_70%)] blur-[140px]" />
       </div>
 
-      {/* ── RESPONSIVE FLUID CONTAINER (1240px -> 1400px -> 1536px) ── */}
-      <div className="w-full max-w-[1240px] xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-3.5 sm:px-6 2xl:px-8 transition-all duration-300">
+      {/* ── FLUID CONTAINER (1240px -> 1400px -> 1536px) ── */}
+      <div className="w-full max-w-[1240px] xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8">
         
-        {/* TWO-CARD HERO GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 2xl:gap-10 items-stretch">
+        {/* TWO-COLUMN STUDIO HERO GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 xl:gap-10 items-stretch">
           
-          {/* ── LEFT CARD ── */}
-          <div className="bg-white rounded-[28px] sm:rounded-[36px] 2xl:rounded-[40px] p-4.5 sm:p-8 lg:p-10 xl:p-11 2xl:p-12 border border-[#dde7f6] shadow-[0_24px_60px_-20px_rgba(16,52,138,0.08),0_4px_16px_-4px_rgba(16,52,138,0.03)] flex flex-col justify-between relative overflow-hidden transition-all">
-            <div>
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#eef5ff] border border-[#cce0ff] text-[#0057ff] text-[12px] sm:text-[13px] xl:text-[13.5px] font-extrabold mb-4 sm:mb-6 shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 fill-current" />
-                {content?.heroBadge || "AI Studio của AI Mở"}
-              </div>
-
-              {/* Headline */}
-              <h1 className="text-[clamp(28px,3.8vw,48px)] xl:text-[46px] 2xl:text-[50px] leading-[1.14] font-black tracking-tight text-[#091a3e] mb-4 sm:mb-6">
-                {content?.heroTitle ? (
-                  content.heroTitle
-                ) : (
-                  <>
-                    Học AI bằng cách<br />
-                    tạo ra{" "}
-                    <span className="relative whitespace-nowrap inline-block">
-                      thứ dùng được.
-                      <svg
-                        className="absolute left-0 right-0 -bottom-2 sm:-bottom-2.5 w-full h-3 sm:h-3.5 pointer-events-none"
-                        viewBox="0 0 200 12"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M2 9 C 60 2, 140 2, 198 8"
-                          fill="none"
-                          stroke="#2cd4ff"
-                          strokeWidth="5"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </span>
-                  </>
-                )}
-              </h1>
-            </div>
-
-            {/* 3D Stickers Cluster (Row 1: 3, Row 2: 2) — Fluid Width Scaling */}
-            <div className="w-full my-auto py-2 sm:py-5 xl:py-7">
-              <div className="w-full max-w-[500px] xl:max-w-[580px] 2xl:max-w-[640px] mx-auto flex flex-col gap-2.5 sm:gap-4 xl:gap-5">
-                {/* Row 1: 3 Stickers */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-3.5 xl:gap-4 w-full">
-                  {STICKERS.slice(0, 3).map((st) => (
-                    <Link
-                      key={st.href}
-                      href={st.href}
-                      className="min-w-0 group flex flex-col items-center justify-center p-0.5 sm:p-1 rounded-2xl transition-all duration-300 hover:-translate-y-2 active:translate-y-0"
-                      title={`Khám phá ${st.label}`}
-                    >
-                      <div className="relative w-full aspect-[1/1.08] max-w-[155px] xl:max-w-[178px] 2xl:max-w-[195px] flex items-center justify-center transition-all duration-300 group-hover:scale-105">
-                        <Image
-                          src={st.src}
-                          alt={st.label}
-                          width={st.width}
-                          height={st.height}
-                          className="w-full h-auto max-h-[140px] object-contain drop-shadow-[0_8px_16px_rgba(12,38,92,0.12)] group-hover:drop-shadow-[0_16px_28px_rgba(0,87,255,0.26)] transition-all duration-300"
-                          priority
-                        />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-
-                {/* Row 2: 2 Stickers Centered (matching exact sticker size of row 1) */}
-                <div className="flex justify-center items-center gap-2 sm:gap-3.5 xl:gap-4 w-full">
-                  {STICKERS.slice(3, 5).map((st) => (
-                    <Link
-                      key={st.href}
-                      href={st.href}
-                      className="min-w-0 group flex flex-col items-center justify-center p-0.5 sm:p-1 rounded-2xl w-[calc((100%-2*0.5rem)/3)] sm:w-[calc((100%-2*0.875rem)/3)] xl:w-[calc((100%-2*1rem)/3)] max-w-[155px] xl:max-w-[178px] 2xl:max-w-[195px] transition-all duration-300 hover:-translate-y-2 active:translate-y-0"
-                      title={`Khám phá ${st.label}`}
-                    >
-                      <div className="relative w-full aspect-[1/1.08] flex items-center justify-center transition-all duration-300 group-hover:scale-105">
-                        <Image
-                          src={st.src}
-                          alt={st.label}
-                          width={st.width}
-                          height={st.height}
-                          className="w-full h-auto max-h-[140px] object-contain drop-shadow-[0_8px_16px_rgba(12,38,92,0.12)] group-hover:drop-shadow-[0_16px_28px_rgba(0,87,255,0.26)] transition-all duration-300"
-                        />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Left CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 pt-3 sm:pt-4">
-              <Link
-                href="/tools"
-                className="inline-flex items-center justify-center gap-2 bg-[#0057ff] text-white text-[14px] sm:text-[14.5px] xl:text-[15px] font-extrabold px-5 sm:px-6 xl:px-7 py-3 sm:py-3.5 rounded-full shadow-[0_10px_24px_-6px_rgba(0,87,255,0.45)] hover:bg-[#0046d5] hover:shadow-[0_14px_30px_-6px_rgba(0,87,255,0.55)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center"
-              >
-                <Sparkles className="w-4 h-4 fill-current shrink-0" />
-                <span>Dùng thử công cụ miễn phí</span>
-              </Link>
-              <Link
-                href="/guides"
-                className="inline-flex items-center justify-center gap-2 bg-white text-[#1a253c] text-[14px] sm:text-[14.5px] xl:text-[15px] font-extrabold px-5 sm:px-6 xl:px-7 py-3 sm:py-3.5 rounded-full border border-[#dde6f8] hover:bg-[#f6f9fe] hover:border-[#b9cdf5] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center"
-              >
-                <Play className="w-3.5 h-3.5 fill-current text-[#0057ff] shrink-0" />
-                <span>Xem lộ trình học</span>
-              </Link>
-            </div>
-          </div>
-
-          {/* ── RIGHT CARD (PromptKichBan Studio) ── */}
-          <div className="bg-white rounded-[28px] sm:rounded-[36px] 2xl:rounded-[40px] p-4.5 sm:p-6 xl:p-7 2xl:p-8 border border-[#dde7f6] shadow-[0_24px_60px_-20px_rgba(16,52,138,0.08),0_4px_16px_-4px_rgba(16,52,138,0.03)] flex flex-col justify-between relative overflow-hidden transition-all">
+          {/* ── LEFT COLUMN: POSITIONING & ECOSYSTEM TILES ── */}
+          <div className="lg:col-span-7 bg-[#101420]/80 backdrop-blur-xl rounded-[28px] sm:rounded-[36px] p-6 sm:p-9 xl:p-10 border border-white/10 shadow-[0_24px_50px_-15px_rgba(0,0,0,0.7)] flex flex-col justify-between relative overflow-hidden transition-all">
             
             <div>
-              {/* Studio Header */}
-              <div className="flex items-center gap-3 pb-3 border-b border-neutral-100/80">
-                <span className="w-8 h-8 sm:w-9 sm:h-9 xl:w-10 xl:h-10 rounded-xl bg-gradient-to-r from-[#7c4dff] via-[#6366f1] to-[#00b8d9] flex items-center justify-center text-white shrink-0 shadow-md">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="5" width="18" height="14" rx="3" />
-                    <path d="M3 9h18M8 5l2.5 4M14 5l2.5 4" />
-                  </svg>
-                </span>
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-[15px] sm:text-base xl:text-[17px] font-extrabold leading-tight text-[#0c1526] truncate">PromptKichBan Studio</h3>
-                  <p className="text-[11px] sm:text-xs xl:text-[12.5px] text-[#68779a] truncate">Tạo kịch bản, storyboard và prompt video chỉ từ ý tưởng</p>
+              {/* Category Signature Pill */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d4ff00]/10 border border-[#d4ff00]/30 text-[#d4ff00] text-[11px] sm:text-[12px] font-mono font-bold mb-4 sm:mb-6 tracking-wide">
+                <span className="w-2 h-2 rounded-full bg-[#d4ff00] animate-pulse"></span>
+                <span>AI MỞ STUDIO // NỀN TẢNG THỰC CHIẾN</span>
+              </div>
+
+              {/* Punchy Headline */}
+              <h1 className="text-[clamp(30px,4vw,52px)] xl:text-[50px] 2xl:text-[54px] leading-[1.12] font-black tracking-tight text-white mb-4 sm:mb-6">
+                Học AI Bằng Cách<br />
+                <span className="text-[#d4ff00]">Tạo Ra Thứ Dùng Được.</span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed mb-6">
+                Tạo kịch bản video TikTok 30s, viết prompt hình ảnh chuẩn chỉ, chạy app quản trị doanh nghiệp và lập trình game độc bản. Không cần code phức tạp.
+              </p>
+
+              {/* Primary & Secondary Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pb-6 border-b border-white/10">
+                <a
+                  href="#prompt-studio"
+                  className="inline-flex items-center justify-center gap-2 bg-[#d4ff00] text-black font-extrabold text-[14px] sm:text-[14.5px] px-6 py-3 rounded-xl shadow-[0_10px_25px_-5px_rgba(212,255,0,0.35)] hover:bg-[#b8e000] hover:-translate-y-0.5 active:translate-y-0 transition-all text-center"
+                >
+                  <span>Dùng Thử PromptKichBan</span>
+                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                </a>
+
+                <Link
+                  href="/guides"
+                  className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white font-semibold text-[14px] sm:text-[14.5px] px-5 py-3 rounded-xl border border-white/15 hover:border-white/30 transition-all text-center"
+                >
+                  <Play className="w-3.5 h-3.5 fill-current text-[#d4ff00]" />
+                  <span>Xem Lộ Trình Học</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* 5 Core Ecosystem Modules (Clean Modern Tech Tiles) */}
+            <div className="pt-6">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d4ff00]"></span>
+                <span>Hệ Sinh Thái AI Mở · Bấm Để Khám Phá</span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                {MODULES.map((m) => {
+                  const Icon = m.icon;
+                  return (
+                    <Link
+                      key={m.href}
+                      href={m.href}
+                      className="group p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-[#d4ff00]/50 transition-all flex flex-col justify-between"
+                      title={`Khám phá ${m.label}`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <Icon className="w-5 h-5 text-slate-300 group-hover:text-[#d4ff00] transition-colors" />
+                        <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-white/5 text-slate-400 group-hover:text-[#d4ff00] group-hover:bg-[#d4ff00]/10 border border-white/5 group-hover:border-[#d4ff00]/30 transition-all">
+                          {m.tag}
+                        </span>
+                      </div>
+                      <div>
+                        <div className="font-bold text-white text-[12.5px] group-hover:text-[#d4ff00] transition-colors truncate">
+                          {m.label}
+                        </div>
+                        <div className="text-[10px] text-slate-400 truncate mt-0.5">
+                          {m.desc}
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+          </div>
+
+          {/* ── RIGHT COLUMN: PROMPTKICHBAN STUDIO COCKPIT WIDGET ── */}
+          <div id="prompt-studio" className="lg:col-span-5 bg-[#121624]/90 backdrop-blur-xl rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 border border-white/15 shadow-[0_24px_50px_-15px_rgba(0,0,0,0.7)] flex flex-col justify-between relative overflow-hidden transition-all">
+            
+            <div>
+              {/* Studio Window Bar */}
+              <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-3.5 text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                  <span className="font-extrabold text-white ml-1.5 tracking-tight text-sm">PromptKichBan Studio</span>
                 </div>
-                <span className="ml-auto bg-[#e6f9f0] text-[#0ba566] border border-[#b7f0d4] font-extrabold text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-full whitespace-nowrap">
-                  Miễn phí
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#d4ff00]/10 text-[#d4ff00] border border-[#d4ff00]/30 font-bold">
+                  FREE STUDIO
                 </span>
               </div>
 
               {/* Video Player Preview */}
-              <div className="relative mt-3 rounded-2xl overflow-hidden aspect-[16/9] bg-neutral-900 shadow-inner">
+              <div className="relative rounded-2xl overflow-hidden aspect-[16/9] bg-neutral-950 border border-white/10 shadow-inner">
                 <CardImageEditor cardId="hero-preview" cardTitle="Video Demo Hero" />
                 <Image
                   src={activeSlides[slideIdx]?.src || activeSlides[0].src}
@@ -314,48 +280,48 @@ export function HeroSection() {
                   className="w-full h-full object-cover transition-opacity duration-300"
                   priority
                 />
-                <span className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 bg-[rgba(8,15,36,0.72)] text-white text-[11px] sm:text-xs font-bold px-2.5 py-0.5 sm:py-1 rounded-full backdrop-blur-sm shadow">
+                <span className="absolute top-2.5 left-2.5 bg-black/75 text-white text-[11px] font-mono font-bold px-2 py-0.5 rounded-md backdrop-blur-sm border border-white/10">
                   ▶ Demo · 0:30
                 </span>
                 <button
                   type="button"
                   onClick={handlePlay}
-                  className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-all cursor-pointer group"
+                  className="absolute inset-0 flex items-center justify-center bg-black/25 hover:bg-black/40 transition-all cursor-pointer group"
                   aria-label={playing ? "Tạm dừng bản demo" : "Phát bản demo storyboard"}
                 >
-                  <span className="w-12 h-12 sm:w-14 sm:h-14 xl:w-15 xl:h-15 rounded-full bg-white/95 text-[#0057ff] flex items-center justify-center shadow-[0_12px_28px_rgba(0,0,0,0.35)] group-hover:scale-110 transition-transform">
-                    {playing ? <Pause className="w-4 h-4 sm:w-5 sm:h-5 fill-current" /> : <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-current ml-0.5" />}
+                  <span className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#d4ff00] text-black flex items-center justify-center shadow-[0_8px_20px_rgba(212,255,0,0.35)] group-hover:scale-110 transition-transform">
+                    {playing ? <Pause className="w-5 h-5 fill-current" /> : <Play className="w-5 h-5 fill-current ml-0.5" />}
                   </span>
                 </button>
-                <span className="absolute left-3 bottom-2.5 sm:bottom-3 text-white text-[11px] sm:text-xs xl:text-[12.5px] font-semibold drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] truncate max-w-[90%]">
+                <span className="absolute left-3 bottom-2.5 text-white text-[11px] sm:text-xs font-semibold drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] truncate max-w-[90%]">
                   {activeSlides[slideIdx]?.cap}
                 </span>
               </div>
 
               {/* Storyboard 3 Frames */}
-              <div className="pt-3 pb-1.5 sm:pb-2">
-                <div className="flex items-center gap-1.5 text-[10.5px] sm:text-[11px] xl:text-[11.5px] font-extrabold uppercase tracking-wider text-[#68779a] mb-2">
-                  <Sparkles className="w-3.5 h-3.5 text-[#7c4dff]" />
-                  Storyboard · Video serum dưỡng da · 30 giây
+              <div className="pt-3 pb-2">
+                <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-2">
+                  <span>Storyboard · Serum Dưỡng Da · 30s</span>
+                  <span className="text-[#d4ff00] font-bold">9:16 Dọc</span>
                 </div>
-                <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 xl:gap-3 w-full">
+                <div className="grid grid-cols-3 gap-2 w-full">
                   {[
-                    { id: "scene-1", src: getImage("scene-1", "/images/home/scene-1-serum-pastel.jpg"), title: "Cảnh 1 · Hook", tc: "0–3s", desc: "Mở đầu bằng cận cảnh chai serum" },
-                    { id: "scene-2", src: getImage("scene-2", "/images/home/scene-2-serum-droplet.jpg"), title: "Cảnh 2 · Chất serum", tc: "3–15s", desc: "Nhỏ giọt, khoe kết cấu trong suốt" },
-                    { id: "scene-3", src: getImage("scene-3", "/images/home/scene-3-serum-flatlay.jpg"), title: "Cảnh 3 · CTA", tc: "15–30s", desc: "Flat-lay sản phẩm, chốt lời mời" },
+                    { id: "scene-1", src: getImage("scene-1", "/images/home/scene-1-serum-pastel.jpg"), title: "Cảnh 1 · Hook", tc: "0–3s", desc: "Cận cảnh chai serum" },
+                    { id: "scene-2", src: getImage("scene-2", "/images/home/scene-2-serum-droplet.jpg"), title: "Cảnh 2 · Chất serum", tc: "3–15s", desc: "Giọt serum trong suốt" },
+                    { id: "scene-3", src: getImage("scene-3", "/images/home/scene-3-serum-flatlay.jpg"), title: "Cảnh 3 · CTA", tc: "15–30s", desc: "Flat-lay chốt lời mời" },
                   ].map((f, i) => (
                     <figure
                       key={f.id}
-                      className="min-w-0 relative border border-[#dde6f8] rounded-xl sm:rounded-[13px] overflow-hidden bg-white cursor-pointer hover:border-[#0057ff] hover:shadow-sm transition-all m-0"
+                      className="min-w-0 relative border border-white/10 rounded-xl overflow-hidden bg-black/40 cursor-pointer hover:border-[#d4ff00] transition-all m-0 group"
                       onClick={() => { setSlideIdx(i + 1); setPlaying(false); }}
                     >
                       <CardImageEditor cardId={f.id} cardTitle={f.title} />
-                      <div className="relative w-full h-[54px] sm:h-[72px] xl:h-[80px]">
-                        <Image src={f.src} alt={f.title} fill sizes="220px" className="object-cover" />
+                      <div className="relative w-full h-[54px] sm:h-[68px]">
+                        <Image src={f.src} alt={f.title} fill sizes="220px" className="object-cover group-hover:scale-105 transition-transform" />
                       </div>
-                      <figcaption className="p-1.5 sm:p-2 xl:p-2.5 text-[10px] sm:text-[10.5px] xl:text-[11px] leading-snug text-[#3c4a68]">
-                        <b className="block text-[#0c1526] text-[10.5px] sm:text-[11px] xl:text-[11.5px] truncate">{f.title}</b>
-                        <span className="font-mono text-[#0057ff] font-semibold">{f.tc}</span> <span className="hidden xs:inline">{f.desc}</span>
+                      <figcaption className="p-1.5 text-[10px] sm:text-[10.5px] leading-snug text-slate-300">
+                        <b className="block text-white truncate">{f.title}</b>
+                        <span className="font-mono text-[#d4ff00] font-semibold">{f.tc}</span> <span className="hidden xs:inline">{f.desc}</span>
                       </figcaption>
                     </figure>
                   ))}
@@ -363,76 +329,75 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* Floating Prompt Generator Box */}
-            <div className="mt-2 bg-white border border-[#d4e2f8] rounded-[20px] sm:rounded-[22px] p-3 sm:p-4 xl:p-4.5 shadow-[0_12px_32px_-10px_rgba(0,87,255,0.12),0_2px_10px_rgba(0,0,0,0.03)]">
+            {/* Prompt Generator Cockpit Form */}
+            <div className="mt-2 bg-black/40 border border-white/15 rounded-2xl p-3.5 shadow-lg">
               <form onSubmit={handleGenerate}>
-                <div className="flex items-start gap-2.5 mb-2">
-                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#f0f4ff] flex items-center justify-center text-[#7c4dff] shrink-0 mt-0.5">
-                    <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
-                  </span>
+                <div className="mb-2">
                   <textarea
                     rows={2}
                     value={idea}
                     onChange={(e) => setIdea(e.target.value)}
-                    placeholder="Nhập ý tưởng video của bạn… ví dụ: video giới thiệu serum dưỡng da cho shop online"
+                    placeholder="Nhập ý tưởng video của bạn… ví dụ: Video review quán cà phê phong cách Nhật"
                     aria-label="Nhập ý tưởng video của bạn"
-                    className="flex-1 border-0 outline-none resize-none text-[13px] sm:text-[14px] xl:text-[14.5px] leading-relaxed py-0.5 px-1 bg-transparent placeholder:text-[#8da1c4] text-[#0c1526]"
+                    className="w-full border-0 outline-none resize-none text-[13px] sm:text-[13.5px] leading-relaxed p-1 bg-transparent placeholder:text-slate-500 text-slate-100 font-mono"
                   />
                 </div>
-                <div className="flex items-center justify-between gap-2 flex-wrap pt-2 border-t border-dashed border-[#e8eef8]">
-                  <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap">
+
+                <div className="flex items-center justify-between gap-2 flex-wrap pt-2 border-t border-white/10">
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     {MODELS.map((m) => (
                       <button
                         key={m}
                         type="button"
                         onClick={() => setModel(m)}
                         aria-pressed={m === model}
-                        className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-[12px] xl:text-[12.5px] font-bold border transition-colors ${
+                        className={`px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold border transition-all ${
                           m === model
-                            ? "bg-[#0c1526] text-white border-[#0c1526]"
-                            : "bg-white text-[#4a5877] border-[#dde6f8] hover:border-[#b9cdf5]"
+                            ? "bg-[#d4ff00] text-black border-[#d4ff00] shadow-sm shadow-[#d4ff00]/30"
+                            : "bg-white/5 text-slate-400 border-white/10 hover:border-white/20 hover:text-white"
                         }`}
                       >
                         {m}
                       </button>
                     ))}
                   </div>
+
                   <button
                     type="submit"
                     disabled={generating}
-                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#0057ff] to-[#7c4dff] text-white rounded-full font-extrabold text-[12.5px] sm:text-[13px] xl:text-[13.5px] px-4 py-1.5 sm:py-2 shadow-[0_6px_18px_rgba(124,77,255,0.35)] hover:brightness-105 disabled:opacity-70 transition-all ml-auto"
+                    className="inline-flex items-center gap-1.5 bg-[#d4ff00] hover:bg-[#b8e000] text-black rounded-lg font-extrabold text-[12.5px] sm:text-[13px] px-4 py-1.5 shadow-md shadow-[#d4ff00]/20 disabled:opacity-50 transition-all ml-auto"
                   >
-                    <Sparkles className="w-3.5 h-3.5 fill-current" />
-                    {generating ? "Đang tạo…" : result ? "Tạo lại" : "Tạo ngay"}
+                    <span>{generating ? "Đang tạo…" : result ? "Tạo lại" : "Tạo Prompt Ngay"}</span>
+                    <span>⚡</span>
                   </button>
                 </div>
               </form>
             </div>
 
-            {/* GENERATED SCRIPT MODAL / RESULT BOX (IF ACTIVE) */}
+            {/* GENERATED SCRIPT RESULT */}
             {result && (
-              <div className="mt-3 bg-[#f8fbff] border border-[#cbe0ff] rounded-2xl p-4 animate-fade-in text-left">
+              <div className="mt-3 bg-black/60 border border-[#d4ff00]/40 rounded-xl p-3.5 animate-fade-in text-left">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <h4 className="text-sm font-extrabold text-[#0c1526]">Kịch bản: {result.titleCap}</h4>
-                  <span className="text-[11px] font-mono text-[#0057ff] bg-[#eef5ff] px-2 py-0.5 rounded-md">
+                  <h4 className="text-xs font-bold text-white truncate">Kịch bản: {result.titleCap}</h4>
+                  <span className="text-[10px] font-mono text-[#d4ff00] bg-[#d4ff00]/10 px-2 py-0.5 rounded border border-[#d4ff00]/30">
                     {result.model} · 30s
                   </span>
                 </div>
-                <div className="space-y-2 mb-3">
+                <div className="space-y-1.5 mb-2.5 text-[11px] text-slate-300">
                   {result.scenes.map((s, i) => (
-                    <div key={i} className="text-xs text-[#3c4a68]">
-                      <b className="text-[#0057ff]">{s.tc} · {s.name}:</b> {s.text}
+                    <div key={i}>
+                      <b className="text-[#d4ff00]">{s.tc} · {s.name}:</b> {s.text}
                     </div>
                   ))}
                 </div>
-                <div className="bg-[#0d1730] text-[#cfe0ff] rounded-xl p-3 font-mono text-[11.5px] leading-relaxed break-words max-h-28 overflow-y-auto">
+                <div className="bg-black/90 text-[#d4ff00] rounded-lg p-2.5 font-mono text-[11px] leading-relaxed break-words max-h-28 overflow-y-auto border border-white/10">
                   {result.prompt}
                 </div>
-                <div className="flex gap-2 mt-3">
+                <div className="flex gap-2 mt-2.5">
                   <button
                     type="button"
                     onClick={() => handleCopy(result.prompt, `Đã copy prompt cho ${result.model} ✓`)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#0057ff] text-white shadow-sm hover:bg-[#0043c7]"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold bg-[#d4ff00] text-black hover:bg-[#b8e000] transition-colors"
                   >
                     <Copy className="w-3 h-3" />
                     Copy prompt
@@ -440,7 +405,7 @@ export function HeroSection() {
                   <button
                     type="button"
                     onClick={handleDownload}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white text-[#0c1526] border border-[#dde6f8] hover:border-[#b9cdf5]"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold bg-white/10 text-white border border-white/15 hover:bg-white/20 transition-colors"
                   >
                     <Download className="w-3 h-3" />
                     Tải .md
@@ -454,7 +419,7 @@ export function HeroSection() {
         </div>
 
         {/* ── BOTTOM IDEA CHIPS & TRUST BAR ── */}
-        <div className="mt-6 sm:mt-9 xl:mt-11 flex flex-col items-center gap-3">
+        <div className="mt-8 sm:mt-10 flex flex-col items-center gap-3">
           <div className="flex items-center justify-center gap-2 sm:gap-2.5 flex-wrap">
             {CHIPS.map((c) => (
               <button
@@ -464,18 +429,19 @@ export function HeroSection() {
                   setIdea(c.idea);
                   showToast(`Đã chọn: "${c.label}" ✓`);
                 }}
-                className="px-3.5 sm:px-4 xl:px-4.5 py-1.5 sm:py-2 rounded-full text-[12px] sm:text-[13px] xl:text-[13.5px] font-bold bg-white text-[#3d4a66] border border-[#dbe5f4] shadow-[0_2px_6px_rgba(16,52,138,0.04)] hover:bg-[#0057ff] hover:text-white hover:border-[#0057ff] hover:-translate-y-0.5 transition-all duration-150"
+                className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[12px] sm:text-[13px] font-semibold bg-white/[0.04] text-slate-300 border border-white/10 hover:border-[#d4ff00] hover:text-[#d4ff00] hover:bg-white/[0.08] transition-all"
               >
                 {c.label}
               </button>
             ))}
           </div>
 
-          <div className="flex items-center justify-center text-center gap-2 text-[12px] sm:text-[13.5px] xl:text-[14px] font-semibold text-[#556987] px-2 flex-wrap">
-            <Check className="w-4 h-4 text-[#0da678] stroke-[2.5] shrink-0" />
-            <span>Công cụ thực hành · Hướng dẫn tiếng Việt · Không cần cài đặt</span>
+          <div className="flex items-center justify-center text-center gap-2 text-[12px] sm:text-[13px] font-mono text-slate-400 px-2 flex-wrap">
+            <Check className="w-4 h-4 text-[#d4ff00] stroke-[2.5] shrink-0" />
+            <span>Công cụ thực hành · Hướng dẫn tiếng Việt · Chạy trực tiếp trên trình duyệt</span>
           </div>
         </div>
+
       </div>
 
       {Toast}

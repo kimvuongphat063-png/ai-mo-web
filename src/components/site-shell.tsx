@@ -52,10 +52,10 @@ export function Logo() {
   return (
     <Link href="/" className="logo flex items-center gap-2 shrink-0 group" aria-label="AI MỞ — Trang chủ">
       <span
-        className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-r from-[#0057ff] via-[#7c4dff] to-[#00b8d9] flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform"
+        className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#090c14] border border-neutral-800 flex items-center justify-center text-[#d4ff00] font-black text-sm shadow-sm group-hover:border-[#d4ff00]/60 transition-colors"
         aria-hidden="true"
       >
-        <Sparkles className="w-4 h-4 fill-current" />
+        M
       </span>
       <span className="font-black tracking-tight text-xl sm:text-2xl text-neutral-900">
         AI <span className="text-[#0057ff]">MỞ</span>
