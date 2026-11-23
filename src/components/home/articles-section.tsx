@@ -59,14 +59,14 @@ export function ArticlesSection() {
   return (
     <section className="w-full max-w-[1240px] xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8 pt-14 sm:pt-16" id="bai-viet">
       <div className="max-w-[640px] mb-7">
-        <span className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0057ff] mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-[#7c4dff]" />
+        <span className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-wider text-[#d4ff00] mb-3">
+          <span className="w-2 h-2 rounded-full bg-[#d4ff00] animate-pulse"></span>
           Kiến thức AI
         </span>
-        <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-tight leading-tight text-[#0c1526] mb-2">
+        <h2 className="text-[clamp(24px,3vw,34px)] font-black tracking-tight leading-tight text-white mb-2">
           {content?.articlesTitle || "Bài viết kiến thức AI"}
         </h2>
-        <p className="text-[15.5px] text-[#68779a] m-0">
+        <p className="text-[15px] text-slate-400 m-0">
           {content?.articlesDesc || "Ảnh bìa là ảnh thật của đúng chủ đề bài viết — đọc tiêu đề, nhìn ảnh là biết bài nói về việc gì."}
         </p>
       </div>
@@ -75,7 +75,7 @@ export function ArticlesSection() {
         {filtered.map((a) => (
           <article
             key={a.id}
-            className="article bg-white border border-[#dde6f8] rounded-[26px] overflow-hidden shadow-[0_8px_24px_-12px_rgba(21,52,140,.18)] flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_18px_44px_-18px_rgba(21,52,140,.22)]"
+            className="article bg-[#101420]/80 border border-white/10 rounded-[26px] overflow-hidden shadow-xl flex flex-col transition-all duration-200 hover:-translate-y-1 hover:border-[#d4ff00]/40 hover:shadow-[0_12px_35px_rgba(212,255,0,0.12)]"
             data-searchable={a.searchable}
           >
             <div className="relative">
@@ -85,25 +85,25 @@ export function ArticlesSection() {
                 alt={a.alt}
                 width={400}
                 height={180}
-                className="w-full h-[160px] sm:h-[180px] object-cover"
+                className="w-full h-[160px] sm:h-[180px] object-cover opacity-90 hover:opacity-100 transition-opacity"
               />
             </div>
             <div className="p-5 flex flex-col gap-2 flex-1">
-              <span className="text-xs font-bold text-[#0057ff] flex items-center gap-2">
+              <span className="text-xs font-mono font-bold text-[#d4ff00] flex items-center gap-2">
                 {a.tag}
-                <span className="w-[3px] h-[3px] rounded-full bg-[#68779a]" />
-                <span className="text-[#68779a] font-semibold">{a.time}</span>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-500" />
+                <span className="text-slate-400 font-semibold">{a.time}</span>
               </span>
-              <h3 className="text-[16.5px] font-extrabold text-[#0c1526] leading-snug m-0 flex-1">
+              <h3 className="text-[16.5px] font-bold text-white leading-snug m-0 flex-1">
                 {a.title}
               </h3>
-              <p className="text-[13.5px] text-[#68779a] m-0">{a.desc}</p>
+              <p className="text-[13.5px] text-slate-300 m-0">{a.desc}</p>
             </div>
           </article>
         ))}
 
         {q && filtered.length === 0 && (
-          <p className="col-span-full text-center text-[#68779a] py-7 border border-dashed border-[#dde6f8] rounded-[18px] bg-white text-[14.5px]">
+          <p className="col-span-full text-center text-slate-400 py-7 border border-dashed border-white/10 rounded-[18px] bg-[#101420]/50 text-[14.5px]">
             Không có bài viết khớp với từ khóa này.
           </p>
         )}

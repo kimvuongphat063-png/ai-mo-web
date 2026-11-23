@@ -17,7 +17,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
-      <main id="main-content" className="bg-[#f4f7ff] text-[#0c1526] pb-16 overflow-x-hidden transition-colors duration-300">
+      <main id="main-content" className="bg-[#090c14] text-slate-100 pb-16 overflow-x-hidden transition-colors duration-300">
         {/* 1. Hero: prompt box + demo card */}
         <HeroSection />
 

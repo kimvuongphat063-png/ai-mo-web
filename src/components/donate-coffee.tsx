@@ -292,18 +292,18 @@ export function DonateCoffeeWidget() {
 
   return (
     <>
-      {/* Floating Coffee Button */}
-      <div className="fixed bottom-5 right-5 z-40">
+      {/* Floating Coffee Button (Placed on bottom-left, cleanly above Customizer FAB, avoiding collision with Mascot on bottom-right) */}
+      <div className="fixed bottom-20 left-4 sm:bottom-20 sm:left-6 z-40">
         <button
           type="button"
           onClick={() => {
             setReason("general");
             setIsOpen(true);
           }}
-          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-white hover:bg-amber-50 text-neutral-800 hover:text-amber-900 border border-amber-200/90 shadow-lg shadow-amber-500/10 hover:shadow-xl hover:scale-105 transition-all duration-200 cursor-pointer group"
+          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-[#121826]/90 hover:bg-[#1a2236] text-slate-200 hover:text-white border border-amber-400/40 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-200 cursor-pointer group backdrop-blur-md"
           title="Mời AI Mở Studio 1 ly cà phê ☕"
         >
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-100 text-amber-700 group-hover:scale-110 transition-transform">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-500/20 text-amber-400 group-hover:scale-110 transition-transform text-xs">
             ☕
           </span>
           <span className="text-xs font-bold tracking-tight pr-1">

@@ -87,14 +87,14 @@ export function BentoTools() {
   return (
     <section className="w-full max-w-[1240px] xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8 pt-14 sm:pt-16" id="cong-cu">
       <div className="max-w-[640px] mb-7">
-        <span className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0057ff] mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-[#7c4dff]" />
+        <span className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-wider text-[#d4ff00] mb-3">
+          <span className="w-2 h-2 rounded-full bg-[#d4ff00] animate-pulse"></span>
           Công cụ nổi bật
         </span>
-        <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-tight leading-tight text-[#0c1526] mb-2">
+        <h2 className="text-[clamp(24px,3vw,34px)] font-black tracking-tight leading-tight text-white mb-2">
           {content?.toolsTitle || "Công cụ AI & app tính toán cho người bán hàng"}
         </h2>
-        <p className="text-[15.5px] text-[#68779a] m-0">
+        <p className="text-[15px] text-slate-400 m-0">
           {content?.toolsDesc || "Mỗi công cụ đều có ảnh thật của việc nó làm — nhìn 2 giây là hiểu."}
         </p>
       </div>
@@ -103,7 +103,7 @@ export function BentoTools() {
         {filtered.map((t) => (
           <article
             key={t.id}
-            className={`tool bg-white border border-[#dde6f8] rounded-[26px] overflow-hidden shadow-[0_8px_24px_-12px_rgba(21,52,140,.18)] flex flex-col ${
+            className={`tool bg-[#101420]/80 border border-white/10 rounded-[26px] overflow-hidden shadow-xl flex flex-col hover:border-[#d4ff00]/40 transition-all ${
               t.big ? "sm:col-span-2 sm:row-span-2" : ""
             } ${t.wide ? "sm:col-span-2" : ""}`}
             data-searchable={t.searchable}
@@ -111,10 +111,10 @@ export function BentoTools() {
             <div className="relative">
               <CardImageEditor cardId={t.id} cardTitle={t.title} />
               <span
-                className={`absolute top-3.5 left-3.5 z-[2] text-xs font-extrabold px-3 py-1 rounded-full ${
+                className={`absolute top-3.5 left-3.5 z-[2] text-xs font-mono font-bold px-3 py-1 rounded-full border ${
                   t.badgeColor === "green"
-                    ? "bg-[#e3f7ee] text-[#0e9f6e]"
-                    : "bg-[#fdf1dc] text-[#b97a0c]"
+                    ? "bg-[#d4ff00]/15 text-[#d4ff00] border-[#d4ff00]/30"
+                    : "bg-amber-400/15 text-amber-300 border-amber-400/30"
                 }`}
               >
                 {t.badge}
@@ -124,19 +124,19 @@ export function BentoTools() {
                 alt={t.alt}
                 width={600}
                 height={t.big ? 300 : 150}
-                className={`w-full object-cover ${t.big ? "h-[220px] sm:h-[300px]" : "h-[140px] sm:h-[150px]"}`}
+                className={`w-full object-cover opacity-90 hover:opacity-100 transition-opacity ${t.big ? "h-[220px] sm:h-[300px]" : "h-[140px] sm:h-[150px]"}`}
               />
             </div>
             <div className="p-5 flex flex-col gap-2 flex-1">
-              <h3 className={`font-extrabold text-[#0c1526] m-0 ${t.big ? "text-[19px] sm:text-[21px]" : "text-lg"}`}>
+              <h3 className={`font-black text-white m-0 ${t.big ? "text-[19px] sm:text-[21px]" : "text-lg"}`}>
                 {t.title}
               </h3>
-              <p className="text-sm text-[#68779a] m-0 flex-1">{t.desc}</p>
+              <p className="text-sm text-slate-300 m-0 flex-1 leading-relaxed">{t.desc}</p>
               {t.checks && (
                 <ul className="mt-1 space-y-2 list-none p-0">
                   {t.checks.map((c, i) => (
-                    <li key={i} className="flex gap-2.5 text-sm text-[#3c4a68] items-start">
-                      <Check className="w-4 h-4 text-[#0e9f6e] shrink-0 mt-0.5" />
+                    <li key={i} className="flex gap-2.5 text-xs sm:text-sm text-slate-300 items-start">
+                      <Check className="w-4 h-4 text-[#d4ff00] shrink-0 mt-0.5" />
                       {c}
                     </li>
                   ))}
@@ -145,7 +145,7 @@ export function BentoTools() {
               <div className="flex items-center gap-3.5 mt-2.5 flex-wrap">
                 <Link
                   href={t.link}
-                  className="inline-flex items-center gap-1.5 text-[14.5px] font-extrabold text-[#0057ff] min-h-[36px] hover:gap-2 transition-all"
+                  className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#d4ff00] min-h-[36px] hover:text-[#b8e000] hover:gap-2 transition-all"
                 >
                   {t.linkLabel}
                   <ArrowRight className="w-4 h-4" />
@@ -153,9 +153,9 @@ export function BentoTools() {
                 {t.guideLink && (
                   <Link
                     href={t.guideLink}
-                    className="text-sm font-semibold text-[#3c4a68] hover:text-[#0057ff] transition-colors min-h-[36px] inline-flex items-center"
+                    className="text-xs font-mono text-slate-400 hover:text-white transition-colors min-h-[36px] inline-flex items-center"
                   >
-                    Xem hướng dẫn
+                    Xem hướng dẫn →
                   </Link>
                 )}
               </div>

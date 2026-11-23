@@ -41,14 +41,14 @@ export function QuickActions() {
   return (
     <section className="w-full max-w-[1240px] xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8 pt-14 sm:pt-16">
       <div className="max-w-[640px] mb-7">
-        <span className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0057ff] mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-[#7c4dff]" />
+        <span className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-wider text-[#d4ff00] mb-3">
+          <span className="w-2 h-2 rounded-full bg-[#d4ff00] animate-pulse"></span>
           Bắt đầu trong 1 phút
         </span>
-        <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-tight leading-tight text-[#0c1526] mb-2">
+        <h2 className="text-[clamp(24px,3vw,34px)] font-black tracking-tight leading-tight text-white mb-2">
           {content?.quickActionsTitle || "Bạn muốn làm gì hôm nay?"}
         </h2>
-        <p className="text-[15.5px] text-[#68779a] m-0">
+        <p className="text-[15px] text-slate-400 m-0">
           {content?.quickActionsDesc || "Mỗi lựa chọn đều mở ra một công cụ dùng được ngay — kèm ảnh minh họa đúng việc bạn sắp làm."}
         </p>
       </div>
@@ -57,7 +57,7 @@ export function QuickActions() {
         {actions.map((a) => (
           <article
             key={a.id}
-            className="group bg-white border border-[#dde6f8] rounded-[26px] overflow-hidden shadow-[0_8px_24px_-12px_rgba(21,52,140,.18)] flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_18px_44px_-18px_rgba(21,52,140,.22)]"
+            className="group bg-[#101420]/80 border border-white/10 rounded-[26px] overflow-hidden shadow-xl flex flex-col transition-all duration-200 hover:-translate-y-1 hover:border-[#d4ff00]/40 hover:shadow-[0_12px_35px_rgba(212,255,0,0.12)]"
           >
             <div className="relative">
               <CardImageEditor cardId={a.id} cardTitle={a.title} />
@@ -66,15 +66,15 @@ export function QuickActions() {
                 alt={a.alt}
                 width={400}
                 height={168}
-                className="w-full h-[160px] sm:h-[168px] object-cover"
+                className="w-full h-[160px] sm:h-[168px] object-cover opacity-90 group-hover:opacity-100 transition-opacity"
               />
             </div>
             <div className="p-5 flex flex-col gap-1.5 flex-1">
-              <h3 className="text-[17.5px] font-extrabold text-[#0c1526] m-0">{a.title}</h3>
-              <p className="text-sm text-[#68779a] m-0 flex-1">{a.desc}</p>
+              <h3 className="text-[17.5px] font-extrabold text-white m-0">{a.title}</h3>
+              <p className="text-sm text-slate-300 m-0 flex-1">{a.desc}</p>
               <Link
                 href={a.link}
-                className="mt-2.5 inline-flex items-center gap-2 text-[14.5px] font-extrabold text-[#0057ff] min-h-[36px] group-hover:gap-3 transition-all"
+                className="mt-2.5 inline-flex items-center gap-2 text-[14px] font-bold text-[#d4ff00] min-h-[36px] group-hover:gap-3 transition-all"
               >
                 {a.linkLabel}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />

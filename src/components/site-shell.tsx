@@ -57,8 +57,8 @@ export function Logo() {
       >
         M
       </span>
-      <span className="font-black tracking-tight text-xl sm:text-2xl text-neutral-900">
-        AI <span className="text-[#0057ff]">MỞ</span>
+      <span className="font-black tracking-tight text-xl sm:text-2xl text-white">
+        AI <span className="text-[#d4ff00]">MỞ</span>
       </span>
     </Link>
   );
@@ -223,7 +223,7 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="site-header sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-neutral-200/80 transition-all">
+    <header className="site-header sticky top-0 z-40 bg-[#090c14]/95 backdrop-blur-md border-b border-white/10 transition-all">
       <div className="w-full max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8 flex items-center justify-between py-3 gap-3">
         {/* Left: Brand Logo */}
         <Logo />
@@ -243,7 +243,7 @@ export function Header() {
                 <Link
                   key={item.key}
                   href={item.href}
-                  className="py-1.5 px-3 text-sm font-semibold text-neutral-700 hover:text-[#0057ff] transition-colors rounded-full hover:bg-neutral-100/80 whitespace-nowrap inline-flex items-center gap-1.5"
+                  className="py-1.5 px-3 text-sm font-semibold text-slate-300 hover:text-[#d4ff00] transition-colors rounded-full hover:bg-white/5 whitespace-nowrap inline-flex items-center gap-1.5"
                 >
                   <span>{item.label}</span>
                   {item.badge && (
@@ -266,8 +266,8 @@ export function Header() {
                   href={item.href}
                   className={`py-1.5 px-3 text-sm font-semibold transition-colors rounded-full whitespace-nowrap inline-flex items-center gap-1 ${
                     isOpen
-                      ? "text-[#0057ff] bg-blue-50/80"
-                      : "text-neutral-700 hover:text-[#0057ff] hover:bg-neutral-100/80"
+                      ? "text-[#d4ff00] bg-white/5"
+                      : "text-neutral-700 hover:text-[#0057ff] hover:bg-white/5"
                   }`}
                   onClick={(e) => {
                     if (window.innerWidth >= 1024 && !isOpen) {
@@ -294,7 +294,7 @@ export function Header() {
                 {/* Dropdown Menu Panel */}
                 {isOpen && item.children && (
                   <div
-                    className="absolute top-full left-0 mt-2 w-80 bg-white/98 backdrop-blur-xl rounded-2xl border border-neutral-200/90 shadow-2xl shadow-blue-900/10 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
+                    className="absolute top-full left-0 mt-2 w-80 bg-[#0d121f]/98 backdrop-blur-2xl rounded-2xl border border-white/15 shadow-2xl p-2 z-50 text-white animate-in fade-in slide-in-from-top-2 duration-150"
                     onMouseEnter={() => handleMouseEnter(item.key)}
                     onMouseLeave={handleMouseLeave}
                   >
@@ -307,7 +307,7 @@ export function Header() {
                           className={`group flex items-start gap-2.5 p-2.5 rounded-xl transition-all ${
                             sub.highlight
                               ? "bg-gradient-to-r from-blue-50/90 to-indigo-50/70 hover:from-blue-100 hover:to-indigo-100"
-                              : "hover:bg-neutral-100/80"
+                              : "hover:bg-white/5"
                           }`}
                         >
                           <div className="flex-1 min-w-0">
@@ -316,7 +316,7 @@ export function Header() {
                                 className={`text-[13.5px] font-bold ${
                                   sub.highlight
                                     ? "text-[#0057ff]"
-                                    : "text-neutral-900 group-hover:text-[#0057ff]"
+                                    : "text-white group-hover:text-[#d4ff00]"
                                 }`}
                               >
                                 {sub.label}
@@ -328,7 +328,7 @@ export function Header() {
                               )}
                             </div>
                             {sub.desc && (
-                              <p className="text-[12px] text-neutral-500 leading-snug line-clamp-2 mt-0.5 m-0">
+                              <p className="text-[12px] text-slate-400 leading-snug line-clamp-2 mt-0.5 m-0">
                                 {sub.desc}
                               </p>
                             )}
@@ -357,7 +357,7 @@ export function Header() {
               onKeyDown={handleSearchKeyDown}
               placeholder="Tìm công cụ, bài viết…"
               aria-label="Tìm kiếm công cụ hoặc bài viết"
-              className="pl-9 pr-7 py-1.5 text-xs sm:text-sm bg-[#eef3ff] hover:bg-[#e6edfc] focus:bg-white text-neutral-900 placeholder:text-neutral-500 rounded-full border border-[#dde6f8] focus:border-[#0057ff] focus:ring-2 focus:ring-[#0057ff]/20 outline-none transition-all w-36 md:w-48 lg:w-56"
+              className="pl-9 pr-7 py-1.5 text-xs sm:text-sm bg-white/5 hover:bg-white/10 focus:bg-[#121826] text-white placeholder:text-slate-500 rounded-full border border-white/10 focus:border-[#d4ff00] focus:ring-1 focus:ring-[#d4ff00]/30 outline-none transition-all w-36 md:w-48 lg:w-56"
             />
             {query && (
               <button
@@ -375,14 +375,14 @@ export function Header() {
 
           <Link
             href="/#prompt"
-            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white bg-[#0057ff] hover:bg-[#0043c7] rounded-full shadow-md shadow-blue-500/20 hover:shadow-blue-500/35 transition-all whitespace-nowrap"
+            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-black bg-[#d4ff00] hover:bg-[#b8e000] font-black rounded-full shadow-[0_2px_12px_rgba(212,255,0,0.3)] transition-all whitespace-nowrap"
           >
             <span>Bắt đầu miễn phí</span>
           </Link>
 
           {/* Mobile Menu Toggle (< 1024px) */}
           <button
-            className="menu-button lg:hidden p-2 text-neutral-700 hover:text-neutral-900 transition-colors rounded-xl hover:bg-neutral-100 border border-neutral-200/60"
+            className="menu-button lg:hidden p-2 text-slate-300 hover:text-white transition-colors rounded-xl hover:bg-white/10 border border-white/15"
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-controls="main-nav-mobile"
@@ -397,7 +397,7 @@ export function Header() {
       {open && (
         <div
           id="main-nav-mobile"
-          className="lg:hidden border-t border-neutral-200 bg-white px-4 py-4 space-y-4 shadow-xl max-h-[85vh] overflow-y-auto"
+          className="lg:hidden border-t border-white/10 bg-[#0d121f] text-white px-4 py-4 space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto"
         >
           {/* Mobile Search */}
           <div className="relative flex items-center sm:hidden pb-1">

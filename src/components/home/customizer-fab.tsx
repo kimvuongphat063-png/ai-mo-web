@@ -97,7 +97,7 @@ export function CustomizerFab() {
     root.style.removeProperty("--violet");
     const main = document.getElementById("main-content");
     if (main) {
-      main.style.backgroundColor = "#f4f7ff";
+      main.style.backgroundColor = "#090c14";
     }
     resetImages();
   };

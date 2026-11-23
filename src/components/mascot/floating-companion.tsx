@@ -176,14 +176,14 @@ export function FloatingMascotCompanion() {
         <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-[#090c14]" />
         <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-400 animate-ping opacity-75" />
 
-        {/* Mascot Avatar */}
-        <div className="w-full h-full rounded-full overflow-hidden relative bg-black/50">
+        {/* Mascot Avatar (High-resolution face crop) */}
+        <div className="w-full h-full rounded-full overflow-hidden relative bg-black">
           <Image
-            src="/mascot/mascot-hero.jpg"
+            src="/mascot/mascot-avatar.png"
             alt="Linh vật AI Mở"
             width={64}
             height={64}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-115 transition-transform duration-300"
           />
         </div>
 
