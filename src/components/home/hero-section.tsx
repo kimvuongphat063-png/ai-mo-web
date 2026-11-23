@@ -37,13 +37,13 @@ const CHIPS = [
 
 const MODELS = ["Veo 3", "Kling 1.5", "Sora", "Grok"];
 
-/* ── 5 Core Ecosystem Modules ── */
+/* ── 5 Core Ecosystem Modules with Distinct Personas & Accent Colors ── */
 const MODULES = [
-  { label: "Công cụ AI", desc: "Tạo video & prompt", href: "/tools", icon: Bot, tag: "Studio" },
-  { label: "App Quản Trị", desc: "Kế toán, bán hàng", href: "/apps", icon: Smartphone, tag: "Free" },
-  { label: "Games 65+", desc: "Trí tuệ, phản xạ", href: "/games", icon: Gamepad2, tag: "Hot" },
-  { label: "Học AI", desc: "Lộ trình thực chiến", href: "/guides", icon: BookOpen, tag: "Guide" },
-  { label: "Sản Phẩm Số", desc: "Template, kịch bản", href: "/products", icon: Package, tag: "Asset" },
+  { label: "Công cụ AI", desc: "Đạo diễn kịch bản", href: "/tools", icon: Bot, tag: "Studio", color: "#d4ff00", persona: "Đạo Diễn" },
+  { label: "App Quản Trị", desc: "95+ app bán hàng", href: "/apps", icon: Smartphone, tag: "Free", color: "#00e5ff", persona: "Kính AR" },
+  { label: "Games 65+", desc: "Trí tuệ, phản xạ", href: "/games", icon: Gamepad2, tag: "Hot", color: "#d946ef", persona: "Gamer" },
+  { label: "Học AI", desc: "Dự án thực chiến", href: "/guides", icon: BookOpen, tag: "Guide", color: "#f59e0b", persona: "Gia Sư" },
+  { label: "Sản Phẩm Số", desc: "Template, kịch bản", href: "/products", icon: Package, tag: "Asset", color: "#10b981", persona: "Thủ Kho" },
 ];
 
 /* ── Toast helper ── */
@@ -177,13 +177,37 @@ export function HeroSection() {
             
             <div>
               {/* Category Signature Pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d4ff00]/10 border border-[#d4ff00]/30 text-[#d4ff00] text-[11px] sm:text-[12px] font-mono font-bold mb-4 sm:mb-6 tracking-wide">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d4ff00]/10 border border-[#d4ff00]/30 text-[#d4ff00] text-[11px] sm:text-[12px] font-mono font-bold mb-4 sm:mb-5 tracking-wide">
                 <span className="w-2 h-2 rounded-full bg-[#d4ff00] animate-pulse"></span>
                 <span>AI MỞ STUDIO // NỀN TẢNG THỰC CHIẾN</span>
               </div>
 
+              {/* ── MASCOT HERO HOST GREETING ── */}
+              <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-2xl bg-black/45 border border-[#d4ff00]/30 mb-5 max-w-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+                <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#090c14] border border-[#d4ff00]/50 p-0.5 shrink-0 overflow-hidden shadow-[0_0_15px_rgba(212,255,0,0.3)]">
+                  <Image
+                    src="/mascot/mascot-hero.jpg"
+                    alt="Linh vật AI Mở"
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                  <span className="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-black animate-pulse" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[10px] font-mono font-bold text-[#d4ff00] flex items-center gap-1.5 uppercase tracking-wider">
+                    <span>LINH VẬT AI MỞ</span>
+                    <span className="text-slate-500">·</span>
+                    <span className="text-slate-300">Live Companion</span>
+                  </div>
+                  <p className="text-xs text-slate-200 mt-0.5 font-medium truncate sm:whitespace-normal">
+                    "Chào bạn! Hãy nhập ý tưởng vào Studio bên phải để tạo video ngay nhé!"
+                  </p>
+                </div>
+              </div>
+
               {/* Punchy Headline */}
-              <h1 className="text-[clamp(30px,4vw,52px)] xl:text-[50px] 2xl:text-[54px] leading-[1.12] font-black tracking-tight text-white mb-4 sm:mb-6">
+              <h1 className="text-[clamp(28px,3.8vw,48px)] xl:text-[46px] 2xl:text-[50px] leading-[1.12] font-black tracking-tight text-white mb-4 sm:mb-5">
                 Học AI Bằng Cách<br />
                 <span className="text-[#d4ff00]">Tạo Ra Thứ Dùng Được.</span>
               </h1>
@@ -213,11 +237,14 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* 5 Core Ecosystem Modules (Clean Modern Tech Tiles) */}
+            {/* 5 Core Ecosystem Modules (Distinct Thematic Cards) */}
             <div className="pt-6">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#d4ff00]"></span>
-                <span>Hệ Sinh Thái AI Mở · Bấm Để Khám Phá</span>
+              <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center justify-between">
+                <span className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#d4ff00]"></span>
+                  <span>5 Nhánh Hệ Sinh Thái · Bấm Để Khám Phá</span>
+                </span>
+                <span className="text-[10px] text-slate-500 font-normal hidden sm:inline">Phân vai đặc trưng</span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
@@ -227,17 +254,27 @@ export function HeroSection() {
                     <Link
                       key={m.href}
                       href={m.href}
-                      className="group p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-[#d4ff00]/50 transition-all flex flex-col justify-between"
-                      title={`Khám phá ${m.label}`}
+                      className="group p-2.5 sm:p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 transition-all flex flex-col justify-between"
+                      style={{
+                        borderColor: undefined,
+                      }}
+                      title={`Khám phá ${m.label} (${m.persona})`}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <Icon className="w-5 h-5 text-slate-300 group-hover:text-[#d4ff00] transition-colors" />
-                        <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-white/5 text-slate-400 group-hover:text-[#d4ff00] group-hover:bg-[#d4ff00]/10 border border-white/5 group-hover:border-[#d4ff00]/30 transition-all">
-                          {m.tag}
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 transition-colors" style={{ color: m.color }} />
+                        <span 
+                          className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border transition-all"
+                          style={{
+                            color: m.color,
+                            backgroundColor: `${m.color}15`,
+                            borderColor: `${m.color}35`,
+                          }}
+                        >
+                          {m.persona}
                         </span>
                       </div>
                       <div>
-                        <div className="font-bold text-white text-[12.5px] group-hover:text-[#d4ff00] transition-colors truncate">
+                        <div className="font-bold text-white text-[12px] sm:text-[12.5px] group-hover:text-white transition-colors truncate">
                           {m.label}
                         </div>
                         <div className="text-[10px] text-slate-400 truncate mt-0.5">

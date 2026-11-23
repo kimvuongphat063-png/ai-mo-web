@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Footer, Header } from "./site-shell";
 import { DonateCoffeeWidget } from "./donate-coffee";
 import { SearchProvider } from "./home-search-context";
+import { FloatingMascotCompanion } from "./mascot/floating-companion";
 
 /**
  * Renders the public marketing chrome (Header/Footer) for every route
@@ -23,6 +24,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <SearchProvider>
         {children}
         <DonateCoffeeWidget />
+        <FloatingMascotCompanion />
       </SearchProvider>
     );
   }
@@ -34,6 +36,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         <div className="flex-1 flex flex-col">{children}</div>
         <Footer />
         <DonateCoffeeWidget />
+        <FloatingMascotCompanion />
       </div>
     </SearchProvider>
   );
