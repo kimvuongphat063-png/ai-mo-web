@@ -53,6 +53,20 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "platform-lookaside.fbsbx.com" },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/blog",
+        destination: "/guides",
+        permanent: true,
+      },
+      {
+        source: "/blog/:slug*",
+        destination: "/guides/:slug*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
