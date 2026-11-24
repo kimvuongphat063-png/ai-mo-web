@@ -269,17 +269,17 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* ── Mẫu kịch bản gợi ý (Presets) ─────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-surface p-4 shadow-2xs">
+      <div className="rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 shadow-lg">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded-md bg-accent-subtle text-accent">
+            <span className="flex h-5 w-5 items-center justify-center rounded-md bg-[#d4ff00]/15 text-[#d4ff00]">
               <Sparkles className="h-3 w-3" />
             </span>
-            <span className="text-xs font-semibold text-text uppercase tracking-wider">
+            <span className="text-xs font-bold text-white uppercase tracking-wider">
               Mẫu gợi ý theo ngành hàng
             </span>
           </div>
-          <span className="text-[11px] text-muted">Bấm vào mẫu để tự động điền</span>
+          <span className="text-[11px] text-slate-400">Bấm vào mẫu để tự động điền</span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -288,17 +288,17 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
               key={p.id}
               type="button"
               onClick={() => handleApplyPreset(p)}
-              className="text-left p-2.5 rounded-lg border border-border bg-surface-2/50 hover:bg-surface-2 hover:border-accent/40 transition-all cursor-pointer group"
+              className="text-left p-2.5 rounded-xl border border-white/10 bg-[#0d121f] hover:bg-white/[0.08] hover:border-[#00e5ff]/50 transition-all cursor-pointer group"
             >
               <div className="flex items-center justify-between gap-1 mb-1">
-                <span className="text-xs font-medium text-text group-hover:text-accent line-clamp-1">
+                <span className="text-xs font-semibold text-slate-200 group-hover:text-[#00e5ff] line-clamp-1">
                   {p.name}
                 </span>
-                <span className="text-[9px] font-semibold px-1.5 py-0.2 rounded bg-surface border border-border text-muted shrink-0">
+                <span className="text-[9px] font-semibold px-1.5 py-0.2 rounded bg-white/5 border border-white/10 text-slate-400 shrink-0">
                   {p.badge}
                 </span>
               </div>
-              <p className="text-[11px] text-muted line-clamp-2 leading-relaxed">
+              <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
                 {p.description}
               </p>
             </button>
@@ -307,13 +307,13 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
       </div>
 
       {/* ── Kịch bản video (Script Textarea — Core Input) ─────────────────── */}
-      <div className="rounded-xl border border-border bg-surface p-4 shadow-2xs space-y-2">
+      <div className="rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 shadow-lg space-y-2">
         <div className="flex items-center justify-between">
-          <label htmlFor="scriptText" className="text-xs font-bold text-text flex items-center gap-1.5">
-            <Video className="h-4 w-4 text-accent" />
+          <label htmlFor="scriptText" className="text-xs font-bold text-white flex items-center gap-1.5">
+            <Video className="h-4 w-4 text-[#d4ff00]" />
             Kịch bản video của bạn (bắt buộc)
           </label>
-          <span className="text-[11px] text-muted">
+          <span className="text-[11px] text-slate-400">
             {scriptText.trim().length} / 12,000 ký tự (tối thiểu 20)
           </span>
         </div>
@@ -324,11 +324,11 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
           value={scriptText}
           onChange={(e) => setScriptText(e.target.value)}
           placeholder="Dán toàn bộ kịch bản, lời thoại hoặc dàn ý video của bạn vào đây...&#10;&#10;Hệ thống sẽ giữ nguyên 100% câu chữ thoại, chia thành từng phân cảnh hợp lý và tạo prompt mô tả hình ảnh cho Google Veo 3 & xAI Grok."
-          className="w-full rounded-lg border border-border bg-surface-2/30 p-3 text-sm text-text placeholder:text-muted focus:border-accent focus:ring-1 focus:ring-accent outline-hidden leading-relaxed resize-y"
+          className="w-full rounded-xl border border-white/15 bg-[#0d121f] p-3 text-sm text-white placeholder:text-slate-500 focus:border-[#d4ff00] focus:ring-1 focus:ring-[#d4ff00]/30 outline-hidden leading-relaxed resize-y"
         />
 
         {!isInputValid && scriptText.length > 0 && (
-          <p className="text-[11px] text-amber-600 dark:text-amber-400">
+          <p className="text-[11px] text-amber-400">
             Nội dung kịch bản cần tối thiểu 20 ký tự để AI có đủ dữ liệu phân cảnh.
           </p>
         )}
@@ -337,168 +337,168 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
       {/* ── Thiết lập kỹ thuật cốt lõi (Platform, Model, Ratio, Duration) ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {/* Nền tảng xuất bản */}
-        <div className="rounded-xl border border-border bg-surface p-3.5 shadow-2xs">
-          <label className="text-xs font-semibold text-text mb-1.5 block">
+        <div className="rounded-xl border border-white/12 bg-[#101420] p-3.5 shadow-md">
+          <label className="text-xs font-semibold text-slate-200 mb-1.5 block">
             Nền tảng đăng tải
           </label>
           <select
             value={publishingPlatform}
             onChange={(e) => setPublishingPlatform(e.target.value as PublishingPlatform)}
-            className="w-full h-9 rounded-md border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-hidden cursor-pointer"
+            className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-hidden cursor-pointer"
           >
             {PUBLISHING_PLATFORMS.map((platform) => (
-              <option key={platform} value={platform}>
+              <option key={platform} value={platform} className="bg-[#101420] text-white">
                 {PLATFORM_LABELS[platform]?.label || platform}
               </option>
             ))}
           </select>
-          <p className="text-[10px] text-muted mt-1">
+          <p className="text-[10px] text-slate-400 mt-1">
             {PLATFORM_LABELS[publishingPlatform]?.badge}
           </p>
         </div>
 
         {/* Video Prompt Model */}
-        <div className="rounded-xl border border-border bg-surface p-3.5 shadow-2xs">
-          <label className="text-xs font-semibold text-text mb-1.5 block">
+        <div className="rounded-xl border border-white/12 bg-[#101420] p-3.5 shadow-md">
+          <label className="text-xs font-semibold text-slate-200 mb-1.5 block">
             Model Video AI
           </label>
           <select
             value={videoModel}
             onChange={(e) => setVideoModel(e.target.value as VideoModel)}
-            className="w-full h-9 rounded-md border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-hidden cursor-pointer font-medium"
+            className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-hidden cursor-pointer font-medium"
           >
             {VIDEO_MODELS.map((model) => (
-              <option key={model} value={model}>
+              <option key={model} value={model} className="bg-[#101420] text-white">
                 {VIDEO_MODEL_LABELS[model]?.name || model}
               </option>
             ))}
           </select>
-          <p className="text-[10px] text-muted mt-1 truncate">
+          <p className="text-[10px] text-slate-400 mt-1 truncate">
             {VIDEO_MODEL_LABELS[videoModel]?.tag}
           </p>
         </div>
 
         {/* Tỷ lệ khung hình */}
-        <div className="rounded-xl border border-border bg-surface p-3.5 shadow-2xs">
-          <label className="text-xs font-semibold text-text mb-1.5 block">
+        <div className="rounded-xl border border-white/12 bg-[#101420] p-3.5 shadow-md">
+          <label className="text-xs font-semibold text-slate-200 mb-1.5 block">
             Tỷ lệ khung hình
           </label>
           <select
             value={aspectRatio}
             onChange={(e) => setAspectRatio(e.target.value as AspectRatio)}
-            className="w-full h-9 rounded-md border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-hidden cursor-pointer"
+            className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-hidden cursor-pointer"
           >
             {ASPECT_RATIOS.map((ratio) => (
-              <option key={ratio} value={ratio}>
+              <option key={ratio} value={ratio} className="bg-[#101420] text-white">
                 {ASPECT_RATIO_LABELS[ratio]}
               </option>
             ))}
           </select>
-          <p className="text-[10px] text-muted mt-1">Độ phân giải tương thích video engine</p>
+          <p className="text-[10px] text-slate-400 mt-1">Độ phân giải tương thích video engine</p>
         </div>
 
         {/* Thời lượng */}
-        <div className="rounded-xl border border-border bg-surface p-3.5 shadow-2xs">
-          <label className="text-xs font-semibold text-text mb-1.5 block">
+        <div className="rounded-xl border border-white/12 bg-[#101420] p-3.5 shadow-md">
+          <label className="text-xs font-semibold text-slate-200 mb-1.5 block">
             Thời lượng video
           </label>
           <div className="flex items-center gap-1.5">
             <select
               value={durationSeconds}
               onChange={(e) => setDurationSeconds(Number(e.target.value))}
-              className="w-full h-9 rounded-md border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-hidden cursor-pointer"
+              className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-hidden cursor-pointer"
             >
               {DURATION_PRESETS.map((dur) => (
-                <option key={dur} value={dur}>
+                <option key={dur} value={dur} className="bg-[#101420] text-white">
                   {dur} giây
                 </option>
               ))}
             </select>
           </div>
-          <p className="text-[10px] text-muted mt-1">Phân bổ 3 - 6 phân cảnh liên tục</p>
+          <p className="text-[10px] text-slate-400 mt-1">Phân bổ 3 - 6 phân cảnh liên tục</p>
         </div>
       </div>
 
       {/* ── Phong cách hình ảnh & Chế độ diễn xuất ────────────────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* Phong cách thị giác */}
-        <div className="rounded-xl border border-border bg-surface p-4 shadow-2xs space-y-2">
-          <label className="text-xs font-bold text-text flex items-center gap-1.5">
-            <Clapperboard className="h-4 w-4 text-accent" />
+        <div className="rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 shadow-lg space-y-2">
+          <label className="text-xs font-bold text-white flex items-center gap-1.5">
+            <Clapperboard className="h-4 w-4 text-[#00e5ff]" />
             Phong cách hình ảnh & Ánh sáng
           </label>
           <select
             value={visualStyle}
             onChange={(e) => setVisualStyle(e.target.value as VisualStyle)}
-            className="w-full h-9 rounded-md border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-hidden cursor-pointer"
+            className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-hidden cursor-pointer"
           >
             {VISUAL_STYLES.map((style) => (
-              <option key={style} value={style}>
+              <option key={style} value={style} className="bg-[#101420] text-white">
                 {VISUAL_STYLE_LABELS[style] || style}
               </option>
             ))}
           </select>
-          <p className="text-[11px] text-muted">
+          <p className="text-[11px] text-slate-400">
             Xác lập ánh sáng, độ tương phản và chất liệu quang học cho máy quay.
           </p>
         </div>
 
         {/* Chế độ thể hiện & diễn xuất */}
-        <div className="rounded-xl border border-border bg-surface p-4 shadow-2xs space-y-2">
-          <label className="text-xs font-bold text-text flex items-center gap-1.5">
-            <Layers className="h-4 w-4 text-accent" />
+        <div className="rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 shadow-lg space-y-2">
+          <label className="text-xs font-bold text-white flex items-center gap-1.5">
+            <Layers className="h-4 w-4 text-[#00e5ff]" />
             Chế độ diễn xuất & Nhân vật
           </label>
           <select
             value={performanceMode}
             onChange={(e) => setPerformanceMode(e.target.value as PerformanceMode)}
-            className="w-full h-9 rounded-md border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-hidden cursor-pointer font-medium"
+            className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-hidden cursor-pointer font-medium"
           >
             {PERFORMANCE_MODES.map((mode) => (
-              <option key={mode} value={mode}>
+              <option key={mode} value={mode} className="bg-[#101420] text-white">
                 {PERFORMANCE_MODE_LABELS[mode]?.title || mode}
               </option>
             ))}
           </select>
-          <p className="text-[11px] text-muted">
+          <p className="text-[11px] text-slate-400">
             {PERFORMANCE_MODE_LABELS[performanceMode]?.desc}
           </p>
         </div>
       </div>
 
       {/* ── Tùy chỉnh nâng cao (Accordion) ─────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-surface shadow-2xs overflow-hidden">
+      <div className="rounded-2xl border border-white/12 bg-[#101420] shadow-lg overflow-hidden">
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="w-full flex items-center justify-between p-4 text-xs font-semibold text-text hover:bg-surface-2/40 transition-colors cursor-pointer"
+          className="w-full flex items-center justify-between p-4 text-xs font-bold text-white hover:bg-white/[0.04] transition-colors cursor-pointer"
         >
           <span className="flex items-center gap-2">
-            <Sliders className="h-4 w-4 text-accent" />
+            <Sliders className="h-4 w-4 text-[#d4ff00]" />
             <span>Tùy chỉnh nâng cao (Mô tả nhân vật, nhịp điệu, SEO, CTA...)</span>
           </span>
           {showAdvanced ? (
-            <ChevronUp className="h-4 w-4 text-muted" />
+            <ChevronUp className="h-4 w-4 text-slate-400" />
           ) : (
-            <ChevronDown className="h-4 w-4 text-muted" />
+            <ChevronDown className="h-4 w-4 text-slate-400" />
           )}
         </button>
 
         {showAdvanced && (
-          <div className="p-4 pt-0 border-t border-border/60 space-y-4 animate-in fade-in duration-150">
+          <div className="p-4 pt-0 border-t border-white/8 space-y-4 animate-in fade-in duration-150">
             {/* Hàng 1: Thể loại & Nhịp điệu */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
               <div>
-                <label className="text-xs font-medium text-text-2 mb-1 block">
+                <label className="text-xs font-semibold text-slate-300 mb-1 block">
                   Thể loại nội dung
                 </label>
                 <select
                   value={contentType}
                   onChange={(e) => setContentType(e.target.value as ContentType)}
-                  className="w-full h-9 rounded-md border border-border bg-surface px-2.5 text-xs text-text"
+                  className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white"
                 >
                   {CONTENT_TYPES.map((type) => (
-                    <option key={type} value={type}>
+                    <option key={type} value={type} className="bg-[#101420] text-white">
                       {CONTENT_TYPE_LABELS[type] || type}
                     </option>
                   ))}
@@ -506,16 +506,16 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
               </div>
 
               <div>
-                <label className="text-xs font-medium text-text-2 mb-1 block">
+                <label className="text-xs font-semibold text-slate-300 mb-1 block">
                   Nhịp điệu phân cảnh (Pacing)
                 </label>
                 <select
                   value={pacing}
                   onChange={(e) => setPacing(e.target.value as PacingOption)}
-                  className="w-full h-9 rounded-md border border-border bg-surface px-2.5 text-xs text-text"
+                  className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white"
                 >
                   {PACING_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
+                    <option key={opt} value={opt} className="bg-[#101420] text-white">
                       {opt === "slow"
                         ? "Chậm rãi & Chiêm nghiệm (Slow)"
                         : opt === "fast"
@@ -530,7 +530,7 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
             {/* Hàng 2: Mô tả nhân vật & SEO Toggle */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="sm:col-span-2">
-                <label className="text-xs font-medium text-text-2 mb-1 block">
+                <label className="text-xs font-semibold text-slate-300 mb-1 block">
                   Mô tả nhân vật / trang phục (tùy chọn)
                 </label>
                 <input
@@ -538,20 +538,20 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
                   value={characterDescription}
                   onChange={(e) => setCharacterDescription(e.target.value)}
                   placeholder="Ví dụ: Nữ 25 tuổi, tóc đen ngắn, áo sơ mi trắng tối giản..."
-                  className="w-full h-9 rounded-md border border-border bg-surface px-3 text-xs text-text"
+                  className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-3 text-xs text-white placeholder:text-slate-500"
                 />
               </div>
 
               <div className="flex flex-col justify-end">
-                <label className="flex items-center gap-2 p-2 rounded-md border border-border bg-surface-2/30 cursor-pointer h-9">
+                <label className="flex items-center gap-2 p-2 rounded-lg border border-white/15 bg-[#0d121f] cursor-pointer h-9">
                   <input
                     type="checkbox"
                     checked={seoEnabled}
                     onChange={(e) => setSeoEnabled(e.target.checked)}
-                    className="h-4 w-4 rounded border-border text-accent focus:ring-accent"
+                    className="h-4 w-4 rounded border-white/20 text-[#d4ff00] focus:ring-[#d4ff00]"
                   />
-                  <span className="text-xs font-medium text-text flex items-center gap-1">
-                    <Search className="h-3.5 w-3.5 text-accent" />
+                  <span className="text-xs font-medium text-slate-200 flex items-center gap-1">
+                    <Search className="h-3.5 w-3.5 text-[#00e5ff]" />
                     Sinh Keywords SEO
                   </span>
                 </label>
@@ -561,7 +561,7 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
             {/* Hàng 3: Kêu gọi hành động (CTA) & Tông thái */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-xs font-medium text-text-2 mb-1 block">
+                <label className="text-xs font-semibold text-slate-300 mb-1 block">
                   Lời kêu gọi hành động (CTA)
                 </label>
                 <input
@@ -569,12 +569,12 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
                   value={cta}
                   onChange={(e) => setCta(e.target.value)}
                   placeholder="Ví dụ: Nhấn vào link bio để nhận tư vấn hoặc tải tài liệu..."
-                  className="w-full h-9 rounded-md border border-border bg-surface px-3 text-xs text-text"
+                  className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-3 text-xs text-white placeholder:text-slate-500"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-medium text-text-2 mb-1 block">
+                <label className="text-xs font-semibold text-slate-300 mb-1 block">
                   Tông thái / Cảm xúc chủ đạo
                 </label>
                 <input
@@ -582,14 +582,14 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
                   value={tone}
                   onChange={(e) => setTone(e.target.value)}
                   placeholder="Ví dụ: Chân thật, dí dỏm, truyền cảm hứng..."
-                  className="w-full h-9 rounded-md border border-border bg-surface px-3 text-xs text-text"
+                  className="w-full h-9 rounded-lg border border-white/15 bg-[#0d121f] px-3 text-xs text-white placeholder:text-slate-500"
                 />
               </div>
             </div>
 
             {/* Hàng 4: Yêu cầu kỹ thuật bổ sung */}
             <div>
-              <label className="text-xs font-medium text-text-2 mb-1 block">
+              <label className="text-xs font-semibold text-slate-300 mb-1 block">
                 Yêu cầu bổ sung cho camera & đạo cụ (tùy chọn)
               </label>
               <textarea
@@ -597,7 +597,7 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
                 value={additionalRequirements}
                 onChange={(e) => setAdditionalRequirements(e.target.value)}
                 placeholder="Ví dụ: Cần nhiều góc quay cận cảnh chi tiết, chuyển cảnh lướt nhanh, ánh sáng vàng ấm..."
-                className="w-full rounded-md border border-border bg-surface p-2.5 text-xs text-text leading-relaxed"
+                className="w-full rounded-lg border border-white/15 bg-[#0d121f] p-2.5 text-xs text-white placeholder:text-slate-500 leading-relaxed"
               />
             </div>
           </div>
@@ -612,38 +612,39 @@ export function InputForm({ initialValues, isLoading, onSubmit }: InputFormProps
           size="md"
           loading={isLoading}
           disabled={!isInputValid || isLoading}
-          className="w-full h-12 text-base font-semibold shadow-md shadow-accent/20 cursor-pointer"
+          className="w-full h-12 text-base font-black !bg-[#d4ff00] hover:!bg-[#b8e000] !text-black shadow-[0_0_25px_rgba(212,255,0,0.45)] hover:shadow-[0_0_35px_rgba(212,255,0,0.65)] hover:scale-[1.01] transition-all cursor-pointer rounded-xl border border-[#d4ff00]"
+          style={{ color: "#000000", fontWeight: 900 }}
         >
           {isLoading ? (
             <span className="flex items-center gap-2">
-              <span>{PROGRESS_MESSAGES[progressIndex]}</span>
+              <span style={{ color: "#000000", fontWeight: 900 }}>{PROGRESS_MESSAGES[progressIndex]}</span>
             </span>
           ) : (
-            <span className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5" />
-              Phân tích kịch bản và tạo prompt
+            <span className="flex items-center gap-2" style={{ color: "#000000", fontWeight: 900 }}>
+              <Sparkles className="h-5 w-5 fill-current" />
+              <span>Phân tích kịch bản và tạo prompt</span>
             </span>
           )}
         </Button>
-        <p className="text-center text-[11px] text-muted mt-2">
+        <p className="text-center text-[11px] text-slate-400 mt-2">
           Hệ thống miễn phí · Tối ưu hóa prompt chuyên sâu cho Google Veo 3 & xAI Grok Video.
         </p>
 
         {/* ── Quyền riêng tư & Điều khoản AI ───────────────────────────────── */}
-        <div className="mt-4 rounded-xl border border-border/70 bg-surface-2/40 p-3.5 text-[11px] text-muted space-y-2">
-          <div className="flex items-center gap-1.5 font-semibold text-text text-xs">
-            <ShieldCheck className="h-4 w-4 text-accent" />
+        <div className="mt-4 rounded-2xl border border-white/10 bg-[#0d121f] p-4 text-[11px] text-slate-400 space-y-2">
+          <div className="flex items-center gap-1.5 font-bold text-white text-xs">
+            <ShieldCheck className="h-4 w-4 text-[#00e5ff]" />
             <span>Chính sách quyền riêng tư & Điều khoản AI</span>
           </div>
-          <ul className="list-disc pl-4 space-y-1 text-muted leading-relaxed">
+          <ul className="list-disc pl-4 space-y-1 text-slate-400 leading-relaxed">
             <li>
-              <strong className="text-text-2">Bảo toàn kịch bản:</strong> Toàn bộ câu từ của kịch bản gốc được lưu giữ nguyên vẹn vào từng phân cảnh; hệ thống không tự ý bịa đặt thông số hay cam kết sai lệch.
+              <strong className="text-slate-200">Bảo toàn kịch bản:</strong> Toàn bộ câu từ của kịch bản gốc được lưu giữ nguyên vẹn vào từng phân cảnh; hệ thống không tự ý bịa đặt thông số hay cam kết sai lệch.
             </li>
             <li>
-              <strong className="text-text-2">Riêng tư mặc định:</strong> Mọi kịch bản lưu trong tài khoản của bạn được giữ ở chế độ riêng tư (Private). Bạn có toàn quyền xem, đổi tên hoặc xóa vĩnh viễn bất kỳ lúc nào.
+              <strong className="text-slate-200">Riêng tư mặc định:</strong> Mọi kịch bản lưu trong tài khoản của bạn được giữ ở chế độ riêng tư (Private). Bạn có toàn quyền xem, đổi tên hoặc xóa vĩnh viễn bất kỳ lúc nào.
             </li>
             <li>
-              <strong className="text-text-2">Công cụ tạo prompt:</strong> Đây là công cụ tạo câu lệnh (Prompt Engineering) cho các engine video như Google Veo 3 và xAI Grok; hệ thống không trực tiếp sinh file video.
+              <strong className="text-slate-200">Công cụ tạo prompt:</strong> Đây là công cụ tạo câu lệnh (Prompt Engineering) cho các engine video như Google Veo 3 và xAI Grok; hệ thống không trực tiếp sinh file video.
             </li>
           </ul>
         </div>

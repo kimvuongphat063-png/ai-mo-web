@@ -592,7 +592,7 @@
       "status": "published",
       "featured": true,
       "sortOrder": 2,
-      "image": "/images/blog/12-skill-claude-code.jpg",
+      "image": "/images/blog/12-skill-claude-code-v2.png",
       "accent": "#155EEF",
       "seo": {
         "title": "Cẩm Nang 12 Skill Claude Code Xịn Nhất 2026 Cho Dân Vibe Coding | AI MỞ",
@@ -612,7 +612,7 @@
       "status": "published",
       "featured": true,
       "sortOrder": 3,
-      "image": "",
+      "image": "/images/blog/cover-prompt-cau-truc.png",
       "accent": "#b9e769",
       "seo": {
         "title": "Viết prompt có cấu trúc | AI MỞ",
@@ -632,7 +632,7 @@
       "status": "published",
       "featured": false,
       "sortOrder": 4,
-      "image": "",
+      "image": "/images/blog/cover-an-toan-du-lieu.png",
       "accent": "#ff7a59",
       "seo": {
         "title": "5 dữ liệu không nên đưa vào chatbot công khai",
@@ -652,7 +652,7 @@
       "status": "published",
       "featured": false,
       "sortOrder": 5,
-      "image": "",
+      "image": "/images/blog/cover-ai-workflow.png",
       "accent": "#8d78ff",
       "seo": {
         "title": "Chọn AI tool theo workflow, không theo FOMO",
@@ -672,7 +672,7 @@
       "status": "published",
       "featured": false,
       "sortOrder": 6,
-      "image": "",
+      "image": "/images/blog/cover-kiem-chung-ai.png",
       "accent": "#f3c94f",
       "seo": {
         "title": "Kiểm chứng câu trả lời của AI trong 10 phút",

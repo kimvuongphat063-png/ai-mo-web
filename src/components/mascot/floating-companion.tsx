@@ -179,7 +179,7 @@ export function FloatingMascotCompanion() {
         {/* Mascot Avatar (High-resolution face crop) */}
         <div className="w-full h-full rounded-full overflow-hidden relative bg-black">
           <Image
-            src="/mascot/mascot-avatar.png"
+            src="/mascot/v2-mascot-avatar.png"
             alt="Linh vật AI Mở"
             width={64}
             height={64}

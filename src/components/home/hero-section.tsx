@@ -37,13 +37,13 @@ const CHIPS = [
 
 const MODELS = ["Veo 3", "Kling 1.5", "Sora", "Grok"];
 
-/* ── 5 Core Ecosystem Modules with Distinct Personas & Accent Colors ── */
+/* ── 5 Core Ecosystem Modules with Distinct Personas, 3D Assets & Accent Colors ── */
 const MODULES = [
-  { label: "Công cụ AI", desc: "Đạo diễn kịch bản", href: "/tools", icon: Bot, tag: "Studio", color: "#d4ff00", persona: "Đạo Diễn", image: "/mascot/theme-tools.png" },
-  { label: "App Quản Trị", desc: "95+ app bán hàng", href: "/apps", icon: Smartphone, tag: "Free", color: "#00e5ff", persona: "Kính AR", image: "/mascot/theme-apps.png" },
-  { label: "Games 65+", desc: "Trí tuệ, phản xạ", href: "/games", icon: Gamepad2, tag: "Hot", color: "#d946ef", persona: "Gamer", image: "/mascot/theme-games.png" },
-  { label: "Học AI", desc: "Dự án thực chiến", href: "/guides", icon: BookOpen, tag: "Guide", color: "#f59e0b", persona: "Gia Sư", image: "/mascot/theme-guides.png" },
-  { label: "Sản Phẩm Số", desc: "Template, kịch bản", href: "/products", icon: Package, tag: "Asset", color: "#10b981", persona: "Thủ Kho", image: "/mascot/theme-products.png" },
+  { label: "Công cụ AI", desc: "Tạo kịch bản & prompt video", href: "/tools", icon: Bot, color: "#d4ff00", image: "/mascot/v2-fullbody-tools.png" },
+  { label: "App Quản Trị (95+)", desc: "Kế toán, dòng tiền, kho bãi", href: "/apps", icon: Smartphone, color: "#00e5ff", image: "/mascot/v2-fullbody-apps.png" },
+  { label: "Game (65+)", desc: "Trí tuệ, phản xạ, logic", href: "/games", icon: Gamepad2, color: "#d946ef", image: "/mascot/v2-fullbody-games.png", badge: "🔥 Schulte HOT" },
+  { label: "Học AI", desc: "Lộ trình thực chiến theo dự án", href: "/guides", icon: BookOpen, color: "#f59e0b", image: "/mascot/v2-fullbody-guides.png" },
+  { label: "Sản Phẩm Số", desc: "Template & asset sẵn dùng", href: "/products", icon: Package, color: "#10b981", image: "/mascot/v2-fullbody-products.png" },
 ];
 
 /* ── Toast helper ── */
@@ -79,6 +79,64 @@ export function HeroSection() {
 
   const { show: showToast, Toast } = useToast();
   const { getImage, content } = useHomeImages();
+
+  /* Mascot 3D Mouse Parallax & Interactive State */
+  const [mascotPos, setMascotPos] = useState({ x: 0, y: 0 });
+  const [mascotHovered, setMascotHovered] = useState(false);
+  const [mascotBouncing, setMascotBouncing] = useState(false);
+  const [mascotSpeechIdx, setMascotSpeechIdx] = useState(0);
+
+  const MASCOT_MESSAGES = [
+    "Chào bạn! Rê chuột để mình xoay 3D tương tác nhé! ✨",
+    "Khám phá 5 trụ cột AI Mở với linh vật 3D bên dưới! 🚀",
+    "Học AI bằng cách tạo ra thứ dùng được ngay! 💡",
+    "Nhập ý tưởng vào Studio bên phải để tạo video 30s! 🎬",
+    "Mỗi ngày một công cụ AI mới thực chiến! 🔥"
+  ];
+
+  const handleMascotMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    setMascotPos({ x, y });
+    setMascotHovered(true);
+  };
+
+  const handleMascotMouseLeave = () => {
+    setMascotPos({ x: 0, y: 0 });
+    setMascotHovered(false);
+  };
+
+  const handleMascotTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = Math.max(-1, Math.min(1, ((touch.clientX - rect.left) / rect.width - 0.5) * 2));
+      const y = Math.max(-1, Math.min(1, ((touch.clientY - rect.top) / rect.height - 0.5) * 2));
+      setMascotPos({ x, y });
+      setMascotHovered(true);
+    }
+  };
+
+  const handleMascotTouchEnd = () => {
+    setTimeout(() => {
+      setMascotPos({ x: 0, y: 0 });
+      setMascotHovered(false);
+    }, 400);
+  };
+
+  const handleMascotClick = () => {
+    setMascotBouncing(true);
+    setTimeout(() => setMascotBouncing(false), 600);
+    const next = (mascotSpeechIdx + 1) % MASCOT_MESSAGES.length;
+    setMascotSpeechIdx(next);
+    showToast(`🤖 Linh vật AI Mở: "${MASCOT_MESSAGES[next]}"`);
+  };
+
+  const rotateY = mascotPos.x * 26;
+  const rotateX = -mascotPos.y * 20;
+  const translateX = mascotPos.x * 14;
+  const translateY = mascotPos.y * 10;
 
   const activeSlides = [
     { src: getImage("hero-preview", "/images/home/hero-creator-preview.jpg"), cap: "Hậu trường: quay video serum bằng điện thoại", alt: "Người sáng tạo quay video sản phẩm serum" },
@@ -146,7 +204,7 @@ export function HeroSection() {
 
   return (
     <section className="relative w-full overflow-hidden bg-[#090c14] text-slate-100 pt-5 pb-12 sm:pt-8 sm:pb-16 border-b border-white/10" id="top">
-      {/* ── ATMOSPHERIC DARK TECH BACKGROUND ── */}
+      {/* ── ATMOSPHERIC DARK TECH BACKGROUND WITH CYBER DEPTH LINES ── */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
         {/* Subtle Tech Grid */}
         <div 
@@ -159,11 +217,36 @@ export function HeroSection() {
           }}
         />
 
-        {/* Top Center Ambient Glow (Acid Lime Accent) */}
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[480px] rounded-full bg-[radial-gradient(circle,rgba(212,255,0,0.14),transparent_70%)] blur-[120px]" />
-        
-        {/* Subtle Cyber Blue Secondary Glow */}
-        <div className="absolute top-[20%] right-[-10%] w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08),transparent_70%)] blur-[140px]" />
+        {/* Cyber Circuit Depth Lines SVG */}
+        <svg 
+          className="absolute inset-0 w-full h-full opacity-30" 
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="limeLine" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#d4ff00" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#00e5ff" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#d4ff00" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="cyanLine" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#00e5ff" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#00e5ff" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path d="M 0,120 L 260,120 L 380,240 L 680,240" fill="none" stroke="url(#limeLine)" strokeWidth="1.5" strokeDasharray="6 4" />
+          <path d="M 120,0 L 120,180 L 240,300 L 240,700" fill="none" stroke="url(#cyanLine)" strokeWidth="1" />
+          <path d="M 820,60 L 960,180 L 1200,180 L 1440,320" fill="none" stroke="url(#limeLine)" strokeWidth="1.5" />
+          <path d="M 1240,0 L 1240,140 L 1080,280 L 1080,720" fill="none" stroke="url(#cyanLine)" strokeWidth="1" strokeDasharray="8 6" />
+          
+          <circle cx="260" cy="120" r="3.5" fill="#d4ff00" />
+          <circle cx="960" cy="180" r="3.5" fill="#00e5ff" />
+          <circle cx="380" cy="240" r="2.5" fill="#d4ff00" />
+        </svg>
+
+        {/* Ambient Glows */}
+        <div className="absolute -top-40 left-1/3 w-[720px] h-[480px] rounded-full bg-[radial-gradient(circle,rgba(212,255,0,0.16),transparent_70%)] blur-[120px]" />
+        <div className="absolute top-[20%] right-[-10%] w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.10),transparent_70%)] blur-[140px]" />
       </div>
 
       {/* ── FLUID CONTAINER (1240px -> 1400px -> 1536px) ── */}
@@ -172,140 +255,203 @@ export function HeroSection() {
         {/* TWO-COLUMN STUDIO HERO GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 xl:gap-10 items-stretch">
           
-          {/* ── LEFT COLUMN: POSITIONING & ECOSYSTEM TILES ── */}
-          <div className="lg:col-span-7 bg-[#101420]/80 backdrop-blur-xl rounded-[28px] sm:rounded-[36px] p-6 sm:p-9 xl:p-10 border border-white/10 shadow-[0_24px_50px_-15px_rgba(0,0,0,0.7)] flex flex-col justify-between relative overflow-hidden transition-all">
+          {/* ── LEFT COLUMN: SLOGAN + 3D INTERACTIVE MASCOT HOST + 5 PROMINENT 3D ECOSYSTEM CARDS ── */}
+          <div className="lg:col-span-7 bg-[#101420]/85 backdrop-blur-2xl rounded-[32px] sm:rounded-[38px] p-6 sm:p-8 xl:p-9 shadow-[0_24px_50px_-15px_rgba(0,0,0,0.6)] flex flex-col justify-between relative overflow-hidden transition-all">
             
-            <div>
+            {/* Liquid glass gradient shine */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-black/30 pointer-events-none rounded-[inherit]" />
+
+            <div className="relative z-10">
               {/* Category Signature Pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d4ff00]/10 border border-[#d4ff00]/30 text-[#d4ff00] text-[11px] sm:text-[12px] font-mono font-bold mb-4 sm:mb-5 tracking-wide">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d4ff00]/12 border border-[#d4ff00]/35 text-[#d4ff00] text-[11px] sm:text-[12px] font-mono font-bold mb-4 tracking-wide shadow-[0_0_15px_rgba(212,255,0,0.15)]">
                 <span className="w-2 h-2 rounded-full bg-[#d4ff00] animate-pulse"></span>
-                <span>AI MỞ STUDIO // NỀN TẢNG THỰC CHIẾN</span>
+                <span>AI MỞ STUDIO // HỆ SINH THÁI SÁNG TẠO & THỰC CHIẾN</span>
               </div>
 
-              {/* ── TOP HERO GRID: HEADLINE + PROMINENT 3D MASCOT STAGE ── */}
+              {/* ── TOP HERO ROW: PUNCHY SLOGAN (LEFT) + 3D INTERACTIVE MASCOT HOST (RIGHT) ── */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center mb-6">
                 
-                {/* Left: Punchy Headline & Value */}
-                <div className="md:col-span-7 space-y-4">
-                  <h1 className="text-[clamp(28px,3.8vw,44px)] xl:text-[44px] leading-[1.12] font-black tracking-tight text-white">
-                    Học AI Bằng Cách<br />
-                    <span className="text-[#d4ff00]">Tạo Ra Thứ Dùng Được.</span>
+                {/* Left: Punchy Slogan alone (paragraph and 2 buttons removed as requested) */}
+                <div className="md:col-span-7">
+                  <h1 className="text-[clamp(22px,3.3vw,42px)] xl:text-[44px] leading-[1.18] font-black tracking-tight text-white m-0">
+                    <span className="block whitespace-nowrap">Học AI Bằng Cách</span>
+                    <span className="block whitespace-nowrap text-[#d4ff00] drop-shadow-[0_0_25px_rgba(212,255,0,0.4)]">
+                      Tạo&nbsp;Ra&nbsp;Thứ&nbsp;Dùng&nbsp;Được.
+                    </span>
                   </h1>
 
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Tạo kịch bản video TikTok 30s, viết prompt chuẩn chỉ, chạy 95+ app quản trị và mini game trí tuệ. Không cần code phức tạp.
-                  </p>
-
-                  <div className="flex flex-wrap items-center gap-3 pt-1">
-                    <a
-                      href="#prompt-studio"
-                      className="inline-flex items-center justify-center gap-2 bg-[#d4ff00] text-black font-extrabold text-[13.5px] px-5 py-2.5 rounded-xl shadow-[0_10px_25px_-5px_rgba(212,255,0,0.35)] hover:bg-[#b8e000] hover:-translate-y-0.5 active:translate-y-0 transition-all text-center"
-                    >
-                      <span>Dùng Thử Studio</span>
-                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-                    </a>
-
-                    <Link
-                      href="/guides"
-                      className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white font-semibold text-[13.5px] px-4 py-2.5 rounded-xl border border-white/15 hover:border-white/30 transition-all text-center"
-                    >
-                      <Play className="w-3.5 h-3.5 fill-current text-[#d4ff00]" />
-                      <span>Xem Lộ Trình</span>
-                    </Link>
+                  {/* Micro feature pills */}
+                  <div className="flex flex-wrap items-center gap-2 mt-4 text-[11px] font-mono text-slate-300">
+                    <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#d4ff00]"></span>
+                      Không cần code
+                    </span>
+                    <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff]"></span>
+                      Chạy trực tiếp Web
+                    </span>
+                    <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#d946ef]"></span>
+                      Tiếng Việt 100%
+                    </span>
                   </div>
                 </div>
 
-                {/* Right: Full-Body 3D Mascot Host */}
-                <div className="md:col-span-5 flex flex-col items-center justify-center relative pt-2 pb-1">
-                  <div className="relative w-full max-w-[240px] aspect-square flex items-center justify-center">
-                    {/* Glowing platform rings */}
-                    <div className="absolute bottom-2 w-48 h-12 border border-[#d4ff00]/40 rounded-[100%] animate-spin" style={{ animationDuration: "25s" }} />
-                    <div className="absolute bottom-1 w-36 h-8 bg-[#d4ff00]/25 blur-lg rounded-[100%]" />
-                    
-                    {/* Big 3D Mascot Image (Full Body) */}
-                    <div className="relative z-10 w-full h-full flex items-center justify-center hover:scale-105 transition-transform duration-300 cursor-pointer">
+                {/* Right: 3D Interactive Mascot Host with Parallax Tracking & Touch Interaction */}
+                <div 
+                  className="md:col-span-5 flex flex-col items-center justify-center relative pt-2 pb-1 cursor-pointer select-none"
+                  onMouseMove={handleMascotMouseMove}
+                  onMouseLeave={handleMascotMouseLeave}
+                  onTouchStart={handleMascotClick}
+                  onTouchMove={handleMascotTouchMove}
+                  onTouchEnd={handleMascotTouchEnd}
+                  onClick={handleMascotClick}
+                  title="Chạm hoặc rê chuột để tương tác 3D cùng Linh vật AI Mở"
+                >
+                  {/* Dynamic Speech Bubble */}
+                  <div className="mb-2 px-3 py-1 rounded-xl bg-[#090c14]/90 border border-[#d4ff00]/40 text-center max-w-[240px] shadow-[0_6px_20px_rgba(0,0,0,0.6)] backdrop-blur-md animate-fade-in group">
+                    <p className="text-[11px] font-mono text-[#d4ff00] font-semibold flex items-center justify-center gap-1">
+                      <span>💬</span>
+                      <span>"{MASCOT_MESSAGES[mascotSpeechIdx]}"</span>
+                    </p>
+                  </div>
+
+                  {/* 3D Perspective Stage */}
+                  <div 
+                    className="relative w-full max-w-[240px] h-[190px] sm:h-[220px] flex items-center justify-center"
+                    style={{ perspective: "1000px" }}
+                  >
+                    {/* Glowing platform rings with perspective */}
+                    <div 
+                      className="absolute bottom-1 w-44 h-12 border border-[#d4ff00]/40 rounded-[100%] animate-spin" 
+                      style={{ animationDuration: "22s" }} 
+                    />
+                    <div className="absolute bottom-0 w-36 h-8 bg-[#d4ff00]/30 blur-lg rounded-[100%]" />
+                    <div className="absolute bottom-2.5 w-48 h-10 border border-[#00e5ff]/20 rounded-[100%]" />
+
+                    {/* 3D Moving Mascot Body (Floats gently when idle, tilts in 3D on hover/touch) */}
+                    <div 
+                      className={`relative z-10 w-full h-full flex items-center justify-center transition-all ${
+                        mascotBouncing ? "-translate-y-4 scale-115" : ""
+                      } ${!mascotHovered ? "animate-mascot-float-0" : ""}`}
+                      style={{
+                        transform: mascotHovered
+                          ? `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(${translateX}px, ${translateY}px, 20px)`
+                          : undefined,
+                        transition: mascotHovered ? "transform 0.08s ease-out" : "transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)"
+                      }}
+                    >
                       <Image
-                        src="/mascot/mascot-full-body.png"
-                        alt="Linh vật AI Mở 3D"
+                        src="/mascot/v2-aimo-mascot.png"
+                        alt="Linh vật AI Mở 3D Tương Tác"
                         width={240}
                         height={240}
-                        className="w-auto h-[190px] sm:h-[230px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)]"
+                        className="w-auto h-[175px] sm:h-[205px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.95)]"
                         priority
                       />
                     </div>
 
-                    {/* Floating Holographic Badge */}
-                    <div className="absolute top-2 -left-2 bg-black/85 backdrop-blur-md border border-[#d4ff00]/50 px-2.5 py-1 rounded-lg text-[10px] font-mono text-[#d4ff00] shadow-lg flex items-center gap-1.5 z-20">
+                    {/* Floating Holographic HUD Screen (Counter-parallax depth layer) */}
+                    <div 
+                      className="absolute top-3 -right-1 bg-black/85 backdrop-blur-md border border-[#d4ff00]/60 px-2.5 py-1 rounded-lg text-[9.5px] font-mono text-[#d4ff00] shadow-[0_4px_16px_rgba(212,255,0,0.25)] flex items-center gap-1.5 z-20 pointer-events-none"
+                      style={{
+                        transform: `rotateX(${rotateX * 1.3}deg) rotateY(${rotateY * 1.3}deg) translate3d(${-translateX * 1.4}px, ${-translateY * 1.4}px, 40px)`,
+                        transition: mascotHovered ? "transform 0.08s ease-out" : "transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)"
+                      }}
+                    >
                       <span className="w-1.5 h-1.5 rounded-full bg-[#d4ff00] animate-ping" />
-                      <span>AI MỞ COMPANION</span>
+                      <span>AI MỞ 3D COMPANION</span>
                     </div>
-                  </div>
 
-                  {/* Speech Bubble */}
-                  <div className="mt-1 px-3 py-1.5 rounded-xl bg-black/60 border border-white/15 text-center max-w-[230px]">
-                    <p className="text-[11px] font-mono text-slate-200">
-                      "Chào bạn! Hãy nhập ý tưởng vào Studio bên phải nhé!"
-                    </p>
+                    <div 
+                      className="absolute bottom-4 -left-2 bg-black/85 backdrop-blur-md border border-[#00e5ff]/50 px-2 py-0.5 rounded-md text-[9px] font-mono text-[#00e5ff] shadow-md z-20 pointer-events-none"
+                      style={{
+                        transform: `rotateX(${rotateX * 1.2}deg) rotateY(${rotateY * 1.2}deg) translate3d(${-translateX * 1.1}px, ${-translateY * 1.1}px, 30px)`,
+                        transition: mascotHovered ? "transform 0.08s ease-out" : "transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)"
+                      }}
+                    >
+                      <span>● CHẠM ĐỂ TƯƠNG TÁC 3D</span>
+                    </div>
                   </div>
                 </div>
 
               </div>
             </div>
 
-            {/* 5 Core Ecosystem Modules (Distinct Thematic Cards with 3D Mascot Previews) */}
-            <div className="pt-6">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#d4ff00]"></span>
-                  <span>5 Nhánh Hệ Sinh Thái · Bấm Để Khám Phá</span>
+            {/* ── 5 PROMINENT ECOSYSTEM CARDS (3D HOLOGRAM FULL-BODY MASCOTS) ── */}
+            <div className="relative z-10 pt-6">
+              <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#d4ff00] animate-ping" />
+                  <span className="font-extrabold text-white text-sm sm:text-base tracking-tight">
+                    5 Trụ Cột Hệ Sinh Thái AI Mở
+                  </span>
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#d4ff00]/15 text-[#d4ff00] border border-[#d4ff00]/30 font-bold hidden sm:inline">
+                    Linh Vật 3D Tương Tác
+                  </span>
+                </div>
+                <span className="text-[11px] font-mono text-slate-400">
+                  Chạm hoặc rê chuột vào linh vật để tương tác ✨
                 </span>
-                <span className="text-[10px] text-slate-500 font-normal hidden sm:inline">Phân vai đặc trưng</span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
-                {MODULES.map((m) => {
-                  return (
-                    <Link
-                      key={m.href}
-                      href={m.href}
-                      className="group p-2.5 sm:p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-[#d4ff00]/50 transition-all flex flex-col justify-between"
-                      title={`Khám phá ${m.label} (${m.persona})`}
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div 
-                          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg overflow-hidden bg-black/60 border p-0.5 shrink-0 flex items-center justify-center shadow-sm"
-                          style={{ borderColor: `${m.color}50` }}
-                        >
-                          <Image
-                            src={m.image}
-                            alt={m.persona}
-                            width={32}
-                            height={32}
-                            className="w-full h-full object-cover rounded"
-                          />
-                        </div>
-                        <span 
-                          className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border transition-all"
-                          style={{
-                            color: m.color,
-                            backgroundColor: `${m.color}15`,
-                            borderColor: `${m.color}35`,
-                          }}
-                        >
-                          {m.persona}
+              {/* 5 Full-Body 3D Mascot Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-3.5 sm:gap-4">
+                {MODULES.map((m, idx) => (
+                  <Link
+                    key={m.href}
+                    href={m.href}
+                    className="group relative p-2 sm:p-3 rounded-2xl bg-transparent hover:bg-white/[0.04] active:bg-white/[0.08] border-0 transition-all duration-300 hover:-translate-y-3 active:scale-95 flex flex-col items-center text-center overflow-visible select-none"
+                    title={`Khám phá ${m.label}`}
+                  >
+                    {/* Ambient Aura Glow (Active breathing on mobile, intensifies on hover) */}
+                    <div 
+                      className="absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full opacity-35 sm:opacity-0 group-hover:opacity-75 blur-3xl transition-opacity duration-500 pointer-events-none animate-mascot-aura"
+                      style={{ backgroundColor: m.color }}
+                    />
+                    
+                    {/* Full-Body 3D Mascot Hologram Stage */}
+                    <div className="relative w-full h-[200px] sm:h-[235px] xl:h-[255px] flex items-end justify-center z-10 pb-2">
+                      {/* Holographic Glowing Platform Ring at feet (Pulsing light effect) */}
+                      <div 
+                        className="absolute bottom-1 w-24 h-6 rounded-[100%] border border-current opacity-60 sm:opacity-40 group-hover:opacity-100 blur-[1px] transition-all group-hover:scale-125 animate-mascot-ring pointer-events-none"
+                        style={{ color: m.color, backgroundColor: `${m.color}25` }}
+                      />
+                      <div 
+                        className="absolute bottom-0 w-16 h-3 rounded-[100%] opacity-40 sm:opacity-30 group-hover:opacity-85 blur-md transition-all pointer-events-none"
+                        style={{ backgroundColor: m.color }}
+                      />
+
+                      {/* Full Body Character PNG with Staggered Ambient Float on mobile & desktop */}
+                      <Image
+                        src={m.image}
+                        alt={m.label}
+                        width={210}
+                        height={424}
+                        className={`relative z-10 w-auto h-full max-h-[200px] sm:max-h-[235px] xl:max-h-[255px] object-contain object-bottom drop-shadow-[0_12px_24px_rgba(0,0,0,0.95)] group-hover:scale-115 group-hover:-translate-y-2.5 active:scale-110 active:-translate-y-2 transition-all duration-300 animate-mascot-float-${idx}`}
+                        priority
+                      />
+                    </div>
+
+                    {/* Card Title & Desc */}
+                    <div className="relative z-10 mt-1 w-full flex flex-col items-center">
+                      {"badge" in m && m.badge && (
+                        <span className="text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#d946ef]/20 text-[#d946ef] border border-[#d946ef]/40 mb-1 shadow-[0_0_8px_rgba(217,70,239,0.3)] animate-pulse">
+                          {m.badge}
                         </span>
+                      )}
+                      <div 
+                        className="font-black text-[15px] sm:text-[17px] leading-tight transition-all duration-200 group-hover:drop-shadow-[0_0_12px_currentColor]"
+                        style={{ color: m.color }}
+                      >
+                        {m.label}
                       </div>
-                      <div>
-                        <div className="font-bold text-white text-[12px] sm:text-[12.5px] group-hover:text-white transition-colors truncate">
-                          {m.label}
-                        </div>
-                        <div className="text-[10px] text-slate-400 truncate mt-0.5">
-                          {m.desc}
-                        </div>
+                      <div className="text-[11px] text-slate-300 mt-1 line-clamp-1 font-medium group-hover:text-white transition-colors">
+                        {m.desc}
                       </div>
-                    </Link>
-                  );
-                })}
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
 

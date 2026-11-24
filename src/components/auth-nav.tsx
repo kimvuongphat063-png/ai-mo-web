@@ -231,15 +231,16 @@ export function AuthNav({ isMobile, onNavigate }: AuthNavProps) {
       <div className="hidden sm:flex items-center gap-2">
         <Link
           href="/login"
-          className="inline-flex items-center justify-center px-3.5 py-2 text-sm font-semibold text-neutral-700 hover:text-neutral-950 transition-colors"
+          className="inline-flex items-center justify-center px-3.5 py-2 text-sm font-semibold text-neutral-300 hover:text-white transition-colors"
         >
           Đăng nhập
         </Link>
         <Link
           href="/register"
-          className="inline-flex items-center justify-center px-3.5 py-2 text-sm font-bold text-[#155EEF] bg-[#EAF2FF] border border-[#155EEF]/20 rounded-xl hover:bg-blue-100 transition-colors shadow-2xs"
+          className="inline-flex items-center justify-center px-3.5 py-2 text-sm font-black !text-black bg-white hover:bg-neutral-100 border border-neutral-200 rounded-xl transition-colors shadow-sm"
+          style={{ color: "#000000", fontWeight: 800 }}
         >
-          Đăng ký
+          <span style={{ color: "#000000", fontWeight: 800 }}>Đăng ký</span>
         </Link>
       </div>
     );

@@ -570,7 +570,7 @@ export default function PromptKichBanPage() {
   };
 
   return (
-    <div className="min-h-screen bg-bg text-text flex flex-col">
+    <div className="min-h-screen bg-[#090c14] text-slate-100 flex flex-col cyber-dark-studio selection:bg-[#d4ff00] selection:text-black">
       {/* ── Header ───────────────────────────────────────────────────────── */}
       <PromptKichBanHeader
         historyCount={historyItems.length + cloudDocuments.length}
@@ -626,7 +626,7 @@ export default function PromptKichBanPage() {
       </main>
 
       {/* ── Footer ───────────────────────────────────────────────────────── */}
-      <footer className="border-t border-border bg-surface py-5 mt-auto text-xs text-muted">
+      <footer className="border-t border-white/10 bg-[#0d121f] py-5 mt-auto text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <span>
             © 2026 AI Mở · Universal Video Prompt Studio. Thiết kế tối ưu cho cộng đồng sáng tạo video.
@@ -634,13 +634,13 @@ export default function PromptKichBanPage() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsGuideOpen(true)}
-              className="hover:text-text transition-colors cursor-pointer"
+              className="text-slate-300 hover:text-[#00e5ff] transition-colors cursor-pointer"
             >
               Cẩm nang prompt AI
             </button>
             <button
               onClick={() => setIsHistoryOpen(true)}
-              className="hover:text-text transition-colors cursor-pointer"
+              className="text-slate-300 hover:text-[#d4ff00] transition-colors cursor-pointer"
             >
               Thư viện của tôi ({historyItems.length + cloudDocuments.length})
             </button>

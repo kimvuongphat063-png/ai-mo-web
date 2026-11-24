@@ -16,6 +16,10 @@ export default function ProductsPage() {
       eyebrow="TÀI NGUYÊN SỐ · TEMPLATE · KHÓA HỌC"
       intro="Kho sản phẩm số thực chiến, bộ prompt đóng gói và công cụ độc lập giúp bạn tiết kiệm hàng chục giờ làm việc mỗi tuần."
       filter={() => true}
+      themeColor="#10b981"
+      mascotImage="/mascot/v2-fullbody-products.png"
+      mascotSpeech="📦 Kho báu template & prompt đóng gói sẵn, tải về là dùng ngay!"
+      mascotRole="AI MỞ · ASSET VAULT HOST"
     />
   );
 }

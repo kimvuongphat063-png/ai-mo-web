@@ -82,10 +82,11 @@ export function LearningPath() {
           <div className="mt-5">
             <Link
               href="/guides"
-              className="inline-flex items-center gap-2 bg-[#d4ff00] hover:bg-[#b8e000] text-black px-5 py-2.5 rounded-xl font-extrabold text-sm shadow-[0_4px_15px_rgba(212,255,0,0.3)] transition-colors min-h-[44px]"
+              style={{ color: "#000000", fontWeight: 900 }}
+              className="inline-flex items-center gap-2 bg-[#d4ff00] hover:bg-[#b8e000] !text-black px-5 py-2.5 rounded-xl font-black text-sm shadow-[0_4px_20px_rgba(212,255,0,0.4)] hover:shadow-[0_4px_28px_rgba(212,255,0,0.6)] hover:scale-105 transition-all min-h-[44px]"
             >
-              Bắt đầu chặng 1
-              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              <span style={{ color: "#000000", fontWeight: 900 }}>Bắt đầu chặng 1</span>
+              <ArrowRight className="w-4 h-4 stroke-[3] !text-black" style={{ color: "#000000" }} />
             </Link>
           </div>
         </div>

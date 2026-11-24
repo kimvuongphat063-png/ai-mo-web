@@ -164,7 +164,7 @@ export function BentoTools() {
         ))}
 
         {q && filtered.length === 0 && (
-          <p className="col-span-full text-center text-[#68779a] py-7 border border-dashed border-[#dde6f8] rounded-[18px] bg-white text-[14.5px]">
+          <p className="col-span-full text-center text-[#68779a] py-7 border border-dashed border-[#dde6f8] rounded-[18px] bg-[#101420] text-[14.5px]">
             Không tìm thấy công cụ khớp với từ khóa — thử &quot;video&quot;, &quot;lãi&quot; hoặc &quot;giá&quot;.
           </p>
         )}

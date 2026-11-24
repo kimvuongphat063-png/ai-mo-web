@@ -95,31 +95,31 @@ export function LibraryDrawer({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/50 backdrop-blur-xs animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-xs animate-in fade-in duration-150">
       <div
-        className="relative w-full max-w-md h-full bg-surface border-l border-border shadow-2xl flex flex-col text-text animate-in slide-in-from-right duration-200"
+        className="relative w-full max-w-md h-full bg-[#101420] border-l border-white/15 shadow-2xl flex flex-col text-white animate-in slide-in-from-right duration-200"
         role="dialog"
         aria-modal="true"
         aria-labelledby="library-drawer-title"
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-border">
+        <div className="flex items-center justify-between p-4 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-2 text-text">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white">
               <FileText className="h-4 w-4" />
             </div>
             <div>
-              <h2 id="library-drawer-title" className="text-sm font-semibold">
+              <h2 id="library-drawer-title" className="text-sm font-bold text-white">
                 Thư viện kịch bản
               </h2>
-              <p className="text-xs text-muted">
+              <p className="text-xs text-slate-400">
                 {currentUser ? `Đang đăng nhập: ${currentUser.email}` : "Chế độ khách vãng lai"}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-muted hover:text-text hover:bg-surface-2 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Đóng thư viện"
           >
             <X className="h-5 w-5" />
@@ -127,14 +127,14 @@ export function LibraryDrawer({
         </div>
 
         {/* Tab Selector: Cloud vs Local */}
-        <div className="flex border-b border-border bg-surface-2/40 px-3 pt-2 gap-2">
+        <div className="flex border-b border-white/10 bg-[#0d121f] px-3 pt-2 gap-2">
           <button
             type="button"
             onClick={() => setActiveTab("cloud")}
             className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold border-b-2 transition-all cursor-pointer ${
               activeTab === "cloud"
-                ? "border-accent text-accent"
-                : "border-transparent text-muted hover:text-text"
+                ? "border-[#00e5ff] text-[#00e5ff]"
+                : "border-transparent text-slate-400 hover:text-white"
             }`}
           >
             <Cloud className="h-3.5 w-3.5" />
@@ -146,8 +146,8 @@ export function LibraryDrawer({
             onClick={() => setActiveTab("local")}
             className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold border-b-2 transition-all cursor-pointer ${
               activeTab === "local"
-                ? "border-accent text-accent"
-                : "border-transparent text-muted hover:text-text"
+                ? "border-[#d4ff00] text-[#d4ff00]"
+                : "border-transparent text-slate-400 hover:text-white"
             }`}
           >
             <HardDrive className="h-3.5 w-3.5" />

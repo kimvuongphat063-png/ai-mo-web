@@ -350,7 +350,7 @@ body {
 }
 
 .article-back:hover {
-  color: #0057ff;
+  color: #d4ff00;
   transform: translateX(-2px);
 }
 
@@ -628,7 +628,7 @@ body {
 }
 
 .article-prose a {
-  color: #155EEF;
+  color: #d4ff00;
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: 600;
@@ -645,7 +645,7 @@ body {
 }
 
 .article-prose blockquote {
-  border-left: 4px solid #155EEF;
+  border-left: 4px solid #d4ff00;
   background: #F8FAFC;
   padding: 1.1rem 1.4rem;
   margin: 1.8rem 0;
@@ -690,4 +690,111 @@ body {
   font-family: var(--font-mono), monospace;
   color: #0F172A;
   border: 1px solid #E2E8F0;
+}
+
+
+/* Modern Cyber Tech Editorial Guide Cards */
+.guide-card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: rgba(16, 20, 32, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+}
+.guide-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+  box-shadow: 0 15px 40px rgba(245, 158, 11, 0.15) !important;
+}
+.guide-card-art {
+  min-height: 140px !important;
+  max-height: 180px !important;
+  padding: 1.25rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(13, 18, 30, 0.95) 100%) !important;
+  border-right: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  position: relative !important;
+}
+.guide-card-art b {
+  display: none !important; /* Hide the giant ugly AI block text */
+}
+.guide-card-art span {
+  font-family: var(--font-mono), monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  color: #f59e0b !important;
+  background: rgba(245, 158, 11, 0.15) !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+  width: fit-content !important;
+}
+.guide-card-body {
+  padding: 1.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+}
+.guide-meta {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  font-size: 0.75rem !important;
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+}
+.guide-card h2 {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  line-height: 1.35 !important;
+  margin: 0.75rem 0 !important;
+}
+.guide-card:hover h2 {
+  color: #f59e0b !important;
+}
+.guide-card p {
+  color: #94a3b8 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 1rem !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.guide-read {
+  margin-top: auto !important;
+  padding-top: 1rem !important;
+  color: #f59e0b !important;
+  font-weight: 800 !important;
+  font-size: 0.85rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+.guide-topics a {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+  border-radius: 999px !important;
+  padding: 0.4rem 0.85rem !important;
+  transition: all 0.2s !important;
+}
+.guide-topics a:hover {
+  background: rgba(245, 158, 11, 0.15) !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  color: #f59e0b !important;
+}
+.guide-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+  gap: 1.5rem !important;
 }

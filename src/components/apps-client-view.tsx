@@ -52,8 +52,8 @@ const APP_MOCKUP_METAS: Record<
 > = {
   "lai-that-tung-don": {
     image: "/images/home/bento-profit-calc.jpg",
-    gradient: "from-blue-600 to-indigo-700",
-    pillBg: "bg-blue-50 text-blue-700 border-blue-200/80",
+    gradient: "from-slate-900 to-[#0d1627]",
+    pillBg: "bg-[#d4ff00]/10 text-[#d4ff00] border-[#d4ff00]/30/80",
     pillText: "Phổ biến nhất",
     tagline: "Khấu trừ phí sàn Shopee/TikTok · Lợi nhuận ròng",
   },
@@ -73,7 +73,7 @@ const APP_MOCKUP_METAS: Record<
   },
   "ctv-affiliate": {
     gradient: "from-blue-500 via-indigo-600 to-blue-700",
-    pillBg: "bg-blue-50 text-blue-700 border-blue-200/80",
+    pillBg: "bg-[#d4ff00]/10 text-[#d4ff00] border-[#d4ff00]/30/80",
     pillText: "Sổ hoa hồng",
     tagline: "Đối soát hoa hồng CTV và thanh toán minh bạch",
   },
@@ -102,37 +102,127 @@ const APP_MOCKUP_METAS: Record<
     tagline: "Checklist kiểm soát chất lượng không bỏ sót bước",
   },
   "ke-hoach-tuan": {
-    gradient: "from-teal-500 to-cyan-700",
+    gradient: "from-slate-900 to-[#0a1e24]",
     pillBg: "bg-teal-50 text-teal-700 border-teal-200/80",
     pillText: "Timeboxing",
     tagline: "Phân bổ ưu tiên và đo lường tỷ lệ hoàn thành",
   },
   "may-ra-de-toan-cap-1": {
     image: "/images/home/action-apps-free.jpg",
-    gradient: "from-purple-600 to-pink-600",
+    gradient: "from-slate-900 to-[#220d24]",
     pillBg: "bg-purple-50 text-purple-700 border-purple-200/80",
     pillText: "GDPT 2018",
     tagline: "Sinh đề thi Toán Lớp 1 - 5 kèm ma trận đáp án A4",
   },
   "giai-toan-cap-2": {
-    gradient: "from-violet-600 to-purple-800",
+    gradient: "from-slate-900 to-[#170e28]",
     pillBg: "bg-violet-50 text-violet-700 border-violet-200/80",
     pillText: "Động cơ BigInt",
     tagline: "Giải chi tiết từng bước, chấm điểm tương tác",
   },
   "toan-lop-4-hk1": {
-    gradient: "from-fuchsia-600 to-purple-700",
+    gradient: "from-slate-900 to-[#200c25]",
     pillBg: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200/80",
     pillText: "Ôn tập HK1",
     tagline: "Bộ đề ôn tập phân số, 4 phép tính có lời văn",
   },
   "luyen-go-10-ngon": {
-    gradient: "from-cyan-600 to-blue-700",
+    gradient: "from-slate-900 to-[#0b1c2b]",
     pillBg: "bg-cyan-50 text-cyan-700 border-cyan-200/80",
     pillText: "Đo WPM chuẩn",
     tagline: "Luyện công thái học bàn phím, phản xạ gõ nhanh",
   },
 };
+
+// Modern category themes for App Icons (Apple / Game Hub style)
+const SUITE_THEMES: Record<
+  string,
+  {
+    gradient: string;
+    shadow: string;
+    glow: string;
+    pillBg: string;
+    pillText: string;
+    pillBorder: string;
+    icon: typeof Calculator;
+  }
+> = {
+  commercial: {
+    gradient: "from-emerald-400 via-emerald-500 to-teal-700",
+    shadow: "shadow-[0_8px_24px_rgba(16,185,129,0.35)]",
+    glow: "bg-emerald-500",
+    pillBg: "bg-emerald-500/15",
+    pillText: "text-emerald-300",
+    pillBorder: "border-emerald-500/30",
+    icon: Calculator,
+  },
+  finance: {
+    gradient: "from-cyan-400 via-sky-500 to-blue-600",
+    shadow: "shadow-[0_8px_24px_rgba(6,182,212,0.35)]",
+    glow: "bg-cyan-500",
+    pillBg: "bg-cyan-500/15",
+    pillText: "text-cyan-300",
+    pillBorder: "border-cyan-500/30",
+    icon: Receipt,
+  },
+  production: {
+    gradient: "from-amber-400 via-orange-500 to-red-600",
+    shadow: "shadow-[0_8px_24px_rgba(249,115,22,0.35)]",
+    glow: "bg-orange-500",
+    pillBg: "bg-orange-500/15",
+    pillText: "text-orange-300",
+    pillBorder: "border-orange-500/30",
+    icon: Factory,
+  },
+  marketing: {
+    gradient: "from-pink-500 via-rose-500 to-purple-600",
+    shadow: "shadow-[0_8px_24px_rgba(236,72,153,0.35)]",
+    glow: "bg-pink-500",
+    pillBg: "bg-pink-500/15",
+    pillText: "text-pink-300",
+    pillBorder: "border-pink-500/30",
+    icon: Megaphone,
+  },
+  governance: {
+    gradient: "from-purple-500 via-indigo-600 to-violet-700",
+    shadow: "shadow-[0_8px_24px_rgba(168,85,247,0.35)]",
+    glow: "bg-purple-500",
+    pillBg: "bg-purple-500/15",
+    pillText: "text-purple-300",
+    pillBorder: "border-purple-500/30",
+    icon: Briefcase,
+  },
+  education: {
+    gradient: "from-blue-500 via-indigo-500 to-sky-600",
+    shadow: "shadow-[0_8px_24px_rgba(59,130,246,0.35)]",
+    glow: "bg-blue-500",
+    pillBg: "bg-blue-500/15",
+    pillText: "text-blue-300",
+    pillBorder: "border-blue-500/30",
+    icon: GraduationCap,
+  },
+  cognitive: {
+    gradient: "from-violet-500 via-purple-600 to-cyan-500",
+    shadow: "shadow-[0_8px_24px_rgba(139,92,246,0.35)]",
+    glow: "bg-violet-500",
+    pillBg: "bg-violet-500/15",
+    pillText: "text-violet-300",
+    pillBorder: "border-violet-500/30",
+    icon: Keyboard,
+  },
+};
+
+function getAppSpecificIcon(app: HtmlAppWithManifest) {
+  const slug = app.slug.toLowerCase();
+  if (slug.includes("toan") || slug.includes("math")) return GraduationCap;
+  if (slug.includes("go-10-ngon") || slug.includes("typing") || slug.includes("keyboard")) return Keyboard;
+  if (slug.includes("lai-that") || slug.includes("gia-ban") || slug.includes("calc")) return Calculator;
+  if (slug.includes("bao-gia") || slug.includes("hoa-don") || slug.includes("invoice") || slug.includes("sao-ke")) return Receipt;
+  if (slug.includes("kho") || slug.includes("san-xuat") || slug.includes("bom") || slug.includes("fefo")) return Factory;
+  if (slug.includes("quang-cao") || slug.includes("marketing") || slug.includes("content") || slug.includes("roas")) return Megaphone;
+  if (slug.includes("hop-dong") || slug.includes("quan-tri") || slug.includes("sop") || slug.includes("dai-ly")) return Briefcase;
+  return SUITE_THEMES[app.suite]?.icon || Cpu;
+}
 
 export function AppsClientView({ apps, isLoggedIn = false }: Props) {
   const [query, setQuery] = useState("");
@@ -325,48 +415,48 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
   return (
     <div className="space-y-12">
       {/* ── TẦNG 1: COMMAND CENTER (BỘ ĐIỀU HƯỚNG & TÌM KIẾM TRỰC QUAN) ────────── */}
-      <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-neutral-200/90 p-5 sm:p-6 shadow-xs space-y-4">
+      <div className="bg-[#101420]/90 backdrop-blur-md rounded-3xl border border-white/10/90 p-5 sm:p-6 shadow-xs space-y-4">
         {/* Thanh tìm kiếm toàn diện với ⌘K và Live Count */}
         <div className="relative">
-          <Search className="w-4 h-4 text-[#155EEF] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#00e5ff] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             ref={searchInputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Tìm kiếm công cụ theo tên, chức năng hoặc môn học (vd: Tính lãi đơn, Shopee, Báo giá, Toán cấp 1, BigInt...)..."
-            className="w-full pl-11 pr-32 sm:pr-36 py-3 rounded-2xl border border-neutral-200/90 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:border-[#155EEF] focus:ring-3 focus:ring-[#155EEF]/10 transition-all bg-white shadow-2xs"
+            className="w-full pl-11 pr-32 sm:pr-36 py-3 rounded-2xl border border-white/10/90 text-sm text-white placeholder:text-slate-500 focus:outline-hidden focus:border-[#d4ff00] focus:ring-3 focus:ring-[#155EEF]/10 transition-all bg-[#101420] shadow-2xs"
           />
           <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-2">
             {query && (
               <button
                 onClick={() => setQuery("")}
-                className="p-1 text-neutral-400 hover:text-neutral-700 rounded-md transition-colors cursor-pointer"
+                className="p-1 text-neutral-400 hover:text-slate-300 rounded-md transition-colors cursor-pointer"
                 aria-label="Xóa tìm kiếm"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
             )}
-            <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-[#155EEF] bg-[#EAF2FF] border border-[#155EEF]/20 rounded-lg">
-              <Sparkles className="w-3 h-3 text-[#155EEF]" />
+            <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-[#00e5ff] bg-[#d4ff00]/10 border border-[#d4ff00]/20 rounded-lg">
+              <Sparkles className="w-3 h-3 text-[#00e5ff]" />
               <span>{filteredApps.length} app</span>
             </span>
-            <kbd className="hidden md:inline-flex items-center px-2 py-1 text-[10px] font-mono text-neutral-400 bg-neutral-100 border border-neutral-200 rounded-md">
+            <kbd className="hidden md:inline-flex items-center px-2 py-1 text-[10px] font-mono text-neutral-400 bg-white/5 border border-white/10 rounded-md">
               ⌘K
             </kbd>
           </div>
         </div>
 
         {/* Danh mục tất cả công cụ để người dùng thấy ngay & nhấn vô */}
-        <div className="pt-2 border-t border-neutral-100 space-y-2.5">
+        <div className="pt-2 border-t border-white/8 space-y-2.5">
           <div className="flex items-center justify-between text-xs flex-wrap gap-2">
-            <span className="font-extrabold text-neutral-800 text-xs sm:text-sm flex items-center gap-1.5">
-              <Layers className="w-4 h-4 text-[#155EEF]" />
+            <span className="font-extrabold text-slate-200 text-xs sm:text-sm flex items-center gap-1.5">
+              <Layers className="w-4 h-4 text-[#00e5ff]" />
               <span>Khám phá trọn bộ {apps.length} công cụ theo chuyên ngành:</span>
             </span>
-            <div className="flex items-center gap-2.5 text-xs text-neutral-500">
+            <div className="flex items-center gap-2.5 text-xs text-slate-500">
               <span>
-                Tìm thấy <strong className="text-neutral-900 font-bold">{filteredApps.length}</strong> / {apps.length} công cụ
+                Tìm thấy <strong className="text-white font-bold">{filteredApps.length}</strong> / {apps.length} công cụ
               </span>
               {(query || selectedSuite !== "all") && (
                 <button
@@ -375,7 +465,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                     setQuery("");
                     setSelectedSuite("all");
                   }}
-                  className="text-[#155EEF] hover:underline font-bold cursor-pointer"
+                  className="text-[#00e5ff] hover:underline font-bold cursor-pointer"
                 >
                   Đặt lại
                 </button>
@@ -392,12 +482,12 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
               }}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 selectedSuite === "all" && !query
-                  ? "bg-[#155EEF] text-white shadow-xs"
-                  : "bg-neutral-100 hover:bg-neutral-200/80 text-neutral-700 border border-neutral-200/70"
+                  ? "bg-[#d4ff00] text-white shadow-xs"
+                  : "bg-white/5 hover:bg-white/10/8/80 text-slate-300 border border-white/10/70"
               }`}
             >
               <span>⚡ Tất cả công cụ</span>
-              <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${selectedSuite === "all" && !query ? "bg-white/20 text-white" : "bg-neutral-200 text-neutral-700"}`}>
+              <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${selectedSuite === "all" && !query ? "bg-[#101420]/20 text-white" : "bg-white/8 text-slate-300"}`}>
                 {apps.length}
               </span>
             </button>
@@ -417,13 +507,13 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                   }}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                     isSelected
-                      ? "bg-[#155EEF] text-white shadow-xs"
-                      : "bg-neutral-100/90 hover:bg-neutral-200/80 text-neutral-700 border border-neutral-200/70 hover:border-neutral-300"
+                      ? "bg-[#d4ff00] text-white shadow-xs"
+                      : "bg-white/5/90 hover:bg-white/10/8/80 text-slate-300 border border-white/10/70 hover:border-white/15"
                   }`}
                 >
                   <SuiteIcon className="w-3.5 h-3.5" />
                   <span>{tab.label}</span>
-                  <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isSelected ? "bg-white/20 text-white" : "bg-neutral-200 text-neutral-700"}`}>
+                  <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isSelected ? "bg-[#101420]/20 text-white" : "bg-white/8 text-slate-300"}`}>
                     {count}
                   </span>
                 </button>
@@ -438,12 +528,12 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="flex h-2.5 w-2.5 rounded-full bg-[#155EEF] animate-pulse" />
-              <h2 className="text-sm font-extrabold tracking-wider text-neutral-900 uppercase">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-[#d4ff00] animate-pulse" />
+              <h2 className="text-sm font-extrabold tracking-wider text-white uppercase">
                 Spotlight · Công cụ trọng điểm nổi bật
               </h2>
             </div>
-            <span className="text-xs text-neutral-500 font-mono">
+            <span className="text-xs text-slate-500 font-mono">
               Offline 100% · Không Server
             </span>
           </div>
@@ -455,7 +545,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
               return (
                 <div
                   key={app.slug}
-                  className="group relative bg-white rounded-3xl border border-neutral-200/90 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-[#155EEF]/50 hover:-translate-y-1 transition-all duration-300"
+                  className="group relative bg-[#101420] rounded-3xl border border-white/10/90 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-[#d4ff00]/50 hover:-translate-y-1 transition-all duration-300"
                 >
                   {/* Thumbnail Banner */}
                   <div className="relative h-44 w-full bg-gradient-to-tr from-neutral-900 via-neutral-800 to-blue-950 overflow-hidden">
@@ -467,7 +557,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                         className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                       />
                     ) : (
-                      <div className={`absolute inset-0 bg-gradient-to-tr ${meta?.gradient || "from-blue-600 to-indigo-700"} flex items-center justify-center p-6 text-white`}>
+                      <div className={`absolute inset-0 bg-gradient-to-tr ${meta?.gradient || "from-slate-900 to-[#0d1627]"} flex items-center justify-center p-6 text-white`}>
                         <div className="text-center space-y-1">
                           <SuiteIcon className="w-12 h-12 mx-auto text-white/90 drop-shadow-md" />
                           <span className="text-xs font-bold text-white/80 block uppercase tracking-wider">{app.suiteLabel}</span>
@@ -477,11 +567,11 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                     
                     <div className="absolute top-3 left-3 flex items-center gap-2">
-                      <span className="bg-white/95 text-neutral-900 font-mono text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs">
+                      <span className="bg-[#101420]/95 text-white font-mono text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs">
                         ⚡ {app.fileSizeFormatted}
                       </span>
                       {app.badge && (
-                        <span className="bg-[#155EEF] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-xs uppercase tracking-wide">
+                        <span className="bg-[#d4ff00] text-black text-[10px] font-black px-2.5 py-1 rounded-full shadow-[0_0_10px_rgba(212,255,0,0.3)] uppercase tracking-wide">
                           {app.badge}
                         </span>
                       )}
@@ -496,17 +586,17 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
 
                   <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-base sm:text-lg font-extrabold text-neutral-900 group-hover:text-[#155EEF] transition-colors leading-snug">
+                      <h3 className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#00e5ff] transition-colors leading-snug">
                         <Link href={`/apps/${app.slug}`}>{app.title}</Link>
                       </h3>
-                      <p className="mt-1.5 text-xs text-neutral-600 line-clamp-2 leading-relaxed">
+                      <p className="mt-1.5 text-xs text-slate-400 line-clamp-2 leading-relaxed">
                         {app.summary}
                       </p>
 
-                      <div className="space-y-1.5 pt-3 border-t border-neutral-100 mt-3">
+                      <div className="space-y-1.5 pt-3 border-t border-white/8 mt-3">
                         {app.highlights.slice(0, 2).map((item, idx) => (
-                          <div key={idx} className="flex items-center gap-2 text-xs text-neutral-600">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#155EEF] shrink-0" />
+                          <div key={idx} className="flex items-center gap-2 text-xs text-slate-400">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#00e5ff] shrink-0" />
                             <span className="truncate">{item}</span>
                           </div>
                         ))}
@@ -514,10 +604,10 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                     </div>
 
                     {/* Action Strip */}
-                    <div className="pt-4 mt-2 border-t border-neutral-100 flex items-center gap-2">
+                    <div className="pt-4 mt-2 border-t border-white/8 flex items-center gap-2">
                       <Link
                         href={`/apps/${app.slug}`}
-                        className="flex-1 py-2.5 px-3.5 rounded-xl bg-[#155EEF] hover:bg-blue-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm shadow-[#155EEF]/20 cursor-pointer"
+                        className="flex-1 py-2.5 px-3.5 rounded-xl bg-[#00e5ff]/15 hover:bg-[#00e5ff] text-[#00e5ff] hover:text-black border border-[#00e5ff]/40 text-xs font-black transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(0,229,255,0.15)] hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] cursor-pointer"
                       >
                         <Play className="w-3.5 h-3.5 fill-current" />
                         <span>Khởi chạy app</span>
@@ -532,17 +622,20 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                         }}
                         className={`py-2.5 px-3.5 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
                           isLoggedIn
-                            ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300"
-                            : "bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300"
+                            ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                            : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
                         }`}
+                        style={{ color: "#171717" }}
                         title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
                       >
                         {isLoggedIn ? (
-                          <Download className="w-3.5 h-3.5 text-emerald-600" />
+                          <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                         ) : (
-                          <Lock className="w-3.5 h-3.5 text-amber-600" />
+                          <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                         )}
-                        <span>{isLoggedIn ? "Tải file" : "Đăng nhập tải"}</span>
+                        <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
+                          {isLoggedIn ? "Tải file" : "Đăng nhập tải"}
+                        </span>
                       </a>
                     </div>
                   </div>
@@ -556,11 +649,11 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
       {/* ── TẦNG 3: BỘ SƯU TẬP THEO CHỦ ĐỀ & CHẾ ĐỘ HIỂN THỊ (GRID / LIST) ── */}
       <section className="space-y-8">
         {/* Header bar with View Mode Toggle */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-neutral-200/80">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10/80">
           <div>
             <div className="flex items-center gap-2">
               <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-              <h2 className="text-base sm:text-lg font-black tracking-tight text-neutral-900">
+              <h2 className="text-base sm:text-lg font-black tracking-tight text-white">
                 {query
                   ? `Kết quả tìm kiếm cho: "${query}"`
                   : selectedSuite === "all"
@@ -568,20 +661,20 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                   : `Chủ đề: ${SUITE_DEFINITIONS[selectedSuite as AppSuiteKey]?.label ?? selectedSuite}`}
               </h2>
             </div>
-            <p className="text-xs text-neutral-500 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               Tất cả đều chạy độc lập 100% trong trình duyệt, không cài đặt, không gửi dữ liệu ra máy chủ ngoài.
             </p>
           </div>
 
           {/* View Mode Toggle: Grid vs List */}
-          <div className="flex items-center gap-1 bg-neutral-100 p-1 rounded-xl border border-neutral-200/70 self-start sm:self-auto">
+          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10/70 self-start sm:self-auto">
             <button
               type="button"
               onClick={() => setViewMode("grid")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 viewMode === "grid"
-                  ? "bg-white text-[#155EEF] shadow-xs"
-                  : "text-neutral-500 hover:text-neutral-800"
+                  ? "bg-[#101420] text-[#00e5ff] shadow-xs"
+                  : "text-slate-500 hover:text-slate-200"
               }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
@@ -592,8 +685,8 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
               onClick={() => setViewMode("list")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 viewMode === "list"
-                  ? "bg-white text-[#155EEF] shadow-xs"
-                  : "text-neutral-500 hover:text-neutral-800"
+                  ? "bg-[#101420] text-[#00e5ff] shadow-xs"
+                  : "text-slate-500 hover:text-slate-200"
               }`}
             >
               <List className="w-3.5 h-3.5" />
@@ -610,21 +703,21 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
               return (
                 <div key={group.suite} className="space-y-5">
                   {/* Category Section Header Banner */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-neutral-50 via-blue-50/30 to-white border border-neutral-200/80">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-neutral-50 via-blue-50/30 to-white border border-white/10/80">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white border border-neutral-200 shadow-2xs flex items-center justify-center text-[#155EEF] shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-[#101420] border border-white/10 shadow-2xs flex items-center justify-center text-[#00e5ff] shrink-0">
                         <GroupIcon className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="text-sm sm:text-base font-extrabold text-neutral-900">
+                        <h3 className="text-sm sm:text-base font-extrabold text-white">
                           {group.title}
                         </h3>
-                        <p className="text-xs text-neutral-500 line-clamp-1">
+                        <p className="text-xs text-slate-500 line-clamp-1">
                           {group.desc}
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs font-bold text-neutral-500 bg-white px-3 py-1 rounded-full border border-neutral-200 shrink-0 self-start sm:self-auto">
+                    <span className="text-xs font-bold text-slate-500 bg-[#101420] px-3 py-1 rounded-full border border-white/10 shrink-0 self-start sm:self-auto">
                       {group.apps.length} ứng dụng
                     </span>
                   </div>
@@ -634,73 +727,79 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {group.apps.map((app) => {
                         const meta = APP_MOCKUP_METAS[app.slug];
+                        const suiteTheme = SUITE_THEMES[app.suite] || SUITE_THEMES.commercial;
+                        const AppIcon = getAppSpecificIcon(app);
                         return (
                           <div
                             key={app.slug}
-                            className="group bg-white rounded-3xl border border-neutral-200/90 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-[#155EEF]/50 hover:-translate-y-1 transition-all duration-300"
+                            className="group bg-[#101420] rounded-3xl border border-white/10 hover:border-[#d4ff00]/50 hover:shadow-[0_8px_30px_rgba(212,255,0,0.12)] overflow-hidden flex flex-col justify-between hover:-translate-y-1 transition-all duration-300"
                           >
-                            {/* Card Visual Header */}
-                            <div className="relative h-36 w-full bg-gradient-to-tr from-neutral-900 to-slate-800 overflow-hidden">
-                              {meta?.image ? (
-                                <Image
-                                  src={meta.image}
-                                  alt={app.title}
-                                  fill
-                                  className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
-                                />
-                              ) : (
-                                <div className={`absolute inset-0 bg-gradient-to-br ${meta?.gradient || "from-blue-600 to-indigo-700"} p-5 flex flex-col justify-between text-white`}>
-                                  <div className="flex items-center justify-between">
-                                    <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center">
-                                      <GroupIcon className="w-4 h-4 text-white" />
-                                    </div>
-                                    <span className="font-mono text-[11px] font-semibold bg-black/30 backdrop-blur-sm px-2 py-0.5 rounded-md text-white/90">
-                                      ⚡ {app.fileSizeFormatted}
+                            {/* Card Visual Header: Modern Apple/Game Hub App Icon Header */}
+                            <div className="relative p-5 pb-4 bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent border-b border-white/8 overflow-hidden">
+                              {/* Ambient glowing orb for category vibe */}
+                              <div
+                                className={`absolute -top-6 -left-6 w-32 h-32 rounded-full ${suiteTheme.glow} blur-2xl opacity-35 pointer-events-none`}
+                              />
+
+                              <div className="relative z-10 flex items-start justify-between gap-3">
+                                {/* Modern App Icon (Apple/Game Hub style) */}
+                                <div
+                                  className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr ${suiteTheme.gradient} p-0.5 shadow-lg ${suiteTheme.shadow} ring-1 ring-white/30 group-hover:scale-105 group-hover:rotate-1 transition-all duration-300 shrink-0 flex items-center justify-center`}
+                                >
+                                  <AppIcon className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-md" />
+                                </div>
+
+                                {/* Top Right Badges */}
+                                <div className="flex flex-col items-end gap-1.5">
+                                  <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                                    {app.badge && (
+                                      <span className="bg-[#d4ff00] text-black text-[10px] font-black px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(212,255,0,0.3)] uppercase tracking-wide">
+                                        {app.badge}
+                                      </span>
+                                    )}
+                                    <span
+                                      className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${suiteTheme.pillBg} ${suiteTheme.pillText} border ${suiteTheme.pillBorder}`}
+                                    >
+                                      {app.suiteLabel}
                                     </span>
                                   </div>
-                                  <div>
-                                    <span className="text-[11px] font-bold text-white/80 uppercase tracking-wider block">
-                                      {app.engineSpec || "Thuật toán Cục bộ"}
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="font-mono text-[10px] font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded-md border border-white/10">
+                                      ⚡ {app.fileSizeFormatted}
                                     </span>
-                                    <span className="text-xs font-extrabold text-white block truncate drop-shadow-sm">
-                                      {meta?.tagline || app.title}
+                                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-md border border-emerald-500/20">
+                                      Offline
                                     </span>
                                   </div>
                                 </div>
-                              )}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                              </div>
 
-                              <div className="absolute top-3 left-3 flex items-center gap-2">
-                                {app.badge && (
-                                  <span className="bg-[#155EEF] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow-xs uppercase tracking-wide">
-                                    {app.badge}
-                                  </span>
-                                )}
+                              {/* Tagline / Engine spec strip */}
+                              <div className="mt-3.5 pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px]">
+                                <span className="text-slate-400 font-medium truncate max-w-[210px]">
+                                  {meta?.tagline || app.engineSpec || "Thuật toán xử lý cục bộ 100%"}
+                                </span>
+                                <span className="text-[#00e5ff] font-semibold text-[10.5px] group-hover:underline flex items-center gap-0.5 shrink-0">
+                                  Khám phá →
+                                </span>
                               </div>
                             </div>
 
                             {/* Card Body */}
                             <div className="p-5 sm:p-6 space-y-3.5 flex-1 flex flex-col justify-between">
                               <div className="space-y-2">
-                                <div className="flex items-center justify-between text-xs text-neutral-400">
-                                  <span className="font-semibold text-neutral-500">{app.suiteLabel}</span>
-                                  <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md font-mono text-[10.5px]">
-                                    ✓ Offline
-                                  </span>
-                                </div>
-
-                                <h4 className="text-base font-extrabold text-neutral-900 group-hover:text-[#155EEF] transition-colors leading-snug">
+                                <h4 className="text-base font-extrabold text-white group-hover:text-[#00e5ff] transition-colors leading-snug">
                                   <Link href={`/apps/${app.slug}`}>{app.title}</Link>
                                 </h4>
 
-                                <p className="text-xs text-neutral-600 line-clamp-2 leading-relaxed">
+                                <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
                                   {app.summary}
                                 </p>
 
-                                <div className="space-y-1.5 pt-2 border-t border-neutral-100">
+                                <div className="space-y-1.5 pt-2 border-t border-white/8">
                                   {app.highlights.slice(0, 2).map((item, idx) => (
-                                    <div key={idx} className="flex items-center gap-2 text-[11.5px] text-neutral-600">
-                                      <CheckCircle2 className="w-3.5 h-3.5 text-[#155EEF] shrink-0" />
+                                    <div key={idx} className="flex items-center gap-2 text-[11.5px] text-slate-400">
+                                      <CheckCircle2 className="w-3.5 h-3.5 text-[#00e5ff] shrink-0" />
                                       <span className="truncate">{item}</span>
                                     </div>
                                   ))}
@@ -708,10 +807,10 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                               </div>
 
                               {/* Card Actions */}
-                              <div className="pt-4 border-t border-neutral-100 flex items-center gap-2">
+                              <div className="pt-4 border-t border-white/8 flex items-center gap-2">
                                 <Link
                                   href={`/apps/${app.slug}`}
-                                  className="flex-1 py-2 px-3 rounded-xl bg-[#155EEF] hover:bg-blue-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm shadow-[#155EEF]/20 cursor-pointer"
+                                  className="flex-1 py-2 px-3 rounded-xl bg-[#00e5ff]/15 hover:bg-[#00e5ff] text-[#00e5ff] hover:text-black border border-[#00e5ff]/40 text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-[0_0_12px_rgba(0,229,255,0.12)] hover:shadow-[0_0_18px_rgba(0,229,255,0.35)] cursor-pointer"
                                 >
                                   <Play className="w-3.5 h-3.5 fill-current" />
                                   <span>Khởi chạy</span>
@@ -726,17 +825,20 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                                   }}
                                   className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
                                     isLoggedIn
-                                      ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300"
-                                      : "bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300"
+                                      ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                                      : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
                                   }`}
+                                  style={{ color: "#171717" }}
                                   title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
                                 >
                                   {isLoggedIn ? (
-                                    <Download className="w-3.5 h-3.5 text-emerald-600" />
+                                    <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                                   ) : (
-                                    <Lock className="w-3.5 h-3.5 text-amber-600" />
+                                    <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                                   )}
-                                  <span>Tải file</span>
+                                  <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
+                                    Tải file
+                                  </span>
                                 </a>
                               </div>
                             </div>
@@ -746,15 +848,15 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                     </div>
                   ) : (
                     /* DISPLAY MODE: MATRIX LIST VIEW */
-                    <div className="bg-white rounded-3xl border border-neutral-200/90 divide-y divide-neutral-100 overflow-hidden shadow-sm">
+                    <div className="bg-[#101420] rounded-3xl border border-white/10/90 divide-y divide-neutral-100 overflow-hidden shadow-sm">
                       {group.apps.map((app) => (
                         <div
                           key={app.slug}
-                          className="group p-4 sm:p-5 hover:bg-neutral-50/70 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                          className="group p-4 sm:p-5 hover:bg-[#0d1420]/70 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                         >
                           {/* Left: Icon & Info */}
                           <div className="flex items-start gap-4 flex-1 min-w-0">
-                            <div className="w-11 h-11 rounded-2xl bg-neutral-100 text-neutral-700 flex items-center justify-center shrink-0 border border-neutral-200/70 group-hover:bg-[#EAF2FF] group-hover:text-[#155EEF] group-hover:border-[#155EEF]/20 transition-all">
+                            <div className="w-11 h-11 rounded-2xl bg-white/5 text-slate-300 flex items-center justify-center shrink-0 border border-white/10/70 group-hover:bg-[#d4ff00]/10 group-hover:text-[#00e5ff] group-hover:border-[#d4ff00]/20 transition-all">
                               <GroupIcon className="w-5 h-5" />
                             </div>
 
@@ -762,28 +864,28 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                               <div className="flex flex-wrap items-center gap-2">
                                 <Link
                                   href={`/apps/${app.slug}`}
-                                  className="text-sm sm:text-base font-extrabold text-neutral-900 hover:text-[#155EEF] transition-colors truncate"
+                                  className="text-sm sm:text-base font-extrabold text-white hover:text-[#00e5ff] transition-colors truncate"
                                 >
                                   {app.title}
                                 </Link>
 
                                 {app.badge && (
-                                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#155EEF] border border-[#155EEF]/20">
+                                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#d4ff00]/10 text-[#00e5ff] border border-[#d4ff00]/20">
                                     {app.badge}
                                   </span>
                                 )}
 
-                                <span className="text-[11px] font-mono font-medium text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-md">
+                                <span className="text-[11px] font-mono font-medium text-slate-500 bg-white/5 px-2 py-0.5 rounded-md">
                                   ⚡ {app.fileSizeFormatted}
                                 </span>
                               </div>
 
-                              <p className="text-xs text-neutral-600 line-clamp-1">
+                              <p className="text-xs text-slate-400 line-clamp-1">
                                 {app.summary}
                               </p>
 
                               <div className="flex flex-wrap items-center gap-3 text-[11px] text-neutral-400 pt-0.5">
-                                <span className="text-neutral-500 font-medium">
+                                <span className="text-slate-500 font-medium">
                                   {app.suiteLabel}
                                 </span>
                                 <span>•</span>
@@ -798,7 +900,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                           <div className="flex items-center gap-2 shrink-0 sm:self-center pl-15 sm:pl-0">
                             <Link
                               href={`/apps/${app.slug}`}
-                              className="py-2 px-3.5 rounded-xl bg-neutral-100 hover:bg-[#EAF2FF] hover:text-[#155EEF] text-neutral-700 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+                              className="py-2 px-3.5 rounded-xl bg-white/5 hover:bg-[#d4ff00]/10 hover:text-[#00e5ff] text-slate-300 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
                             >
                               <Play className="w-3.5 h-3.5 fill-current" />
                               <span>Mở app</span>
@@ -813,17 +915,18 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                               }}
                               className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs ${
                                 isLoggedIn
-                                  ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300"
-                                  : "bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300"
+                                  ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                                  : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
                               }`}
+                              style={{ color: "#171717" }}
                               title={isLoggedIn ? `Tải file ${app.fileName}` : "Đăng nhập để tải file"}
                             >
                               {isLoggedIn ? (
-                                <Download className="w-3.5 h-3.5 text-emerald-600" />
+                                <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                               ) : (
-                                <Lock className="w-3.5 h-3.5 text-amber-600" />
+                                <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                               )}
-                              <span className="hidden sm:inline">{isLoggedIn ? "Tải về" : "Đăng nhập"}</span>
+                              <span className="hidden sm:inline text-neutral-900 font-bold" style={{ color: "#171717" }}>{isLoggedIn ? "Tải về" : "Đăng nhập"}</span>
                             </a>
                           </div>
                         </div>
@@ -835,14 +938,14 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
             })}
           </div>
         ) : (
-          <div className="bg-white rounded-3xl border border-neutral-200/90 p-12 text-center space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-neutral-100 text-neutral-400 flex items-center justify-center mx-auto">
+          <div className="bg-[#101420] rounded-3xl border border-white/10/90 p-12 text-center space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-white/5 text-neutral-400 flex items-center justify-center mx-auto">
               <Search className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-neutral-800">
+            <h3 className="text-base font-bold text-slate-200">
               Không tìm thấy công cụ phù hợp với từ khóa &ldquo;{query}&rdquo;
             </h3>
-            <p className="text-xs text-neutral-500 max-w-sm mx-auto">
+            <p className="text-xs text-slate-500 max-w-sm mx-auto">
               Vui lòng thử tìm với từ khóa chung hơn hoặc chọn lại danh mục công cụ.
             </p>
             <button
@@ -850,7 +953,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                 setQuery("");
                 setSelectedSuite("all");
               }}
-              className="px-4 py-2 rounded-xl bg-[#155EEF] text-white text-xs font-bold hover:bg-blue-700 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-[#d4ff00] text-white text-xs font-bold hover:bg-blue-700 transition-colors cursor-pointer"
             >
               Xem tất cả 19 công cụ
             </button>
@@ -859,27 +962,27 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
       </section>
 
       {/* ── TẦNG 4: ARCHITECTURE & ZERO-TELEMETRY GUARANTEE STRIP ────────── */}
-      <section className="rounded-3xl border border-neutral-200/80 bg-linear-to-b from-neutral-50/80 to-white p-6 sm:p-8 space-y-4">
+      <section className="rounded-3xl border border-white/10/80 bg-linear-to-b from-neutral-50/80 to-white p-6 sm:p-8 space-y-4">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-[11px] font-bold text-[#155EEF] uppercase tracking-wider">
+            <span className="text-[11px] font-bold text-[#00e5ff] uppercase tracking-wider">
               Kiến trúc thuật toán độc lập (Zero-Telemetry Architecture)
             </span>
-            <h3 className="text-base sm:text-lg font-extrabold text-neutral-900">
+            <h3 className="text-base sm:text-lg font-extrabold text-white">
               Tại sao công cụ của AI MỞ chạy hoàn toàn trên máy bạn?
             </h3>
-            <p className="text-xs text-neutral-600 max-w-2xl leading-relaxed">
+            <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
               Mỗi ứng dụng được đóng gói thành một file HTML duy nhất chứa toàn bộ mã nguồn, font chữ và động cơ toán học. Dữ liệu kinh doanh, ngân sách, học tập không gửi tới bất kỳ máy chủ nào. Khi mất mạng hay lưu trữ offline, phần mềm vẫn hoạt động trọn đời.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-neutral-200 text-xs font-medium text-neutral-700 shadow-2xs">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#101420] border border-white/10 text-xs font-medium text-slate-300 shadow-2xs">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
               <span>Cục bộ 100%</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-neutral-200 text-xs font-medium text-neutral-700 shadow-2xs">
-              <FileCode2 className="w-4 h-4 text-[#155EEF]" />
+            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#101420] border border-white/10 text-xs font-medium text-slate-300 shadow-2xs">
+              <FileCode2 className="w-4 h-4 text-[#00e5ff]" />
               <span>Single-File HTML</span>
             </div>
           </div>

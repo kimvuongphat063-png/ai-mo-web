@@ -41,6 +41,7 @@ export function Button({
   type = "button",
   onClick,
   className,
+  style,
 }: {
   children: React.ReactNode;
   variant?: ButtonVariant;
@@ -50,12 +51,14 @@ export function Button({
   type?: "button" | "submit";
   onClick?: () => void;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
+      style={style}
       className={cx(
         "inline-flex items-center justify-center gap-1.5 rounded-md text-sm font-medium transition-colors",
         "disabled:opacity-60 disabled:cursor-not-allowed",
@@ -77,16 +80,19 @@ export function ButtonLink({
   variant = "primary",
   size = "md",
   className,
+  style,
 }: {
   children: React.ReactNode;
   href: string;
   variant?: ButtonVariant;
   size?: "sm" | "md";
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <Link
       href={href}
+      style={style}
       className={cx(
         "inline-flex items-center justify-center gap-1.5 rounded-md text-sm font-medium transition-colors",
         size === "sm" ? "h-8 px-3" : "h-9 px-4",

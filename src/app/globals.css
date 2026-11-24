@@ -13,7 +13,7 @@
   --color-text-2: #475569;
   --color-muted: #64748B;
 
-  --color-accent: #155EEF;
+  --color-accent: #d4ff00;
   --color-accent-hover: #124BBF;
   --color-accent-subtle: #EAF2FF;
 
@@ -38,7 +38,7 @@
   --color-terracotta-200: #BFDBFE;
   --color-terracotta-300: #93C5FD;
   --color-terracotta-400: #60A5FA;
-  --color-terracotta-500: #155EEF;
+  --color-terracotta-500: #d4ff00;
   --color-terracotta-600: #124BBF;
   --color-terracotta-700: #0F3F99;
   --color-terracotta-800: #0B2D6D;
@@ -60,22 +60,22 @@ html, body {
 }
 
 :root {
-  /* TECH LED PALETTE — Minimalism + Neon Accents */
-  --ink: #0A0A0A;
-  --paper: #FFFFFF;
-  --line: #E5E5E5;
-  --line-2: #F5F5F5;
-  --muted: #737373;
-  --accent: #000000;
+  /* TECH LED PALETTE — Dark Theme + Neon Accents */
+  --ink: #F8FAFC;
+  --paper: #090c14;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-2: rgba(255, 255, 255, 0.05);
+  --muted: #94a3b8;
+  --accent: #d4ff00;
 
   /* LED/Neon accents */
-  --electric-blue: #00D4FF;
-  --electric-cyan: #00FFF5;
-  --electric-purple: #B366FF;
-  --electric-pink: #FF3D9A;
-  --glow-blue: rgba(0, 212, 255, 0.5);
-  --glow-cyan: rgba(0, 255, 245, 0.5);
-  --glow-purple: rgba(179, 102, 255, 0.5);
+  --electric-blue: #00e5ff;
+  --electric-cyan: #d4ff00;
+  --electric-purple: #d946ef;
+  --electric-pink: #ec4899;
+  --glow-blue: rgba(0, 229, 255, 0.4);
+  --glow-cyan: rgba(212, 255, 0, 0.4);
+  --glow-purple: rgba(217, 70, 239, 0.4);
 }
 
 * {
@@ -88,7 +88,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: #090c14 !important;
+  color: #F8FAFC !important;
   color: var(--ink);
   font-family: var(--font-sans), Inter, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -99,6 +100,45 @@ body {
 
 code, kbd, samp, pre {
   font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Cyber Dark Studio Theme (Dark Obsidian Glass + Acid Lime + Cyber Cyan) */
+.cyber-dark-studio {
+  --color-bg: #090c14;
+  --color-surface: #101420;
+  --color-surface-2: #0d121f;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-border-2: rgba(255, 255, 255, 0.18);
+  --color-text: #F8FAFC;
+  --color-text-2: #CBD5E1;
+  --color-muted: #94A3B8;
+  --color-accent: #d4ff00;
+  --color-accent-hover: #b8e000;
+  --color-accent-subtle: rgba(212, 255, 0, 0.15);
+  background-color: #090c14 !important;
+  color: #F8FAFC !important;
+}
+
+.cyber-dark-studio .bg-surface {
+  background-color: #101420 !important;
+}
+.cyber-dark-studio .bg-surface-2 {
+  background-color: #0d121f !important;
+}
+.cyber-dark-studio .bg-bg {
+  background-color: #090c14 !important;
+}
+.cyber-dark-studio .border-border {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.cyber-dark-studio .text-text {
+  color: #F8FAFC !important;
+}
+.cyber-dark-studio .text-text-2 {
+  color: #CBD5E1 !important;
+}
+.cyber-dark-studio .text-muted {
+  color: #94A3B8 !important;
 }
 
 /* AI Modern Utilities */
@@ -159,10 +199,13 @@ button, input {
 .site-header {
   min-height: 64px;
   height: auto;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   position: sticky;
   top: 0;
-  background: var(--paper);
+  background: rgba(9, 12, 20, 0.96) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #FFFFFF !important;
   z-index: 50;
 }
 
@@ -484,7 +527,7 @@ button, input {
 
 .cms-crud td button {
   border: 1px solid #ccc;
-  background: white;
+  background: #090c14;
   border-radius: 0.35rem;
   padding: 0.35rem 0.6rem;
   cursor: pointer;
@@ -679,10 +722,7 @@ body::before {
 }
 
 /* --- Header: Clean sticky navigation ---------------------------- */
-.site-header {
-  position: sticky;
-  top: 0;
-}
+/* .site-header handled above */
 
 /* --- Hero headline: gradient ink with a soft neon bloom ---------- */
 .cms-hero h1,
@@ -994,3 +1034,206 @@ body::before {
 
 .cms-hero > *:nth-child(2) { animation-delay: 0.08s; }
 .cms-hero > *:nth-child(3) { animation-delay: 0.16s; }
+
+
+/* Header dark mode override */
+
+
+.site-header .logo {
+  color: #ffffff !important;
+}
+
+
+/* Absolute contrast rule for Acid Lime (#d4ff00) buttons */
+a[class*="bg-[#d4ff00]"],
+button[class*="bg-[#d4ff00]"],
+[class*="bg-[#d4ff00]"] > span,
+[class*="bg-[#d4ff00]"] > a,
+.btn-lime {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Light Mode Overrides when user toggles Theme */
+[data-theme="light"],
+[data-theme="light"] body,
+[data-theme="light"] main,
+[data-theme="light"] #main-content {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .site-header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .site-header .logo span.text-white {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .site-header nav a {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .site-header nav a:hover {
+  color: #0284c7 !important;
+}
+
+/* Light Mode Cards, Glassmorphism & Containers */
+[data-theme="light"] [class*="bg-[#101420]"],
+[data-theme="light"] [class*="bg-[#090c14]"],
+[data-theme="light"] [class*="bg-[#121826]"],
+[data-theme="light"] [class*="bg-[#121624]"],
+[data-theme="light"] [class*="bg-black/"],
+[data-theme="light"] [class*="bg-neutral-900"],
+[data-theme="light"] [class*="bg-neutral-950"],
+[data-theme="light"] .guide-card {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Headings in Light Mode */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6,
+[data-theme="light"] [class*="text-white"] {
+  color: #0f172a !important;
+}
+
+/* Descriptions in Light Mode */
+[data-theme="light"] [class*="text-slate-300"],
+[data-theme="light"] [class*="text-slate-400"] {
+  color: #475569 !important;
+}
+
+/* Inputs, Textareas & Form fields in Light Mode */
+[data-theme="light"] input,
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Subtle background buttons and chips in Light Mode */
+[data-theme="light"] [class*="bg-white/5"],
+[data-theme="light"] [class*="bg-white/8"],
+[data-theme="light"] [class*="bg-white/10"],
+[data-theme="light"] [class*="bg-white/15"],
+[data-theme="light"] [class*="bg-white/[0.04]"],
+[data-theme="light"] [class*="bg-white/[0.08]"] {
+  background: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+/* Footer in Light Mode */
+[data-theme="light"] footer,
+[data-theme="light"] .site-footer {
+  background: #f1f5f9 !important;
+  border-top: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+/* Strict Lime Button Contrast in Light Mode */
+[data-theme="light"] [class*="bg-[#d4ff00]"],
+[data-theme="light"] .btn-lime {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="light"] [class*="bg-[#d4ff00]"] *,
+[data-theme="light"] .btn-lime * {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+
+/* ── LIVING 3D MASCOT AMBIENT ANIMATIONS (MOBILE & DESKTOP) ── */
+@keyframes mascotFloatAmbient {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(1.2deg);
+  }
+}
+
+@keyframes mascotRingPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.9;
+  }
+}
+
+@keyframes mascotAuraBreathe {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.12);
+  }
+}
+
+.animate-mascot-float-0 {
+  animation: mascotFloatAmbient 4s ease-in-out infinite;
+  animation-delay: 0s;
+}
+.animate-mascot-float-1 {
+  animation: mascotFloatAmbient 4.2s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+.animate-mascot-float-2 {
+  animation: mascotFloatAmbient 3.8s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+.animate-mascot-float-3 {
+  animation: mascotFloatAmbient 4.4s ease-in-out infinite;
+  animation-delay: 1.8s;
+}
+.animate-mascot-float-4 {
+  animation: mascotFloatAmbient 4s ease-in-out infinite;
+  animation-delay: 2.4s;
+}
+
+.animate-mascot-ring {
+  animation: mascotRingPulse 2.8s ease-in-out infinite;
+}
+
+.animate-mascot-aura {
+  animation: mascotAuraBreathe 3.5s ease-in-out infinite;
+}
+
+
+/* ── SCHULTE GAME FULLSCREEN HARDWARE EXTENSION ── */
+:fullscreen, :-webkit-full-screen {
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: #090c14 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+:fullscreen iframe, :-webkit-full-screen iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+}

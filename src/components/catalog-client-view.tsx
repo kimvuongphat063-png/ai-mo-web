@@ -43,7 +43,7 @@ export function CatalogClientView({ initialProducts }: Props) {
   return (
     <section className="container space-y-6">
       {/* Controls: Search and Filters */}
-      <div className="bg-white rounded-2xl border border-neutral-200/90 p-4 sm:p-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 shadow-2xs">
+      <div className="bg-[#101420] rounded-2xl border border-white/10/90 p-4 sm:p-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 shadow-2xs">
         {/* Search Input */}
         <div className="relative flex-1 max-w-md">
           <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -52,12 +52,12 @@ export function CatalogClientView({ initialProducts }: Props) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Tìm theo tên, kỹ năng hoặc nội dung..."
-            className="w-full pl-10 pr-9 py-2.5 rounded-xl border border-neutral-200 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all bg-neutral-50/50"
+            className="w-full pl-10 pr-9 py-2.5 rounded-xl border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all bg-[#0d1420]/50"
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-neutral-400 hover:text-neutral-700 rounded-md"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-neutral-400 hover:text-slate-300 rounded-md"
               aria-label="Xóa tìm kiếm"
             >
               <X className="w-3.5 h-3.5" />
@@ -73,7 +73,7 @@ export function CatalogClientView({ initialProducts }: Props) {
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 selectedCategory === "all"
                   ? "bg-blue-600 text-white shadow-2xs"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200/80"
+                  : "bg-white/5 text-slate-400 hover:bg-white/10/8/80"
               }`}
             >
               Tất cả ({initialProducts.length})
@@ -87,7 +87,7 @@ export function CatalogClientView({ initialProducts }: Props) {
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                     selectedCategory === cat
                       ? "bg-blue-600 text-white shadow-2xs"
-                      : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200/80"
+                      : "bg-white/5 text-slate-400 hover:bg-white/10/8/80"
                   }`}
                 >
                   {cat} ({count})
@@ -99,7 +99,7 @@ export function CatalogClientView({ initialProducts }: Props) {
       </div>
 
       {/* Results Count Summary */}
-      <div className="flex items-center justify-between text-xs text-neutral-500 px-1">
+      <div className="flex items-center justify-between text-xs text-slate-500 px-1">
         <span>
           Hiển thị <strong>{filtered.length}</strong> / {initialProducts.length} sản phẩm
         </span>
@@ -109,7 +109,7 @@ export function CatalogClientView({ initialProducts }: Props) {
               setQuery("");
               setSelectedCategory("all");
             }}
-            className="text-blue-600 hover:underline font-semibold"
+            className="text-[#d4ff00] hover:underline font-semibold"
           >
             Đặt lại bộ lọc
           </button>
@@ -124,14 +124,14 @@ export function CatalogClientView({ initialProducts }: Props) {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-white rounded-2xl border border-neutral-200/80 p-8 space-y-3">
-          <div className="w-12 h-12 rounded-full bg-neutral-100 text-neutral-400 flex items-center justify-center mx-auto">
+        <div className="text-center py-16 bg-[#101420] rounded-2xl border border-white/10/80 p-8 space-y-3">
+          <div className="w-12 h-12 rounded-full bg-white/5 text-neutral-400 flex items-center justify-center mx-auto">
             <Search className="w-6 h-6" />
           </div>
-          <h3 className="text-base font-bold text-neutral-900">
+          <h3 className="text-base font-bold text-white">
             Không tìm thấy sản phẩm phù hợp
           </h3>
-          <p className="text-xs text-neutral-500 max-w-sm mx-auto">
+          <p className="text-xs text-slate-500 max-w-sm mx-auto">
             Thử tìm kiếm với từ khóa khác hoặc xóa bộ lọc để xem toàn bộ danh mục.
           </p>
           <button
@@ -139,7 +139,7 @@ export function CatalogClientView({ initialProducts }: Props) {
               setQuery("");
               setSelectedCategory("all");
             }}
-            className="px-4 py-2 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-100 font-semibold text-xs transition-colors"
+            className="px-4 py-2 rounded-xl bg-[#d4ff00]/10 text-[#d4ff00] hover:bg-blue-100 font-semibold text-xs transition-colors"
           >
             Xem tất cả sản phẩm
           </button>

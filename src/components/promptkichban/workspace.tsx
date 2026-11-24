@@ -206,27 +206,39 @@ export function Workspace({
   return (
     <div className="space-y-5 animate-in fade-in duration-200">
       {/* ── Top Workspace Header ─────────────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-surface p-4 sm:p-5 shadow-xs">
+      <div className="rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 shadow-lg">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           {/* Back & Title */}
           <div className="space-y-1">
             <button
               onClick={onBackToInput}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-text-2 hover:text-accent transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-[#00e5ff] transition-colors cursor-pointer"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Chỉnh sửa input / Tạo kịch bản mới</span>
             </button>
-            <h1 className="text-lg sm:text-xl font-bold text-text line-clamp-1">
+            <h1 className="text-lg sm:text-xl font-extrabold text-white line-clamp-1">
               {output.title}
             </h1>
             <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-              <Badge tone="accent">{output.durationSeconds} giây</Badge>
-              <Badge tone="neutral">{output.scenes.length} phân cảnh</Badge>
-              <Badge tone="neutral">{output.aspectRatio}</Badge>
-              <Badge tone="neutral">{output.publishingPlatform}</Badge>
-              <Badge tone="neutral">{output.contentType}</Badge>
-              <Badge tone="neutral">Model: {output.videoModel === "both" ? "Veo 3 & Grok" : output.videoModel || output.promptModel}</Badge>
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-[#d4ff00]/15 text-[#d4ff00] border border-[#d4ff00]/30">
+                {output.durationSeconds} giây
+              </span>
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/10 text-slate-300 border border-white/15">
+                {output.scenes.length} phân cảnh
+              </span>
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/10 text-slate-300 border border-white/15">
+                {output.aspectRatio}
+              </span>
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/10 text-slate-300 border border-white/15">
+                {output.publishingPlatform}
+              </span>
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/10 text-slate-300 border border-white/15">
+                {output.contentType}
+              </span>
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/10 text-slate-300 border border-white/15">
+                Model: {output.videoModel === "both" ? "Veo 3 & Grok" : output.videoModel || output.promptModel}
+              </span>
             </div>
           </div>
 
@@ -238,7 +250,11 @@ export function Workspace({
                 size="sm"
                 onClick={onSaveToCloud}
                 disabled={isSavingCloud}
-                className="cursor-pointer"
+                className={`cursor-pointer font-bold ${
+                  currentDocumentId
+                    ? "bg-white/10 hover:bg-white/15 text-slate-200 border-white/20"
+                    : "bg-[#00e5ff]/20 hover:bg-[#00e5ff] text-[#00e5ff] hover:text-black border border-[#00e5ff]/40 shadow-[0_0_15px_rgba(0,229,255,0.2)]"
+                }`}
               >
                 {isSavingCloud ? (
                   <>
@@ -247,7 +263,7 @@ export function Workspace({
                   </>
                 ) : currentDocumentId ? (
                   <>
-                    <Check className="h-3.5 w-3.5 text-success" />
+                    <Check className="h-3.5 w-3.5 text-emerald-400" />
                     <span>Đã lưu vào tài khoản</span>
                   </>
                 ) : (
@@ -260,20 +276,21 @@ export function Workspace({
             )}
 
             <Button
-              variant="secondary"
+              variant="primary"
               size="sm"
               onClick={() => handleCopy(formatScriptToMarkdown(output, "all"), "copy-all")}
-              className="cursor-pointer"
+              className="cursor-pointer !bg-[#d4ff00] hover:!bg-[#b8e000] !text-black font-black shadow-[0_0_15px_rgba(212,255,0,0.35)]"
+              style={{ color: "#000000", fontWeight: 900 }}
             >
               {copiedKey === "copy-all" ? (
                 <>
-                  <Check className="h-3.5 w-3.5 text-success" />
-                  <span>Đã chép toàn bộ</span>
+                  <Check className="h-3.5 w-3.5" />
+                  <span style={{ color: "#000000", fontWeight: 900 }}>Đã chép toàn bộ</span>
                 </>
               ) : (
                 <>
                   <Copy className="h-3.5 w-3.5" />
-                  <span>Chép kịch bản</span>
+                  <span style={{ color: "#000000", fontWeight: 900 }}>Chép kịch bản</span>
                 </>
               )}
             </Button>
@@ -282,7 +299,7 @@ export function Workspace({
               variant="secondary"
               size="sm"
               onClick={handleDownloadMarkdown}
-              className="cursor-pointer"
+              className="cursor-pointer bg-white/5 hover:bg-white/10 text-slate-200 border-white/15 font-semibold"
             >
               <Download className="h-3.5 w-3.5" />
               <span>Tải Markdown (.md)</span>
@@ -292,7 +309,7 @@ export function Workspace({
               variant="secondary"
               size="sm"
               onClick={handleDownloadJSON}
-              className="cursor-pointer"
+              className="cursor-pointer bg-white/5 hover:bg-white/10 text-slate-200 border-white/15 font-semibold"
             >
               <FileCode className="h-3.5 w-3.5" />
               <span>Tải JSON</span>
@@ -302,23 +319,23 @@ export function Workspace({
       </div>
 
       {/* ── Summary & Hook Banner ────────────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-surface-2/40 p-4 grid gap-3 sm:grid-cols-2">
-        <div className="space-y-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted flex items-center gap-1">
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
+      <div className="rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 grid gap-3 sm:grid-cols-2 shadow-lg">
+        <div className="space-y-1.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <Sparkles className="h-3.5 w-3.5 text-[#d4ff00]" />
             Hook mở đầu video (3 giây đầu)
           </span>
-          <p className="text-sm font-medium text-text bg-surface p-2.5 rounded-lg border border-border">
+          <p className="text-sm font-medium text-slate-200 bg-[#0d121f] p-3 rounded-xl border border-white/12 leading-relaxed">
             &ldquo;{output.hook}&rdquo;
           </p>
         </div>
 
-        <div className="space-y-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted flex items-center gap-1">
-            <Clapperboard className="h-3.5 w-3.5 text-accent" />
+        <div className="space-y-1.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <Clapperboard className="h-3.5 w-3.5 text-[#00e5ff]" />
             Kêu gọi hành động (CTA)
           </span>
-          <p className="text-sm font-medium text-text bg-surface p-2.5 rounded-lg border border-border">
+          <p className="text-sm font-medium text-slate-200 bg-[#0d121f] p-3 rounded-xl border border-white/12 leading-relaxed">
             &ldquo;{output.cta}&rdquo;
           </p>
         </div>
@@ -327,13 +344,13 @@ export function Workspace({
       {/* ── 3-Column Storyboard Workspace (Desktop Layout) ────────────────── */}
       <div className="grid gap-4 lg:grid-cols-12 items-start">
         {/* ── CỘT 1: Danh sách cảnh (Timeline) ────────────────────────────── */}
-        <div className="lg:col-span-3 rounded-xl border border-border bg-surface p-3 space-y-2">
-          <div className="flex items-center justify-between pb-2 border-b border-border px-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-muted flex items-center gap-1.5">
-              <Layers className="h-3.5 w-3.5 text-accent" />
+        <div className="lg:col-span-3 rounded-2xl border border-white/12 bg-[#101420] p-3.5 space-y-2 shadow-lg">
+          <div className="flex items-center justify-between pb-2 border-b border-white/10 px-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+              <Layers className="h-3.5 w-3.5 text-[#d4ff00]" />
               Phân cảnh ({output.scenes.length})
             </span>
-            <span className="text-[11px] text-muted font-medium">Timeline</span>
+            <span className="text-[11px] text-[#00e5ff] font-semibold">Timeline</span>
           </div>
 
           <div className="space-y-2 max-h-[640px] overflow-y-auto pr-1">
@@ -344,19 +361,19 @@ export function Workspace({
                   key={scene.sceneNumber}
                   type="button"
                   onClick={() => handleSelectScene(idx)}
-                  className={`w-full text-left p-3 rounded-lg border transition-all cursor-pointer relative ${
+                  className={`w-full text-left p-3 rounded-xl border transition-all cursor-pointer relative ${
                     isSelected
-                      ? "border-accent bg-accent-subtle/40 ring-1 ring-accent text-text"
-                      : "border-border bg-surface hover:bg-surface-2 text-text-2 hover:text-text"
+                      ? "border-[#d4ff00] bg-[#d4ff00]/10 ring-1 ring-[#d4ff00] text-white shadow-[0_0_15px_rgba(212,255,0,0.15)]"
+                      : "border-white/10 bg-[#0d121f] hover:bg-white/[0.08] text-slate-300 hover:text-white"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-1 mb-1">
-                    <span className="text-xs font-bold text-text flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-white flex items-center gap-1.5">
                       <span
-                        className={`h-4.5 w-4.5 rounded text-[10px] font-bold flex items-center justify-center ${
+                        className={`h-5 w-5 rounded-md text-[10px] font-black flex items-center justify-center ${
                           isSelected
-                            ? "bg-accent text-white"
-                            : "bg-surface-2 text-muted"
+                            ? "bg-[#d4ff00] text-black"
+                            : "bg-white/10 text-slate-300"
                         }`}
                       >
                         {scene.sceneNumber}
@@ -364,29 +381,29 @@ export function Workspace({
                       Cảnh {scene.sceneNumber}
                       {scene.isLocked && (
                         <span title="Cảnh này đã bị khóa">
-                          <Lock className="h-3 w-3 text-warning shrink-0" />
+                          <Lock className="h-3 w-3 text-amber-400 shrink-0" />
                         </span>
                       )}
                     </span>
-                    <span className="text-[11px] font-mono text-muted flex items-center gap-1">
+                    <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {scene.startSecond}s - {scene.endSecond}s
                     </span>
                   </div>
 
-                  <p className="text-xs font-semibold text-text line-clamp-1 mb-1">
+                  <p className="text-xs font-bold text-slate-200 line-clamp-1 mb-1">
                     {scene.scenePurpose}
                   </p>
 
-                  <p className="text-[11px] text-muted line-clamp-2 leading-relaxed bg-surface-2/40 p-1.5 rounded">
+                  <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed bg-black/40 border border-white/5 p-2 rounded-lg">
                     &ldquo;{scene.originalScriptSegment || scene.voiceover}&rdquo;
                   </p>
 
-                  <div className="flex items-center gap-1 mt-2">
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-surface-2 text-muted font-medium line-clamp-1">
+                  <div className="flex items-center gap-1.5 mt-2">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10 font-medium line-clamp-1">
                       {scene.cameraShot}
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-surface-2 text-muted font-medium line-clamp-1">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10 font-medium line-clamp-1">
                       {scene.cameraMovement}
                     </span>
                   </div>
@@ -397,23 +414,25 @@ export function Workspace({
         </div>
 
         {/* ── CỘT 2: Chi tiết cảnh & Biên tập (Editor) ────────────────────── */}
-        <div className="lg:col-span-5 rounded-xl border border-border bg-surface p-4 sm:p-5 space-y-4">
+        <div className="lg:col-span-5 rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 space-y-4 shadow-lg">
           {selectedScene ? (
             <>
               {/* Scene Header */}
-              <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-border">
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="h-6 w-6 rounded-md bg-accent text-white text-xs font-bold flex items-center justify-center">
+                  <span className="h-6 w-6 rounded-md bg-[#00e5ff] text-black text-xs font-black flex items-center justify-center">
                     {selectedScene.sceneNumber}
                   </span>
                   <div>
-                    <h2 className="text-sm font-bold text-text flex items-center gap-1.5">
+                    <h2 className="text-sm font-bold text-white flex items-center gap-1.5">
                       Chi tiết Cảnh {selectedScene.sceneNumber}
                       {selectedScene.isLocked && (
-                        <Badge tone="warning">Đã khóa</Badge>
+                        <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                          Đã khóa
+                        </span>
                       )}
                     </h2>
-                    <p className="text-xs text-text-2">
+                    <p className="text-xs text-slate-400">
                       Thời lượng: {selectedScene.startSecond}s – {selectedScene.endSecond}s ({selectedScene.endSecond - selectedScene.startSecond}s) · {selectedScene.scenePurpose}
                     </p>
                   </div>
@@ -424,10 +443,10 @@ export function Workspace({
                   <button
                     type="button"
                     onClick={() => handleToggleLock(selectedScene.sceneNumber)}
-                    className={`p-1.5 rounded-md border text-xs font-medium transition-colors cursor-pointer flex items-center gap-1 ${
+                    className={`p-1.5 rounded-lg border text-xs font-semibold transition-colors cursor-pointer flex items-center gap-1 ${
                       selectedScene.isLocked
-                        ? "border-warning/40 bg-warning-subtle text-warning hover:bg-warning/20"
-                        : "border-border bg-surface text-text-2 hover:bg-surface-2"
+                        ? "border-amber-500/40 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30"
+                        : "border-white/15 bg-white/5 text-slate-300 hover:bg-white/10"
                     }`}
                     title={selectedScene.isLocked ? "Bấm để mở khóa cảnh" : "Bấm để khóa cảnh (giữ nguyên khi tạo lại)"}
                   >
@@ -438,7 +457,7 @@ export function Workspace({
                       </>
                     ) : (
                       <>
-                        <Unlock className="h-3.5 w-3.5 text-muted" />
+                        <Unlock className="h-3.5 w-3.5 text-slate-400" />
                         <span className="text-[11px]">Khóa cảnh</span>
                       </>
                     )}
@@ -450,7 +469,7 @@ export function Workspace({
                       type="button"
                       disabled={selectedScene.isLocked}
                       onClick={() => onRegenerateScene(selectedScene.sceneNumber)}
-                      className="p-1.5 rounded-md border border-border bg-surface text-xs font-medium text-text-2 hover:text-accent hover:border-accent hover:bg-accent-subtle/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer flex items-center gap-1"
+                      className="p-1.5 rounded-lg border border-white/15 bg-white/5 text-xs font-medium text-slate-300 hover:text-[#00e5ff] hover:border-[#00e5ff]/40 hover:bg-[#00e5ff]/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer flex items-center gap-1"
                       title={selectedScene.isLocked ? "Mở khóa cảnh trước khi tạo lại" : "Tạo lại chỉ cảnh này bằng AI"}
                     >
                       <RefreshCw className="h-3.5 w-3.5" />
@@ -463,10 +482,11 @@ export function Workspace({
                       variant="primary"
                       size="sm"
                       onClick={handleSaveSceneEdits}
-                      className="cursor-pointer"
+                      className="cursor-pointer !bg-[#d4ff00] hover:!bg-[#b8e000] !text-black font-black"
+                      style={{ color: "#000000", fontWeight: 900 }}
                     >
                       <Save className="h-3.5 w-3.5" />
-                      <span>Lưu sửa</span>
+                      <span style={{ color: "#000000", fontWeight: 900 }}>Lưu sửa</span>
                     </Button>
                   )}
                 </div>
@@ -474,12 +494,12 @@ export function Workspace({
 
               {/* Original Script Segment (Preserved Verbatim) */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-text flex items-center justify-between">
+                <label className="text-xs font-bold text-white flex items-center justify-between">
                   <span className="flex items-center gap-1.5">
-                    <FileText className="h-3.5 w-3.5 text-accent" />
+                    <FileText className="h-3.5 w-3.5 text-[#d4ff00]" />
                     Kịch bản gốc tương ứng (Thoại tiếng Việt)
                   </span>
-                  <span className="text-[10px] text-muted font-normal">Giữ nguyên câu chữ</span>
+                  <span className="text-[10px] text-slate-400 font-normal">Giữ nguyên câu chữ</span>
                 </label>
                 <textarea
                   rows={2}
@@ -489,14 +509,14 @@ export function Workspace({
                     setHasUnsavedChanges(true);
                   }}
                   placeholder="Đoạn kịch bản gốc tương ứng với cảnh này..."
-                  className="w-full rounded-lg border border-border bg-surface p-2.5 text-xs text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all leading-relaxed"
+                  className="w-full rounded-xl border border-white/15 bg-[#0d121f] p-2.5 text-xs text-white placeholder:text-slate-500 focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff]/30 outline-none transition-all leading-relaxed"
                 />
               </div>
 
               {/* Character Action & Actor Performance */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-text flex items-center gap-1.5">
-                  <Clapperboard className="h-3.5 w-3.5 text-accent" />
+                <label className="text-xs font-bold text-white flex items-center gap-1.5">
+                  <Clapperboard className="h-3.5 w-3.5 text-[#00e5ff]" />
                   Hành động của chủ thể & Diễn xuất
                 </label>
                 <textarea
@@ -507,14 +527,14 @@ export function Workspace({
                     setHasUnsavedChanges(true);
                   }}
                   placeholder="Mô tả hành động của chủ thể / bàn tay / diễn viên..."
-                  className="w-full rounded-lg border border-border bg-surface p-2.5 text-xs text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all leading-relaxed"
+                  className="w-full rounded-xl border border-white/15 bg-[#0d121f] p-2.5 text-xs text-white placeholder:text-slate-500 focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff]/30 outline-none transition-all leading-relaxed"
                 />
               </div>
 
               {/* Camera Shot & Angle & Movement */}
               <div className="grid gap-2 sm:grid-cols-3">
                 <div className="space-y-1">
-                  <label className="text-xs font-medium text-text-2 block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Cỡ cảnh (Shot)
                   </label>
                   <input
@@ -525,12 +545,12 @@ export function Workspace({
                       setHasUnsavedChanges(true);
                     }}
                     placeholder="Ví dụ: Close-up"
-                    className="w-full h-8.5 rounded-lg border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-none"
+                    className="w-full h-8.5 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-none"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-medium text-text-2 block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Góc máy (Angle)
                   </label>
                   <input
@@ -541,12 +561,12 @@ export function Workspace({
                       setHasUnsavedChanges(true);
                     }}
                     placeholder="Ví dụ: Eye-level, Low-angle"
-                    className="w-full h-8.5 rounded-lg border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-none"
+                    className="w-full h-8.5 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-none"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-medium text-text-2 block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Chuyển động (Movement)
                   </label>
                   <input
@@ -557,15 +577,15 @@ export function Workspace({
                       setHasUnsavedChanges(true);
                     }}
                     placeholder="Ví dụ: Slow push-in"
-                    className="w-full h-8.5 rounded-lg border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-none"
+                    className="w-full h-8.5 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-none"
                   />
                 </div>
               </div>
 
               {/* Visual Description */}
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-text flex items-center gap-1.5">
-                  <Eye className="h-3.5 w-3.5 text-accent" />
+                <label className="text-xs font-bold text-white flex items-center gap-1.5">
+                  <Eye className="h-3.5 w-3.5 text-[#d4ff00]" />
                   Mô tả hình ảnh tổng quan
                 </label>
                 <textarea
@@ -575,14 +595,14 @@ export function Workspace({
                     setEditVisualDesc(e.target.value);
                     setHasUnsavedChanges(true);
                   }}
-                  className="w-full rounded-lg border border-border bg-surface p-2.5 text-xs text-text focus:border-accent outline-none leading-relaxed"
+                  className="w-full rounded-xl border border-white/15 bg-[#0d121f] p-2.5 text-xs text-white focus:border-[#00e5ff] outline-none leading-relaxed"
                 />
               </div>
 
               {/* Continuity Notes & OnScreen Text */}
               <div className="grid gap-2 sm:grid-cols-2">
                 <div className="space-y-1">
-                  <label className="text-xs font-medium text-text-2 block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Tính liền mạch (Continuity Notes)
                   </label>
                   <input
@@ -593,12 +613,12 @@ export function Workspace({
                       setHasUnsavedChanges(true);
                     }}
                     placeholder="Duy trì ánh sáng và màu sắc đồng nhất..."
-                    className="w-full h-8.5 rounded-lg border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-none"
+                    className="w-full h-8.5 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-none"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-medium text-text-2 block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Chữ hiện trên màn hình (Text Overlay)
                   </label>
                   <input
@@ -609,46 +629,46 @@ export function Workspace({
                       setHasUnsavedChanges(true);
                     }}
                     placeholder="Ví dụ: TÍNH NĂNG ĐỘC BẢN..."
-                    className="w-full h-8.5 rounded-lg border border-border bg-surface px-2.5 text-xs text-text focus:border-accent outline-none"
+                    className="w-full h-8.5 rounded-lg border border-white/15 bg-[#0d121f] px-2.5 text-xs text-white focus:border-[#00e5ff] outline-none"
                   />
                 </div>
               </div>
 
               {/* Shot Details Grid */}
-              <div className="rounded-lg border border-border bg-surface-2/40 p-3 grid gap-2.5 grid-cols-2 text-xs">
+              <div className="rounded-xl border border-white/10 bg-[#0d121f] p-3.5 grid gap-2.5 grid-cols-2 text-xs">
                 <div>
-                  <span className="text-[11px] font-medium text-muted block">Ánh sáng:</span>
-                  <span className="text-text">{selectedScene.lighting}</span>
+                  <span className="text-[11px] font-semibold text-slate-400 block">Ánh sáng:</span>
+                  <span className="text-slate-200">{selectedScene.lighting}</span>
                 </div>
                 <div>
-                  <span className="text-[11px] font-medium text-muted block">Bối cảnh:</span>
-                  <span className="text-text">{selectedScene.setting}</span>
+                  <span className="text-[11px] font-semibold text-slate-400 block">Bối cảnh:</span>
+                  <span className="text-slate-200">{selectedScene.setting}</span>
                 </div>
                 <div>
-                  <span className="text-[11px] font-medium text-muted block">Âm thanh / SFX:</span>
-                  <span className="text-text">{selectedScene.soundDesign}</span>
+                  <span className="text-[11px] font-semibold text-slate-400 block">Âm thanh / SFX:</span>
+                  <span className="text-slate-200">{selectedScene.soundDesign}</span>
                 </div>
                 <div>
-                  <span className="text-[11px] font-medium text-muted block">Chuyển cảnh:</span>
-                  <span className="text-text">{selectedScene.transition}</span>
+                  <span className="text-[11px] font-semibold text-slate-400 block">Chuyển cảnh:</span>
+                  <span className="text-slate-200">{selectedScene.transition}</span>
                 </div>
               </div>
             </>
           ) : (
-            <div className="py-16 text-center text-muted text-xs">
+            <div className="py-16 text-center text-slate-400 text-xs">
               Chọn một cảnh từ danh sách bên trái để xem và sửa chi tiết.
             </div>
           )}
         </div>
 
         {/* ── CỘT 3: Prompt theo Model AI (Veo 3 & Grok) ───────────────────── */}
-        <div className="lg:col-span-4 rounded-xl border border-border bg-surface p-4 sm:p-5 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-border">
-            <span className="text-xs font-bold uppercase tracking-wider text-muted flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-accent" />
+        <div className="lg:col-span-4 rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 space-y-4 shadow-lg">
+          <div className="flex items-center justify-between pb-2 border-b border-white/10">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+              <Sparkles className="h-3.5 w-3.5 text-[#d4ff00]" />
               Prompt Video AI Cảnh {selectedScene?.sceneNumber || 1}
             </span>
-            <span className="text-[11px] text-accent font-semibold">
+            <span className="text-[11px] text-[#00e5ff] font-bold">
               Tiếng Anh chuẩn model
             </span>
           </div>
@@ -657,7 +677,7 @@ export function Workspace({
           <div
             role="tablist"
             aria-label="Chọn mô hình Video AI"
-            className="flex flex-wrap gap-1 p-1 rounded-lg bg-surface-2/60 border border-border"
+            className="flex flex-wrap gap-1 p-1 rounded-xl bg-[#0d121f] border border-white/12"
           >
             {TAB_MODELS.map((m) => {
               const active = activeModelTab === m.id;
@@ -670,10 +690,10 @@ export function Workspace({
                   aria-controls={`panel-${m.id}`}
                   type="button"
                   onClick={() => setActiveModelTab(m.id)}
-                  className={`flex-1 min-w-[70px] py-1 px-2 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                  className={`flex-1 min-w-[70px] py-1.5 px-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     active
-                      ? "bg-surface text-accent shadow-xs border border-border"
-                      : "text-muted hover:text-text"
+                      ? "bg-[#00e5ff] text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]"
+                      : "text-slate-400 hover:text-white"
                   }`}
                 >
                   {m.name}
@@ -683,8 +703,8 @@ export function Workspace({
           </div>
 
           {/* Model Description Notice */}
-          <div className="text-[11px] text-text-2 bg-surface-2/30 p-2 rounded-md border border-border flex items-center gap-1.5">
-            <span className="font-semibold text-accent">
+          <div className="text-[11px] text-slate-300 bg-white/[0.03] p-2.5 rounded-lg border border-white/10 flex items-center gap-1.5">
+            <span className="font-bold text-[#00e5ff]">
               {TAB_MODELS.find((m) => m.id === activeModelTab)?.badge}:
             </span>
             <span className="line-clamp-2">{TAB_MODELS.find((m) => m.id === activeModelTab)?.desc}</span>
@@ -698,30 +718,31 @@ export function Workspace({
             className="space-y-2"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-text">
+              <span className="text-xs font-bold text-white">
                 Full Generation Prompt
               </span>
               <button
                 type="button"
                 onClick={() => handleCopy(currentPromptText, `prompt-${selectedSceneIndex}-${activeModelTab}`)}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium text-accent bg-accent-subtle hover:bg-accent-hover hover:text-white transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black text-black bg-[#d4ff00] hover:bg-[#b8e000] shadow-[0_0_15px_rgba(212,255,0,0.35)] transition-all cursor-pointer"
+                style={{ color: "#000000", fontWeight: 900 }}
               >
                 {copiedKey === `prompt-${selectedSceneIndex}-${activeModelTab}` ? (
                   <>
-                    <Check className="h-3.5 w-3.5 text-success" />
-                    <span>Đã sao chép</span>
+                    <Check className="h-3.5 w-3.5" />
+                    <span style={{ color: "#000000", fontWeight: 900 }}>Đã sao chép</span>
                   </>
                 ) : (
                   <>
                     <Copy className="h-3.5 w-3.5" />
-                    <span>Sao chép Prompt</span>
+                    <span style={{ color: "#000000", fontWeight: 900 }}>Sao chép Prompt</span>
                   </>
                 )}
               </button>
             </div>
 
             <div className="relative">
-              <pre className="w-full max-h-[300px] overflow-y-auto p-3.5 rounded-lg border border-border bg-surface-2/40 text-xs font-mono text-text whitespace-pre-wrap leading-relaxed select-all">
+              <pre className="w-full max-h-[300px] overflow-y-auto p-3.5 rounded-xl border border-white/15 bg-[#070a12] text-xs font-mono text-slate-200 whitespace-pre-wrap leading-relaxed select-all">
                 {currentPromptText}
               </pre>
             </div>
@@ -731,17 +752,17 @@ export function Workspace({
           {selectedScene?.negativePrompt && (
             <div className="space-y-1 pt-1">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-text-2">
+                <span className="text-xs font-semibold text-slate-300">
                   Negative Prompt (Loại trừ lỗi)
                 </span>
                 <button
                   type="button"
                   onClick={() => handleCopy(selectedScene.negativePrompt, `neg-${selectedSceneIndex}`)}
-                  className="text-[11px] text-muted hover:text-text flex items-center gap-1 cursor-pointer"
+                  className="text-[11px] text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer"
                 >
                   {copiedKey === `neg-${selectedSceneIndex}` ? (
                     <>
-                      <Check className="h-3 w-3 text-success" />
+                      <Check className="h-3 w-3 text-emerald-400" />
                       <span>Đã chép</span>
                     </>
                   ) : (
@@ -752,15 +773,15 @@ export function Workspace({
                   )}
                 </button>
               </div>
-              <div className="p-2 rounded-md bg-surface-2/30 border border-border text-[11px] font-mono text-muted">
+              <div className="p-2.5 rounded-lg bg-[#070a12] border border-white/15 text-[11px] font-mono text-slate-400">
                 {selectedScene.negativePrompt}
               </div>
             </div>
           )}
 
           {/* Quick instructions on how to use */}
-          <div className="pt-2 border-t border-border text-[11px] text-muted space-y-1">
-            <p className="font-semibold text-text-2">Cách dùng prompt này:</p>
+          <div className="pt-2 border-t border-white/10 text-[11px] text-slate-400 space-y-1">
+            <p className="font-bold text-slate-200">Cách dùng prompt này:</p>
             <p>1. Bấm <strong>Sao chép Prompt</strong> ở trên.</p>
             <p>2. Dán vào ô nhập câu lệnh của {TAB_MODELS.find((m) => m.id === activeModelTab)?.name}.</p>
             <p>3. Chọn tỷ lệ khung hình <strong>{output.aspectRatio}</strong> và render clip.</p>
@@ -769,10 +790,10 @@ export function Workspace({
       </div>
 
       {/* ── Social Package: Caption, Hashtags & Keywords ──────────────────── */}
-      <div className="rounded-xl border border-border bg-surface p-4 sm:p-5 space-y-3">
-        <div className="flex items-center justify-between border-b border-border pb-2.5">
-          <span className="text-xs font-bold uppercase tracking-wider text-muted flex items-center gap-1.5">
-            <Share2 className="h-3.5 w-3.5 text-accent" />
+      <div className="rounded-2xl border border-white/12 bg-[#101420] p-4 sm:p-5 space-y-3.5 shadow-lg">
+        <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+            <Share2 className="h-3.5 w-3.5 text-[#00e5ff]" />
             Nội dung bài đăng & Caption mạng xã hội
           </span>
           <button
@@ -785,11 +806,11 @@ export function Workspace({
                 "copy-social"
               )
             }
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium text-accent bg-accent-subtle hover:bg-accent-hover hover:text-white transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#00e5ff] bg-[#00e5ff]/20 hover:bg-[#00e5ff] hover:text-black border border-[#00e5ff]/40 transition-all cursor-pointer"
           >
             {copiedKey === "copy-social" ? (
               <>
-                <Check className="h-3.5 w-3.5 text-success" />
+                <Check className="h-3.5 w-3.5" />
                 <span>Đã sao chép</span>
               </>
             ) : (
@@ -801,8 +822,8 @@ export function Workspace({
           </button>
         </div>
 
-        <div className="space-y-2">
-          <p className="text-sm text-text whitespace-pre-wrap leading-relaxed bg-surface-2/30 p-3 rounded-lg border border-border">
+        <div className="space-y-2.5">
+          <p className="text-sm text-slate-200 whitespace-pre-wrap leading-relaxed bg-[#0d121f] p-3.5 rounded-xl border border-white/15">
             {output.caption}
           </p>
 
@@ -810,7 +831,7 @@ export function Workspace({
             {output.hashtags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs font-medium px-2 py-0.5 rounded-full bg-accent-subtle text-accent border border-accent/20"
+                className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#00e5ff]/15 text-[#00e5ff] border border-[#00e5ff]/30"
               >
                 {tag.startsWith("#") ? tag : `#${tag}`}
               </span>
@@ -819,14 +840,14 @@ export function Workspace({
 
           {output.keywords && output.keywords.length > 0 && (
             <div className="pt-2 flex flex-wrap items-center gap-1.5">
-              <span className="text-xs font-semibold text-muted flex items-center gap-1">
+              <span className="text-xs font-bold text-slate-400 flex items-center gap-1">
                 <Search className="h-3 w-3" />
                 Keywords:
               </span>
               {output.keywords.map((kw, i) => (
                 <span
                   key={i}
-                  className="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-2 text-text-2 border border-border"
+                  className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-white/5 text-slate-300 border border-white/10"
                 >
                   {kw}
                 </span>
@@ -837,8 +858,8 @@ export function Workspace({
 
         {/* Warnings / Policy notices */}
         {output.warnings && output.warnings.length > 0 && (
-          <div className="mt-3 p-3 rounded-lg bg-warning-subtle border border-warning/20 text-xs text-warning space-y-1">
-            <span className="font-semibold flex items-center gap-1">
+          <div className="mt-3 p-3.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-xs text-amber-300 space-y-1">
+            <span className="font-bold flex items-center gap-1.5">
               <AlertTriangle className="h-3.5 w-3.5" />
               Lưu ý tuân thủ:
             </span>

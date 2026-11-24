@@ -67,6 +67,20 @@ window.KGP = {
  ],
  "games": [
   {
+   "slug": "schulte-focus",
+   "dir": "games/schulte",
+   "title": "Vòng Số Schulte Focus - Luyện Não Đỉnh Cao",
+   "blurb": "Thử thách 60 giây kích hoạt 100% não bộ, mở rộng thị trường thị giác ngoại vi và tăng tốc độ đọc 300%. Chơi ngay trực tiếp trên web!",
+   "collection": "them",
+   "ages": "Mọi lứa tuổi",
+   "voice": true,
+   "android8": true,
+   "template": false,
+   "icon": "games/schulte/icon.png",
+   "zip": "",
+   "zipBytes": 55044
+  },
+  {
    "slug": "lat-the-tri-nho",
    "dir": "games/Lat The Tri Nho",
    "title": "Lật Thẻ Trí Nhớ",

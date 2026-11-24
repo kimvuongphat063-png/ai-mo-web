@@ -1,4 +1,5 @@
 "use client";
+import { ThemeToggle } from "./theme-toggle";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { CONTACT_INFO } from "@/lib/organization";
@@ -50,20 +51,27 @@ import { useSearch } from "./home-search-context";
 
 export function Logo() {
   return (
-    <Link href="/" className="logo flex items-center gap-2 shrink-0 group" aria-label="AI MỞ — Trang chủ">
-      <span
-        className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#090c14] border border-neutral-800 flex items-center justify-center text-[#d4ff00] font-black text-sm shadow-sm group-hover:border-[#d4ff00]/60 transition-colors"
-        aria-hidden="true"
-      >
-        M
-      </span>
-      <span className="font-black tracking-tight text-xl sm:text-2xl text-white">
-        AI <span className="text-[#d4ff00]">MỞ</span>
-      </span>
+    <Link href="/" className="logo flex items-center gap-2.5 shrink-0 group select-none" aria-label="AI MỞ — Trang chủ">
+      <div className="relative">
+        <img
+          src="/mascot/v2-mascot-avatar.png"
+          alt="AI Mở Mascot"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-cover shadow-[0_0_12px_rgba(212,255,0,0.3)] group-hover:shadow-[0_0_20px_rgba(212,255,0,0.6)] group-hover:scale-105 transition-all border border-[#d4ff00]/40"
+        />
+        <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#d4ff00] border-2 border-[#090c14] animate-pulse" />
+      </div>
+      <div className="flex flex-col">
+        <span className="font-black tracking-tight text-xl sm:text-2xl leading-none flex items-center gap-1">
+          <span className="text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)]">AI</span>
+          <span className="text-[#d4ff00] drop-shadow-[0_0_12px_rgba(212,255,0,0.7)]">MỞ</span>
+        </span>
+        <span className="text-[9.5px] font-mono font-bold tracking-wider text-slate-400 group-hover:text-[#00e5ff] transition-colors mt-0.5">
+          STUDIO TECH
+        </span>
+      </div>
     </Link>
   );
 }
-
 interface DropdownChild {
   href: string;
   label: string;
@@ -223,7 +231,7 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="site-header sticky top-0 z-40 bg-[#090c14]/95 backdrop-blur-md border-b border-white/10 transition-all">
+    <header className="site-header sticky top-0 z-50 bg-[#090c14]/98 backdrop-blur-xl border-b border-white/12 shadow-[0_4px_30px_rgba(0,0,0,0.8)] transition-all">
       <div className="w-full max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 2xl:px-8 flex items-center justify-between py-3 gap-3">
         {/* Left: Brand Logo */}
         <Logo />
@@ -232,7 +240,7 @@ export function Header() {
         <nav
           id="main-nav"
           aria-label="Điều hướng chính"
-          className="hidden lg:flex items-center gap-1 xl:gap-1.5 ml-1"
+          className="hidden lg:flex items-center gap-1.5 xl:gap-2 ml-2"
         >
           {navItems.map((item) => {
             const hasChildren = Boolean(item.children && item.children.length > 0);
@@ -243,11 +251,11 @@ export function Header() {
                 <Link
                   key={item.key}
                   href={item.href}
-                  className="py-1.5 px-3 text-sm font-semibold text-slate-300 hover:text-[#d4ff00] transition-colors rounded-full hover:bg-white/5 whitespace-nowrap inline-flex items-center gap-1.5"
+                  className="py-2 px-3.5 text-[13.5px] font-bold text-slate-200 hover:text-[#d4ff00] hover:bg-white/8 transition-all rounded-full whitespace-nowrap inline-flex items-center gap-1.5 border border-transparent hover:border-[#d4ff00]/30"
                 >
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 text-[#0057ff] border border-blue-200/60">
+                    <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-[#d4ff00]/10 text-[#d4ff00] border border-[#d4ff00]/30">
                       {item.badge}
                     </span>
                   )}
@@ -264,10 +272,10 @@ export function Header() {
               >
                 <Link
                   href={item.href}
-                  className={`py-1.5 px-3 text-sm font-semibold transition-colors rounded-full whitespace-nowrap inline-flex items-center gap-1 ${
+                  className={`py-2 px-3.5 text-[13.5px] font-bold transition-all rounded-full whitespace-nowrap inline-flex items-center gap-1.5 border border-transparent hover:border-[#d4ff00]/30 ${
                     isOpen
                       ? "text-[#d4ff00] bg-white/5"
-                      : "text-neutral-700 hover:text-[#0057ff] hover:bg-white/5"
+                      : "text-slate-200 hover:text-[#d4ff00] hover:bg-white/8"
                   }`}
                   onClick={(e) => {
                     if (window.innerWidth >= 1024 && !isOpen) {
@@ -281,11 +289,11 @@ export function Header() {
                   <span>{item.label}</span>
                   <ChevronDown
                     className={`w-3.5 h-3.5 text-neutral-400 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[#0057ff]" : ""
+                      isOpen ? "rotate-180 text-[#d4ff00]" : ""
                     }`}
                   />
                   {item.badge && (
-                    <span className="ml-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 border border-neutral-200">
+                    <span className="ml-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/10 text-slate-300 border border-white/15">
                       {item.badge}
                     </span>
                   )}
@@ -306,7 +314,7 @@ export function Header() {
                           onClick={() => setActiveDropdown(null)}
                           className={`group flex items-start gap-2.5 p-2.5 rounded-xl transition-all ${
                             sub.highlight
-                              ? "bg-gradient-to-r from-blue-50/90 to-indigo-50/70 hover:from-blue-100 hover:to-indigo-100"
+                              ? "bg-white/8 hover:bg-white/12"
                               : "hover:bg-white/5"
                           }`}
                         >
@@ -315,14 +323,14 @@ export function Header() {
                               <span
                                 className={`text-[13.5px] font-bold ${
                                   sub.highlight
-                                    ? "text-[#0057ff]"
+                                    ? "text-[#d4ff00]"
                                     : "text-white group-hover:text-[#d4ff00]"
                                 }`}
                               >
                                 {sub.label}
                               </span>
                               {sub.badge && (
-                                <span className="text-[10px] font-extrabold px-1.5 py-0.2 rounded-md bg-[#0057ff] text-white">
+                                <span className="text-[10px] font-extrabold px-1.5 py-0.2 rounded-md bg-[#d4ff00] text-black">
                                   {sub.badge}
                                 </span>
                               )}
@@ -333,7 +341,7 @@ export function Header() {
                               </p>
                             )}
                           </div>
-                          <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-[#0057ff] group-hover:translate-x-0.5 transition-all mt-1 shrink-0" />
+                          <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#d4ff00] group-hover:translate-x-0.5 transition-all mt-1 shrink-0" />
                         </Link>
                       ))}
                     </div>
@@ -364,20 +372,21 @@ export function Header() {
                 type="button"
                 onClick={() => setQuery("")}
                 aria-label="Xóa tìm kiếm"
-                className="absolute right-2.5 text-neutral-400 hover:text-neutral-700 text-xs font-bold"
+                className="absolute right-2.5 text-neutral-400 hover:text-white text-xs font-bold"
               >
                 ✕
               </button>
             )}
           </div>
 
+          <ThemeToggle />
           <AuthNav />
 
           <Link
             href="/#prompt"
-            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-black bg-[#d4ff00] hover:bg-[#b8e000] font-black rounded-full shadow-[0_2px_12px_rgba(212,255,0,0.3)] transition-all whitespace-nowrap"
+            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-black bg-[#d4ff00] hover:bg-[#b8e000] font-black rounded-full shadow-[0_0_20px_rgba(212,255,0,0.45)] hover:shadow-[0_0_28px_rgba(212,255,0,0.7)] hover:scale-105 transition-all whitespace-nowrap"
           >
-            <span>Bắt đầu miễn phí</span>
+            <span style={{ color: "#000000", fontWeight: 900 }}>Bắt đầu miễn phí</span>
           </Link>
 
           {/* Mobile Menu Toggle (< 1024px) */}
@@ -414,13 +423,13 @@ export function Header() {
               }}
               placeholder="Tìm công cụ, bài viết…"
               aria-label="Tìm kiếm di động"
-              className="w-full pl-9 pr-7 py-2 text-sm bg-[#eef3ff] text-neutral-900 placeholder:text-neutral-500 rounded-full border border-[#dde6f8] focus:border-[#0057ff] outline-none"
+              className="w-full pl-9 pr-7 py-2 text-sm bg-white/5 text-white placeholder:text-slate-500 rounded-full border border-white/10 focus:border-[#d4ff00] outline-none"
             />
             {query && (
               <button
                 type="button"
                 onClick={() => setQuery("")}
-                className="absolute right-3 text-neutral-400 hover:text-neutral-700 text-xs font-bold"
+                className="absolute right-3 text-neutral-400 hover:text-white text-xs font-bold"
               >
                 ✕
               </button>
@@ -436,11 +445,11 @@ export function Header() {
                     key={item.key}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="flex items-center justify-between py-2.5 px-3 text-sm font-bold text-neutral-800 hover:text-[#0057ff] rounded-xl hover:bg-neutral-50"
+                    className="flex items-center justify-between py-2.5 px-3 text-sm font-bold text-slate-200 hover:text-[#d4ff00] rounded-xl hover:bg-white/5"
                   >
                     <span>{item.label}</span>
                     {item.badge && (
-                      <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 text-[#0057ff] border border-blue-200/60">
+                      <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-[#d4ff00]/10 text-[#d4ff00] border border-[#d4ff00]/30">
                         {item.badge}
                       </span>
                     )}
@@ -451,49 +460,49 @@ export function Header() {
               const isExpanded = Boolean(mobileExpanded[item.key]);
 
               return (
-                <div key={item.key} className="border-b border-neutral-100 pb-1">
+                <div key={item.key} className="border-b border-white/10 pb-1">
                   <div className="flex items-center justify-between py-2 px-3">
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="text-sm font-bold text-neutral-900 hover:text-[#0057ff]"
+                      className="text-sm font-bold text-white hover:text-[#d4ff00]"
                     >
                       {item.label}
                     </Link>
                     <button
                       type="button"
                       onClick={() => toggleMobileGroup(item.key)}
-                      className="p-1.5 text-neutral-500 hover:text-neutral-900 rounded-lg"
+                      className="p-1.5 text-slate-400 hover:text-white rounded-lg"
                       aria-label={`Mở rộng ${item.label}`}
                     >
                       <ChevronDown
                         className={`w-4 h-4 transition-transform duration-200 ${
-                          isExpanded ? "rotate-180 text-[#0057ff]" : ""
+                          isExpanded ? "rotate-180 text-[#d4ff00]" : ""
                         }`}
                       />
                     </button>
                   </div>
 
                   {isExpanded && (
-                    <div className="pl-4 pr-2 py-1 space-y-1 bg-neutral-50/70 rounded-xl mb-1">
+                    <div className="pl-4 pr-2 py-1 space-y-1 bg-white/5 rounded-xl mb-1">
                       {item.children.map((sub) => (
                         <Link
                           key={sub.href + sub.label}
                           href={sub.href}
                           onClick={() => setOpen(false)}
-                          className="flex items-start justify-between py-2 px-2.5 rounded-lg text-xs font-semibold text-neutral-700 hover:text-[#0057ff] hover:bg-white"
+                          className="flex items-start justify-between py-2 px-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-[#d4ff00] hover:bg-white/5"
                         >
                           <div>
                             <div className="font-bold flex items-center gap-1.5">
                               <span>{sub.label}</span>
                               {sub.badge && (
-                                <span className="text-[9px] font-extrabold px-1.5 py-0.2 rounded bg-[#0057ff] text-white">
+                                <span className="text-[9px] font-extrabold px-1.5 py-0.2 rounded bg-[#d4ff00] text-black">
                                   {sub.badge}
                                 </span>
                               )}
                             </div>
                             {sub.desc && (
-                              <p className="text-[11px] text-neutral-500 font-normal m-0 line-clamp-1">
+                              <p className="text-[11px] text-slate-500 font-normal m-0 line-clamp-1">
                                 {sub.desc}
                               </p>
                             )}
@@ -508,12 +517,12 @@ export function Header() {
             })}
           </div>
 
-          <div className="pt-2 border-t border-neutral-100 flex flex-col gap-2.5">
+          <div className="pt-2 border-t border-white/10 flex flex-col gap-2.5">
             <AuthNav isMobile onNavigate={() => setOpen(false)} />
             <Link
               href="/promptkichban"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center gap-2 py-2.5 text-sm font-bold text-white bg-[#0057ff] rounded-xl shadow-md shadow-blue-500/20"
+              className="inline-flex items-center justify-center gap-2 py-2.5 text-sm font-bold text-black bg-[#d4ff00] rounded-xl shadow-md shadow-[#d4ff00]/20"
             >
               <span>Vào PromptKichBan Studio</span>
               <ArrowRight className="w-4 h-4" />
@@ -534,7 +543,7 @@ export function Footer() {
           <div className="lg:col-span-5 space-y-4">
             <div className="space-y-2">
               <span className="font-black text-white text-2xl tracking-tight block">
-                AI <span className="text-blue-500">MỞ</span>
+                AI <span className="text-[#d4ff00]">MỞ</span>
               </span>
               <p className="text-xs text-neutral-400 leading-relaxed max-w-md">
                 Nền tảng thực hành sản phẩm số & công cụ AI tiếng Việt. Học AI bằng cách tạo ra thứ dùng được vào công việc hàng ngày.
@@ -558,7 +567,7 @@ export function Footer() {
                 <span className="text-neutral-600">—</span>
                 <a
                   href={CONTACT_INFO.hotline.telLink}
-                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium transition-colors"
+                  className="text-[#d4ff00] hover:text-[#d4ff00]/80 underline underline-offset-2 font-medium transition-colors"
                   title="Bấm để gọi hotline"
                 >
                   Bấm để gọi
@@ -568,7 +577,7 @@ export function Footer() {
                   href={CONTACT_INFO.hotline.zaloLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium transition-colors"
+                  className="text-[#d4ff00] hover:text-[#d4ff00]/80 underline underline-offset-2 font-medium transition-colors"
                   title="Bấm để mở Zalo"
                 >
                   Mở Zalo
@@ -580,7 +589,7 @@ export function Footer() {
                 <span className="text-neutral-400 shrink-0 font-medium">Email liên hệ:</span>
                 <a
                   href={CONTACT_INFO.emailPrimary.link}
-                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium break-all transition-colors"
+                  className="text-[#d4ff00] hover:text-[#d4ff00]/80 underline underline-offset-2 font-medium break-all transition-colors"
                   title="Gửi email liên hệ"
                 >
                   {CONTACT_INFO.emailPrimary.address}
@@ -592,7 +601,7 @@ export function Footer() {
                 <span className="text-neutral-400 shrink-0 font-medium">Email hỗ trợ:</span>
                 <a
                   href={CONTACT_INFO.emailSupport.link}
-                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium break-all transition-colors"
+                  className="text-[#d4ff00] hover:text-[#d4ff00]/80 underline underline-offset-2 font-medium break-all transition-colors"
                   title="Gửi email hỗ trợ"
                 >
                   {CONTACT_INFO.emailSupport.address}
@@ -609,7 +618,7 @@ export function Footer() {
                   href={CONTACT_INFO.facebook.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 font-medium break-all transition-colors"
+                  className="text-[#d4ff00] hover:text-[#d4ff00]/80 underline underline-offset-2 font-medium break-all transition-colors"
                   title="Ghé thăm Facebook AI Mở"
                 >
                   {CONTACT_INFO.facebook.url}
@@ -634,7 +643,7 @@ export function Footer() {
               <div className="pt-2 border-t border-neutral-800/90 flex items-center justify-between">
                 <Link
                   href="/lien-he"
-                  className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-bold transition-colors"
+                  className="inline-flex items-center gap-1.5 text-[#d4ff00] hover:text-[#d4ff00]/80 font-bold transition-colors"
                 >
                   <span>→ Xem trang Liên hệ chi tiết (/lien-he)</span>
                 </Link>
@@ -648,7 +657,7 @@ export function Footer() {
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href="/promptkichban" className="hover:text-white transition-colors flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#d4ff00]"></span>
                   PromptKichBan Studio
                 </Link>
               </li>
@@ -702,7 +711,7 @@ export function Footer() {
             <h3 className="font-semibold text-white text-xs uppercase tracking-wider mb-3">Tài khoản & Hỗ trợ</h3>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/lien-he" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors flex items-center gap-1">
+                <Link href="/lien-he" className="text-[#d4ff00] hover:text-[#d4ff00]/80 font-semibold transition-colors flex items-center gap-1">
                   <span>Trang liên hệ & Gửi yêu cầu</span>
                 </Link>
               </li>
