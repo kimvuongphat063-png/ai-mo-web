@@ -1237,3 +1237,24 @@ button[class*="bg-[#d4ff00]"],
   height: 100% !important;
   border: 0 !important;
 }
+
+
+/* ── ACCESSIBLE HIGH-CONTRAST TEXT SELECTION (NO GLARE) ── */
+::selection {
+  background-color: #d4ff00 !important;
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+::-moz-selection {
+  background-color: #d4ff00 !important;
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+.article-markdown-body ::selection,
+[data-theme="light"] ::selection {
+  background-color: #d4ff00 !important;
+  color: #000000 !important;
+  text-shadow: none !important;
+}

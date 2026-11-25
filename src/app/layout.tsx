@@ -40,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" className={`${sans.variable} ${mono.variable}`}>
-      <body className="font-sans antialiased bg-[#090c14] text-slate-100 selection:bg-[#d4ff00]/20 selection:text-[#d4ff00]">
+      <body className="font-sans antialiased bg-[#090c14] text-slate-100 selection:bg-[#d4ff00] selection:text-black">
         <a className="skip-link" href="#main-content">
           Bỏ qua điều hướng
         </a>
