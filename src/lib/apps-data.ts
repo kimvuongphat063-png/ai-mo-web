@@ -32,6 +32,7 @@ export interface HtmlAppItem {
   badge?: string;
   isFeatured?: boolean;
   featuredRank?: number;
+  coffeePrice?: number;
   engineSpec?: string;
 }
 
@@ -112,21 +113,46 @@ export const HTML_APPS: HtmlAppItem[] = [
     "categoryLabel": "Kinh doanh & Bán lẻ",
     "suite": "commercial",
     "suiteLabel": "Kinh doanh & Bán lẻ",
-    "summary": "Quản trị lợi nhuận ròng thực tế từng đơn sau khi trừ phí sàn, đóng gói, ship, tỷ lệ hoàn và công nợ.",
-    "description": "Công cụ offline giúp chủ shop online trên TikTok, Shopee, Facebook tính đúng phần tiền thực nhận về túi. Không bị ảo tưởng doanh số cao nhưng cuối tháng hụt tiền do chi phí ẩn.",
-    "suitableFor": "Chủ shop online, nhà bán hàng dropship, cá nhân kinh doanh đa sàn.",
+    "summary": "Tính nhanh 3 giây ra lãi ròng & giá bán hòa vốn sau khi trừ preset phí sàn Shopee/TikTok/Lazada 2026, thuế TMĐT 1.5%, Affiliate, Ads/ROAS và hoàn hàng.",
+    "description": "Bộ máy tính lãi thật chuẩn biểu phí 2026 cho chủ shop Shopee, TikTok Shop, Lazada và bán đa kênh. Tự động khấu trừ phí sàn, thuế TMĐT 1.5%, hoa hồng Affiliate, chi phí quảng cáo (ROAS/Ads), đóng gói và tỷ lệ hoàn hàng để biết ngay lãi ròng từng đơn & giá bán hòa vốn chỉ trong 3 giây.",
+    "suitableFor": "Chủ shop online Shopee, TikTok Shop, Lazada, nhà bán hàng dropship và kinh doanh đa kênh.",
     "highlights": [
-      "Tính phí sàn thực tế",
-      "Trừ chi phí hoàn và đóng gói",
-      "Xuất file Excel & HTML kèm dữ liệu",
-      "Lưu trữ offline an toàn"
+      "Preset biểu phí Shopee, TikTok Shop & Lazada 2026",
+      "Khấu trừ thuế TMĐT 1.5%, hoa hồng Affiliate & ROAS/Ads",
+      "Tính chi phí ẩn tỷ lệ hoàn hàng & đóng gói",
+      "Tính nhanh 3 giây ra lãi ròng & giá bán hòa vốn"
     ],
     "fileName": "lai-that-tung-don.html",
     "status": "ready",
-    "badge": "Phổ biến",
+    "badge": "Chuẩn Sàn 2026",
     "isFeatured": true,
     "featuredRank": 1,
-    "engineSpec": "Engine Tài chính E-com"
+    "coffeePrice": 20000,
+    "engineSpec": "E-com Profit & Breakeven Engine 2026"
+  },
+  {
+    "slug": "nhip-marketing-2027",
+    "title": "Nhịp Marketing & Lịch Chiến Dịch 2027",
+    "category": "marketing",
+    "categoryLabel": "Tiếp thị & Tăng trưởng",
+    "suite": "marketing",
+    "suiteLabel": "Tiếp thị & Tăng trưởng",
+    "summary": "Biến 35 mốc lễ Tết & Mega Sale 2027 thành kế hoạch tuần cho shop, kèm 14 mẫu chiến dịch, 20 góc content và xuất lịch .ics vào điện thoại.",
+    "description": "Bộ kế hoạch hành động năm 2027 đóng gói bởi AI Mở Studio cho chủ shop Bán lẻ, F&B, Spa, Giáo dục và Dịch vụ. Tự động lùi mốc chuẩn bị trước ngày sale, lọc theo ngành & kênh chính, cập nhật lưu ý Luật TMĐT & livestream 2027 và xuất thẳng lịch nhắc việc sang iPhone / Google Calendar.",
+    "suitableFor": "Chủ shop Bán lẻ, F&B, Spa, trung tâm Giáo dục, Marketer và đội ngũ Content đa kênh.",
+    "highlights": [
+      "35 mốc lễ & Mega Sale 2027 lọc theo ngành",
+      "14 mẫu chiến dịch tự chia mốc chuẩn bị",
+      "20 góc ý tưởng nội dung tuần thực chiến",
+      "Xuất lịch .ics vào iPhone & Google Calendar"
+    ],
+    "fileName": "nhip-marketing-2027.html",
+    "status": "ready",
+    "badge": "Mới · 2027",
+    "isFeatured": true,
+    "featuredRank": 2,
+    "coffeePrice": 20000,
+    "engineSpec": "Marketing Planner & ICS Calendar Engine"
   },
   {
     "slug": "gia-ban-khuyen-mai",
@@ -148,7 +174,7 @@ export const HTML_APPS: HtmlAppItem[] = [
     "status": "ready",
     "badge": "Thực dụng",
     "isFeatured": true,
-    "featuredRank": 5,
+    "featuredRank": 3,
     "engineSpec": "Thuật toán Flash Sale Breakeven"
   },
   {
@@ -171,7 +197,7 @@ export const HTML_APPS: HtmlAppItem[] = [
     "status": "ready",
     "badge": "B2B Pro",
     "isFeatured": true,
-    "featuredRank": 6,
+    "featuredRank": 7,
     "engineSpec": "Trình kết xuất PDF A4 Vector"
   },
   {
@@ -317,7 +343,7 @@ export const HTML_APPS: HtmlAppItem[] = [
     "status": "ready",
     "badge": "Động cơ BigInt",
     "isFeatured": true,
-    "featuredRank": 2,
+    "featuredRank": 4,
     "engineSpec": "Động cơ toán học BigInt + LaTeX-lite"
   },
   {
@@ -340,7 +366,7 @@ export const HTML_APPS: HtmlAppItem[] = [
     "status": "ready",
     "badge": "GDPT 2018",
     "isFeatured": true,
-    "featuredRank": 3,
+    "featuredRank": 5,
     "engineSpec": "Trình tạo đề GDPT 2018 Vector"
   },
   {
@@ -511,7 +537,7 @@ export const HTML_APPS: HtmlAppItem[] = [
     "status": "ready",
     "badge": "Công thái học",
     "isFeatured": true,
-    "featuredRank": 4,
+    "featuredRank": 6,
     "engineSpec": "Đồng hồ đo tốc độ WPM & Keystroke"
   },
   {

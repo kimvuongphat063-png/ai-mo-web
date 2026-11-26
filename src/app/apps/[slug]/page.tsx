@@ -20,6 +20,7 @@ import {
 import { HTML_APPS } from "@/lib/apps-data";
 import { getAppManifest } from "@/lib/apps-manifest";
 import { getSession } from "@/lib/auth";
+import { AppDownloadButton } from "@/components/app-download-button";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -59,9 +60,6 @@ export default async function AppDetailPage({
   const manifest = getAppManifest(app);
   const otherApps = HTML_APPS.filter((a) => a.slug !== slug).slice(0, 3);
   const playUrl = `/html-apps/${app.fileName}`;
-  const downloadUrl = session
-    ? `/api/apps/${app.slug}/download`
-    : `/login?next=${encodeURIComponent(`/apps/${app.slug}`)}`;
 
   return (
     <main id="main-content" className="container py-8 sm:py-12 space-y-10">
@@ -96,32 +94,14 @@ export default async function AppDetailPage({
           </div>
 
           <div className="flex items-center gap-3">
-            {session ? (
-              <a
-                href={downloadUrl}
-                download={app.fileName}
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-600 !text-white font-black text-xs sm:text-sm shadow-md shadow-emerald-600/25 hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
-                title={`Tải file ${app.fileName} về máy`}
-              >
-                <Download className="w-4 h-4 !text-white" />
-                <span className="!text-white">Tải file về máy (.html)</span>
-                <span className="px-1.5 py-0.5 rounded-md bg-white/20 !text-white text-[10px] font-mono font-normal">
-                  {manifest.fileSizeFormatted}
-                </span>
-              </a>
-            ) : (
-              <a
-                href={downloadUrl}
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#155EEF] via-blue-600 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 !text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/25 hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
-                title="Đăng nhập tài khoản miễn phí để tải file"
-              >
-                <Lock className="w-4 h-4 text-amber-300 shrink-0" />
-                <span className="!text-white">Đăng nhập để tải file (.html)</span>
-                <span className="px-1.5 py-0.5 rounded-md bg-white/20 !text-white text-[10px] font-semibold">
-                  Miễn phí
-                </span>
-              </a>
-            )}
+            <AppDownloadButton
+              slug={app.slug}
+              title={app.title}
+              fileName={app.fileName}
+              fileSizeFormatted={manifest.fileSizeFormatted}
+              coffeePrice={app.coffeePrice}
+              isLoggedIn={Boolean(session)}
+            />
           </div>
         </div>
 
@@ -275,7 +255,7 @@ export default async function AppDetailPage({
             Các ứng dụng hữu ích khác
           </h2>
           <Link href="/apps" className="text-xs font-bold text-[#155EEF] hover:underline">
-            Xem tất cả 19 công cụ →
+            Xem tất cả {HTML_APPS.length} công cụ →
           </Link>
         </div>
 

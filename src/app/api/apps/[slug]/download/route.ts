@@ -4,6 +4,8 @@ import fs from "node:fs";
 import { getSession } from "@/lib/auth";
 import { HTML_APPS } from "@/lib/apps-data";
 
+const OFFLINE_UNLOCK_SCRIPT = "<script>window.__AIMO_OFFLINE_UNLOCKED__=true;</script>";
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> },
@@ -15,43 +17,70 @@ export async function GET(
     return NextResponse.json({ error: "Ứng dụng không tồn tại" }, { status: 404 });
   }
 
-  const session = await getSession();
+  const isCoffeeApp = Boolean(app.coffeePrice && app.coffeePrice > 0);
+  const hasCoffeeConfirm = request.nextUrl.searchParams.get("coffee") === "1";
 
-  // If user is not logged in: gate the download to capture lead email
-  if (!session) {
-    const returnUrl = `/apps/${slug}`;
-    const loginUrl = new URL(`/login?next=${encodeURIComponent(returnUrl)}`, request.url);
-
-    // If client requested JSON
-    const acceptHeader = request.headers.get("accept") || "";
-    if (acceptHeader.includes("application/json")) {
-      return NextResponse.json(
-        {
-          error: "Vui lòng đăng nhập tài khoản miễn phí để tải file",
-          redirect: `/login?next=${encodeURIComponent(returnUrl)}`,
-        },
-        { status: 401 },
-      );
+  if (isCoffeeApp) {
+    // Allow immediate download when ?coffee=1 is present (no login required, zero friction after VietQR)
+    if (!hasCoffeeConfirm) {
+      const coffeeRedirectPath = `/apps/${slug}?coffee=1`;
+      const acceptHeader = request.headers.get("accept") || "";
+      if (acceptHeader.includes("application/json")) {
+        return NextResponse.json(
+          {
+            error: "Mời AI Mở 1 ly cà phê 20.000đ để tải bản Offline trọn đời",
+            redirect: coffeeRedirectPath,
+          },
+          { status: 402 },
+        );
+      }
+      return NextResponse.redirect(new URL(coffeeRedirectPath, request.url));
     }
+  } else {
+    const session = await getSession();
 
-    return NextResponse.redirect(loginUrl);
+    // Free apps: gate download with free account login to capture lead email
+    if (!session) {
+      const returnUrl = `/apps/${slug}`;
+      const loginUrl = new URL(`/login?next=${encodeURIComponent(returnUrl)}`, request.url);
+
+      const acceptHeader = request.headers.get("accept") || "";
+      if (acceptHeader.includes("application/json")) {
+        return NextResponse.json(
+          {
+            error: "Vui lòng đăng nhập tài khoản miễn phí để tải file",
+            redirect: `/login?next=${encodeURIComponent(returnUrl)}`,
+          },
+          { status: 401 },
+        );
+      }
+
+      return NextResponse.redirect(loginUrl);
+    }
   }
 
-  // User is authenticated -> serve file with attachment disposition
+  // Serve standalone HTML file with offline unlock flag injected
   const filePath = path.join(process.cwd(), "public", "html-apps", app.fileName);
 
   if (!fs.existsSync(filePath)) {
     return NextResponse.json({ error: "File ứng dụng chưa sẵn sàng" }, { status: 404 });
   }
 
-  const fileBuffer = fs.readFileSync(filePath);
+  let htmlContent = fs.readFileSync(filePath, "utf8");
+  if (/<head[^>]*>/i.test(htmlContent)) {
+    htmlContent = htmlContent.replace(/<head[^>]*>/i, (match) => `${match}\n${OFFLINE_UNLOCK_SCRIPT}`);
+  } else {
+    htmlContent = `${OFFLINE_UNLOCK_SCRIPT}\n${htmlContent}`;
+  }
 
-  return new NextResponse(fileBuffer, {
+  const outputBuffer = Buffer.from(htmlContent, "utf8");
+
+  return new NextResponse(outputBuffer, {
     status: 200,
     headers: {
       "Content-Type": "text/html; charset=utf-8",
       "Content-Disposition": `attachment; filename="${app.fileName}"`,
-      "Content-Length": String(fileBuffer.length),
+      "Content-Length": String(outputBuffer.byteLength),
       "Cache-Control": "private, no-cache, no-store, must-revalidate",
     },
   });

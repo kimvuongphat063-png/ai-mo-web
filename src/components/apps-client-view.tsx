@@ -54,8 +54,14 @@ const APP_MOCKUP_METAS: Record<
     image: "/images/home/bento-profit-calc.jpg",
     gradient: "from-slate-900 to-[#0d1627]",
     pillBg: "bg-[#d4ff00]/10 text-[#d4ff00] border-[#d4ff00]/30/80",
-    pillText: "Phổ biến nhất",
-    tagline: "Khấu trừ phí sàn Shopee/TikTok · Lợi nhuận ròng",
+    pillText: "Chuẩn Sàn 2026",
+    tagline: "Biểu phí Shopee/TikTok/Lazada 2026 · Thuế 1.5% · Lãi ròng 3s",
+  },
+  "nhip-marketing-2027": {
+    gradient: "from-[#062c24] via-emerald-800 to-amber-700",
+    pillBg: "bg-amber-400/15 text-amber-200 border-amber-300/35",
+    pillText: "Kế hoạch 2027",
+    tagline: "35 mốc lễ & Mega Sale · Xuất lịch iPhone/Google",
   },
   "gia-ban-khuyen-mai": {
     image: "/images/home/bento-pricing-tool.jpg",
@@ -228,7 +234,31 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
   const [query, setQuery] = useState("");
   const [selectedSuite, setSelectedSuite] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [unlockedSlugs, setUnlockedSlugs] = useState<Record<string, boolean>>({});
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Sync coffee-unlocked apps from localStorage & live custom events
+  useEffect(() => {
+    const syncUnlocked = () => {
+      try {
+        const next: Record<string, boolean> = {};
+        for (const app of apps) {
+          if (app.coffeePrice && localStorage.getItem(`aimo_coffee_unlocked_${app.slug}`) === "1") {
+            next[app.slug] = true;
+          }
+        }
+        setUnlockedSlugs(next);
+      } catch {}
+    };
+
+    syncUnlocked();
+    window.addEventListener("aimo-coffee-unlocked", syncUnlocked);
+    window.addEventListener("storage", syncUnlocked);
+    return () => {
+      window.removeEventListener("aimo-coffee-unlocked", syncUnlocked);
+      window.removeEventListener("storage", syncUnlocked);
+    };
+  }, [apps]);
 
   // ⌘K / Ctrl+K keyboard shortcut to focus search input
   useEffect(() => {
@@ -558,9 +588,14 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                       />
                     ) : (
                       <div className={`absolute inset-0 bg-gradient-to-tr ${meta?.gradient || "from-slate-900 to-[#0d1627]"} flex items-center justify-center p-6 text-white`}>
-                        <div className="text-center space-y-1">
-                          <SuiteIcon className="w-12 h-12 mx-auto text-white/90 drop-shadow-md" />
-                          <span className="text-xs font-bold text-white/80 block uppercase tracking-wider">{app.suiteLabel}</span>
+                        <div className="text-center space-y-1.5">
+                          <SuiteIcon className="w-12 h-12 mx-auto text-amber-300 drop-shadow-md" />
+                          {meta?.pillText && (
+                            <span className={`inline-block text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border uppercase tracking-wider ${meta.pillBg}`}>
+                              {meta.pillText}
+                            </span>
+                          )}
+                          <span className="text-xs font-bold text-white/85 block uppercase tracking-wider">{app.suiteLabel}</span>
                         </div>
                       </div>
                     )}
@@ -613,30 +648,66 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                         <span>Khởi chạy app</span>
                       </Link>
 
-                      <a
-                        href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
-                        onClick={() => {
-                          if (isLoggedIn) {
-                            triggerCoffeePopup("download");
-                          }
-                        }}
-                        className={`py-2.5 px-3.5 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
-                          isLoggedIn
-                            ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
-                            : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
-                        }`}
-                        style={{ color: "#171717" }}
-                        title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
-                      >
-                        {isLoggedIn ? (
-                          <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                      {app.coffeePrice && app.coffeePrice > 0 ? (
+                        unlockedSlugs[app.slug] ? (
+                          <a
+                            href={`/api/apps/${app.slug}/download?coffee=1`}
+                            download={app.fileName}
+                            data-skip-coffee-popup="true"
+                            className="py-2.5 px-3.5 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                            style={{ color: "#171717" }}
+                            title={`Tải lại file ${app.fileName} về máy`}
+                          >
+                            <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
+                              ✓ Tải lại file
+                            </span>
+                          </a>
                         ) : (
-                          <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
-                        )}
-                        <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
-                          {isLoggedIn ? "Tải file" : "Đăng nhập tải"}
-                        </span>
-                      </a>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              triggerCoffeePopup({
+                                reason: "coffee-unlock",
+                                appSlug: app.slug,
+                                appTitle: app.title,
+                                amount: app.coffeePrice,
+                              })
+                            }
+                            className="py-2.5 px-3.5 rounded-xl border text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-500 !text-neutral-950 border-amber-500/80"
+                            style={{ color: "#171717" }}
+                            title={`Mời ly cà phê ${Math.round(app.coffeePrice / 1000)}k để tải file Offline`}
+                          >
+                            <span className="text-neutral-950 font-black" style={{ color: "#171717" }}>
+                              ☕ Tải về · {Math.round(app.coffeePrice / 1000)}k
+                            </span>
+                          </button>
+                        )
+                      ) : (
+                        <a
+                          href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                          onClick={() => {
+                            if (isLoggedIn) {
+                              triggerCoffeePopup("download");
+                            }
+                          }}
+                          className={`py-2.5 px-3.5 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
+                            isLoggedIn
+                              ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                              : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
+                          }`}
+                          style={{ color: "#171717" }}
+                          title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
+                        >
+                          {isLoggedIn ? (
+                            <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                          ) : (
+                            <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                          )}
+                          <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
+                            {isLoggedIn ? "Tải file" : "Đăng nhập tải"}
+                          </span>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -816,30 +887,66 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                                   <span>Khởi chạy</span>
                                 </Link>
 
-                                <a
-                                  href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
-                                  onClick={() => {
-                                    if (isLoggedIn) {
-                                      triggerCoffeePopup("download");
-                                    }
-                                  }}
-                                  className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
-                                    isLoggedIn
-                                      ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
-                                      : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
-                                  }`}
-                                  style={{ color: "#171717" }}
-                                  title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
-                                >
-                                  {isLoggedIn ? (
-                                    <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                                {app.coffeePrice && app.coffeePrice > 0 ? (
+                                  unlockedSlugs[app.slug] ? (
+                                    <a
+                                      href={`/api/apps/${app.slug}/download?coffee=1`}
+                                      download={app.fileName}
+                                      data-skip-coffee-popup="true"
+                                      className="py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                                      style={{ color: "#171717" }}
+                                      title={`Tải lại file ${app.fileName} về máy`}
+                                    >
+                                      <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
+                                        ✓ Tải lại file
+                                      </span>
+                                    </a>
                                   ) : (
-                                    <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
-                                  )}
-                                  <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
-                                    Tải file
-                                  </span>
-                                </a>
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        triggerCoffeePopup({
+                                          reason: "coffee-unlock",
+                                          appSlug: app.slug,
+                                          appTitle: app.title,
+                                          amount: app.coffeePrice,
+                                        })
+                                      }
+                                      className="py-2 px-3 rounded-xl border text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-500 !text-neutral-950 border-amber-500/80"
+                                      style={{ color: "#171717" }}
+                                      title={`Mời ly cà phê ${Math.round(app.coffeePrice / 1000)}k để tải file Offline`}
+                                    >
+                                      <span className="text-neutral-950 font-black" style={{ color: "#171717" }}>
+                                        ☕ Tải về · {Math.round(app.coffeePrice / 1000)}k
+                                      </span>
+                                    </button>
+                                  )
+                                ) : (
+                                  <a
+                                    href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                                    onClick={() => {
+                                      if (isLoggedIn) {
+                                        triggerCoffeePopup("download");
+                                      }
+                                    }}
+                                    className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
+                                      isLoggedIn
+                                        ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                                        : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
+                                    }`}
+                                    style={{ color: "#171717" }}
+                                    title={isLoggedIn ? `Tải file ${app.fileName} về máy` : "Đăng nhập để tải file"}
+                                  >
+                                    {isLoggedIn ? (
+                                      <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                                    ) : (
+                                      <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                                    )}
+                                    <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
+                                      Tải file
+                                    </span>
+                                  </a>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -906,28 +1013,64 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                               <span>Mở app</span>
                             </Link>
 
-                            <a
-                              href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
-                              onClick={() => {
-                                if (isLoggedIn) {
-                                  triggerCoffeePopup("download");
-                                }
-                              }}
-                              className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs ${
-                                isLoggedIn
-                                  ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
-                                  : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
-                              }`}
-                              style={{ color: "#171717" }}
-                              title={isLoggedIn ? `Tải file ${app.fileName}` : "Đăng nhập để tải file"}
-                            >
-                              {isLoggedIn ? (
-                                <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                            {app.coffeePrice && app.coffeePrice > 0 ? (
+                              unlockedSlugs[app.slug] ? (
+                                <a
+                                  href={`/api/apps/${app.slug}/download?coffee=1`}
+                                  download={app.fileName}
+                                  data-skip-coffee-popup="true"
+                                  className="py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                                  style={{ color: "#171717" }}
+                                  title={`Tải lại file ${app.fileName}`}
+                                >
+                                  <span className="text-neutral-900 font-bold" style={{ color: "#171717" }}>
+                                    ✓ Tải lại file
+                                  </span>
+                                </a>
                               ) : (
-                                <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
-                              )}
-                              <span className="hidden sm:inline text-neutral-900 font-bold" style={{ color: "#171717" }}>{isLoggedIn ? "Tải về" : "Đăng nhập"}</span>
-                            </a>
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    triggerCoffeePopup({
+                                      reason: "coffee-unlock",
+                                      appSlug: app.slug,
+                                      appTitle: app.title,
+                                      amount: app.coffeePrice,
+                                    })
+                                  }
+                                  className="py-2 px-3 rounded-xl border text-xs font-black transition-all flex items-center gap-1.5 cursor-pointer shadow-xs bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-500 !text-neutral-950 border-amber-500/80"
+                                  style={{ color: "#171717" }}
+                                  title={`Mời ly cà phê ${Math.round(app.coffeePrice / 1000)}k để tải file Offline`}
+                                >
+                                  <span className="text-neutral-950 font-black" style={{ color: "#171717" }}>
+                                    ☕ Tải về · {Math.round(app.coffeePrice / 1000)}k
+                                  </span>
+                                </button>
+                              )
+                            ) : (
+                              <a
+                                href={isLoggedIn ? `/api/apps/${app.slug}/download` : `/login?next=/apps/${app.slug}`}
+                                onClick={() => {
+                                  if (isLoggedIn) {
+                                    triggerCoffeePopup("download");
+                                  }
+                                }}
+                                className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs ${
+                                  isLoggedIn
+                                    ? "bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
+                                    : "bg-[#fef9c3] hover:bg-[#fef08a] !text-neutral-900 border-amber-300"
+                                }`}
+                                style={{ color: "#171717" }}
+                                title={isLoggedIn ? `Tải file ${app.fileName}` : "Đăng nhập để tải file"}
+                              >
+                                {isLoggedIn ? (
+                                  <Download className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                                ) : (
+                                  <Lock className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                                )}
+                                <span className="hidden sm:inline text-neutral-900 font-bold" style={{ color: "#171717" }}>{isLoggedIn ? "Tải về" : "Đăng nhập"}</span>
+                              </a>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -953,9 +1096,9 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                 setQuery("");
                 setSelectedSuite("all");
               }}
-              className="px-4 py-2 rounded-xl bg-[#d4ff00] text-white text-xs font-bold hover:bg-blue-700 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-[#d4ff00] text-black text-xs font-bold hover:bg-[#b8e000] transition-colors cursor-pointer"
             >
-              Xem tất cả 19 công cụ
+              Xem tất cả {apps.length} công cụ
             </button>
           </div>
         )}
