@@ -413,7 +413,8 @@ export const ModelName = {
   StudioPerformanceMetric: 'StudioPerformanceMetric',
   StudioAiUsage: 'StudioAiUsage',
   StudioGenerationJob: 'StudioGenerationJob',
-  PromptKichBanDocument: 'PromptKichBanDocument'
+  PromptKichBanDocument: 'PromptKichBanDocument',
+  CoffeeOrder: 'CoffeeOrder'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -429,7 +430,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "passwordResetToken" | "account" | "session" | "verificationToken" | "category" | "product" | "productVariant" | "productAsset" | "productAssetVariant" | "order" | "orderItem" | "downloadToken" | "coupon" | "couponUsage" | "review" | "referral" | "payout" | "payoutItem" | "legalPage" | "auditLog" | "studioBrandProfile" | "studioProduct" | "studioScript" | "studioCampaign" | "studioCampaignItem" | "studioPerformanceMetric" | "studioAiUsage" | "studioGenerationJob" | "promptKichBanDocument"
+    modelProps: "user" | "passwordResetToken" | "account" | "session" | "verificationToken" | "category" | "product" | "productVariant" | "productAsset" | "productAssetVariant" | "order" | "orderItem" | "downloadToken" | "coupon" | "couponUsage" | "review" | "referral" | "payout" | "payoutItem" | "legalPage" | "auditLog" | "studioBrandProfile" | "studioProduct" | "studioScript" | "studioCampaign" | "studioCampaignItem" | "studioPerformanceMetric" | "studioAiUsage" | "studioGenerationJob" | "promptKichBanDocument" | "coffeeOrder"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2653,6 +2654,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CoffeeOrder: {
+      payload: Prisma.$CoffeeOrderPayload<ExtArgs>
+      fields: Prisma.CoffeeOrderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CoffeeOrderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CoffeeOrderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>
+        }
+        findFirst: {
+          args: Prisma.CoffeeOrderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CoffeeOrderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>
+        }
+        findMany: {
+          args: Prisma.CoffeeOrderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>[]
+        }
+        create: {
+          args: Prisma.CoffeeOrderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>
+        }
+        createMany: {
+          args: Prisma.CoffeeOrderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CoffeeOrderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>[]
+        }
+        delete: {
+          args: Prisma.CoffeeOrderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>
+        }
+        update: {
+          args: Prisma.CoffeeOrderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>
+        }
+        deleteMany: {
+          args: Prisma.CoffeeOrderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CoffeeOrderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CoffeeOrderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>[]
+        }
+        upsert: {
+          args: Prisma.CoffeeOrderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoffeeOrderPayload>
+        }
+        aggregate: {
+          args: Prisma.CoffeeOrderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCoffeeOrder>
+        }
+        groupBy: {
+          args: Prisma.CoffeeOrderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CoffeeOrderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CoffeeOrderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CoffeeOrderCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3206,6 +3281,26 @@ export const PromptKichBanDocumentScalarFieldEnum = {
 export type PromptKichBanDocumentScalarFieldEnum = (typeof PromptKichBanDocumentScalarFieldEnum)[keyof typeof PromptKichBanDocumentScalarFieldEnum]
 
 
+export const CoffeeOrderScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  transferCode: 'transferCode',
+  appSlug: 'appSlug',
+  amount: 'amount',
+  status: 'status',
+  sepayTxId: 'sepayTxId',
+  referenceCode: 'referenceCode',
+  gateway: 'gateway',
+  paidAmount: 'paidAmount',
+  expiresAt: 'expiresAt',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CoffeeOrderScalarFieldEnum = (typeof CoffeeOrderScalarFieldEnum)[keyof typeof CoffeeOrderScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3616,6 +3711,7 @@ export type GlobalOmitConfig = {
   studioAiUsage?: Prisma.StudioAiUsageOmit
   studioGenerationJob?: Prisma.StudioGenerationJobOmit
   promptKichBanDocument?: Prisma.PromptKichBanDocumentOmit
+  coffeeOrder?: Prisma.CoffeeOrderOmit
 }
 
 /* Types for Logging */

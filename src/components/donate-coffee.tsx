@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Coffee, X, Copy, Check, Heart, Sparkles, CheckCircle2, Download } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { Coffee, X, Copy, Check, Heart, Sparkles, CheckCircle2, Loader2, RefreshCw } from "lucide-react";
 import { HTML_APPS } from "@/lib/apps-data";
 
 export type CoffeePopupReason = "download" | "general" | "coffee-unlock";
@@ -39,30 +39,165 @@ export function DonateModal({
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [selectedAmount, setSelectedAmount] = useState<number>(amount || 20000);
   const [qrSrc, setQrSrc] = useState<string>("/images/donate-qr.jpg");
-  const [confirmedUnlock, setConfirmedUnlock] = useState<boolean>(false);
+  const [orderId, setOrderId] = useState<string | null>(null);
+  const [dynamicTransferCode, setDynamicTransferCode] = useState<string | null>(null);
+  const [orderStatus, setOrderStatus] = useState<"idle" | "creating" | "pending" | "paid" | "expired" | "error">("idle");
+  const [orderError, setOrderError] = useState<string | null>(null);
   const autoCloseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const isCoffeeUnlock = reason === "coffee-unlock";
   const transferCode = isCoffeeUnlock
-    ? `AIMO ${(appSlug || "APP").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 12)}`
+    ? dynamicTransferCode || "AIMO..."
     : "AIMO CAFE";
+
+  const triggerDownloadAndUnlock = useCallback(
+    (paidOrderId: string) => {
+      const targetSlug = appSlug || "";
+      if (targetSlug) {
+        try {
+          localStorage.setItem("aimo_coffee_order_" + targetSlug, paidOrderId);
+        } catch {}
+
+        window.dispatchEvent(
+          new CustomEvent("aimo-coffee-unlocked", {
+            detail: { slug: targetSlug, orderId: paidOrderId },
+          })
+        );
+
+        // Notify embedded app iframes if listening
+        try {
+          document.querySelectorAll("iframe").forEach((frame) => {
+            frame.contentWindow?.postMessage(
+              { type: "AIMO_COFFEE_UNLOCKED", slug: targetSlug, orderId: paidOrderId },
+              "*"
+            );
+          });
+        } catch {}
+
+        // Auto-trigger file download
+        const downloadUrl = `/api/apps/${targetSlug}/download?orderId=${encodeURIComponent(paidOrderId)}`;
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.setAttribute("download", "");
+        link.setAttribute("data-skip-coffee-popup", "true");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+    },
+    [appSlug]
+  );
+
+  const createOrder = useCallback(
+    async (amt: number) => {
+      if (!appSlug) return;
+      setOrderStatus("creating");
+      setOrderError(null);
+      setOrderId(null);
+      setDynamicTransferCode(null);
+
+      try {
+        const res = await fetch("/api/coffee/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ appSlug, amount: amt }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data?.error || "Không thể tạo mã thanh toán");
+        }
+        setOrderId(data.orderId);
+        setDynamicTransferCode(data.transferCode);
+        setQrSrc(data.qrUrl);
+        setOrderStatus("pending");
+      } catch (err: any) {
+        setOrderStatus("error");
+        setOrderError(err?.message || "Lỗi kết nối máy chủ thanh toán");
+      }
+    },
+    [appSlug]
+  );
 
   // Reset modal state whenever opened or target app changes
   useEffect(() => {
     if (isOpen) {
-      setConfirmedUnlock(false);
-      setSelectedAmount(amount && amount > 0 ? amount : 20000);
+      const initialAmount = amount && amount > 0 ? amount : 20000;
+      setSelectedAmount(initialAmount);
+      if (isCoffeeUnlock && appSlug) {
+        createOrder(initialAmount);
+      } else {
+        setOrderStatus("idle");
+        setOrderId(null);
+        setDynamicTransferCode(null);
+        setOrderError(null);
+      }
+    } else {
+      if (pollRef.current) {
+        clearInterval(pollRef.current);
+        pollRef.current = null;
+      }
     }
     return () => {
       if (autoCloseRef.current) {
         clearTimeout(autoCloseRef.current);
         autoCloseRef.current = null;
       }
+      if (pollRef.current) {
+        clearInterval(pollRef.current);
+        pollRef.current = null;
+      }
     };
-  }, [isOpen, reason, appSlug, amount]);
+  }, [isOpen, isCoffeeUnlock, appSlug, amount, createOrder]);
 
-  // Update dynamic VietQR if user changes amount or transfer note, fallback to local image
+  // Poll SePay-verified order status every 2.5 seconds while pending
   useEffect(() => {
+    if (!isOpen || !isCoffeeUnlock || orderStatus !== "pending" || !orderId) {
+      if (pollRef.current) {
+        clearInterval(pollRef.current);
+        pollRef.current = null;
+      }
+      return;
+    }
+
+    const checkStatus = async () => {
+      try {
+        const res = await fetch(`/api/coffee/status/${encodeURIComponent(orderId)}`, {
+          cache: "no-store",
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.status === "paid") {
+          if (pollRef.current) {
+            clearInterval(pollRef.current);
+            pollRef.current = null;
+          }
+          setOrderStatus("paid");
+          triggerDownloadAndUnlock(orderId);
+        } else if (data.status === "expired") {
+          if (pollRef.current) {
+            clearInterval(pollRef.current);
+            pollRef.current = null;
+          }
+          setOrderStatus("expired");
+        }
+      } catch {
+        // Ignore transient network errors during polling
+      }
+    };
+
+    pollRef.current = setInterval(checkStatus, 2500);
+    return () => {
+      if (pollRef.current) {
+        clearInterval(pollRef.current);
+        pollRef.current = null;
+      }
+    };
+  }, [isOpen, isCoffeeUnlock, orderStatus, orderId, triggerDownloadAndUnlock]);
+
+  // Update dynamic VietQR for general donate mode (non-coffee-unlock)
+  useEffect(() => {
+    if (isCoffeeUnlock) return;
     if (selectedAmount > 0) {
       setQrSrc(
         `https://img.vietqr.io/image/seabank-666006668789-compact2.png?amount=${selectedAmount}&addInfo=${encodeURIComponent(
@@ -72,7 +207,7 @@ export function DonateModal({
     } else {
       setQrSrc("/images/donate-qr.jpg");
     }
-  }, [selectedAmount, transferCode]);
+  }, [isCoffeeUnlock, selectedAmount, transferCode]);
 
   if (!isOpen) return null;
 
@@ -87,6 +222,10 @@ export function DonateModal({
       clearTimeout(autoCloseRef.current);
       autoCloseRef.current = null;
     }
+    if (pollRef.current) {
+      clearInterval(pollRef.current);
+      pollRef.current = null;
+    }
     // Only suppress auto-popup for general/download modes; NEVER block coffee-unlock from reopening
     if (!isCoffeeUnlock) {
       try {
@@ -99,37 +238,10 @@ export function DonateModal({
     onClose();
   };
 
-  const handleConfirmCoffeeDownload = () => {
-    const targetSlug = appSlug || "";
-    if (targetSlug) {
-      try {
-        localStorage.setItem("aimo_coffee_unlocked_" + targetSlug, "1");
-      } catch {}
-
-      window.dispatchEvent(
-        new CustomEvent("aimo-coffee-unlocked", { detail: { slug: targetSlug } })
-      );
-
-      // Notify embedded app iframes if listening
-      try {
-        document.querySelectorAll("iframe").forEach((frame) => {
-          frame.contentWindow?.postMessage(
-            { type: "AIMO_COFFEE_UNLOCKED", slug: targetSlug },
-            "*"
-          );
-        });
-      } catch {}
-    }
-
-    setConfirmedUnlock(true);
-
-    if (autoCloseRef.current) clearTimeout(autoCloseRef.current);
-    autoCloseRef.current = setTimeout(() => {
-      onClose();
-    }, 3500);
-  };
-
-  const downloadHref = appSlug ? `/api/apps/${appSlug}/download?coffee=1` : "#";
+  const downloadHref =
+    appSlug && orderId
+      ? `/api/apps/${appSlug}/download?orderId=${encodeURIComponent(orderId)}`
+      : "#";
 
   return (
     <div
@@ -203,7 +315,13 @@ export function DonateModal({
                 <button
                   key={item.value}
                   type="button"
-                  onClick={() => setSelectedAmount(item.value)}
+                  onClick={() => {
+                    if (isCoffeeUnlock && orderStatus === "paid") return;
+                    setSelectedAmount(item.value);
+                    if (isCoffeeUnlock && appSlug) {
+                      createOrder(item.value);
+                    }
+                  }}
                   className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center border cursor-pointer ${
                     isSelected
                       ? "bg-amber-500 text-white border-amber-600 shadow-xs scale-[1.02]"
@@ -219,13 +337,51 @@ export function DonateModal({
 
         {/* VietQR Code Card */}
         <div className="mt-4 p-4 rounded-2xl bg-neutral-50 border border-neutral-200/90 flex flex-col items-center text-center">
-          <div className="relative w-48 h-48 bg-white p-2 rounded-xl shadow-xs border border-neutral-200/80">
-            <img
-              src={qrSrc}
-              alt="Mã VietQR Donate SeABank"
-              className="w-full h-full object-contain rounded-lg"
-              onError={() => setQrSrc("/images/donate-qr.jpg")}
-            />
+          <div className="relative w-48 h-48 bg-white p-2 rounded-xl shadow-xs border border-neutral-200/80 flex items-center justify-center">
+            {isCoffeeUnlock && orderStatus === "creating" ? (
+              <div className="flex flex-col items-center gap-2 text-neutral-500">
+                <Loader2 className="w-7 h-7 animate-spin text-amber-500" />
+                <span className="text-[11px] font-semibold">Đang tạo mã VietQR...</span>
+              </div>
+            ) : isCoffeeUnlock && orderStatus === "error" ? (
+              <div className="flex flex-col items-center gap-2 px-3 text-center">
+                <span className="text-xs font-bold text-rose-600">{orderError || "Lỗi tạo mã"}</span>
+                <button
+                  type="button"
+                  onClick={() => createOrder(selectedAmount)}
+                  className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold flex items-center gap-1 cursor-pointer"
+                >
+                  <RefreshCw className="w-3.5 h-3.5" />
+                  Thử lại
+                </button>
+              </div>
+            ) : (
+              <>
+                <img
+                  src={qrSrc}
+                  alt="Mã VietQR Donate SeABank"
+                  className={`w-full h-full object-contain rounded-lg transition-opacity ${
+                    isCoffeeUnlock && orderStatus === "expired" ? "opacity-25" : ""
+                  }`}
+                  onError={() => setQrSrc("/images/donate-qr.jpg")}
+                />
+                {isCoffeeUnlock && orderStatus === "expired" && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/85 rounded-xl p-3">
+                    <span className="text-xs font-bold text-neutral-800 mb-2">
+                      Mã QR đã hết hạn (30 phút)
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => createOrder(selectedAmount)}
+                      className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold flex items-center gap-1 cursor-pointer shadow-xs"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      Tạo mã QR mới
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
           <span className="mt-2 text-[11px] text-neutral-500 flex items-center gap-1">
             <Sparkles className="w-3 h-3 text-amber-500 shrink-0" />
@@ -236,14 +392,14 @@ export function DonateModal({
           </span>
         </div>
 
-        {/* Coffee-Unlock Instant Confirm & Download Action (Hướng 1 — không chờ duyệt) */}
+        {/* Coffee-Unlock Auto-Verification Status (100% Automatic via SePay Webhook) */}
         {isCoffeeUnlock && appSlug && (
           <div className="mt-4 space-y-2.5">
-            {confirmedUnlock ? (
+            {orderStatus === "paid" ? (
               <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2 animate-in fade-in duration-200">
                 <p className="text-xs sm:text-sm font-extrabold text-emerald-800 flex items-center justify-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>🎉 Cảm ơn bạn rất nhiều! File Offline đang được tải về máy...</span>
+                  <span>🎉 Đã nhận thanh toán! File Offline đang tự động tải về...</span>
                 </p>
                 <div className="flex items-center justify-center gap-3 pt-0.5">
                   <a
@@ -263,23 +419,47 @@ export function DonateModal({
                   </button>
                 </div>
               </div>
-            ) : (
-              <a
-                href={downloadHref}
-                download
-                data-skip-coffee-popup="true"
-                onClick={handleConfirmCoffeeDownload}
-                className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-500 !text-white font-black text-xs sm:text-sm shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 text-center cursor-pointer"
-              >
-                <Download className="w-4 h-4 !text-white shrink-0" />
-                <span className="!text-white">☕ Tôi đã mời cà phê 20k — Tải file ngay</span>
-              </a>
-            )}
+            ) : orderStatus === "pending" ? (
+              <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200/90 text-center space-y-1">
+                <p className="text-xs font-bold text-amber-900 flex items-center justify-center gap-2">
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-600 shrink-0" />
+                  <span>Đang chờ quét mã VietQR — Tự động tải sau ~3 giây khi tiền vào</span>
+                </p>
+                <p className="text-[11px] text-amber-700">
+                  Vui lòng giữ nguyên nội dung chuyển khoản{" "}
+                  <strong className="font-mono">{transferCode}</strong> để hệ thống tự động mở khóa.
+                </p>
+              </div>
+            ) : null}
           </div>
         )}
 
         {/* Account Details with Copy Buttons */}
         <div className="mt-4 space-y-2 text-xs">
+          {isCoffeeUnlock && dynamicTransferCode && (
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
+              <div>
+                <span className="text-[10px] text-amber-700 uppercase block font-semibold">
+                  Nội dung chuyển khoản (Bắt buộc)
+                </span>
+                <span className="font-mono font-black text-sm text-amber-900">
+                  {dynamicTransferCode}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(dynamicTransferCode, "code")}
+                className="px-2.5 py-1 text-[11px] font-semibold text-amber-900 bg-amber-200/70 hover:bg-amber-200 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+              >
+                {copiedField === "code" ? (
+                  <Check className="w-3 h-3 text-emerald-700" />
+                ) : (
+                  <Copy className="w-3 h-3" />
+                )}
+                <span>{copiedField === "code" ? "Đã chép" : "Sao chép mã"}</span>
+              </button>
+            </div>
+          )}
           <div className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-neutral-200">
             <div>
               <span className="text-[10px] text-neutral-400 uppercase block font-semibold">

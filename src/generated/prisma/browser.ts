@@ -167,3 +167,8 @@ export type StudioGenerationJob = Prisma.StudioGenerationJobModel
  * 
  */
 export type PromptKichBanDocument = Prisma.PromptKichBanDocumentModel
+/**
+ * Model CoffeeOrder
+ * 
+ */
+export type CoffeeOrder = Prisma.CoffeeOrderModel

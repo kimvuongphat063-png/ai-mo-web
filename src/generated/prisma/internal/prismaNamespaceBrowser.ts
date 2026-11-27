@@ -80,7 +80,8 @@ export const ModelName = {
   StudioPerformanceMetric: 'StudioPerformanceMetric',
   StudioAiUsage: 'StudioAiUsage',
   StudioGenerationJob: 'StudioGenerationJob',
-  PromptKichBanDocument: 'PromptKichBanDocument'
+  PromptKichBanDocument: 'PromptKichBanDocument',
+  CoffeeOrder: 'CoffeeOrder'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -611,6 +612,26 @@ export const PromptKichBanDocumentScalarFieldEnum = {
 } as const
 
 export type PromptKichBanDocumentScalarFieldEnum = (typeof PromptKichBanDocumentScalarFieldEnum)[keyof typeof PromptKichBanDocumentScalarFieldEnum]
+
+
+export const CoffeeOrderScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  transferCode: 'transferCode',
+  appSlug: 'appSlug',
+  amount: 'amount',
+  status: 'status',
+  sepayTxId: 'sepayTxId',
+  referenceCode: 'referenceCode',
+  gateway: 'gateway',
+  paidAmount: 'paidAmount',
+  expiresAt: 'expiresAt',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CoffeeOrderScalarFieldEnum = (typeof CoffeeOrderScalarFieldEnum)[keyof typeof CoffeeOrderScalarFieldEnum]
 
 
 export const SortOrder = {

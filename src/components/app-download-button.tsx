@@ -21,7 +21,7 @@ export function AppDownloadButton({
   coffeePrice,
   isLoggedIn,
 }: AppDownloadButtonProps) {
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [paidOrderId, setPaidOrderId] = useState<string | null>(null);
   const isCoffeeApp = Boolean(coffeePrice && coffeePrice > 0);
 
   useEffect(() => {
@@ -29,16 +29,21 @@ export function AppDownloadButton({
 
     const checkUnlocked = () => {
       try {
-        setIsUnlocked(localStorage.getItem(`aimo_coffee_unlocked_${slug}`) === "1");
+        const storedOrderId = localStorage.getItem(`aimo_coffee_order_${slug}`);
+        setPaidOrderId(storedOrderId && storedOrderId.trim() ? storedOrderId.trim() : null);
       } catch {}
     };
 
     checkUnlocked();
 
     const handleUnlockedEvent = (e: Event) => {
-      const customEvent = e as CustomEvent<{ slug?: string }>;
+      const customEvent = e as CustomEvent<{ slug?: string; orderId?: string }>;
       if (!customEvent.detail?.slug || customEvent.detail.slug === slug) {
-        checkUnlocked();
+        if (customEvent.detail?.orderId) {
+          setPaidOrderId(customEvent.detail.orderId);
+        } else {
+          checkUnlocked();
+        }
       }
     };
 
@@ -71,10 +76,10 @@ export function AppDownloadButton({
   if (isCoffeeApp) {
     const formattedPrice = `${(coffeePrice || 20000).toLocaleString("vi-VN")}đ`;
 
-    if (isUnlocked) {
+    if (paidOrderId) {
       return (
         <a
-          href={`/api/apps/${slug}/download?coffee=1`}
+          href={`/api/apps/${slug}/download?orderId=${encodeURIComponent(paidOrderId)}`}
           download={fileName}
           data-skip-coffee-popup="true"
           className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-600 !text-white font-black text-xs sm:text-sm shadow-md shadow-emerald-600/25 hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"

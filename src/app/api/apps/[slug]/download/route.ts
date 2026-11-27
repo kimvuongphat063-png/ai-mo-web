@@ -3,6 +3,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { getSession } from "@/lib/auth";
 import { HTML_APPS } from "@/lib/apps-data";
+import { verifyPaidCoffeeOrder } from "@/lib/coffee-orders";
 
 const OFFLINE_UNLOCK_SCRIPT = "<script>window.__AIMO_OFFLINE_UNLOCKED__=true;</script>";
 
@@ -18,17 +19,18 @@ export async function GET(
   }
 
   const isCoffeeApp = Boolean(app.coffeePrice && app.coffeePrice > 0);
-  const hasCoffeeConfirm = request.nextUrl.searchParams.get("coffee") === "1";
 
   if (isCoffeeApp) {
-    // Allow immediate download when ?coffee=1 is present (no login required, zero friction after VietQR)
-    if (!hasCoffeeConfirm) {
+    const orderId = request.nextUrl.searchParams.get("orderId")?.trim() || "";
+    const isPaid = await verifyPaidCoffeeOrder(orderId, slug);
+
+    if (!isPaid) {
       const coffeeRedirectPath = `/apps/${slug}?coffee=1`;
       const acceptHeader = request.headers.get("accept") || "";
       if (acceptHeader.includes("application/json")) {
         return NextResponse.json(
           {
-            error: "Mời AI Mở 1 ly cà phê 20.000đ để tải bản Offline trọn đời",
+            error: "Vui lòng mời AI Mở 1 ly cà phê 20.000đ qua VietQR để tải bản Offline trọn đời",
             redirect: coffeeRedirectPath,
           },
           { status: 402 },

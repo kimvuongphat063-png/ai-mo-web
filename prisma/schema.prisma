@@ -672,3 +672,24 @@ model PromptKichBanDocument {
   @@index([userId, deletedAt])
   @@index([deletedAt])
 }
+
+// Coffee-gated offline app download orders (verified automatically via SePay webhook)
+model CoffeeOrder {
+  id            String    @id @default(cuid())
+  orderId       String    @unique
+  transferCode  String    @unique
+  appSlug       String
+  amount        Int
+  status        String    @default("pending") // pending, paid, expired
+  sepayTxId     Int?      @unique
+  referenceCode String?
+  gateway       String?
+  paidAmount    Int?
+  expiresAt     DateTime
+  paidAt        DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status, expiresAt])
+  @@index([appSlug])
+}

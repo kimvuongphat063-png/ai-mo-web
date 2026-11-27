@@ -234,20 +234,23 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
   const [query, setQuery] = useState("");
   const [selectedSuite, setSelectedSuite] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [unlockedSlugs, setUnlockedSlugs] = useState<Record<string, boolean>>({});
+  const [unlockedOrderIds, setUnlockedOrderIds] = useState<Record<string, string>>({});
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Sync coffee-unlocked apps from localStorage & live custom events
   useEffect(() => {
     const syncUnlocked = () => {
       try {
-        const next: Record<string, boolean> = {};
+        const next: Record<string, string> = {};
         for (const app of apps) {
-          if (app.coffeePrice && localStorage.getItem(`aimo_coffee_unlocked_${app.slug}`) === "1") {
-            next[app.slug] = true;
+          const orderId = app.coffeePrice
+            ? localStorage.getItem(`aimo_coffee_order_${app.slug}`)
+            : null;
+          if (orderId && orderId.trim()) {
+            next[app.slug] = orderId.trim();
           }
         }
-        setUnlockedSlugs(next);
+        setUnlockedOrderIds(next);
       } catch {}
     };
 
@@ -649,9 +652,9 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                       </Link>
 
                       {app.coffeePrice && app.coffeePrice > 0 ? (
-                        unlockedSlugs[app.slug] ? (
+                        unlockedOrderIds[app.slug] ? (
                           <a
-                            href={`/api/apps/${app.slug}/download?coffee=1`}
+                            href={`/api/apps/${app.slug}/download?orderId=${encodeURIComponent(unlockedOrderIds[app.slug])}`}
                             download={app.fileName}
                             data-skip-coffee-popup="true"
                             className="py-2.5 px-3.5 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
@@ -888,9 +891,9 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                                 </Link>
 
                                 {app.coffeePrice && app.coffeePrice > 0 ? (
-                                  unlockedSlugs[app.slug] ? (
+                                  unlockedOrderIds[app.slug] ? (
                                     <a
-                                      href={`/api/apps/${app.slug}/download?coffee=1`}
+                                      href={`/api/apps/${app.slug}/download?orderId=${encodeURIComponent(unlockedOrderIds[app.slug])}`}
                                       download={app.fileName}
                                       data-skip-coffee-popup="true"
                                       className="py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
@@ -1014,9 +1017,9 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                             </Link>
 
                             {app.coffeePrice && app.coffeePrice > 0 ? (
-                              unlockedSlugs[app.slug] ? (
+                              unlockedOrderIds[app.slug] ? (
                                 <a
-                                  href={`/api/apps/${app.slug}/download?coffee=1`}
+                                  href={`/api/apps/${app.slug}/download?orderId=${encodeURIComponent(unlockedOrderIds[app.slug])}`}
                                   download={app.fileName}
                                   data-skip-coffee-popup="true"
                                   className="py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs bg-emerald-100 hover:bg-emerald-200 !text-neutral-900 border-emerald-300"
