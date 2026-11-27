@@ -155,6 +155,30 @@ export const HTML_APPS: HtmlAppItem[] = [
     "engineSpec": "Marketing Planner & ICS Calendar Engine"
   },
   {
+    "slug": "bac-si-camp-fmp",
+    "title": "Bác Sĩ Camp & Hòa Vốn FMP",
+    "category": "marketing",
+    "categoryLabel": "Tiếp thị & Tăng trưởng",
+    "suite": "marketing",
+    "suiteLabel": "Tiếp thị & Tăng trưởng",
+    "summary": "Tính nhanh CPO hòa vốn, giá tin nhắn trần và chẩn đoán 4 lớp chiến dịch Ads theo quy tắc Tắt – Giữ – Scale 15–20%. Dùng thử miễn phí 1 Camp, mở khóa Pro & tải Offline qua SePay.",
+    "description": "Công cụ chẩn đoán tài chính & hiệu suất quảng cáo đóng gói bởi AI Mở Studio. Giúp chủ shop và team Ads biết chính xác ngưỡng CPO hòa vốn trước khi chạy, chấm điểm 8 chỉ số phễu (Reach/Lead, tỷ lệ chốt, tần suất, lãi ròng), Import CSV Facebook/TikTok Ads, kiểm soát tỷ lệ ngân sách lãng phí dưới 15% và xuất Prompt AI sửa hook/kịch bản chỉ với 1 click.",
+    "suitableFor": "Chủ shop online, người tự chạy Facebook/TikTok Ads, team Marketing in-house và học viên thực chiến.",
+    "highlights": [
+      "Tính CPO hòa vốn, CPO an toàn & giá tin nhắn trần chuẩn tài chính",
+      "Phiếu Khám Camp 4 lớp với quy tắc Tắt – Giữ – Tăng ngân sách 15–20%",
+      "Import CSV Ads, đo tỷ lệ lãng phí < 15% & Copy Prompt AI 1-click",
+      "Dùng thử miễn phí trên web, mở khóa Pro & tải Offline tự động qua SePay"
+    ],
+    "fileName": "bac-si-camp-fmp.html",
+    "status": "ready",
+    "badge": "Pro · SePay",
+    "isFeatured": true,
+    "featuredRank": 3,
+    "coffeePrice": 50000,
+    "engineSpec": "FMP Breakeven & 4-Layer Ads Diagnostic Engine"
+  },
+  {
     "slug": "gia-ban-khuyen-mai",
     "title": "Định giá bán & Khuyến mãi",
     "category": "kinh-doanh",

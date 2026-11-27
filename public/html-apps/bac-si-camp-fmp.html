@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bác Sĩ Camp &amp; Hòa Vốn FMP — AI Mở Studio</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --ink: #0f172a;
+      --ink-muted: #475569;
+      --line: #e2e8f0;
+      --brand: #2563eb;
+      --brand-dark: #1d4ed8;
+      --brand-soft: #eff6ff;
+      --emerald: #059669;
+      --emerald-soft: #ecfdf5;
+      --amber: #d97706;
+      --amber-soft: #fffbeb;
+      --rose: #e11d48;
+      --rose-soft: #fff1f2;
+      --slate: #64748b;
+      --slate-soft: #f8fafc;
+      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 4px 10px -4px rgba(15, 23, 42, 0.04);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px 16px 64px;
+    }
+
+    /* Header */
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fff;
+      padding: 20px 24px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .topbar h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .topbar p {
+      margin: 2px 0 0;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.12);
+      color: #e2e8f0;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+    .pill-status.pro {
+      background: rgba(16, 185, 129, 0.2);
+      color: #6ee7b7;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    /* Buttons */
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 9px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--surface-soft); }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-pro {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      border-color: #d97706;
+      color: #fff;
+    }
+    .btn-pro:hover { filter: brightness(1.05); }
+    .btn-emerald {
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #fff;
+    }
+    .btn-emerald:hover { filter: brightness(1.05); }
+    .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
+    .btn-danger-ghost {
+      background: transparent;
+      border-color: transparent;
+      color: var(--rose);
+      padding: 5px 8px;
+    }
+    .btn-danger-ghost:hover { background: var(--rose-soft); }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      background: var(--surface);
+      padding: 6px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      width: fit-content;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .tab-btn.active {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* Grid & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .card-title {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .card-sub {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    /* Form */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 540px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .field.full { grid-column: 1 / -1; }
+    .field label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+    .hint {
+      font-size: 11px;
+      color: var(--slate);
+    }
+
+    /* KPI tiles */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 520px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+    .kpi {
+      background: var(--slate-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 13px 14px;
+    }
+    .kpi.highlight {
+      background: var(--brand-soft);
+      border-color: #bfdbfe;
+    }
+    .kpi.good {
+      background: var(--emerald-soft);
+      border-color: #a7f3d0;
+    }
+    .kpi.warn {
+      background: var(--amber-soft);
+      border-color: #fde68a;
+    }
+    .kpi.danger {
+      background: var(--rose-soft);
+      border-color: #fecdd3;
+    }
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+    .kpi-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+
+    /* Alert boxes */
+    .alert {
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 13px;
+      border: 1px solid;
+      margin-top: 12px;
+    }
+    .alert-danger { background: var(--rose-soft); border-color: #fecdd3; color: #9f1239; }
+    .alert-warn { background: var(--amber-soft); border-color: #fde68a; color: #92400e; }
+    .alert-good { background: var(--emerald-soft); border-color: #a7f3d0; color: #065f46; }
+    .alert-info { background: var(--brand-soft); border-color: #bfdbfe; color: #1e40af; }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .toolbar-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Pro Gate Banner / Lock */
+    .pro-banner {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid #fcd34d;
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .pro-banner strong { color: #92400e; font-size: 14px; }
+    .pro-banner p { margin: 2px 0 0; font-size: 12.5px; color: #78350f; }
+
+    .lock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    /* Portfolio Summary */
+    .portfolio-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 780px) {
+      .portfolio-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Campaign Cards / Table */
+    .camp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .camp-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+    }
+    .camp-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .camp-name-input {
+      font-size: 15px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 4px 8px;
+      color: var(--ink);
+      background: var(--slate-soft);
+      min-width: 220px;
+      flex: 1;
+    }
+    .camp-name-input:focus {
+      border-color: var(--brand);
+      background: #fff;
+      outline: none;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .status-WAIT { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .status-RED { background: var(--rose-soft); color: #be123c; border: 1px solid #fda4af; }
+    .status-YELLOW { background: var(--amber-soft); color: #b45309; border: 1px solid #fcd34d; }
+    .status-GREEN { background: var(--emerald-soft); color: #047857; border: 1px solid #6ee7b7; }
+
+    .camp-inputs {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 920px) {
+      .camp-inputs { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .camp-inputs { grid-template-columns: repeat(2, 1fr); }
+    }
+    .mini-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--slate);
+      margin-bottom: 3px;
+    }
+    .mini-field input {
+      width: 100%;
+      padding: 7px 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .mini-field input:focus {
+      outline: none;
+      border-color: var(--brand);
+    }
+
+    .metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 8px;
+      background: var(--slate-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 960px) {
+      .metrics-strip { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .metrics-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    .m-item .m-k {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--slate);
+      text-transform: uppercase;
+    }
+    .m-item .m-v {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .m-v.bad { color: var(--rose); }
+    .m-v.warn { color: var(--amber); }
+    .m-v.good { color: var(--emerald); }
+
+    /* 4-Layer Diagnosis */
+    .layers-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 860px) {
+      .layers-box { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .layers-box { grid-template-columns: 1fr; }
+    }
+    .layer-item {
+      border-radius: 10px;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 12px;
+    }
+    .layer-item.issue {
+      border-color: #fda4af;
+      background: #fff5f7;
+    }
+    .layer-item.ok {
+      border-color: #a7f3d0;
+      background: #f0fdf9;
+    }
+    .layer-tag {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 2px;
+    }
+    .layer-item.issue .layer-tag { color: #be123c; }
+    .layer-item.ok .layer-tag { color: #047857; }
+
+    .action-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      font-size: 12.5px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* Prompt Modal / Toast */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f172a;
+      color: #fff;
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .blurred-gate {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .blurred-gate .gate-overlay {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(4px);
+      padding: 18px;
+      border: 1px dashed #f59e0b;
+      border-radius: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="brand-row">
+        <div class="logo-badge">FMP</div>
+        <div>
+          <h1>Bác Sĩ Camp &amp; Hòa Vốn FMP</h1>
+          <p>Chẩn đoán 4 lớp chiến dịch Ads &amp; tính ngưỡng CPO hòa vốn chuẩn tài chính — AI Mở Studio</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span id="licenseBadge" class="pill-status">Bản Dùng Thử (1 Camp)</span>
+        <button id="btnHeaderUnlock" class="btn btn-pro btn-sm" onclick="triggerProUnlock()">
+          Mở khóa Full + Tải Offline (50k)
+        </button>
+      </div>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="fmp" onclick="switchTab('fmp')">
+        1. Tính Hòa Vốn FMP &amp; Ngưỡng Ads
+      </button>
+      <button class="tab-btn" data-tab="doctor" onclick="switchTab('doctor')">
+        2. Phiếu Khám Camp 4 Lớp &amp; Tắt/Giữ/Tăng
+      </button>
+    </nav>
+
+    <!-- TAB 1: FMP CALCULATOR -->
+    <section id="tab-fmp" class="panel active">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span>Thông số Kinh doanh &amp; Chi phí nền</span>
+            <button class="btn btn-sm" onclick="loadSampleFmp()">Nạp mẫu Shop Thời trang</button>
+          </div>
+          <p class="card-sub">Nhập số liệu thực tế của sản phẩm/shop để biết chính xác giới hạn chi tiền quảng cáo trước khi đốt ngân sách.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Giá bán trung bình / đơn (AOV) <span>VNĐ</span></label>
+              <input type="number" id="fmpAov" value="350000" min="0" step="1000" oninput="recalcAll()" />
+            </div>
+            <div class="field">
+              <label>Giá vốn nhập hàng (COGS) <span>VNĐ</span></label>
+              <input type="number" id="fmpCogs" value="125000" min="0" step="1000" oninput="recalcAll()" />
+            </div>
+            <div class="field">
+              <label>Tỷ lệ hoàn / hủy đơn <span>%</span></label>
+              <input type="number" id="fmpReturnRate" value="8" min="0" max="90" step="0.5" oninput="recalcAll()" />
+              <span class="hint">Trừ trực tiếp vào doanh thu thực nhận/đơn</span>
+            </div>
+            <div class="field">
+              <label>Phí sàn / Thuế TMĐT / Cổng TT <span>%</span></label>
+              <input type="number" id="fmpPlatformPct" value="6" min="0" max="60" step="0.5" oninput="recalcAll()" />
+              <span class="hint">VD: Bán trực tiếp 1.5–3%, Sàn 8–14%</span>
+            </div>
+            <div class="field">
+              <label>Đóng gói + Hỗ trợ ship + Hoa hồng <span>VNĐ/đơn</span></label>
+              <input type="number" id="fmpVariableOther" value="25000" min="0" step="1000" oninput="recalcAll()" />
+            </div>
+            <div class="field">
+              <label>Tỷ lệ chốt đơn dự kiến (Close Rate) <span>%</span></label>
+              <input type="number" id="fmpCloseRate" value="12" min="1" max="100" step="0.5" oninput="recalcAll()" />
+              <span class="hint">Chuẩn thị trường: 8–15% trên tin nhắn/lead</span>
+            </div>
+            <div class="field full">
+              <label>Tổng chi phí cố định hàng tháng (Mặt bằng, lương cứng, phần mềm...) <span>VNĐ/tháng</span></label>
+              <input type="number" id="fmpFixedCost" value="35000000" min="0" step="500000" oninput="recalcAll()" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Kết quả Hòa Vốn FMP &amp; Trần Giá Ads</span>
+            <button class="btn btn-primary btn-sm" onclick="switchTab('doctor')">Sang Khám Camp →</button>
+          </div>
+          <p class="card-sub">Các ngưỡng này tự động đồng bộ sang Tab Phiếu Khám Camp để chấm điểm Đỏ / Vàng / Xanh.</p>
+
+          <div class="kpi-grid">
+            <div class="kpi">
+              <div class="kpi-label">Doanh thu thực nhận / đơn</div>
+              <div class="kpi-val" id="outEffRev">0đ</div>
+              <div class="kpi-sub">Đã trừ tỷ lệ hoàn hủy</div>
+            </div>
+            <div class="kpi" id="boxGross">
+              <div class="kpi-label">Lợi nhuận gộp trước Ads</div>
+              <div class="kpi-val" id="outGrossProfit">0đ</div>
+              <div class="kpi-sub" id="outGrossMargin">Biên gộp: 0%</div>
+            </div>
+            <div class="kpi warn">
+              <div class="kpi-label">CPO Hòa Vốn Tối Đa (Trần Đỏ)</div>
+              <div class="kpi-val" id="outMaxCpo">0đ</div>
+              <div class="kpi-sub">Vượt mức này = Lỗ trên từng đơn</div>
+            </div>
+            <div class="kpi good">
+              <div class="kpi-label">CPO An Toàn Mục Tiêu (Chuẩn Scale)</div>
+              <div class="kpi-val" id="outSafeCpo">0đ</div>
+              <div class="kpi-sub">Tối ưu ≤ 50% lãi gộp &amp; ≤ 25% AOV</div>
+            </div>
+            <div class="kpi highlight">
+              <div class="kpi-label">Giá Tin Nhắn / Lead Trần</div>
+              <div class="kpi-val" id="outMaxMsg">0đ</div>
+              <div class="kpi-sub">Dựa theo tỷ lệ chốt dự kiến</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Sản lượng Hòa Vốn / Tháng</div>
+              <div class="kpi-val" id="outBeOrdersAds">0 đơn</div>
+              <div class="kpi-sub" id="outBeOrdersSub">Chưa Ads: 0 đơn | Khuyến nghị: 0 đơn</div>
+            </div>
+          </div>
+
+          <div id="fmpAlertBox" class="alert alert-info"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: CAMP DOCTOR -->
+    <section id="tab-doctor" class="panel">
+      <!-- Pro Banner when Locked -->
+      <div id="proBanner" class="pro-banner">
+        <div>
+          <strong>Bạn đang ở chế độ Dùng Thử (Miễn phí 1 Camp + Dữ liệu mẫu)</strong>
+          <p>Mở khóa bản Full (50.000đ qua SePay tự động) để Import CSV Facebook/TikTok Ads, chấm điểm không giới hạn Camp, đo Tỷ lệ lãng phí 15%, Copy Prompt AI sửa Camp &amp; Tải bản Offline.</p>
+        </div>
+        <button class="btn btn-pro" onclick="triggerProUnlock()">Mở khóa Full ngay (50k)</button>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="toolbar-group">
+          <button class="btn" onclick="loadSampleCamps()">Nạp 4 Camp Mẫu (Đỏ/Vàng/Xanh)</button>
+          <button class="btn btn-primary" onclick="addCamp()">
+            + Thêm Camp <span id="lockAddCamp" class="lock-badge">PRO</span>
+          </button>
+          <label class="btn" style="cursor:pointer;">
+            Import CSV Ads <span id="lockCsv" class="lock-badge">PRO</span>
+            <input type="file" id="csvInput" accept=".csv" style="display:none" onchange="handleCsvUpload(event)" />
+          </label>
+        </div>
+        <div class="toolbar-group">
+          <button class="btn btn-emerald" onclick="copyAiPrompt()">
+            Copy Prompt AI Chẩn Đoán <span id="lockPrompt" class="lock-badge">PRO</span>
+          </button>
+          <button class="btn" onclick="downloadOfflineOrUnlock()">
+            Tải bản Offline (.html) <span id="lockOffline" class="lock-badge">PRO</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Portfolio Summary -->
+      <div class="portfolio-bar">
+        <div class="kpi">
+          <div class="kpi-label">Tổng Chi Tiêu Ads</div>
+          <div class="kpi-val" id="portSpend">0đ</div>
+          <div class="kpi-sub" id="portCampCount">0 chiến dịch</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Tổng Đơn &amp; Lãi Ròng Ước Tính</div>
+          <div class="kpi-val" id="portNet">0đ</div>
+          <div class="kpi-sub" id="portOrders">0 đơn hàng</div>
+        </div>
+        <div class="kpi" id="portWasteBox">
+          <div class="kpi-label">Tỷ Lệ Ngân Sách Lãng Phí <span id="lockWaste" class="lock-badge">PRO</span></div>
+          <div class="kpi-val" id="portWastePct">0%</div>
+          <div class="kpi-sub">Ngưỡng an toàn: &lt; 15% tổng chi</div>
+        </div>
+        <div class="kpi highlight">
+          <div class="kpi-label">CPO Hòa Vốn / An Toàn</div>
+          <div class="kpi-val" id="portCpoRef">0đ</div>
+          <div class="kpi-sub" id="portSafeRef">Mục tiêu: 0đ</div>
+        </div>
+      </div>
+
+      <!-- Campaign Cards -->
+      <div id="campList" class="camp-list"></div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const APP_SLUG = "bac-si-camp-fmp";
+    const APP_TITLE = "Bác Sĩ Camp & Hòa Vốn FMP";
+    const COFFEE_AMOUNT = 50000;
+
+    let isProUnlocked = false;
+    let camps = [
+      {
+        id: 1,
+        name: "Camp 01 - Video Review Chủ Shop",
+        days: 4,
+        spend: 1200000,
+        impressions: 24000,
+        reach: 16500,
+        leads: 38,
+        orders: 6
+      }
+    ];
+
+    function fmtVnd(n) {
+      if (!isFinite(n)) return "0đ";
+      return Math.round(n).toLocaleString("vi-VN") + "đ";
+    }
+
+    function fmtNum(n, d = 1) {
+      if (!isFinite(n)) return "0";
+      return Number(n).toLocaleString("vi-VN", { maximumFractionDigits: d });
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      setTimeout(() => el.classList.remove("show"), 2600);
+    }
+
+    function checkProUnlock() {
+      let localOrder = "";
+      try {
+        localOrder = localStorage.getItem("aimo_coffee_order_" + APP_SLUG) || "";
+      } catch (e) {}
+      isProUnlocked = Boolean(window.__AIMO_OFFLINE_UNLOCKED__ === true || localOrder.trim().length > 0);
+      applyProUi();
+    }
+
+    function applyProUi() {
+      const badge = document.getElementById("licenseBadge");
+      const btnUnlock = document.getElementById("btnHeaderUnlock");
+      const proBanner = document.getElementById("proBanner");
+      const lockIds = ["lockAddCamp", "lockCsv", "lockPrompt", "lockOffline", "lockWaste"];
+
+      if (isProUnlocked) {
+        badge.textContent = "Đã Mở Khóa PRO";
+        badge.classList.add("pro");
+        btnUnlock.style.display = "none";
+        proBanner.style.display = "none";
+        lockIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = "none";
+        });
+      } else {
+        badge.textContent = "Bản Dùng Thử (1 Camp)";
+        badge.classList.remove("pro");
+        btnUnlock.style.display = "inline-flex";
+        proBanner.style.display = "flex";
+        lockIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = "inline-flex";
+        });
+      }
+    }
+
+    window.addEventListener("message", (event) => {
+      if (event.data && event.data.type === "AIMO_COFFEE_UNLOCKED") {
+        if (!event.data.slug || event.data.slug === APP_SLUG) {
+          if (event.data.orderId) {
+            try {
+              localStorage.setItem("aimo_coffee_order_" + APP_SLUG, event.data.orderId);
+            } catch (e) {}
+          }
+          isProUnlocked = true;
+          applyProUi();
+          renderCamps();
+          showToast("Đã mở khóa PRO thành công!");
+        }
+      }
+    });
+
+    function triggerProUnlock() {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: "AIMO_OPEN_COFFEE_DOWNLOAD",
+          slug: APP_SLUG,
+          title: APP_TITLE,
+          amount: COFFEE_AMOUNT
+        }, "*");
+      } else {
+        showToast("Hãy mở app trên heyaimo.com/apps/bac-si-camp-fmp để thanh toán SePay mở khóa.");
+      }
+    }
+
+    function downloadOfflineOrUnlock() {
+      if (!isProUnlocked) {
+        triggerProUnlock();
+        return;
+      }
+      if (window.__AIMO_OFFLINE_UNLOCKED__ === true) {
+        showToast("Bạn đang dùng bản Offline PRO rồi!");
+        return;
+      }
+      triggerProUnlock();
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll(".tab-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.tab === tab);
+      });
+      document.querySelectorAll(".panel").forEach(p => {
+        p.classList.toggle("active", p.id === "tab-" + tab);
+      });
+    }
+
+    function getFmp() {
+      const aov = Math.max(0, Number(document.getElementById("fmpAov").value) || 0);
+      const cogs = Math.max(0, Number(document.getElementById("fmpCogs").value) || 0);
+      const returnRate = Math.min(95, Math.max(0, Number(document.getElementById("fmpReturnRate").value) || 0));
+      const platformPct = Math.min(80, Math.max(0, Number(document.getElementById("fmpPlatformPct").value) || 0));
+      const varOther = Math.max(0, Number(document.getElementById("fmpVariableOther").value) || 0);
+      const closeRate = Math.min(100, Math.max(1, Number(document.getElementById("fmpCloseRate").value) || 10));
+      const fixedCost = Math.max(0, Number(document.getElementById("fmpFixedCost").value) || 0);
+
+      const effectiveRevenue = aov * (1 - returnRate / 100);
+      const platformFee = effectiveRevenue * (platformPct / 100);
+      const variableCost = cogs + platformFee + varOther;
+      const grossProfit = effectiveRevenue - variableCost;
+      const grossMarginPct = effectiveRevenue > 0 ? (grossProfit / effectiveRevenue) * 100 : 0;
+
+      const maxCpoBreakEven = Math.max(0, grossProfit);
+      const safeCpoTarget = grossProfit > 0 ? Math.min(grossProfit * 0.5, aov * 0.25) : 0;
+      const maxCostPerMsg = safeCpoTarget * (closeRate / 100);
+
+      const beNoAds = grossProfit > 0 ? Math.ceil(fixedCost / grossProfit) : Infinity;
+      const marginAfterAds = grossProfit - safeCpoTarget;
+      const beWithAds = marginAfterAds > 0 ? Math.ceil(fixedCost / marginAfterAds) : Infinity;
+      const recOrders = isFinite(beWithAds) ? Math.ceil(beWithAds * 1.5) : Infinity;
+
+      return {
+        aov, cogs, returnRate, platformPct, varOther, closeRate, fixedCost,
+        effectiveRevenue, variableCost, grossProfit, grossMarginPct,
+        maxCpoBreakEven, safeCpoTarget, maxCostPerMsg,
+        beNoAds, beWithAds, recOrders
+      };
+    }
+
+    function renderFmp(f) {
+      document.getElementById("outEffRev").textContent = fmtVnd(f.effectiveRevenue);
+      document.getElementById("outGrossProfit").textContent = fmtVnd(f.grossProfit);
+      document.getElementById("outGrossMargin").textContent = "Biên gộp: " + fmtNum(f.grossMarginPct, 1) + "%";
+
+      const boxGross = document.getElementById("boxGross");
+      boxGross.className = "kpi " + (f.grossProfit <= 0 ? "danger" : f.grossMarginPct < 30 ? "warn" : "good");
+
+      document.getElementById("outMaxCpo").textContent = fmtVnd(f.maxCpoBreakEven);
+      document.getElementById("outSafeCpo").textContent = fmtVnd(f.safeCpoTarget);
+      document.getElementById("outMaxMsg").textContent = fmtVnd(f.maxCostPerMsg);
+
+      document.getElementById("outBeOrdersAds").textContent = isFinite(f.beWithAds) ? fmtNum(f.beWithAds, 0) + " đơn" : "Không thể hòa vốn";
+      document.getElementById("outBeOrdersSub").textContent =
+        isFinite(f.beWithAds)
+          ? `Chưa Ads: ${fmtNum(f.beNoAds, 0)} đơn | An toàn (+50%): ${fmtNum(f.recOrders, 0)} đơn`
+          : "Cần tăng giá bán hoặc giảm giá vốn";
+
+      const alertBox = document.getElementById("fmpAlertBox");
+      if (f.grossProfit <= 0) {
+        alertBox.className = "alert alert-danger";
+        alertBox.innerHTML = "<strong>Cảnh báo Lớp 1 (Nền tài chính gãy):</strong> Lãi gộp trước Ads đang ≤ 0đ. Tuyệt đối KHÔNG chạy quảng cáo lúc này vì càng bán càng lỗ. Hãy tăng AOV (combo/upsell), giảm giá vốn hoặc giảm tỷ lệ hoàn hàng.";
+      } else if (f.grossMarginPct < 35) {
+        alertBox.className = "alert alert-warn";
+        alertBox.innerHTML = `<strong>Lưu ý biên lợi nhuận mỏng (${fmtNum(f.grossMarginPct, 1)}%):</strong> Để chạy Ads bền vững ở năm 2026, biên gộp trước Ads nên đạt từ 40% trở lên. Hiện bạn chỉ được phép mua 1 đơn tối đa <strong>${fmtVnd(f.safeCpoTarget)}</strong> để còn dư tiền trả chi phí cố định.`;
+      } else {
+        alertBox.className = "alert alert-good";
+        alertBox.innerHTML = `<strong>Nền tài chính khỏe:</strong> Với CPO mục tiêu <strong>${fmtVnd(f.safeCpoTarget)}/đơn</strong> và tỷ lệ chốt ${f.closeRate}%, giá tin nhắn/lead tối đa nên giữ dưới <strong>${fmtVnd(f.maxCostPerMsg)}</strong>. Cần đạt <strong>${fmtNum(f.beWithAds, 0)} đơn/tháng</strong> để hòa vốn toàn shop.`;
+      }
+
+      document.getElementById("portCpoRef").textContent = fmtVnd(f.maxCpoBreakEven);
+      document.getElementById("portSafeRef").textContent = "Mục tiêu an toàn: " + fmtVnd(f.safeCpoTarget);
+    }
+
+    function diagnoseCamp(c, f) {
+      const spend = Math.max(0, Number(c.spend) || 0);
+      const imp = Math.max(0, Number(c.impressions) || 0);
+      const reach = Math.max(0, Number(c.reach) || 0);
+      const leads = Math.max(0, Number(c.leads) || 0);
+      const orders = Math.max(0, Number(c.orders) || 0);
+      const days = Math.max(0, Number(c.days) || 0);
+
+      const cpm = imp > 0 ? (spend / imp) * 1000 : 0;
+      const freq = reach > 0 ? imp / reach : 0;
+      const reachPerLead = leads > 0 ? reach / leads : (reach > 0 ? Infinity : 0);
+      const costPerLead = leads > 0 ? spend / leads : 0;
+      const closeRate = leads > 0 ? (orders / leads) * 100 : 0;
+      const reachPerOrder = orders > 0 ? reach / orders : (reach > 0 ? Infinity : 0);
+      const cpo = orders > 0 ? spend / orders : (spend > 0 ? Infinity : 0);
+      const revenue = orders * f.effectiveRevenue;
+      const adsPct = revenue > 0 ? (spend / revenue) * 100 : (spend > 0 ? Infinity : 0);
+      const roas = spend > 0 ? revenue / spend : 0;
+      const netProfit = (orders * f.grossProfit) - spend;
+
+      // Status decision
+      let status = "YELLOW";
+      let statusLabel = "VÀNG · Giữ / Tối ưu";
+      let actionText = "Theo dõi thêm chỉ số phễu và sửa đúng lớp đang nghẽn trước khi tăng tiền.";
+
+      if (f.grossProfit <= 0) {
+        status = "RED";
+        statusLabel = "ĐỎ · Tắt ngay (Lỗ nền)";
+        actionText = "Lợi nhuận gộp trước Ads ≤ 0đ. Tắt toàn bộ Ads để sửa giá bán / combo / giá vốn.";
+      } else if (reach < 1500 || spend < 100000 || days < 2) {
+        status = "WAIT";
+        statusLabel = "CHỜ DỮ LIỆU";
+        actionText = "Camp mới chạy hoặc Reach < 1.500 / chi tiêu < 100k. Chưa đủ mẫu thống kê, giữ nguyên thêm 24–48h.";
+      } else if (
+        (orders === 0 && spend >= 1.5 * f.maxCpoBreakEven) ||
+        (days >= 3 && cpo > f.maxCpoBreakEven && reachPerLead > 1000) ||
+        (orders > 0 && cpo > f.maxCpoBreakEven * 1.15 && days >= 3)
+      ) {
+        status = "RED";
+        statusLabel = "ĐỎ · Tắt ngay";
+        actionText = "Đốt vượt ngưỡng hòa vốn hoặc Reach/Lead > 1.000 quá yếu. Tắt ngay để giữ tổng lãng phí < 15%.";
+      } else if (days >= 2 && orders >= 2 && cpo <= f.safeCpoTarget && netProfit > 0) {
+        status = "GREEN";
+        statusLabel = "XANH · Scale +15–20%";
+        actionText = "CPO nằm trong vùng an toàn và đã có lãi ròng dương. Tăng ngân sách 15–20% mỗi 48h hoặc nhân nhóm giữ nguyên bài tốt.";
+      } else if (freq > 3.5) {
+        status = "YELLOW";
+        statusLabel = "VÀNG · Mỏi tần suất";
+        actionText = "Tần suất > 3.5 khiến khách thấy lặp lại. Giữ hoặc giảm nhẹ ngân sách, làm mới Hook 3 giây đầu / đổi Creative.";
+      } else if (leads > 0 && reachPerLead <= 600 && closeRate < 5) {
+        status = "YELLOW";
+        statusLabel = "VÀNG · Sửa Sale / Lọc Lead";
+        actionText = "Tin nhắn rẻ nhưng tỷ lệ chốt < 5%. Không tắt vội Creative — kiểm tra lại kịch bản tư vấn, tốc độ rep và chất lượng phễu.";
+      }
+
+      // 4-Layer Diagnostic
+      const l1Issue = f.grossProfit <= 0 || adsPct > 35;
+      const l1Msg = f.grossProfit <= 0
+        ? "Lãi gộp ≤ 0đ. Gãy giá bán/COGS."
+        : adsPct > 35
+          ? `Ads/Doanh thu ${fmtNum(adsPct, 1)}% (>35%), ăn mòn lãi.`
+          : `Lãi gộp ${fmtVnd(f.grossProfit)}/đơn, Ads/DT ${isFinite(adsPct) ? fmtNum(adsPct, 1) + "%" : "—"}.`;
+
+      const l2Issue = reach >= 1500 && (reachPerLead > 1000 || freq > 3.5);
+      const l2Msg = freq > 3.5
+        ? `Tần suất ${fmtNum(freq, 2)} (>3.5) — Creative bị bão hòa.`
+        : reachPerLead > 1000
+          ? `Reach/Lead ${isFinite(reachPerLead) ? fmtNum(reachPerLead, 0) : "∞"} (>1.000) — Hook/Target chưa hút.`
+          : `Reach/Lead ${isFinite(reachPerLead) ? fmtNum(reachPerLead, 0) : "0"}, Freq ${fmtNum(freq, 2)} ổn.`;
+
+      const l3Issue = leads >= 5 && closeRate < 5;
+      const l3Msg = leads === 0
+        ? "Chưa có Lead/Tin nhắn để đo chuyển đổi."
+        : closeRate < 5
+          ? `Chốt ${fmtNum(closeRate, 1)}% (<5%) — Tin nhắn rác hoặc Sale chốt yếu.`
+          : `Chốt ${fmtNum(closeRate, 1)}% (${orders}/${leads} lead) — Đạt chuẩn.`;
+
+      const l4Issue = status === "RED";
+      const l4Msg = status === "RED"
+        ? "Vi phạm ngưỡng cắt lỗ. Dừng ngay để bảo toàn dòng tiền."
+        : status === "GREEN"
+          ? "Đạt chuẩn nhân rộng +15–20% ngân sách."
+          : "Theo dõi sát 24–48h trước khi quyết định tăng/tắt.";
+
+      return {
+        cpm, freq, reachPerLead, costPerLead, closeRate, reachPerOrder,
+        cpo, revenue, adsPct, roas, netProfit,
+        status, statusLabel, actionText,
+        layers: [
+          { tag: "Lớp 1 · Tài chính & Giá", issue: l1Issue, msg: l1Msg },
+          { tag: "Lớp 2 · Hook & Target", issue: l2Issue, msg: l2Msg },
+          { tag: "Lớp 3 · Lead & Chốt Sale", issue: l3Issue, msg: l3Msg },
+          { tag: "Lớp 4 · Kỷ luật Ngân sách", issue: l4Issue, msg: l4Msg }
+        ]
+      };
+    }
+
+    function renderCamps() {
+      const f = getFmp();
+      const listEl = document.getElementById("campList");
+      const visibleCamps = isProUnlocked ? camps : camps.slice(0, 1);
+
+      let totalSpend = 0;
+      let totalOrders = 0;
+      let totalNet = 0;
+      let wastedSpend = 0;
+
+      const htmlParts = visibleCamps.map((c, idx) => {
+        const d = diagnoseCamp(c, f);
+        totalSpend += Number(c.spend) || 0;
+        totalOrders += Number(c.orders) || 0;
+        totalNet += d.netProfit;
+        if (d.status === "RED") wastedSpend += Number(c.spend) || 0;
+
+        const cpoClass = !isFinite(d.cpo) || d.cpo > f.maxCpoBreakEven ? "bad" : d.cpo <= f.safeCpoTarget ? "good" : "warn";
+        const rplClass = !isFinite(d.reachPerLead) || d.reachPerLead > 1000 ? "bad" : d.reachPerLead <= 500 ? "good" : "warn";
+        const crClass = d.closeRate < 5 ? "bad" : d.closeRate >= 10 ? "good" : "warn";
+        const netClass = d.netProfit < 0 ? "bad" : "good";
+
+        return `
+          <div class="camp-card">
+            <div class="camp-head">
+              <input class="camp-name-input" value="${escapeHtml(c.name)}" onchange="updateCamp(${c.id}, 'name', this.value)" />
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="status-pill status-${d.status}">${d.statusLabel}</span>
+                ${visibleCamps.length > 1 ? `<button class="btn btn-danger-ghost btn-sm" onclick="removeCamp(${c.id})">Xóa</button>` : ""}
+              </div>
+            </div>
+
+            <div class="camp-inputs">
+              <div class="mini-field">
+                <label>Số ngày chạy</label>
+                <input type="number" min="0" value="${c.days}" oninput="updateCamp(${c.id}, 'days', this.value)" />
+              </div>
+              <div class="mini-field">
+                <label>Chi tiêu (VNĐ)</label>
+                <input type="number" min="0" step="10000" value="${c.spend}" oninput="updateCamp(${c.id}, 'spend', this.value)" />
+              </div>
+              <div class="mini-field">
+                <label>Hiển thị (Imp)</label>
+                <input type="number" min="0" step="100" value="${c.impressions}" oninput="updateCamp(${c.id}, 'impressions', this.value)" />
+              </div>
+              <div class="mini-field">
+                <label>Tiếp cận (Reach)</label>
+                <input type="number" min="0" step="100" value="${c.reach}" oninput="updateCamp(${c.id}, 'reach', this.value)" />
+              </div>
+              <div class="mini-field">
+                <label>Tin nhắn / Lead</label>
+                <input type="number" min="0" value="${c.leads}" oninput="updateCamp(${c.id}, 'leads', this.value)" />
+              </div>
+              <div class="mini-field">
+                <label>Số đơn chốt</label>
+                <input type="number" min="0" value="${c.orders}" oninput="updateCamp(${c.id}, 'orders', this.value)" />
+              </div>
+              <div class="mini-field">
+                <label>ROAS thực tế</label>
+                <input type="text" readonly value="${fmtNum(d.roas, 2)}x" style="background:#f8fafc;color:#475569;" />
+              </div>
+            </div>
+
+            <div class="metrics-strip">
+              <div class="m-item"><div class="m-k">CPO (Giá/đơn)</div><div class="m-v ${cpoClass}">${isFinite(d.cpo) ? fmtVnd(d.cpo) : "Chưa có đơn"}</div></div>
+              <div class="m-item"><div class="m-k">Giá Lead/Mess</div><div class="m-v">${c.leads > 0 ? fmtVnd(d.costPerLead) : "—"}</div></div>
+              <div class="m-item"><div class="m-k">Reach / Lead</div><div class="m-v ${rplClass}">${isFinite(d.reachPerLead) ? fmtNum(d.reachPerLead, 0) : "∞"}</div></div>
+              <div class="m-item"><div class="m-k">Tỷ lệ chốt</div><div class="m-v ${crClass}">${fmtNum(d.closeRate, 1)}%</div></div>
+              <div class="m-item"><div class="m-k">Reach / Đơn</div><div class="m-v">${isFinite(d.reachPerOrder) ? fmtNum(d.reachPerOrder, 0) : "∞"}</div></div>
+              <div class="m-item"><div class="m-k">Tần suất</div><div class="m-v ${d.freq > 3.5 ? "warn" : ""}">${fmtNum(d.freq, 2)}</div></div>
+              <div class="m-item"><div class="m-k">CPM</div><div class="m-v">${fmtVnd(d.cpm)}</div></div>
+              <div class="m-item"><div class="m-k">Lãi ròng ước tính</div><div class="m-v ${netClass}">${fmtVnd(d.netProfit)}</div></div>
+            </div>
+
+            <div class="layers-box">
+              ${d.layers.map(l => `
+                <div class="layer-item ${l.issue ? "issue" : "ok"}">
+                  <div class="layer-tag">${l.tag}</div>
+                  <div>${l.msg}</div>
+                </div>
+              `).join("")}
+            </div>
+
+            <div class="action-box">
+              <div><strong>Chỉ định hành động:</strong> ${d.actionText}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      if (!isProUnlocked && camps.length > 1) {
+        htmlParts.push(`
+          <div class="blurred-gate">
+            <div class="gate-overlay">
+              <strong>Đang ẩn ${camps.length - 1} chiến dịch còn lại &amp; Tỷ lệ lãng phí toàn tài khoản</strong>
+              <p style="margin:6px 0 12px;font-size:13px;color:#475569;">Mở khóa PRO (50.000đ qua SePay) để khám đồng thời nhiều Camp, Import CSV và Copy Prompt AI sửa bài viết/hook.</p>
+              <button class="btn btn-pro" onclick="triggerProUnlock()">Mở khóa ngay (50k)</button>
+            </div>
+          </div>
+        `);
+      }
+
+      listEl.innerHTML = htmlParts.join("");
+
+      document.getElementById("portSpend").textContent = fmtVnd(totalSpend);
+      document.getElementById("portCampCount").textContent = visibleCamps.length + " chiến dịch đang hiển thị";
+      document.getElementById("portNet").textContent = fmtVnd(totalNet);
+      document.getElementById("portOrders").textContent = fmtNum(totalOrders, 0) + " đơn hàng";
+
+      const wastePct = totalSpend > 0 ? (wastedSpend / totalSpend) * 100 : 0;
+      const wasteBox = document.getElementById("portWasteBox");
+      if (isProUnlocked) {
+        document.getElementById("portWastePct").textContent = fmtNum(wastePct, 1) + "%";
+        wasteBox.className = "kpi " + (wastePct > 15 ? "danger" : wastePct > 0 ? "warn" : "good");
+      } else {
+        document.getElementById("portWastePct").textContent = "Khóa PRO";
+        wasteBox.className = "kpi";
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function updateCamp(id, field, val) {
+      const target = camps.find(c => c.id === id);
+      if (!target) return;
+      if (field === "name") target.name = val;
+      else target[field] = Math.max(0, Number(val) || 0);
+      renderCamps();
+    }
+
+    function removeCamp(id) {
+      camps = camps.filter(c => c.id !== id);
+      renderCamps();
+    }
+
+    function addCamp() {
+      if (!isProUnlocked) {
+        triggerProUnlock();
+        return;
+      }
+      const nextId = camps.length ? Math.max(...camps.map(c => c.id)) + 1 : 1;
+      camps.push({
+        id: nextId,
+        name: `Camp 0${nextId} - Nhóm mới`,
+        days: 3,
+        spend: 600000,
+        impressions: 12000,
+        reach: 9000,
+        leads: 18,
+        orders: 2
+      });
+      renderCamps();
+    }
+
+    function loadSampleFmp() {
+      document.getElementById("fmpAov").value = 390000;
+      document.getElementById("fmpCogs").value = 135000;
+      document.getElementById("fmpReturnRate").value = 8;
+      document.getElementById("fmpPlatformPct").value = 5;
+      document.getElementById("fmpVariableOther").value = 28000;
+      document.getElementById("fmpCloseRate").value = 12;
+      document.getElementById("fmpFixedCost").value = 40000000;
+      recalcAll();
+      showToast("Đã nạp thông số mẫu Shop Thời trang.");
+    }
+
+    function loadSampleCamps() {
+      camps = [
+        {
+          id: 1,
+          name: "Camp 01 - Video Review Chủ Shop (Xanh)",
+          days: 4,
+          spend: 1200000,
+          impressions: 26000,
+          reach: 18500,
+          leads: 52,
+          orders: 16
+        },
+        {
+          id: 2,
+          name: "Camp 02 - Ảnh Feedback Khách (Vàng - Sale yếu)",
+          days: 3,
+          spend: 900000,
+          impressions: 19000,
+          reach: 14500,
+          leads: 45,
+          orders: 2
+        },
+        {
+          id: 3,
+          name: "Camp 03 - Carousel Sản Phẩm (Đỏ - Cắt lỗ)",
+          days: 4,
+          spend: 1100000,
+          impressions: 21000,
+          reach: 15000,
+          leads: 9,
+          orders: 1
+        },
+        {
+          id: 4,
+          name: "Camp 04 - Test Hook Mới (Chờ dữ liệu)",
+          days: 1,
+          spend: 180000,
+          impressions: 3200,
+          reach: 2800,
+          leads: 4,
+          orders: 1
+        }
+      ];
+      renderCamps();
+      showToast(isProUnlocked ? "Đã nạp 4 Camp mẫu đầy đủ trạng thái." : "Đã nạp Camp mẫu (Chế độ thử hiển thị 1 Camp).");
+    }
+
+    function parseCsvLine(line) {
+      const res = [];
+      let cur = "";
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') {
+          if (inQuotes && line[i + 1] === '"') { cur += '"'; i++; }
+          else inQuotes = !inQuotes;
+        } else if (ch === "," && !inQuotes) {
+          res.push(cur.trim());
+          cur = "";
+        } else {
+          cur += ch;
+        }
+      }
+      res.push(cur.trim());
+      return res;
+    }
+
+    function handleCsvUpload(e) {
+      const file = e.target.files && e.target.files[0];
+      e.target.value = "";
+      if (!file) return;
+      if (!isProUnlocked) {
+        triggerProUnlock();
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const text = String(reader.result || "").trim();
+        const lines = text.split(/\r?\n/).filter(Boolean);
+        if (lines.length < 2) {
+          showToast("File CSV không có dữ liệu.");
+          return;
+        }
+        const headers = parseCsvLine(lines[0]).map(h => h.toLowerCase());
+        const findCol = (patterns) => headers.findIndex(h => patterns.some(p => h.includes(p)));
+
+        const idxName = findCol(["campaign name", "tên chiến dịch", "camp", "name"]);
+        const idxSpend = findCol(["amount spent", "chi tiêu", "spend", "cost"]);
+        const idxImp = findCol(["impressions", "hiển thị", "imp"]);
+        const idxReach = findCol(["reach", "tiếp cận"]);
+        const idxLeads = findCol(["messaging", "leads", "tin nhắn", "kết quả", "results"]);
+        const idxOrders = findCol(["purchases", "orders", "đơn", "mua hàng"]);
+        const idxDays = findCol(["days", "ngày"]);
+
+        const imported = [];
+        for (let i = 1; i < lines.length; i++) {
+          const cols = parseCsvLine(lines[i]);
+          const spend = idxSpend >= 0 ? Number(String(cols[idxSpend] || "0").replace(/[^\d.-]/g, "")) : 0;
+          if (!spend && idxName < 0) continue;
+          imported.push({
+            id: i,
+            name: idxName >= 0 && cols[idxName] ? cols[idxName] : `Camp CSV #${i}`,
+            days: idxDays >= 0 ? Number(cols[idxDays]) || 3 : 3,
+            spend: Math.max(0, spend || 0),
+            impressions: idxImp >= 0 ? Math.max(0, Number(String(cols[idxImp] || "0").replace(/[^\d.-]/g, "")) || 0) : 0,
+            reach: idxReach >= 0 ? Math.max(0, Number(String(cols[idxReach] || "0").replace(/[^\d.-]/g, "")) || 0) : 0,
+            leads: idxLeads >= 0 ? Math.max(0, Number(String(cols[idxLeads] || "0").replace(/[^\d.-]/g, "")) || 0) : 0,
+            orders: idxOrders >= 0 ? Math.max(0, Number(String(cols[idxOrders] || "0").replace(/[^\d.-]/g, "")) || 0) : 0
+          });
+        }
+        if (!imported.length) {
+          showToast("Không nhận diện được cột số liệu Ads trong CSV.");
+          return;
+        }
+        camps = imported;
+        renderCamps();
+        showToast(`Đã import thành công ${imported.length} chiến dịch từ CSV!`);
+      };
+      reader.readAsText(file, "UTF-8");
+    }
+
+    function copyAiPrompt() {
+      if (!isProUnlocked) {
+        triggerProUnlock();
+        return;
+      }
+      const f = getFmp();
+      const lines = [
+        "Bạn là Giám đốc Tăng trưởng & Chuyên gia Tối ưu Quảng cáo Thực chiến.",
+        "Hãy phân tích dữ liệu Hòa vốn FMP và Phiếu Khám Camp dưới đây, sau đó đề xuất:",
+        "1) Camp nào cần Tắt ngay / Giữ tối ưu / Tăng ngân sách 15-20%.",
+        "2) 3 phương án Hook 3 giây đầu + Angle nội dung mới để hạ Reach/Lead cho các Camp đang nghẽn Lớp 2.",
+        "3) Kịch bản chốt Sale 3 bước để nâng Close Rate cho các Camp nghẽn Lớp 3.",
+        "",
+        "=== THÔNG SỐ HÒA VỐN FMP ===",
+        `- AOV: ${fmtVnd(f.aov)} | Doanh thu thực nhận (sau hoàn ${f.returnRate}%): ${fmtVnd(f.effectiveRevenue)}`,
+        `- Lợi nhuận gộp trước Ads: ${fmtVnd(f.grossProfit)}/đơn (${fmtNum(f.grossMarginPct, 1)}%)`,
+        `- CPO Hòa Vốn tối đa: ${fmtVnd(f.maxCpoBreakEven)} | CPO An Toàn mục tiêu: ${fmtVnd(f.safeCpoTarget)}`,
+        `- Giá tin nhắn/lead trần: ${fmtVnd(f.maxCostPerMsg)} | Hòa vốn toàn shop: ${isFinite(f.beWithAds) ? f.beWithAds + " đơn/tháng" : "Chưa đạt"}`,
+        "",
+        "=== DỮ LIỆU CÁC CHIẾN DỊCH ==="
+      ];
+
+      camps.forEach((c, idx) => {
+        const d = diagnoseCamp(c, f);
+        lines.push(
+          `${idx + 1}. ${c.name} [${d.statusLabel}]`,
+          `   - Ngày: ${c.days} | Chi: ${fmtVnd(c.spend)} | Reach: ${c.reach} | Lead: ${c.leads} | Đơn: ${c.orders}`,
+          `   - CPO: ${isFinite(d.cpo) ? fmtVnd(d.cpo) : "Chưa có đơn"} | Reach/Lead: ${isFinite(d.reachPerLead) ? fmtNum(d.reachPerLead, 0) : "∞"} | Chốt: ${fmtNum(d.closeRate, 1)}% | Freq: ${fmtNum(d.freq, 2)} | Lãi ròng: ${fmtVnd(d.netProfit)}`,
+          `   - Chẩn đoán: ${d.layers.map(l => l.tag + ": " + l.msg).join(" | ")}`
+        );
+      });
+
+      const promptText = lines.join("\n");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(promptText)
+          .then(() => showToast("Đã copy Prompt AI vào bộ nhớ tạm! Dán vào ChatGPT/Claude/Gemini ngay."))
+          .catch(() => fallbackCopy(promptText));
+      } else {
+        fallbackCopy(promptText);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast("Đã copy Prompt AI vào bộ nhớ tạm!");
+      } catch (e) {
+        showToast("Không thể copy tự động.");
+      }
+      document.body.removeChild(ta);
+    }
+
+    function recalcAll() {
+      const f = getFmp();
+      renderFmp(f);
+      renderCamps();
+    }
+
+    checkProUnlock();
+    recalcAll();
+  </script>
+</body>
+</html>
