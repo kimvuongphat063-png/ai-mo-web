@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Coffee, X, Copy, Check, Heart, Sparkles, CheckCircle2, Loader2, RefreshCw } from "lucide-react";
 import { HTML_APPS } from "@/lib/apps-data";
+import { PAID_APP_ACCOUNT } from "@/lib/coffee-payment";
 
 export type CoffeePopupReason = "download" | "general" | "coffee-unlock";
 
@@ -39,6 +40,7 @@ export function DonateModal({
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [selectedAmount, setSelectedAmount] = useState<number>(amount || 20000);
   const [qrSrc, setQrSrc] = useState<string>("/images/donate-qr.jpg");
+  const [qrFailed, setQrFailed] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
   const [dynamicTransferCode, setDynamicTransferCode] = useState<string | null>(null);
   const [orderStatus, setOrderStatus] = useState<"idle" | "creating" | "pending" | "paid" | "expired" | "error">("idle");
@@ -50,6 +52,8 @@ export function DonateModal({
   const transferCode = isCoffeeUnlock
     ? dynamicTransferCode || "AIMO..."
     : "AIMO CAFE";
+  const showPaymentDetails = !isCoffeeUnlock ||
+    (Boolean(orderId) && (orderStatus === "pending" || orderStatus === "paid"));
 
   const triggerDownloadAndUnlock = useCallback(
     (paidOrderId: string) => {
@@ -96,6 +100,7 @@ export function DonateModal({
       setOrderError(null);
       setOrderId(null);
       setDynamicTransferCode(null);
+      setQrFailed(false);
 
       try {
         const res = await fetch("/api/coffee/create", {
@@ -277,7 +282,7 @@ export function DonateModal({
 
           <h3 className="text-xl sm:text-2xl font-black text-neutral-900 tracking-tight">
             {isCoffeeUnlock
-              ? "Mời AI Mở 1 ly cà phê 20k nhé! ☕"
+              ? "Thanh toán để tải bản Offline"
               : "Mời team 1 ly cà phê nhé! ☕"}
           </h3>
 
@@ -288,8 +293,8 @@ export function DonateModal({
                 <strong className="text-neutral-900 font-bold">
                   &ldquo;{appTitle || "ứng dụng"}&rdquo;
                 </strong>{" "}
-                (.html) về máy dùng offline vĩnh viễn không cần mạng, hãy mời team 1 ly cà phê
-                20.000đ qua mã VietQR bên dưới nhé!
+                (.html) về máy dùng offline vĩnh viễn không cần mạng, vui lòng thanh toán
+                20.000đ qua mã VietQR bên dưới.
               </>
             ) : reason === "download" ? (
               <>
@@ -306,7 +311,7 @@ export function DonateModal({
         {/* Preset Amount Selector */}
         <div className="mt-4 space-y-1.5">
           <label className="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block text-center">
-            {isCoffeeUnlock ? "Mức cà phê mở khóa (mặc định 20k):" : "Chọn mức cà phê tiếp sức:"}
+            {isCoffeeUnlock ? "Mức thanh toán (từ 20k):" : "Chọn mức cà phê tiếp sức:"}
           </label>
           <div className="grid grid-cols-3 gap-2">
             {PRESET_AMOUNTS.map((item) => {
@@ -355,15 +360,22 @@ export function DonateModal({
                   Thử lại
                 </button>
               </div>
+            ) : isCoffeeUnlock && qrFailed ? (
+              <span className="text-xs font-semibold text-rose-600">
+                Không tải được QR. Vui lòng dùng thông tin chuyển khoản bên dưới.
+              </span>
             ) : (
               <>
                 <img
                   src={qrSrc}
-                  alt="Mã VietQR Donate SeABank"
+                  alt={isCoffeeUnlock ? "Mã VietQR BIDV để tải app" : "Mã VietQR ủng hộ SeABank"}
                   className={`w-full h-full object-contain rounded-lg transition-opacity ${
                     isCoffeeUnlock && orderStatus === "expired" ? "opacity-25" : ""
                   }`}
-                  onError={() => setQrSrc("/images/donate-qr.jpg")}
+                  onError={() => {
+                    if (isCoffeeUnlock) setQrFailed(true);
+                    else setQrSrc("/images/donate-qr.jpg");
+                  }}
                 />
                 {isCoffeeUnlock && orderStatus === "expired" && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/85 rounded-xl p-3">
@@ -435,7 +447,7 @@ export function DonateModal({
         )}
 
         {/* Account Details with Copy Buttons */}
-        <div className="mt-4 space-y-2 text-xs">
+        {showPaymentDetails && <div className="mt-4 space-y-2 text-xs">
           {isCoffeeUnlock && dynamicTransferCode && (
             <div className="flex items-center justify-between p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
               <div>
@@ -465,11 +477,13 @@ export function DonateModal({
               <span className="text-[10px] text-neutral-400 uppercase block font-semibold">
                 Ngân hàng
               </span>
-              <span className="font-bold text-neutral-800">SeABank (Đông Nam Á)</span>
+              <span className="font-bold text-neutral-800">
+                {isCoffeeUnlock ? PAID_APP_ACCOUNT.bank : "SeABank (Đông Nam Á)"}
+              </span>
             </div>
             <button
               type="button"
-              onClick={() => copyToClipboard("SeABank", "bank")}
+              onClick={() => copyToClipboard(isCoffeeUnlock ? PAID_APP_ACCOUNT.bank : "SeABank", "bank")}
               className="px-2.5 py-1 text-[11px] font-semibold text-neutral-600 hover:text-neutral-900 bg-neutral-100 hover:bg-neutral-200 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
             >
               {copiedField === "bank" ? (
@@ -486,11 +500,13 @@ export function DonateModal({
               <span className="text-[10px] text-neutral-400 uppercase block font-semibold">
                 Số tài khoản
               </span>
-              <span className="font-mono font-bold text-sm text-[#155EEF]">666006668789</span>
+              <span className="font-mono font-bold text-sm text-[#155EEF]">
+                {isCoffeeUnlock ? PAID_APP_ACCOUNT.accountNumber : "666006668789"}
+              </span>
             </div>
             <button
               type="button"
-              onClick={() => copyToClipboard("666006668789", "stk")}
+              onClick={() => copyToClipboard(isCoffeeUnlock ? PAID_APP_ACCOUNT.accountNumber : "666006668789", "stk")}
               className="px-2.5 py-1 text-[11px] font-semibold text-white bg-[#155EEF] hover:bg-blue-700 rounded-lg transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
             >
               {copiedField === "stk" ? (
@@ -522,7 +538,7 @@ export function DonateModal({
               <span>{copiedField === "name" ? "Đã chép" : "Sao chép"}</span>
             </button>
           </div>
-        </div>
+        </div>}
 
         {/* Footer Actions */}
         <div className="mt-5 pt-3 border-t border-neutral-100 flex items-center justify-between">
