@@ -28,9 +28,10 @@ export async function GET(
       const coffeeRedirectPath = `/apps/${slug}?coffee=1`;
       const acceptHeader = request.headers.get("accept") || "";
       if (acceptHeader.includes("application/json")) {
+        const priceLabel = `${(app.coffeePrice || 20000).toLocaleString("vi-VN")}đ`;
         return NextResponse.json(
           {
-            error: "Vui lòng mời AI Mở 1 ly cà phê 20.000đ qua VietQR để tải bản Offline trọn đời",
+            error: `Vui lòng mời AI Mở 1 ly cà phê ${priceLabel} qua VietQR để tải bản Offline trọn đời`,
             redirect: coffeeRedirectPath,
           },
           { status: 402 },

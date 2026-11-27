@@ -49,6 +49,17 @@ export function DonateModal({
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const isCoffeeUnlock = reason === "coffee-unlock";
+  const matchedApp = appSlug ? HTML_APPS.find((a) => a.slug === appSlug) : undefined;
+  const minAmount = isCoffeeUnlock
+    ? Math.max(matchedApp?.coffeePrice || 0, amount || 0) || 20000
+    : 0;
+  const visiblePresets = isCoffeeUnlock
+    ? PRESET_AMOUNTS.filter((item) => item.value >= minAmount)
+    : PRESET_AMOUNTS;
+  const minAmountShortLabel =
+    minAmount >= 1000 && minAmount % 1000 === 0
+      ? `${minAmount / 1000}k`
+      : `${minAmount.toLocaleString("vi-VN")}đ`;
   const transferCode = isCoffeeUnlock
     ? dynamicTransferCode || "AIMO..."
     : "AIMO CAFE";
@@ -127,7 +138,11 @@ export function DonateModal({
   // Reset modal state whenever opened or target app changes
   useEffect(() => {
     if (isOpen) {
-      const initialAmount = amount && amount > 0 ? amount : 20000;
+      const initialAmount = isCoffeeUnlock
+        ? minAmount
+        : amount && amount > 0
+          ? amount
+          : 20000;
       setSelectedAmount(initialAmount);
       if (isCoffeeUnlock && appSlug) {
         createOrder(initialAmount);
@@ -153,7 +168,7 @@ export function DonateModal({
         pollRef.current = null;
       }
     };
-  }, [isOpen, isCoffeeUnlock, appSlug, amount, createOrder]);
+  }, [isOpen, isCoffeeUnlock, appSlug, amount, minAmount, createOrder]);
 
   // Poll SePay-verified order status every 2.5 seconds while pending
   useEffect(() => {
@@ -275,7 +290,7 @@ export function DonateModal({
             <Coffee className="w-3.5 h-3.5 text-amber-600 shrink-0" />
             <span>
               {isCoffeeUnlock
-                ? "☕ Mở khóa Bản Offline Trọn Đời · 20.000đ"
+                ? `☕ Mở khóa Bản Offline Trọn Đời · ${selectedAmount.toLocaleString("vi-VN")}đ`
                 : "Tiếp lửa cho AI Mở Studio"}
             </span>
           </div>
@@ -293,8 +308,8 @@ export function DonateModal({
                 <strong className="text-neutral-900 font-bold">
                   &ldquo;{appTitle || "ứng dụng"}&rdquo;
                 </strong>{" "}
-                (.html) về máy dùng offline vĩnh viễn không cần mạng, vui lòng thanh toán
-                20.000đ qua mã VietQR bên dưới.
+                (.html) về máy dùng offline vĩnh viễn không cần mạng, vui lòng thanh toán{" "}
+                {selectedAmount.toLocaleString("vi-VN")}đ qua mã VietQR bên dưới.
               </>
             ) : reason === "download" ? (
               <>
@@ -311,10 +326,18 @@ export function DonateModal({
         {/* Preset Amount Selector */}
         <div className="mt-4 space-y-1.5">
           <label className="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block text-center">
-            {isCoffeeUnlock ? "Mức thanh toán (từ 20k):" : "Chọn mức cà phê tiếp sức:"}
+            {isCoffeeUnlock ? `Mức thanh toán (từ ${minAmountShortLabel}):` : "Chọn mức cà phê tiếp sức:"}
           </label>
-          <div className="grid grid-cols-3 gap-2">
-            {PRESET_AMOUNTS.map((item) => {
+          <div
+            className={`grid gap-2 ${
+              visiblePresets.length === 1
+                ? "grid-cols-1"
+                : visiblePresets.length === 2
+                  ? "grid-cols-2"
+                  : "grid-cols-3"
+            }`}
+          >
+            {visiblePresets.map((item) => {
               const isSelected = selectedAmount === item.value;
               return (
                 <button
