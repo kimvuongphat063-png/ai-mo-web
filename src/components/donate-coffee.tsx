@@ -395,13 +395,13 @@ export function DonateModal({
               </>
             )}
           </div>
-          <span className="mt-2 text-[11px] text-neutral-500 flex items-center gap-1">
+          {(!isCoffeeUnlock || orderStatus === "pending" || orderStatus === "paid") && <span className="mt-2 text-[11px] text-neutral-500 flex items-center gap-1">
             <Sparkles className="w-3 h-3 text-amber-500 shrink-0" />
             <span>
               Mở App ngân hàng hoặc MoMo quét mã ({selectedAmount.toLocaleString("vi-VN")}đ ·{" "}
               <strong className="text-neutral-700 font-mono">{transferCode}</strong>)
             </span>
-          </span>
+          </span>}
         </div>
 
         {/* Coffee-Unlock Auto-Verification Status (100% Automatic via SePay Webhook) */}
