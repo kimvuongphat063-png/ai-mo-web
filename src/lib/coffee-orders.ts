@@ -3,9 +3,8 @@ import { randomBytes } from "node:crypto";
 import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { HTML_APPS } from "@/lib/apps-data";
+import { buildVietQrUrl, isPaidAppRecipient } from "@/lib/coffee-payment";
 
-const SEABANK_ACCOUNT = "666006668789";
-const SEABANK_ACCOUNT_NAME = "TRAN NGOC HOANG ANH";
 const ORDER_TTL_MS = 30 * 60 * 1000; // 30 minutes
 const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
@@ -31,12 +30,6 @@ export function generateTransferCode(): string {
 
 export function generateOrderId(): string {
   return `COF-${Date.now().toString(36).toUpperCase()}-${randomBytes(3).toString("hex").toUpperCase()}`;
-}
-
-export function buildVietQrUrl(amount: number, transferCode: string): string {
-  return `https://img.vietqr.io/image/seabank-${SEABANK_ACCOUNT}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(
-    transferCode
-  )}&accountName=${encodeURIComponent(SEABANK_ACCOUNT_NAME)}`;
 }
 
 export interface CreatedCoffeeOrder {
@@ -183,6 +176,10 @@ export async function processSepayWebhook(payload: SepayWebhookPayload): Promise
 }> {
   if (payload.transferType !== "in") {
     return { matched: false, reason: "ignored_outgoing" };
+  }
+
+  if (!isPaidAppRecipient(payload.gateway, payload.subAccount)) {
+    return { matched: false, reason: "wrong_recipient" };
   }
 
   const transferAmount = Number(payload.transferAmount || 0);

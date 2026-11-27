@@ -3,6 +3,13 @@ import { createCoffeeOrder } from "@/lib/coffee-orders";
 
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.SEPAY_API_KEY?.trim()) {
+      return NextResponse.json(
+        { error: "Thanh toán tải app đang tạm thời chưa sẵn sàng" },
+        { status: 503, headers: { "Cache-Control": "no-store" } }
+      );
+    }
+
     const body = await request.json().catch(() => ({}));
     const appSlug = typeof body?.appSlug === "string" ? body.appSlug.trim() : "";
     const amount = typeof body?.amount === "number" ? body.amount : undefined;
