@@ -118,7 +118,7 @@ export function CatalogClientView({ initialProducts }: Props) {
 
       {/* Grid */}
       {filtered.length > 0 ? (
-        <div className="product-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}
