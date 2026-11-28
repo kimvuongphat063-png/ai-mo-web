@@ -593,6 +593,196 @@
       border-radius: 14px;
       text-align: center;
     }
+
+    /* Quickstart 3-step bar */
+    .quickstart-box {
+      background: var(--surface);
+      border: 1px solid #bfdbfe;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .quickstart-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .quickstart-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .quickstart-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand);
+    }
+    .quickstart-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 820px) {
+      .quickstart-steps { grid-template-columns: 1fr; }
+    }
+    .quickstart-box.collapsed .quickstart-steps {
+      display: none;
+    }
+    .qs-step {
+      background: var(--slate-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: 12.5px;
+      color: var(--ink-muted);
+    }
+    .qs-step strong {
+      display: block;
+      color: var(--ink);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .btn-topbar-guide {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: #f8fafc;
+    }
+    .btn-topbar-guide:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .preset-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .camp-helper-note {
+      background: var(--brand-soft);
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      margin-bottom: 14px;
+    }
+
+    /* Guide Tab */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 860px) {
+      .guide-grid { grid-template-columns: 1fr; }
+    }
+    .dict-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 640px) {
+      .dict-list { grid-template-columns: 1fr; }
+    }
+    .dict-item {
+      background: var(--slate-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: 12.5px;
+      color: var(--ink-muted);
+    }
+    .dict-item strong {
+      display: block;
+      color: var(--ink);
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+    .step-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--ink-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .step-list strong { color: var(--ink); }
+    .col-chip {
+      display: inline-block;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 2px 2px 2px 0;
+    }
+    .status-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    .status-table th, .status-table td {
+      text-align: left;
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    .status-table th {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 800;
+    }
+    .mistake-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mistake-item {
+      background: var(--rose-soft);
+      border: 1px solid #fecdd3;
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: 12.5px;
+      color: #881337;
+    }
+    .mistake-item strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+      color: #9f1239;
+    }
+    .guide-cta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
   </style>
 </head>
 <body>
@@ -607,12 +797,42 @@
         </div>
       </div>
       <div class="topbar-actions">
+        <button class="btn btn-sm btn-topbar-guide" onclick="switchTab('guide')">
+          ? Hướng dẫn
+        </button>
         <span id="licenseBadge" class="pill-status">Bản Dùng Thử (1 Camp)</span>
         <button id="btnHeaderUnlock" class="btn btn-pro btn-sm" onclick="triggerProUnlock()">
           Mở khóa Full + Tải Offline (50k)
         </button>
       </div>
     </header>
+
+    <!-- Quickstart 3-step bar -->
+    <section id="quickstartBox" class="quickstart-box">
+      <div class="quickstart-head" onclick="toggleQuickstart()">
+        <div class="quickstart-title">
+          <span class="quickstart-badge">Người mới</span>
+          <span>Bắt đầu nhanh trong 3 bước</span>
+        </div>
+        <button type="button" id="quickstartToggleBtn" class="btn btn-sm" onclick="event.stopPropagation(); toggleQuickstart()">
+          Thu gọn ▲
+        </button>
+      </div>
+      <div class="quickstart-steps">
+        <div class="qs-step">
+          <strong>Bước 1 (Tab 1): Khai báo 7 số của shop</strong>
+          Nhập 7 chỉ số cơ bản (hoặc chọn 1 trong 3 mẫu ngành) → biết ngay <b>CPO An Toàn</b> &amp; <b>Giá Tin Nhắn Trần</b>.
+        </div>
+        <div class="qs-step">
+          <strong>Bước 2 (Tab 2): Khám Camp đang chạy</strong>
+          Nhập số liệu 1 Camp (hoặc bấm Nạp mẫu / Import CSV) → App tự tô màu <b>Đỏ (Tắt) / Vàng (Sửa) / Xanh (Tăng tiền)</b>.
+        </div>
+        <div class="qs-step">
+          <strong>Bước 3: Sửa đúng lớp bị nghẽn</strong>
+          Xem ô báo đỏ ở <b>4 Lớp chẩn đoán</b> để sửa đúng chỗ (Giá/Sản phẩm → Hook/Target → Kịch bản Sale), hoặc bấm <b>Copy Prompt AI</b>.
+        </div>
+      </div>
+    </section>
 
     <!-- Tabs -->
     <nav class="tabs" role="tablist">
@@ -622,6 +842,9 @@
       <button class="tab-btn" data-tab="doctor" onclick="switchTab('doctor')">
         2. Phiếu Khám Camp 4 Lớp &amp; Tắt/Giữ/Tăng
       </button>
+      <button class="tab-btn" data-tab="guide" onclick="switchTab('guide')">
+        3. Hướng dẫn cho người mới
+      </button>
     </nav>
 
     <!-- TAB 1: FMP CALCULATOR -->
@@ -630,41 +853,49 @@
         <div class="card">
           <div class="card-title">
             <span>Thông số Kinh doanh &amp; Chi phí nền</span>
-            <button class="btn btn-sm" onclick="loadSampleFmp()">Nạp mẫu Shop Thời trang</button>
           </div>
-          <p class="card-sub">Nhập số liệu thực tế của sản phẩm/shop để biết chính xác giới hạn chi tiền quảng cáo trước khi đốt ngân sách.</p>
+          <p class="card-sub">Nhập số liệu thực tế của sản phẩm/shop hoặc chọn nhanh 1 mẫu ngành phổ biến bên dưới:</p>
+          <div class="preset-group" style="margin-bottom:14px;">
+            <button class="btn btn-sm" onclick="loadSampleFmp('fashion')">Mẫu Thời trang</button>
+            <button class="btn btn-sm" onclick="loadSampleFmp('cosmetics')">Mẫu Mỹ phẩm</button>
+            <button class="btn btn-sm" onclick="loadSampleFmp('homefb')">Mẫu Gia dụng / F&amp;B</button>
+          </div>
 
           <div class="form-grid">
             <div class="field">
               <label>Giá bán trung bình / đơn (AOV) <span>VNĐ</span></label>
               <input type="number" id="fmpAov" value="350000" min="0" step="1000" oninput="recalcAll()" />
+              <span class="hint">Tổng doanh thu chia tổng số đơn. VD: Áo 350k, khách hay mua kèm thành 390k.</span>
             </div>
             <div class="field">
               <label>Giá vốn nhập hàng (COGS) <span>VNĐ</span></label>
               <input type="number" id="fmpCogs" value="125000" min="0" step="1000" oninput="recalcAll()" />
+              <span class="hint">Giá nhập từ xưởng/NCC cho 1 đơn (chưa tính ship, bao bì).</span>
             </div>
             <div class="field">
               <label>Tỷ lệ hoàn / hủy đơn <span>%</span></label>
               <input type="number" id="fmpReturnRate" value="8" min="0" max="90" step="0.5" oninput="recalcAll()" />
-              <span class="hint">Trừ trực tiếp vào doanh thu thực nhận/đơn</span>
+              <span class="hint">VD: 100 đơn đi, 8 đơn bom/hoàn thì nhập 8. Trừ thẳng vào doanh thu thực.</span>
             </div>
             <div class="field">
               <label>Phí sàn / Thuế TMĐT / Cổng TT <span>%</span></label>
               <input type="number" id="fmpPlatformPct" value="6" min="0" max="60" step="0.5" oninput="recalcAll()" />
-              <span class="hint">VD: Bán trực tiếp 1.5–3%, Sàn 8–14%</span>
+              <span class="hint">VD: Bán trực tiếp 1.5–3%, Sàn Shopee/TikTok Shop 8–14%.</span>
             </div>
             <div class="field">
               <label>Đóng gói + Hỗ trợ ship + Hoa hồng <span>VNĐ/đơn</span></label>
               <input type="number" id="fmpVariableOther" value="25000" min="0" step="1000" oninput="recalcAll()" />
+              <span class="hint">Túi/hộp + băng keo + phần shop bù ship + hoa hồng chốt đơn.</span>
             </div>
             <div class="field">
               <label>Tỷ lệ chốt đơn dự kiến (Close Rate) <span>%</span></label>
               <input type="number" id="fmpCloseRate" value="12" min="1" max="100" step="0.5" oninput="recalcAll()" />
-              <span class="hint">Chuẩn thị trường: 8–15% trên tin nhắn/lead</span>
+              <span class="hint">100 khách nhắn tin chốt được 12 đơn thì nhập 12 (chuẩn: 8–15%).</span>
             </div>
             <div class="field full">
               <label>Tổng chi phí cố định hàng tháng (Mặt bằng, lương cứng, phần mềm...) <span>VNĐ/tháng</span></label>
               <input type="number" id="fmpFixedCost" value="35000000" min="0" step="500000" oninput="recalcAll()" />
+              <span class="hint">Tiền mặt bằng + lương cứng + phần mềm/tháng. Nếu bán tại nhà chưa có lương cứng, nhập 0.</span>
             </div>
           </div>
         </div>
@@ -771,8 +1002,150 @@
         </div>
       </div>
 
+      <!-- Helper note for Imp vs Reach -->
+      <div class="camp-helper-note">
+        <strong>Mẹo phân biệt nhanh:</strong> <b>Hiển thị (Imp)</b> là tổng số lần quảng cáo hiện trên màn hình (1 người xem 2 lần = 2 Imp); <b>Tiếp cận (Reach)</b> là số người thực tế đã thấy bài (thường Imp ≥ Reach). App lấy <b>Imp ÷ Reach</b> để tính Tần suất.
+      </div>
+
       <!-- Campaign Cards -->
       <div id="campList" class="camp-list"></div>
+    </section>
+
+    <!-- TAB 3: BEGINNER GUIDE -->
+    <section id="tab-guide" class="panel">
+      <div class="guide-grid">
+        <div class="card">
+          <div class="card-title"><span>1. Từ điển 60 giây bằng tiếng Việt bình dân</span></div>
+          <p class="card-sub">Không cần nhớ thuật ngữ khó, chỉ cần hiểu đúng 8 chỉ số này là đọc được sức khỏe mọi Camp Ads.</p>
+          <div class="dict-list">
+            <div class="dict-item">
+              <strong>AOV (Giá trị trung bình 1 đơn)</strong>
+              Khách mua 1 đơn trả trung bình bao nhiêu tiền (VD: 390.000đ).
+            </div>
+            <div class="dict-item">
+              <strong>COGS (Giá vốn nhập hàng)</strong>
+              Tiền nhập sản phẩm từ xưởng/NCC cho 1 đơn, chưa tính ship hay hộp.
+            </div>
+            <div class="dict-item">
+              <strong>CPO (Tiền Ads cho 1 đơn)</strong>
+              Lấy Tổng tiền Ads ÷ Số đơn chốt. CPO phải nhỏ hơn <b>CPO Hòa Vốn</b> thì mới có lãi.
+            </div>
+            <div class="dict-item">
+              <strong>CPM (Giá 1.000 lượt hiển thị)</strong>
+              Phí phải trả để bài quảng cáo hiện ra 1.000 lần. CPM tăng cao báo hiệu nội dung kém hút hoặc target hẹp.
+            </div>
+            <div class="dict-item">
+              <strong>ROAS (Doanh thu / Tiền Ads)</strong>
+              Chi 1 đồng quảng cáo thu về mấy đồng doanh thu (VD: chi 1 triệu bán 4 triệu → ROAS = 4.0x).
+            </div>
+            <div class="dict-item">
+              <strong>Impressions vs Reach</strong>
+              <b>Impressions (Hiển thị)</b> có thể lặp lại cùng 1 người; <b>Reach (Tiếp cận)</b> đếm số người thật duy nhất đã xem bài.
+            </div>
+            <div class="dict-item">
+              <strong>Reach / Lead</strong>
+              Cần bao nhiêu người xem mới ra được 1 tin nhắn. Dưới 500 là bài rất hút; trên 1.000 là Hook/Target yếu.
+            </div>
+            <div class="dict-item">
+              <strong>Tần suất (Frequency)</strong>
+              Trung bình 1 người thấy bài mấy lần (Imp ÷ Reach). Vượt 3.5 là khách đã chán, cần đổi video/ảnh mới.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>2. 4 bước lấy đúng 6 cột số liệu Ads &amp; xuất CSV</span></div>
+          <p class="card-sub">Áp dụng giống nhau trên <b>Facebook Ads Manager</b> và <b>TikTok Ads Manager</b>:</p>
+          <ol class="step-list">
+            <li>
+              <strong>Bước 1:</strong> Mở Trình quản lý quảng cáo (Ads Manager), chọn khoảng thời gian muốn khám (nên chọn ít nhất 2–4 ngày gần nhất).
+            </li>
+            <li>
+              <strong>Bước 2:</strong> Bấm vào mục <b>Cột (Columns)</b> → chọn <b>Tùy chỉnh cột (Customize Columns)</b>.
+            </li>
+            <li>
+              <strong>Bước 3:</strong> Tích chọn đúng 6 cột số liệu sau (tên tiếng Việt / tiếng Anh):<br />
+              <span class="col-chip">Số ngày (Days)</span>
+              <span class="col-chip">Số tiền đã chi tiêu / Amount spent</span>
+              <span class="col-chip">Lượt hiển thị / Impressions</span>
+              <span class="col-chip">Người tiếp cận / Reach</span>
+              <span class="col-chip">Lượt bắt đầu cuộc trò chuyện qua tin nhắn / Messaging conversations started</span>
+              <span class="col-chip">Lượt mua hàng / Purchases</span>
+            </li>
+            <li>
+              <strong>Bước 4:</strong> Nhập tay 6 số vào Tab 2 để test ngay 1 Camp, hoặc bấm <b>Báo cáo (Reports) → Xuất bảng dữ liệu (.csv)</b> rồi bấm nút <b>Import CSV Ads</b> ở Tab 2.
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="guide-grid">
+        <div class="card">
+          <div class="card-title"><span>3. Bảng giải mã 4 màu trạng thái Camp</span></div>
+          <p class="card-sub">App tự đối chiếu số liệu Camp với ngưỡng FMP của shop để ra 1 trong 4 kết luận:</p>
+          <table class="status-table">
+            <thead>
+              <tr>
+                <th>Trạng thái</th>
+                <th>Khi nào xuất hiện</th>
+                <th>Hành động chuẩn</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="status-pill status-WAIT">CHỜ DỮ LIỆU</span></td>
+                <td>Chạy dưới 2 ngày, Reach &lt; 1.500 hoặc chi tiêu &lt; 100k.</td>
+                <td>Giữ nguyên thêm 24–48h cho máy học ổn định.</td>
+              </tr>
+              <tr>
+                <td><span class="status-pill status-GREEN">XANH · Scale +15–20%</span></td>
+                <td>Từ 2 ngày &amp; ≥ 2 đơn, CPO ≤ CPO An Toàn, lãi ròng dương.</td>
+                <td>Tăng ngân sách từ từ 15–20% mỗi 48h hoặc nhân nhóm.</td>
+              </tr>
+              <tr>
+                <td><span class="status-pill status-YELLOW">VÀNG · Giữ / Sửa</span></td>
+                <td>CPO cận hòa vốn, mỏi tần suất (&gt;3.5) hoặc tin nhắn rẻ nhưng chốt &lt; 5%.</td>
+                <td>Không tắt bừa! Sửa đúng lớp bị đỏ: đổi Hook/Creative hoặc sửa kịch bản Sale.</td>
+              </tr>
+              <tr>
+                <td><span class="status-pill status-RED">ĐỎ · Tắt ngay</span></td>
+                <td>Chi ≥ 1.5× CPO hòa vốn mà 0 đơn, hoặc CPO vượt trần quá nặng.</td>
+                <td>Tắt ngay để giữ tổng lãng phí toàn tài khoản &lt; 15%.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>4. 3 lỗi "đốt tiền" người mới hay mắc</span></div>
+          <p class="card-sub">Tránh 3 sai lầm này giúp bạn tiết kiệm ít nhất 20–30% tiền Ads mỗi tháng:</p>
+          <div class="mistake-list">
+            <div class="mistake-item">
+              <strong>Lỗi 1: Tắt Camp quá sớm trước 1.500 Reach / 2 ngày</strong>
+              Thấy mới tiêu 50k–80k chưa ra đơn đã vội tắt. Dữ liệu quá nhỏ khiến hệ thống chưa kịp tìm đúng tệp khách mua.
+            </div>
+            <div class="mistake-item">
+              <strong>Lỗi 2: Nhân ngân sách gấp đôi làm sập máy học</strong>
+              Thấy Camp Xanh liền tăng từ 300k lên 1 triệu trong 1 đêm khiến giá thầu vọt lên. Chỉ nên tăng tối đa 15–20% mỗi 48h.
+            </div>
+            <div class="mistake-item">
+              <strong>Lỗi 3: Tắt nhầm bài Ads ngon khi tin nhắn rẻ mà Sale chốt chậm</strong>
+              Reach/Lead rất tốt (tin nhắn rẻ) nhưng tỷ lệ chốt &lt; 5% do nhân viên rep chậm hoặc kịch bản tư vấn yếu. Lỗi nằm ở Lớp 3 (Sale), đừng tắt oan bài Ads Lớp 2!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-cta-bar">
+        <div>
+          <strong style="font-size:15px;">Sẵn sàng khám bệnh cho chiến dịch của bạn?</strong>
+          <div style="font-size:13px;color:var(--ink-muted);margin-top:2px;">Chỉ mất 60 giây nhập thông số shop ở Tab 1, sau đó sang Tab 2 để chấm điểm Camp.</div>
+        </div>
+        <div class="toolbar-group">
+          <button class="btn btn-primary" onclick="switchTab('fmp')">Bắt đầu nhập số ở Tab 1 →</button>
+          <button class="btn btn-emerald" onclick="switchTab('doctor')">Sang Tab 2 Khám Camp →</button>
+        </div>
+      </div>
     </section>
   </div>
 
@@ -891,6 +1264,34 @@
       triggerProUnlock();
     }
 
+    const QUICKSTART_STORAGE_KEY = "aimo_quickstart_collapsed_" + APP_SLUG;
+
+    function applyQuickstartState(collapsed) {
+      const box = document.getElementById("quickstartBox");
+      const btn = document.getElementById("quickstartToggleBtn");
+      if (!box || !btn) return;
+      box.classList.toggle("collapsed", collapsed);
+      btn.textContent = collapsed ? "Mở rộng ▼" : "Thu gọn ▲";
+    }
+
+    function initQuickstart() {
+      let collapsed = false;
+      try {
+        collapsed = localStorage.getItem(QUICKSTART_STORAGE_KEY) === "1";
+      } catch (e) {}
+      applyQuickstartState(collapsed);
+    }
+
+    function toggleQuickstart() {
+      const box = document.getElementById("quickstartBox");
+      if (!box) return;
+      const nextCollapsed = !box.classList.contains("collapsed");
+      applyQuickstartState(nextCollapsed);
+      try {
+        localStorage.setItem(QUICKSTART_STORAGE_KEY, nextCollapsed ? "1" : "0");
+      } catch (e) {}
+    }
+
     function switchTab(tab) {
       document.querySelectorAll(".tab-btn").forEach(b => {
         b.classList.toggle("active", b.dataset.tab === tab);
@@ -898,6 +1299,7 @@
       document.querySelectorAll(".panel").forEach(p => {
         p.classList.toggle("active", p.id === "tab-" + tab);
       });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function getFmp() {
@@ -1223,16 +1625,50 @@
       renderCamps();
     }
 
-    function loadSampleFmp() {
-      document.getElementById("fmpAov").value = 390000;
-      document.getElementById("fmpCogs").value = 135000;
-      document.getElementById("fmpReturnRate").value = 8;
-      document.getElementById("fmpPlatformPct").value = 5;
-      document.getElementById("fmpVariableOther").value = 28000;
-      document.getElementById("fmpCloseRate").value = 12;
-      document.getElementById("fmpFixedCost").value = 40000000;
+    const FMP_PRESETS = {
+      fashion: {
+        label: "Mẫu Thời trang",
+        aov: 390000,
+        cogs: 135000,
+        returnRate: 8,
+        platformPct: 5,
+        varOther: 28000,
+        closeRate: 12,
+        fixedCost: 40000000
+      },
+      cosmetics: {
+        label: "Mẫu Mỹ phẩm",
+        aov: 450000,
+        cogs: 110000,
+        returnRate: 5,
+        platformPct: 4,
+        varOther: 25000,
+        closeRate: 15,
+        fixedCost: 30000000
+      },
+      homefb: {
+        label: "Mẫu Gia dụng / F&B",
+        aov: 220000,
+        cogs: 85000,
+        returnRate: 6,
+        platformPct: 10,
+        varOther: 22000,
+        closeRate: 10,
+        fixedCost: 18000000
+      }
+    };
+
+    function loadSampleFmp(presetKey = "fashion") {
+      const p = FMP_PRESETS[presetKey] || FMP_PRESETS.fashion;
+      document.getElementById("fmpAov").value = p.aov;
+      document.getElementById("fmpCogs").value = p.cogs;
+      document.getElementById("fmpReturnRate").value = p.returnRate;
+      document.getElementById("fmpPlatformPct").value = p.platformPct;
+      document.getElementById("fmpVariableOther").value = p.varOther;
+      document.getElementById("fmpCloseRate").value = p.closeRate;
+      document.getElementById("fmpFixedCost").value = p.fixedCost;
       recalcAll();
-      showToast("Đã nạp thông số mẫu Shop Thời trang.");
+      showToast(`Đã nạp thông số ${p.label}.`);
     }
 
     function loadSampleCamps() {
@@ -1418,6 +1854,7 @@
       renderCamps();
     }
 
+    initQuickstart();
     checkProUnlock();
     recalcAll();
   </script>
