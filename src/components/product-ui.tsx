@@ -18,7 +18,7 @@ export function ProductArt({ product, className = "" }: { product: Product; clas
   const accent = product.color || "#10b981";
   return (
     <div
-      className={`relative overflow-hidden p-5 min-h-[156px] flex flex-col justify-between border-b border-white/10 ${className}`}
+      className={`dark-surface-preserve relative overflow-hidden p-5 min-h-[156px] flex flex-col justify-between border-b border-white/10 ${className}`}
       style={{
         background: `radial-gradient(circle at 85% 15%, ${accent}33, rgba(13, 18, 30, 0.96) 70%)`,
       }}

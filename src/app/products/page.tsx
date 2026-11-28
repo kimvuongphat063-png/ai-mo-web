@@ -55,7 +55,7 @@ export default function ProductsPage() {
                 <Link
                   key={app.slug}
                   href={`/apps/${app.slug}`}
-                  className="group rounded-2xl bg-[#0b101b] border border-white/10 hover:border-emerald-400/50 p-5 flex flex-col justify-between gap-4 transition-all"
+                  className="group rounded-2xl bg-[#121826] border border-white/10 hover:border-emerald-400/50 p-5 flex flex-col justify-between gap-4 transition-all"
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2">

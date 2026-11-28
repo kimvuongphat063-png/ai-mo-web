@@ -581,7 +581,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                   className="group relative bg-[#101420] rounded-3xl border border-white/10/90 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-[#d4ff00]/50 hover:-translate-y-1 transition-all duration-300"
                 >
                   {/* Thumbnail Banner */}
-                  <div className="relative h-44 w-full bg-gradient-to-tr from-neutral-900 via-neutral-800 to-blue-950 overflow-hidden">
+                  <div className="dark-surface-preserve relative h-44 w-full bg-gradient-to-tr from-neutral-900 via-neutral-800 to-blue-950 overflow-hidden">
                     {meta?.image ? (
                       <Image
                         src={meta.image}
@@ -605,7 +605,7 @@ export function AppsClientView({ apps, isLoggedIn = false }: Props) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                     
                     <div className="absolute top-3 left-3 flex items-center gap-2">
-                      <span className="bg-[#101420]/95 text-white font-mono text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs">
+                      <span className="bg-slate-950/90 text-white font-mono text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs">
                         ⚡ {app.fileSizeFormatted}
                       </span>
                       {app.badge && (
