@@ -179,6 +179,52 @@ export const HTML_APPS: HtmlAppItem[] = [
     "engineSpec": "FMP Breakeven & 4-Layer Ads Diagnostic Engine"
   },
   {
+    "slug": "ai-mo-nghien-cuu",
+    "title": "AI Mở Nghiên Cứu — Phân Tích Thị Trường 9 Nền Tảng",
+    "category": "marketing",
+    "categoryLabel": "Tiếp thị & Tăng trưởng",
+    "suite": "marketing",
+    "suiteLabel": "Tiếp thị & Tăng trưởng",
+    "summary": "Nghiên cứu thị trường, đối thủ & xu hướng nội dung trên 9 nền tảng (TikTok, YouTube, Facebook, X, Google, Instagram, Douyin, Kuaishou...), lập báo cáo 7 phần bằng AI và chế độ dữ liệu mẫu.",
+    "description": "Ứng dụng nghiên cứu thị trường đa nền tảng đóng gói bởi AI Mở Studio. Hỗ trợ chế độ Dữ liệu mẫu để dùng thử ngay không cần API key, hoặc tự nhập API key (Gemini, OpenAI, OpenRouter, DeepSeek, Claude) để phân tích sâu, tổng hợp báo cáo chiến lược 7 phần và lưu cục bộ 100% trên trình duyệt.",
+    "suitableFor": "Chủ shop, người làm content đa kênh, Marketer, KOC/KOL và team phát triển sản phẩm.",
+    "highlights": [
+      "Phân tích thị trường & đối thủ trên 9 nền tảng phổ biến",
+      "Chế độ Dữ liệu mẫu dùng thử ngay không cần nhập API Key",
+      "Hỗ trợ đa AI Provider (Gemini, OpenAI, DeepSeek, Claude)",
+      "Lập báo cáo 7 phần & chạy độc lập 100% trên trình duyệt"
+    ],
+    "fileName": "ai-mo-nghien-cuu.html",
+    "status": "ready",
+    "badge": "Mới · 9 Nền Tảng",
+    "isFeatured": false,
+    "coffeePrice": 50000,
+    "engineSpec": "Multi-Platform Market Research Engine"
+  },
+  {
+    "slug": "ai-mo-quan-ly-shop",
+    "title": "AI Mở Quản Lý Shop — ERP, Kho, Thu Chi & Văn Phòng 3D",
+    "category": "kinh-doanh",
+    "categoryLabel": "Kinh doanh & Bán lẻ",
+    "suite": "commercial",
+    "suiteLabel": "Kinh doanh & Bán lẻ",
+    "summary": "Bộ quản lý shop toàn diện: Đơn hàng, Kho hàng, Thu chi, CRM khách hàng, Kịch bản livestream, Trợ lý AI và Văn phòng 3D tương tác. Lưu cục bộ 100% trên máy khách, có nút Nạp dữ liệu mẫu.",
+    "description": "Hệ thống quản trị bán hàng & vận hành cửa hàng đóng gói bởi AI Mở Studio. Toàn bộ dữ liệu doanh thu, giá vốn, tồn kho và khách hàng được lưu an toàn ngay trên trình duyệt của bạn (IndexedDB). Tích hợp sẵn nút Nạp dữ liệu mẫu một cửa hàng hoàn chỉnh để trải nghiệm ngay và trợ lý AI bán hàng đa provider.",
+    "suitableFor": "Chủ shop online, cửa hàng bán lẻ, doanh nghiệp nhỏ và team vận hành thương mại điện tử.",
+    "highlights": [
+      "Quản lý Đơn hàng, Tồn kho, Thu chi & CRM khách hàng trọn bộ",
+      "Tích hợp Văn phòng 3D tương tác & Kịch bản Livestream AI",
+      "Nút Nạp dữ liệu mẫu 1 click để dùng thử ngay mọi tính năng",
+      "Bảo mật dữ liệu kinh doanh cục bộ 100% trên thiết bị"
+    ],
+    "fileName": "ai-mo-quan-ly-shop.html",
+    "status": "ready",
+    "badge": "Mới · ERP 3D",
+    "isFeatured": false,
+    "coffeePrice": 50000,
+    "engineSpec": "Shop ERP, Inventory & 3D Office Engine"
+  },
+  {
     "slug": "gia-ban-khuyen-mai",
     "title": "Định giá bán & Khuyến mãi",
     "category": "kinh-doanh",
