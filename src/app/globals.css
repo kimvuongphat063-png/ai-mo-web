@@ -1085,6 +1085,7 @@ button[class*="bg-[#d4ff00]"],
 [data-theme="light"] [class*="bg-[#101420]"],
 [data-theme="light"] [class*="bg-[#090c14]"],
 [data-theme="light"] [class*="bg-[#0b101b]"],
+[data-theme="light"] [class*="bg-[#0d121f]"],
 [data-theme="light"] [class*="bg-[#0d1420]"],
 [data-theme="light"] [class*="bg-[#121826]"],
 [data-theme="light"] [class*="bg-[#121624]"],
@@ -1098,7 +1099,22 @@ button[class*="bg-[#d4ff00]"],
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* Preserve readable light ink inside intentionally dark thumbnail/art banners in Light Mode */
+/* Preserve readable overlays & light ink inside intentionally dark media/thumbnail banners in Light Mode */
+[data-theme="light"] .dark-surface-preserve {
+  background-color: #090c14 !important;
+}
+[data-theme="light"] .dark-surface-preserve [class*="bg-black/25"] {
+  background: rgba(0, 0, 0, 0.25) !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+[data-theme="light"] .dark-surface-preserve [class*="bg-black/25"]:hover {
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+[data-theme="light"] .dark-surface-preserve [class*="bg-black/75"] {
+  background: rgba(0, 0, 0, 0.75) !important;
+  color: #ffffff !important;
+}
 [data-theme="light"] .dark-surface-preserve [class*="text-white"] {
   color: #ffffff !important;
 }
@@ -1107,6 +1123,14 @@ button[class*="bg-[#d4ff00]"],
 }
 [data-theme="light"] .dark-surface-preserve [class*="text-slate-400"] {
   color: #94a3b8 !important;
+}
+
+/* Readable lime accent text on light backgrounds */
+[data-theme="light"] [class*="text-[#d4ff00]"] {
+  color: #3f6212 !important;
+}
+[data-theme="light"] [class*="text-slate-200"] {
+  color: #1e293b !important;
 }
 
 /* Headings in Light Mode */

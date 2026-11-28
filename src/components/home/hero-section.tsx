@@ -475,7 +475,7 @@ export function HeroSection() {
               </div>
 
               {/* Video Player Preview */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[16/9] bg-neutral-950 border border-white/10 shadow-inner">
+              <div className="dark-surface-preserve relative rounded-2xl overflow-hidden aspect-[16/9] bg-neutral-950 border border-white/10 shadow-inner">
                 <CardImageEditor cardId="hero-preview" cardTitle="Video Demo Hero" />
                 <Image
                   src={activeSlides[slideIdx]?.src || activeSlides[0].src}
