@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Link from "next/link";
 import {
   Download,
@@ -23,6 +23,11 @@ import { getSession } from "@/lib/auth";
 import { AppDownloadButton } from "@/components/app-download-button";
 import type { Metadata } from "next";
 
+const LEGACY_APP_REDIRECTS: Record<string, string> = {
+  "dinh-gia-ban-combo": "/apps/gia-ban-khuyen-mai",
+  "tinh-loi-nhuan-don-hang": "/apps/lai-that-tung-don",
+};
+
 export function generateStaticParams() {
   return HTML_APPS.map((app) => ({
     slug: app.slug,
@@ -35,6 +40,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  if (LEGACY_APP_REDIRECTS[slug]) {
+    permanentRedirect(LEGACY_APP_REDIRECTS[slug]);
+  }
   const app = HTML_APPS.find((a) => a.slug === slug);
   if (!app) return { title: "Không tìm thấy ứng dụng" };
 
@@ -42,7 +50,7 @@ export async function generateMetadata({
     title: `${app.title} — App HTML Miễn Phí Chạy Offline`,
     description: `${app.summary} Sử dụng trực tiếp trên web hoặc tải file HTML về máy dùng offline 100% không cần mạng.`,
     alternates: {
-      canonical: `https://www.heyaimo.com/apps/${app.slug}`,
+      canonical: `https://heyaimo.com/apps/${app.slug}`,
     },
   };
 }
@@ -53,6 +61,9 @@ export default async function AppDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (LEGACY_APP_REDIRECTS[slug]) {
+    permanentRedirect(LEGACY_APP_REDIRECTS[slug]);
+  }
   const app = HTML_APPS.find((a) => a.slug === slug);
   if (!app) notFound();
 

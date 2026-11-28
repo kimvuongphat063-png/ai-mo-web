@@ -35,15 +35,15 @@ export function ContactForm() {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-9 border border-neutral-200/80 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.06)] relative overflow-hidden">
+    <div className="bg-[#101420] rounded-3xl p-6 sm:p-8 lg:p-9 border border-white/10 shadow-xl relative overflow-hidden">
       <div className="mb-6">
-        <h2 className="text-xl sm:text-2xl font-black text-neutral-900 tracking-tight mb-2">
+        <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-2">
           Gửi tin nhắn tới AI Mở Studio
         </h2>
-        <p className="text-sm text-neutral-600 leading-relaxed">
+        <p className="text-sm text-slate-300 leading-relaxed">
           Điền thông tin và yêu cầu của bạn vào form dưới đây. Đội ngũ AI Mở Studio sẽ liên hệ lại trực tiếp.
         </p>
-        <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0057ff] text-xs font-semibold">
+        <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-sky-400 text-xs font-semibold">
           <Clock className="w-3.5 h-3.5 shrink-0" />
           <span>Cam kết phản hồi trong một ngày làm việc</span>
         </div>
@@ -75,8 +75,8 @@ export function ContactForm() {
           )}
 
           <div>
-            <label htmlFor="contact-name" className="block text-xs font-bold text-neutral-800 uppercase tracking-wider mb-1.5">
-              Họ và tên của bạn <span className="text-red-500">*</span>
+            <label htmlFor="contact-name" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+              Họ và tên của bạn <span className="text-rose-400">*</span>
             </label>
             <input
               id="contact-name"
@@ -85,13 +85,13 @@ export function ContactForm() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Ví dụ: Nguyễn Văn A"
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#0057ff] focus:ring-2 focus:ring-blue-100 transition-all bg-neutral-50/50"
+              className="w-full px-4 py-3 rounded-xl border border-white/15 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition-all bg-[#090c14]"
             />
           </div>
 
           <div>
-            <label htmlFor="contact-method" className="block text-xs font-bold text-neutral-800 uppercase tracking-wider mb-1.5">
-              Email hoặc số Zalo <span className="text-red-500">*</span>
+            <label htmlFor="contact-method" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+              Email hoặc số Zalo <span className="text-rose-400">*</span>
             </label>
             <input
               id="contact-method"
@@ -100,13 +100,13 @@ export function ContactForm() {
               value={contactMethod}
               onChange={(e) => setContactMethod(e.target.value)}
               placeholder="Email của bạn hoặc số điện thoại có Zalo để nhận phản hồi"
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#0057ff] focus:ring-2 focus:ring-blue-100 transition-all bg-neutral-50/50"
+              className="w-full px-4 py-3 rounded-xl border border-white/15 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition-all bg-[#090c14]"
             />
           </div>
 
           <div>
-            <label htmlFor="contact-message" className="block text-xs font-bold text-neutral-800 uppercase tracking-wider mb-1.5">
-              Nội dung tin nhắn / Yêu cầu <span className="text-red-500">*</span>
+            <label htmlFor="contact-message" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+              Nội dung tin nhắn / Yêu cầu <span className="text-rose-400">*</span>
             </label>
             <textarea
               id="contact-message"
@@ -115,7 +115,7 @@ export function ContactForm() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Mô tả câu hỏi, yêu cầu tư vấn khóa học, sản phẩm số hoặc nhu cầu hợp tác của bạn..."
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#0057ff] focus:ring-2 focus:ring-blue-100 transition-all bg-neutral-50/50 resize-y"
+              className="w-full px-4 py-3 rounded-xl border border-white/15 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition-all bg-[#090c14] resize-y"
             />
           </div>
 

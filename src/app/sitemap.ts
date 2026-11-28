@@ -1,15 +1,19 @@
 import type { MetadataRoute } from "next";
 import { products } from "@/lib/store";
+import { HTML_APPS } from "@/lib/apps-data";
 import { readCms, isPublic } from "@/lib/cms";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = "https://www.heyaimo.com";
+  const base = "https://heyaimo.com";
   const staticRoutes = [
     "",
+    "/products",
     "/courses",
     "/tools",
     "/apps",
+    "/promptkichban",
     "/games",
+    "/games/schulte",
     "/affiliate",
     "/bundles",
     "/free-resources",
@@ -34,7 +38,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: base + url,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: url === "" ? 1 : 0.7,
+    priority: url === "" ? 1 : 0.8,
+  }));
+
+  const appEntries = HTML_APPS.map((app) => ({
+    url: `${base}/apps/${app.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: app.isFeatured ? 0.9 : 0.75,
   }));
 
   const productEntries = products.map((p) => ({
@@ -42,16 +53,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       p.ownership === "affiliate"
         ? "affiliate"
         : p.kind === "course"
-        ? "courses"
-        : p.kind === "bundle"
-        ? "bundles"
-        : p.kind === "resource"
-        ? "free-resources"
-        : "tools"
+          ? "courses"
+          : p.kind === "bundle"
+            ? "bundles"
+            : p.kind === "resource"
+              ? "free-resources"
+              : "tools"
     }/${p.slug}`,
     lastModified: new Date(p.updated.split("/").reverse().join("-")),
     changeFrequency: "monthly" as const,
-    priority: 0.8,
+    priority: 0.75,
   }));
 
   const articleEntries = articles.map((a) => ({
@@ -61,5 +72,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticEntries, ...productEntries, ...articleEntries];
+  return [...staticEntries, ...appEntries, ...productEntries, ...articleEntries];
 }

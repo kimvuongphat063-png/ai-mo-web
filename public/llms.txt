@@ -1,0 +1,25 @@
+# AI MỞ Studio (heyaimo.com)
+
+> Nền tảng thực hành AI, sản phẩm số và bộ 97+ ứng dụng HTML độc lập bằng tiếng Việt dành cho chủ shop, người làm kinh doanh online và cá nhân muốn ứng dụng AI vào công việc hàng ngày.
+
+## Khu vực chính
+- [Trang chủ](https://heyaimo.com): Tổng quan hệ sinh thái AI Mở Studio.
+- [Kho 97+ App Offline](https://heyaimo.com/apps): Bộ công cụ tính toán, quản trị shop, marketing, kế toán, giáo dục chạy trực tiếp trên trình duyệt và tải offline.
+- [PromptKichBan Studio](https://heyaimo.com/promptkichban): Tạo kịch bản video ngắn và prompt chuẩn cho Veo 3, Kling, Sora, Grok.
+- [Sản phẩm số & Tài nguyên](https://heyaimo.com/products): Kho công cụ, template, prompt, skill, bộ giải pháp và khóa học cơ bản.
+- [Công cụ AI](https://heyaimo.com/tools): Các ứng dụng desktop và web app tối ưu quy trình làm việc.
+- [Kho Game Web Trí Tuệ](https://heyaimo.com/games): Các trò chơi rèn luyện tư duy, phản xạ và logic (bao gồm Schulte).
+- [Hướng dẫn & Bài viết](https://heyaimo.com/guides): Kiến thức thực chiến về viết prompt, bán hàng online và tự động hóa.
+- [Liên hệ](https://heyaimo.com/lien-he): Thông tin hỗ trợ chính thức của AI Mở Studio.
+
+## Công cụ nổi bật cho Chủ Shop & Marketer
+- [Bác Sĩ Camp & Hòa Vốn FMP](https://heyaimo.com/apps/bac-si-camp-fmp): Tính CPO hòa vốn, giá tin nhắn trần và chẩn đoán 4 lớp chiến dịch Ads theo quy tắc Tắt – Giữ – Scale 15–20%.
+- [Tính lãi thật từng đơn hàng](https://heyaimo.com/apps/lai-that-tung-don): Tính lãi ròng và giá bán hòa vốn chuẩn biểu phí sàn Shopee, TikTok Shop, Lazada 2026.
+- [Nhịp Marketing & Lịch Chiến Dịch 2027](https://heyaimo.com/apps/nhip-marketing-2027): Lập kế hoạch 35 mốc lễ Tết & Mega Sale 2027 kèm file lịch `.ics`.
+- [Định giá bán & Khuyến mãi](https://heyaimo.com/apps/gia-ban-khuyen-mai): Tìm điểm hòa vốn và mô phỏng các kịch bản giảm giá Flash Sale không bị lỗ.
+
+## Thông tin đơn vị vận hành
+- Tên tổ chức: AI Mở Studio
+- Website: https://heyaimo.com
+- Email hỗ trợ: hello@aimo.vn
+- Hotline/Zalo: 0988366917

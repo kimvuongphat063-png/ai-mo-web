@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import { CatalogPage } from "@/components/catalog";
+
+export const metadata: Metadata = {
+  title: "Công cụ làm việc cùng AI — AI MỞ",
+  description:
+    "Ứng dụng desktop riêng tư và web app gọn nhẹ từ AI Mở Studio, được xây dựng từ chính những vướng mắc thực tế của người mới.",
+  alternates: {
+    canonical: "https://heyaimo.com/tools",
+  },
+};
 
 export default function Page() {
   return (
